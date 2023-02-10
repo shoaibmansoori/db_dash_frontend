@@ -1,8 +1,8 @@
 import React from 'react';
 import './App.css';
 import { Route, Routes} from 'react-router-dom';
-import Authpage from './Pages/authPage';
-import LandingPage from './Pages/landingPage';
+import Authpage from './pages/authPage';
+import LandingPage from './pages/landingPage';
 import { AuthContextProvider } from './context/authContext';
 
 function App() {
