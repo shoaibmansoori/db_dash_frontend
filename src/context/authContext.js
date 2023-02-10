@@ -10,10 +10,12 @@ import {GoogleAuthProvider,
   getAdditionalUserInfo
 } from "firebase/auth";
 import {signUpUser} from "../api/index"
+import { useNavigate } from "react-router-dom";
 const AuthContext = createContext();
 
 export const AuthContextProvider = ({ children }) => {
     const [user, setUser] = useState({});
+    const navigate = useNavigate();
     const googleSignIn = async () => {
       try {
         const provider = new GoogleAuthProvider();
@@ -29,6 +31,9 @@ export const AuthContextProvider = ({ children }) => {
         await signUpUser(dataToSend)
           // return;
         }
+
+        navigate("/dashboard")
+
         console.log(userInfo)
       } catch (error) {
         console.log(error);

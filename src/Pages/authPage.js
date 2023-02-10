@@ -1,48 +1,69 @@
 import React from 'react'
 import Box from '@mui/material/Box';
-// import { Link,  } from 'react-router-dom';
 import { useState } from 'react';
-import {UserAuth} from '../context/authContext.js'
-import Googleauth from '../component/auth/googleAuth';
-import Signupinput from '../component/auth/signupInput';
-import Logininput from '../component/auth/loginInput';
+import { UserAuth } from '../context/authContext.js'
+import GoogleAuth from '../component/auth/googleAuth';
+import SignupInput from '../component/auth/signupInput';
+import LoginInput from '../component/auth/loginInput';
+import {Container} from '@mui/material';
+
 export default function Authpage() {
-    
-  const [islogin, setislogin] = useState(true)
+
+  const [isLogin, setIsLogin] = useState(true)
+
   const usera = UserAuth();
   const signUp = usera?.signUp;
   const signIn = usera?.signIn;
 
- const SignuphandleSubmit = async (userdata)=>{
-  const email = userdata.email;
-  const password = userdata.password;
-  const firstname = userdata.firstname;
-  const lastname = userdata.lastname;
-  
-  await signUp(email,password,firstname,lastname,);
-}
-const LoginhandleSubmit = async (userdata)=>{
-  const email = userdata.email;
-  const password = userdata.password;
-  await signIn(email,password);
-  
-}
+  const signupHandleSubmit = async (userdata) => {
+    const email = userdata.email;
+    const password = userdata.password;
+    const firstName = userdata.firstName;
+    const lastName = userdata.lastName;
+
+    await signUp(email, password, firstName, lastName,);
+  }
+  const loginHandleSubmit = async (userdata) => {
+    const email = userdata.email;
+    const password = userdata.password;
+    await signIn(email, password);
+
+  }
   return (
-    <Box style={{backgroundColor:"rgb(211, 211, 211,0.3)"}}  sx={{width:'98vw', height:'100%',display: 'flex',flexDirection: 'row',justifyContent: 'center',alignItems: 'center'}}>
-      <Box    style={{backgroundColor:"white",}}  sx={{width:'35%', height:'100%',display: 'flex',flexDirection: 'column',justifyContent: 'center',alignItems: 'center',boxShadow: 3, borderRadius:4}}>
-        <h1>
-          {islogin == false?"Create Your Account!":"Welcome Back!"}
-        </h1>
+    <Container maxWidth={'true'} sx={{display: 'flex',  justifyContent: 'center', backgroundColor: "rgb(211, 211, 211,0.3)", padding:0 }}>
+    
+      <Box sx={{backgroundColor: "white", width: '35%', display: 'flex', flexDirection: 'column', alignItems: 'center', boxShadow: 3, borderRadius: 4, mt:2, mb:2 }}>
+
         <Box>
-            <Googleauth/>
-        </Box> 
+          {/* <img style={{ width: "100px"}}
+            src="https://uploads-ssl.webflow.com/63403f10e7b52a177fd0c2ac/634934b92269c62bb6cf2e0a_Logo.png"
+            alt="Via Socket"
+          /> */}
+
+          <h3>DB DASH</h3>
+        </Box>
+
+        <h2>
+          {isLogin === false ? "Create Your Account!" : "Welcome Back!"}
+        </h2>
+
+        <Box>
+          <GoogleAuth />
+        </Box>
+
         <p>or</p>
-        {/* condition to show login page or signup page */}
-        {islogin == true ?  <Logininput LoginhandleSubmit={LoginhandleSubmit}/> : <Signupinput SignuphandleSubmit={SignuphandleSubmit}/>}
-        
-        {islogin == true ? <h4>No account? <span  onClick={()=>{setislogin(false)}} style={{color:"blueviolet", cursor:'pointer', textDecoration:'underline'}}>Create an account!</span> </h4> : <h4>Already a User? <span onClick={()=>{setislogin(true)}} style={{color:"blueviolet",cursor:'pointer', textDecoration:'underline'}} >Login</span> </h4>}
-  
+        <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+          {/* condition to show login page or signup page */}
+          {isLogin === true ? <LoginInput loginHandleSubmit={loginHandleSubmit} /> : <SignupInput signupHandleSubmit={signupHandleSubmit} />}
+        </Box>
+
+        <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+
+        {isLogin === true ? <h4>No account? <span onClick={() => { setIsLogin(false) }} style={{ color: "blueviolet", cursor: 'pointer', textDecoration: 'underline' }}>Create an account!</span> </h4> : <h4>Already a User? <span onClick={() => { setIsLogin(true) }} style={{ color: "blueviolet", cursor: 'pointer', textDecoration: 'underline' }} >Login</span> </h4>}
+
+        </Box>
+
       </Box>
-    </Box>
+    </Container>
   )
 }

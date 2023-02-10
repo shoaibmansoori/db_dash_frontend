@@ -5,11 +5,10 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import PropTypes from 'prop-types';
-import { useNavigate } from 'react-router-dom';
-export default function Logininput(props) {
-    // Joi implementation
 
-    const navigate = useNavigate();
+export default function LoginInput(props) {
+
+    // Joi implementation
     const { state, setData, setExplicitField, validate } = useValidator({
         initialData: {
             email: null,
@@ -47,38 +46,52 @@ export default function Logininput(props) {
             password: e.target.value,
         }))
     }
+
+
     const onSubmitLogin = (e)=>{
         e.preventDefault();
         const userdata = {
             email : e.target.email.value,
             password : e.target.password.value
         }
-        props?.LoginhandleSubmit(userdata);
+        props?.loginHandleSubmit(userdata);
     }
+
+
   return (
-    <div>
-    <Box onSubmit={onSubmitLogin} component="form"  sx={{width:'auto', height:'100%',display: 'flex',flexDirection: 'column',justifyContent: 'center',alignItems: 'center' }}>
-        <Box>
+    
+        <Box onSubmit={onSubmitLogin} component="form"  sx={{width:'auto', height:'auto', display: 'flex',flexDirection: 'column',alignItems: 'center' }}>
+
+        <Box sx={{m:2}}>
+
         <TextField error={state?.$errors?.email.length === 0 ?false:state.$errors.email?true:false} required id="email" name='email' label="Email" type="email" variant="outlined" onChange={updateEmail} onBlur={() => setExplicitField("email", true)}/>
+
          {/* error display */}
-        <div style={{color:'red', fontSize:'12px', margin:'2px'}}>
+        <Box style={{color:'red', fontSize:'12px', margin:'2px'}}>
         {state.$errors.email.map((data) => data.$message).join(",")}
-        </div>
         </Box>
+
+        </Box>
+
         <Box sx={{m:1}}>
+
         <TextField error={state?.$errors?.password.length === 0 ?false:state.$errors.password?true:false} required id="password" name='password' label="Password" type="password" variant="outlined" onChange={updatePassword} onBlur={() => setExplicitField("password", true)}/>
+
         {/* error display */}
-        <div style={{color:'red', fontSize:'12px'}}>
+        <Box style={{color:'red', fontSize:'12px'}}>
         {state.$errors.password.map((data) => data.$message).join(",")}
-        </div>
         </Box>
-         <Button onClick={()=>{navigate('/joker')}} type='submit' sx={{bgcolor: 'text.primary', width:"50%", my:2}} variant="contained">Login</Button>
+
+        </Box>
+
+         <Button onClick={validate} type='submit' sx={{bgcolor: 'text.primary', width:"50%", my:2}} variant="contained">Login</Button>
+         
     </Box>
-    </div>
+    
   )
 }
-Logininput.propTypes = {
-    LoginhandleSubmit: PropTypes.func
+LoginInput.propTypes = {
+    loginHandleSubmit: PropTypes.func
 }
 
 
