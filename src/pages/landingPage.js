@@ -1,18 +1,26 @@
 import React from 'react'
-import { Box } from '@mui/material'
-import { Container } from '@mui/system'
+import { Box, Container} from '@mui/material'
 import MainNavbar from '../component/mainNavbar'
+import WorkspaceCombined from '../component/workspaceDatabase/workspaceCombined';
 
 export default function LandingPage() {
+
   return (
-    <Container maxWidth='true' sx={{height:'100vh'}}>
+    <Container maxWidth='true'>
+
     <Box>
-       <Box sx={{fontWeight:'bold' }}>
-       <MainNavbar/>
+
+       <Box>
+          <MainNavbar/>
        </Box>
+
+       <Box>
+            <WorkspaceCombined/>
+       </Box>
+
     </Box>
+
     </Container>
-  )
+  
+    )
 }
-
-

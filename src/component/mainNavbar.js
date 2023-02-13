@@ -1,29 +1,18 @@
 import React from 'react';
-import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
-import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
-import Menu from '@mui/material/Menu';
-import Container from '@mui/material/Container';
-import Avatar from '@mui/material/Avatar';
-import Tooltip from '@mui/material/Tooltip';
-import MenuItem from '@mui/material/MenuItem';
-import { Divider } from '@mui/material';
+import {Box, Toolbar, IconButton, Typography, Menu, Container, Avatar, Tooltip, MenuItem,  Divider} from '@mui/material';
 import { UserAuth } from "../context/authContext.js"
-import {Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 // import PropTypes from 'prop-types';
 // import { useLocation } from 'react-router-dom';
 
 
-
-
 function MainNavbar() {
-  
+
   const user = UserAuth();
   const logOut = user?.logOut;
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const navigate = useNavigate();
-  
+
   // const location = useLocation();
 
   const handleOpenUserMenu = (event) => {
@@ -47,35 +36,33 @@ function MainNavbar() {
   };
 
   return (
-    <Container sx={{ bgcolor: "#212529", height : '55px'}} maxWidth="100vw">
+    <Container sx={{ bgcolor: "#212529", height: '55px'}} maxWidth="false">
 
-      <Toolbar sx={{ display: 'flex', justifyContent: 'space-between', alignItems:'center', height:'50px'}} disableGutters>
+      <Toolbar sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', height: '50px' }} disableGutters>
 
-        <Box sx={{ display: 'flex', justifyContent: "space-between", alignItems: 'center', width: '20%',height:'50px'}}>
+        <Box sx={{ display: 'flex', justifyContent: "space-between", alignItems: 'center', width: '20%', height: '50px' }}>
 
-          <Box sx={{display : "flex", justifyContent:'center', alignItems:"center"}}>
+          <Box sx={{ display: "flex", justifyContent: 'center', alignItems: "center" }}>
             <Link to="/dashboard">
               {/* <img style={{ width: "120px", height: 'auto' }}
                 src={viaScoketWhiteImg}
                 alt="Via Socket" />  */}
-                DB Dash
-                </Link>
+              DB Dash
+            </Link>
           </Box>
 
-         <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', color: "white", ':hover': { color: 'black', cursor: 'pointer' } }}>
+          <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', color: "white", ':hover': { color: 'black', cursor: 'pointer' } }}>
 
           </Box>
-          
-
         </Box>
 
 
 
-        <Box sx={{ display:'flex', justifyContent:'center', alignItems:'center', height:'30px',}}>
+        <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '30px', }}>
 
           <Tooltip title="Open settings">
             <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-              <Avatar/>
+              <Avatar />
             </IconButton>
           </Tooltip>
 
