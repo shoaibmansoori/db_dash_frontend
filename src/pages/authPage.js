@@ -21,7 +21,7 @@ export default function Authpage() {
     const firstName = userdata.firstName;
     const lastName = userdata.lastName;
 
-    await signUp(email, password, firstName, lastName,);
+    await signUp(email, password, firstName, lastName);
   }
   const loginHandleSubmit = async (userdata) => {
     const email = userdata.email;

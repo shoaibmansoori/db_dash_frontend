@@ -9,7 +9,7 @@ import {GoogleAuthProvider,
   signInWithPopup,
   getAdditionalUserInfo
 } from "firebase/auth";
-import {signUpUser} from "../api/index"
+import {signUpUser} from "../api/userApi"
 import { useNavigate } from "react-router-dom";
 const AuthContext = createContext();
 
@@ -25,10 +25,11 @@ export const AuthContextProvider = ({ children }) => {
           const email = userInfo?.user?.email;
           const dataToSend ={
             "email":email,
-            "password" :"",
-            "name":displayName
+            "first_name": displayName.split(" ")[0],
+            last_name: displayName.split(" ")[1] || " ",
           }
-        await signUpUser(dataToSend)
+      await signUpUser(dataToSend)
+
           // return;
         }
 
@@ -39,16 +40,17 @@ export const AuthContextProvider = ({ children }) => {
         console.log(error);
       }
     };
-  const signUp = async (email, password,name) => {
+  const signUp = async (email,password, firstName,lastName) => {
     try {
-      console.log("in signup",email,password);  
+      console.log("in signup",email,firstName);  
       const userInfo = await createUserWithEmailAndPassword(auth, email, password);
       const dataToSend ={
             "email":email,
-            "password" :password,
-            "name":name
+            "first_name" :firstName,
+            "last_name":lastName
       }
       await signUpUser(dataToSend)
+      navigate("/dashboard")
       console.log(userInfo);
      } catch (error) {
       console.log(error);
@@ -58,6 +60,7 @@ export const AuthContextProvider = ({ children }) => {
   const signIn = async (email,password) => {
     try {
       const userInfo = await signInWithEmailAndPassword(auth, email, password);
+      navigate("/dashboard")
       console.log(userInfo);
     } catch (error) {
      console.log(error);

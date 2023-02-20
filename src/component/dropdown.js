@@ -21,7 +21,7 @@ export default function Dropdown(props) {
   return (
     <>
         <Tooltip>
-            <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+            <IconButton onClick={handleOpenUserMenu}>
               <MoreHorizIcon />
             </IconButton>
           </Tooltip>
