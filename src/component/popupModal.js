@@ -4,6 +4,7 @@ import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import PropTypes from 'prop-types';
 import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
 
 const style = {
   position: 'absolute',
@@ -36,6 +37,14 @@ export default function PopupModal(props) {
           </Typography>
             <Box sx={{my:2}}>
                 <TextField id="standard-basic" label="Organisation Name" variant="standard"/>
+          </Box>
+          <Box sx={{display:"flex", justifyContent:"space-between"}}>
+          <Box>
+          <Button variant="contained">Save</Button>
+          </Box>
+          <Box >
+          <Button variant="outlined">Cancel</Button>
+          </Box>
           </Box>
         </Box>
       </Modal>

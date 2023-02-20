@@ -24,29 +24,25 @@ export default function WorkspaceCombined() {
             <Button onClick={handleOpen} variant="contained">Create Organisation</Button>
             <PopupModal title="create organisation" open={open} setOpen ={setOpen}/>
             </Box>
-
-            <Box sx={{my:7 , mx: -10}}>
-                  {name ? 
-                  (
-                    <TextField id="outlined-basic" variant="outlined" />
-                  ) : 
-                  (
-                    <Typography onDoubleClick={()=>{setName(true)}} sx={{fontWeight: 'bold'}}>Workspace 1</Typography>
-                  )}
-            </Box>
-
-            <Box sx={{mx:1}}>
-                  { name ?
+            <Box sx ={{my:7 , mx: -10, display: "flex", marginLeft: -29}}>
+             
+                    {name ? 
                     (
-                        <Box sx={{mx:12, mt:9}}>
-                        <Typography sx={{fontWeight: 'bold',cursor:'pointer'}}>Rename</Typography>
-                        </Box>
-                    ) :
-                    (    <Box sx={{my:6, mx:10}}>
-                        <Dropdown first={"Rename workspace"} second={"Delete workspace"} setName={setName}/>
-                        </Box>
-                    )
-                }
+                      <>
+                      <TextField id="outlined-basic" variant="outlined" />
+                      <Typography sx={{fontWeight: 'bold',cursor:'pointer'}}>Rename</Typography>
+                      </>
+                    ) : 
+                    (
+                      <>
+                      <Typography onDoubleClick={()=>{setName(true)}} sx={{fontWeight: 'bold'}}>Workspace 1</Typography>
+                      <Box sx={{mt: -1}}>
+                      <Dropdown  first={"Rename workspace"} second={"Delete workspace"} setName={setName}/>
+                      </Box>
+                      </>
+                    )}
+                   
+  
             </Box>
     </Box>
            
