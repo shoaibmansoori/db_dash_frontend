@@ -30,7 +30,7 @@ export default function WorkspaceCombined() {
                     (
                       <>
                       <TextField id="outlined-basic" variant="outlined" />
-                      <Typography sx={{fontWeight: 'bold',cursor:'pointer'}}>Rename</Typography>
+                      <Typography sx={{fontWeight: 'bold',cursor:'pointer', margin: 1.8}}>Rename</Typography>
                       </>
                     ) : 
                     (

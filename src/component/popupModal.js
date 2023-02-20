@@ -19,12 +19,12 @@ const style = {
 };
 
 export default function PopupModal(props) {
- 
+
   const handleClose = () => props.setOpen(false);
 
   return (
     <Box>
-     
+
       <Modal
         open={props.open}
         onClose={handleClose}
@@ -35,26 +35,26 @@ export default function PopupModal(props) {
           <Typography id="modal-modal-title" variant="h6" component="h2">
             {props.title}
           </Typography>
-            <Box sx={{my:2}}>
-                <TextField id="standard-basic" label="Organisation Name" variant="standard"/>
+          <Box sx={{ my: 2 }}>
+            <TextField id="standard-basic" label="Organisation Name" variant="standard" />
           </Box>
-          <Box sx={{display:"flex", justifyContent:"space-between"}}>
-          <Box>
-          <Button variant="contained">Save</Button>
-          </Box>
-          <Box >
-          <Button variant="outlined">Cancel</Button>
-          </Box>
+          <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+            <Box>
+              <Button variant="contained">Save</Button>
+            </Box>
+            <Box >
+              <Button variant="outlined">Cancel</Button>
+            </Box>
           </Box>
         </Box>
       </Modal>
-      
+
     </Box>
   );
 }
 
 PopupModal.propTypes = {
-   title: PropTypes.string,
-   open: PropTypes.bool,
-   setOpen: PropTypes.func,
-  };
+  title: PropTypes.string,
+  open: PropTypes.bool,
+  setOpen: PropTypes.func,
+};
