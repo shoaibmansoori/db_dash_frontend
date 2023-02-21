@@ -4,7 +4,6 @@ const URL = process.env.REACT_APP_API_BASE_URL;
 
 const signUpUser = async (data)=>
 {   
-    // console.log(URL+"api/user");
     return await axios.post(URL +"/users" ,data );
 }
 
@@ -35,7 +34,7 @@ const deleteUser = async (id) =>
 
 const findUserByEmail = async (email) =>
 {
-    return await axios.get(URL + `/users/${email}`);
+    return await axios.get(URL + `/users/email/${email}`);
 }
 
 

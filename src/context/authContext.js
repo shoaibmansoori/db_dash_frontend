@@ -35,15 +35,13 @@ export const AuthContextProvider = ({ children }) => {
 
         navigate("/dashboard")
 
-        console.log(userInfo)
       } catch (error) {
         console.log(error);
       }
     };
   const signUp = async (email,password, firstName,lastName) => {
     try {
-      console.log("in signup",email,firstName);  
-      const userInfo = await createUserWithEmailAndPassword(auth, email, password);
+      await createUserWithEmailAndPassword(auth, email, password);
       const dataToSend ={
             "email":email,
             "first_name" :firstName,
@@ -51,7 +49,6 @@ export const AuthContextProvider = ({ children }) => {
       }
       await signUpUser(dataToSend)
       navigate("/dashboard")
-      console.log(userInfo);
      } catch (error) {
       console.log(error);
       }
@@ -59,9 +56,8 @@ export const AuthContextProvider = ({ children }) => {
 
   const signIn = async (email,password) => {
     try {
-      const userInfo = await signInWithEmailAndPassword(auth, email, password);
+      await signInWithEmailAndPassword(auth, email, password);
       navigate("/dashboard")
-      console.log(userInfo);
     } catch (error) {
      console.log(error);
     }
@@ -74,12 +70,11 @@ export const AuthContextProvider = ({ children }) => {
  
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
-      if(currentUser) {
+     
         setUser(currentUser);
-      }
     });
-    return () => {
-      unsubscribe();
+    return async () => {
+      await unsubscribe();
     };
   }, []);
 
@@ -97,3 +92,4 @@ export const UserAuth = () => {
 AuthContextProvider.propTypes = {
   children: PropTypes.node.isRequired,
 }
+

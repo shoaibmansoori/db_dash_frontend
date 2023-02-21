@@ -40,10 +40,10 @@ export default function PopupModal(props) {
           </Box>
           <Box sx={{ display: "flex", justifyContent: "space-between" }}>
             <Box>
-              <Button variant="contained">Save</Button>
+              <Button variant="contained" onClick={handleClose}>Save</Button>
             </Box>
             <Box >
-              <Button variant="outlined">Cancel</Button>
+              <Button variant="outlined" onClick={handleClose}>Cancel</Button>
             </Box>
           </Box>
         </Box>

@@ -7,7 +7,6 @@ import { Link, useNavigate } from 'react-router-dom';
 
 
 function MainNavbar() {
-
   const user = UserAuth();
   const logOut = user?.logOut;
   const [anchorElUser, setAnchorElUser] = React.useState(null);
@@ -62,7 +61,7 @@ function MainNavbar() {
 
           <Tooltip title="Open settings">
             <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-              <Avatar />
+              <Avatar alt={user?.user?.displayName} src={user?.user?.photoURL}/>
             </IconButton>
           </Tooltip>
 
@@ -84,10 +83,10 @@ function MainNavbar() {
           >
 
             <MenuItem onClick={handleCloseUserMenu}>
-              <Typography textAlign="center">Ansh</Typography>
+              <Typography textAlign="center">{user?.user?.displayName}</Typography>
             </MenuItem>
             <MenuItem onClick={handleCloseUserMenu}>
-              <Typography textAlign="center">ansh@gmail.com</Typography>
+              <Typography textAlign="center">{user?.user?.email}</Typography>
             </MenuItem>
             <Divider />
             <MenuItem onClick={() => { handleLogOut() }}>

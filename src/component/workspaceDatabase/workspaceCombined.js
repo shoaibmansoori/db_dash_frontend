@@ -1,21 +1,31 @@
-import React,{useState} from 'react'
+import React,{useEffect, useState} from 'react'
 import Dropdown from '../dropdown';
 import  {Box, Typography, TextField} from '@mui/material'
 import SingleDatabase from './singleDatabase';
 import PopupModal from '../popupModal';
 import Button from '@mui/material/Button';
-
+import {findUserByEmail} from "../../api/userApi"
+import { UserAuth } from "../../context/authContext.js"
 
 
 export default function WorkspaceCombined() {
 
+    const {user} = UserAuth();  
     const [name, setName] = useState(false)
-
     //state to display modal
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen(true);
-  
-    
+    useEffect(()=>{
+    // if(user)
+      getOrgAndDb();
+
+    },[user])
+    const getOrgAndDb = async()=>
+    {
+      console.log(user);
+      await findUserByEmail(user?.user?.email);
+      // console.log(data);
+    }
   return (
     <>
   <Box sx={{display:'flex', my:2}}>
