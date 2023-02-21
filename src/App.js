@@ -4,7 +4,7 @@ import { Route, Routes} from 'react-router-dom';
 import Authpage from './pages/authPage';
 import LandingPage from './pages/landingPage';
 import { AuthContextProvider } from './context/authContext';
-
+import "./pages/css.css"
 function App() {
 
   return (

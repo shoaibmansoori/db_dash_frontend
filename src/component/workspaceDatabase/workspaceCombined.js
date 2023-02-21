@@ -29,13 +29,14 @@ export default function WorkspaceCombined() {
                     {name ? 
                     (
                       <>
-                      <TextField id="outlined-basic" variant="outlined" />
-                      <Typography sx={{fontWeight: 'bold',cursor:'pointer', margin: 1.8}}>Rename</Typography>
+                      {/* <TextField id="outlined-basic" variant="outlined" /> */}
+                      <TextField  sx={{width:120 ,fontWeight: 'bold'}} defaultValue="WorkSpace1"  size="small"/>
+                      <Typography sx={{fontWeight: 'bold',cursor:'pointer', margin: 1}}>Rename</Typography>
                       </>
                     ) : 
                     (
                       <>
-                      <Typography onDoubleClick={()=>{setName(true)}} sx={{fontWeight: 'bold'}}>Workspace 1</Typography>
+                      <Typography onClick={()=>{setName(true)}} sx={{fontWeight: 'bold'}}>Workspace 1</Typography>
                       <Box sx={{mt: -1}}>
                       <Dropdown  first={"Rename workspace"} second={"Delete workspace"} setName={setName}/>
                       </Box>
