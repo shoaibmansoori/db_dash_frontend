@@ -35,7 +35,7 @@ function MainNavbar() {
   };
 
   return (
-    <Container sx={{ bgcolor: "#212529", height: '55px'}} maxWidth="false">
+    <Container sx={{bgcolor: "#212529", height: '55px'}} maxWidth="false" >
 
       <Toolbar sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', height: '50px' }} disableGutters>
 

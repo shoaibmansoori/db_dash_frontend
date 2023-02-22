@@ -1,10 +1,11 @@
 import React from 'react'
 import { Card, CardContent, Typography, Box } from '@mui/material'
 import Dropdown from '../dropdown'
+import PropTypes from "prop-types"
 
 
 
-export default function SingleDatabase() {
+export default function SingleDatabase(props) {
   return (
 
     <Card sx={{ minWidth: 250, minHeight: 200, boxShadow: 2 }}>
@@ -23,4 +24,8 @@ export default function SingleDatabase() {
     </Card>
 
   )
+}
+
+SingleDatabase.propTypes = {
+  name  : PropTypes.string
 }

@@ -23,7 +23,7 @@ export default function WorkspaceCombined() {
   const saveOrgToDB = async (e) => {
       e.preventDefault();
       const userid = localStorage.getItem("userid");
-      //console.log("userid",userid);
+      console.log("userid",userid);
       const response = await createOrg({name: org,user_id:userid})
       console.log(response);
       setOpen(false);
