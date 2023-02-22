@@ -1,6 +1,6 @@
 import axios from "../interceptor/interceptor.js";
 const URL = process.env.REACT_APP_API_BASE_URL;
-console.log(URL);
+// console.log(URL);
 
 const signUpUser = async (data)=>
 {   
