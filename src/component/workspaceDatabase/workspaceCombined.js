@@ -16,14 +16,14 @@ export default function WorkspaceCombined() {
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen(true);
     useEffect(()=>{
-    // if(user)
+    if(user?.email)
       getOrgAndDb();
 
     },[user])
     const getOrgAndDb = async()=>
     {
       console.log(user);
-      await findUserByEmail(user?.user?.email);
+      await findUserByEmail(user?.email);
       // console.log(data);
     }
   return (
