@@ -10,14 +10,15 @@ export default function SingleDatabase() {
     <Card sx={{ minWidth: 250, minHeight: 200, boxShadow: 2 }}>
       <CardContent>
         <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-          <Box>
+          <Box >
             <Typography>Database-1</Typography>
           </Box>
-
           <Box>
             <Dropdown first={"Rename Database"} second={"Delete Database"} />
           </Box>
-        </Box>
+          </Box>
+
+          
       </CardContent>
     </Card>
 

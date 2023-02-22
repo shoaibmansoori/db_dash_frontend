@@ -5,7 +5,6 @@ import Modal from "@mui/material/Modal";
 import PropTypes from "prop-types";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
-import { createOrg } from "../api/orgApi";
 
 const style = {
   position: "absolute",
@@ -20,19 +19,7 @@ const style = {
 };
 
 export default function PopupModal(props) {
-  const [org, setOrg] = React.useState();
-
-  const saveOrgToDB = async (e) => {
-    e.preventDefault();
-    const userid = localStorage.getItem("userid");
-    console.log(userid);
-    // const dataToSend = { name: org, user_id: "sd12sra32fsf" };
-    // const response = await createOrg("wefbgftefrd", dataToSend);
-    const response = await createOrg({name: org,user_id:userid})
-    console.log(response);
-    props.setOpen(false);
-  };
-
+   
   const handleClose = () => props.setOpen(false);
 
   return (
@@ -50,16 +37,16 @@ export default function PopupModal(props) {
           <Box sx={{ my: 2 }}>
             <TextField
               id="standard-basic"
-              label="Organisation Name"
+              label={props.label}
               variant="standard"
               onChange={(e) => {
-                setOrg(e.target.value);
+                props.setVariable(e.target.value);
               }}
             />
           </Box>
           <Box sx={{ display: "flex", justifyContent: "space-between" }}>
             <Box>
-              <Button variant="contained" onClick={saveOrgToDB}>
+              <Button variant="contained" onClick={props?.saveFunction}>
                 Save
               </Button>
             </Box>
@@ -79,4 +66,7 @@ PopupModal.propTypes = {
   title: PropTypes.string,
   open: PropTypes.bool,
   setOpen: PropTypes.func,
+  label: PropTypes.string,
+  saveFunction:PropTypes.func,
+  setVariable:PropTypes.func
 };
