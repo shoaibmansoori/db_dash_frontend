@@ -4,12 +4,40 @@ import Button from '@mui/material/Button';
 import PopupModal from '../popupModal';
 import { Box, Typography, TextField } from '@mui/material'
 import SingleDatabase from './singleDatabase';
+import { createDb } from '../../api/dbApi';
+
 
 
 export const OrgList = () => {
+    
+   
     const [name, setName] = useState(false)
+    const [db, setDb] = useState(false);
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
+
+   
+
+    
+    const saveDb = async (e) => {
+        e.preventDefault();
+      let  orgid = "63e5f9563f3d80ad6be632e0"
+         const userId = localStorage.getItem("userid");
+         
+         const data ={
+                user_id : userId,
+                name    : db,
+            }
+          
+         const response = await createDb(orgid,data)
+         console.log("response",response)
+         
+        setOpen(false);
+      };
+      
+     
+
+
 
     return (
         <>
@@ -41,10 +69,12 @@ export const OrgList = () => {
 
                 <Box>
                     <Button onClick={handleOpen} variant="contained">Create Db</Button>
-                    <PopupModal title="create Database" open={open} setOpen={setOpen} label="Database Name"  />
+                    <PopupModal title="create Database" open={open} setOpen={setOpen} label="Database Name" 
+                    saveFunction = {saveDb}  setVariable={setDb}/>
                 </Box>
 
             </Box>
+            
         </>
     )
 }

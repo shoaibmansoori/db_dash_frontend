@@ -7,6 +7,7 @@ import { UserAuth } from "../../context/authContext.js"
 import { createOrg } from "../../api/orgApi";
 import { OrgList } from './orgList';
 
+
 export default function WorkspaceCombined() {
 
     const {user} = UserAuth();  
@@ -22,7 +23,7 @@ export default function WorkspaceCombined() {
   const saveOrgToDB = async (e) => {
       e.preventDefault();
       const userid = localStorage.getItem("userid");
-      console.log("userid",userid);
+      //console.log("userid",userid);
       const response = await createOrg({name: org,user_id:userid})
       console.log(response);
       setOpen(false);
@@ -35,6 +36,7 @@ export default function WorkspaceCombined() {
       localStorage.setItem("userid", data?.data?.data?._id);
       // console.log(data?.data?.data?._id);
     }
+
    
   return (
     <>

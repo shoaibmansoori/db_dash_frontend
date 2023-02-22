@@ -13,7 +13,7 @@ export default function SingleDatabase() {
           <Box >
             <Typography>Database-1</Typography>
           </Box>
-          <Box>
+                <Box>
             <Dropdown first={"Rename Database"} second={"Delete Database"} />
           </Box>
           </Box>
