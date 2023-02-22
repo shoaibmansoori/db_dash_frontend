@@ -24,10 +24,12 @@ export default function PopupModal(props) {
 
   const saveOrgToDB = async (e) => {
     e.preventDefault();
+    const userid = localStorage.getItem("userid");
+    console.log(userid);
     // const dataToSend = { name: org, user_id: "sd12sra32fsf" };
     // const response = await createOrg("wefbgftefrd", dataToSend);
-    // const response = await createOrg({name: org})
-    // console.log(response);
+    const response = await createOrg({name: org,user_id:userid})
+    console.log(response);
     props.setOpen(false);
   };
 

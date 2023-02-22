@@ -22,9 +22,10 @@ export default function WorkspaceCombined() {
     },[user])
     const getOrgAndDb = async()=>
     {
-      console.log(user);
-      await findUserByEmail(user?.email);
-      // console.log(data);
+      // console.log(user);
+      const data = await findUserByEmail(user?.email);
+      localStorage.setItem("userid", data?.data?.data?._id);
+      // console.log(data?.data?.data?._id);
     }
   return (
     <>
