@@ -5,7 +5,7 @@ import Modal from "@mui/material/Modal";
 import PropTypes from "prop-types";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
-import { createOrg } from "../api/orgApi";
+// import { createOrg } from "../api/orgApi";
 
 const style = {
   position: "absolute",
@@ -28,6 +28,7 @@ export default function PopupModal(props) {
     // const response = await createOrg("wefbgftefrd", dataToSend);
     // const response = await createOrg({name: org})
     // console.log(response);
+    console.log(org);
     props.setOpen(false);
   };
 

@@ -8,9 +8,11 @@ import {findUserByEmail} from "../../api/userApi"
 import { UserAuth } from "../../context/authContext.js"
 
 
+
 export default function WorkspaceCombined() {
 
     const {user} = UserAuth();  
+    const [alldbs,setAllDbs] = useState([]);
     const [name, setName] = useState(false)
     //state to display modal
     const [open, setOpen] = React.useState(false);
@@ -20,14 +22,27 @@ export default function WorkspaceCombined() {
       getOrgAndDb();
 
     },[user])
+    const filterDbsBasedOnOrg = async (allDbs)=>
+    {
+      var result = {};
+      allDbs.map((item)=>{
+          result[item.org_id]=result[item.org_id]?[...result[item.org_id],item]:[item]
+      })
+      setAllDbs(result);
+      // console.log(result);
+    }
     const getOrgAndDb = async()=>
     {
       console.log(user);
-      await findUserByEmail(user?.email);
-      // console.log(data);
+      const data = await findUserByEmail(user?.email);  
+
+      console.log(data?.data?.data?.dbs);
+      filterDbsBasedOnOrg(data?.data?.data?.dbs)
+      // setAllDbs(data?.data?.data?.dbs); 
     }
   return (
     <>
+    {console.log(alldbs)}
   <Box sx={{display:'flex', my:2}}>
 
             <Box sx={{mx:3}}>
@@ -46,7 +61,7 @@ export default function WorkspaceCombined() {
                     ) : 
                     (
                       <>
-                      <Typography onClick={()=>{setName(true)}} sx={{fontWeight: 'bold'}}>Workspace 1</Typography>
+                      <Typography onClick={()=>{setName(true)}} sx={{fontWeight: 'bold'}}>{}</Typography>
                       <Box sx={{mt: -1}}>
                       <Dropdown  first={"Rename workspace"} second={"Delete workspace"} setName={setName}/>
                       </Box>
@@ -65,7 +80,15 @@ export default function WorkspaceCombined() {
                 
             </Box>
    
+            {Object.entries(alldbs).map(([orgId, dbs]) => (
+        <Box key={orgId} sx={{ my: 2 }}>
+          <Typography variant="h6">{`Organization ${orgId}`}</Typography>
+          {dbs.map((db) => (
+            <SingleDatabase name={db.name} key={db.id} />
+          ))}
+        </Box>
+      ))}
     </>
-  )
+  );
 }
 
