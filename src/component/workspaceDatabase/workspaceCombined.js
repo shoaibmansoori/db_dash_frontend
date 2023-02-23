@@ -35,7 +35,7 @@ export default function WorkspaceCombined() {
     {
       console.log(user);
       const data = await findUserByEmail(user?.email);  
-
+      localStorage.setItem("userid",data?.data?.data?._id)
       console.log(data?.data?.data?.dbs);
       filterDbsBasedOnOrg(data?.data?.data?.dbs)
       // setAllDbs(data?.data?.data?.dbs); 
@@ -53,11 +53,11 @@ export default function WorkspaceCombined() {
    
   return (
     <>
-  <Box sx={{display:''}}>
+  <Box>
 
-            <Box sx={{mx:3}}>
+            <Box sx={{m:3}}>
             <Button onClick={handleOpen} variant="contained">Create Organisation</Button>
-            <PopupModal title="create organisation" label="Organization Name" open={open} setOpen ={setOpen}              
+            <PopupModal title="create organisation" label="Organization Name" open={open} setOpen ={setOpen} id="orgId"              
             saveFunction = {saveOrgToDB}  setVariable={setOrg}/>
             </Box>
            <OrgList/>

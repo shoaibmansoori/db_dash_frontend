@@ -17,31 +17,33 @@ export const OrgList = () => {
                 {name ?
                     (
                         <>
-                            {/* <TextField id="outlined-basic" variant="outlined" /> */}
-                            <TextField sx={{ width: 12000, fontWeight: 'bold' }} defaultValue="WorkSpace1" size="small" />
+                        <Box sx={{display:'flex',mx:3}}>
+                            <TextField sx={{ width: 120, fontWeight: 'bold' }} defaultValue="WorkSpace1" size="small" />
                             <Typography sx={{ fontWeight: 'bold', cursor: 'pointer', margin: 1 }}>Rename</Typography>
+                        </Box>
                         </>
                     ) :
                     (
                         <>
+                        <Box sx={{mx:3}}>
                             <Typography onClick={() => { setName(true) }} sx={{ fontWeight: 'bold' }}>Workspace 1</Typography>
+                        </Box>
                             <Box sx={{ mt: -1 }}>
                                 <Dropdown first={"Rename workspace"} second={"Delete workspace"} setName={setName} />
                             </Box>
                         </>
                     )}
-
-
             </Box>
-            <Box sx={{  display:"flex"}}>
+
+            <Box sx={{  display:"flex", mt:-3}}>
 
                 <Box sx={{ mx: 2 }}>
                     <SingleDatabase />
                 </Box>
 
                 <Box>
-                    <Button onClick={handleOpen} variant="contained">Create Db</Button>
-                    <PopupModal title="create Database" open={open} setOpen={setOpen} label="Database Name"  />
+                    <Button onClick={handleOpen} variant="contained">Create Database</Button>
+                    <PopupModal title="create Database" open={open} setOpen={setOpen} id="databaseId" label="Database Name"/>
                 </Box>
 
             </Box>

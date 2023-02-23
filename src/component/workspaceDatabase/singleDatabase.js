@@ -5,7 +5,7 @@ import PropTypes from "prop-types"
 
 
 
-export default function SingleDatabase(props) {
+export default function SingleDatabase() {
   return (
 
     <Card sx={{ minWidth: 250, minHeight: 200, boxShadow: 2 }}>

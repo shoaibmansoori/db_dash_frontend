@@ -5,6 +5,7 @@ import Modal from "@mui/material/Modal";
 import PropTypes from "prop-types";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
+// import { createOrg } from "../api/orgApi";
 
 const style = {
   position: "absolute",
@@ -19,7 +20,8 @@ const style = {
 };
 
 export default function PopupModal(props) {
-   
+  // const [org, setOrg] = React.useState();
+
   const handleClose = () => props.setOpen(false);
 
   return (
@@ -31,22 +33,25 @@ export default function PopupModal(props) {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          <Typography id="modal-modal-title" variant="h6" component="h2">
+          <Typography id="title" variant="h6" component="h2">
             {props.title}
           </Typography>
           <Box sx={{ my: 2 }}>
-            <TextField
-              id="standard-basic"
-              label={props.label}
+            <TextField 
+              id={props?.id}
+              name={props?.id}
+              label={props.label} 
               variant="standard"
               onChange={(e) => {
                 props.setVariable(e.target.value);
               }}
             />
+
+  
           </Box>
           <Box sx={{ display: "flex", justifyContent: "space-between" }}>
             <Box>
-              <Button variant="contained" onClick={props?.saveFunction}>
+              <Button variant="contained" onClick={(e)=>{props?.saveFunction (e)}}>
                 Save
               </Button>
             </Box>
@@ -68,5 +73,6 @@ PopupModal.propTypes = {
   setOpen: PropTypes.func,
   label: PropTypes.string,
   saveFunction:PropTypes.func,
-  setVariable:PropTypes.func
+  setVariable:PropTypes.func,
+  id: PropTypes.string
 };
