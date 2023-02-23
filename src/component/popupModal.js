@@ -60,6 +60,7 @@ export default function PopupModal(props) {
                 Cancel
               </Button>
             </Box>
+            
           </Box>
         </Box>
       </Modal>
@@ -75,4 +76,5 @@ PopupModal.propTypes = {
   saveFunction:PropTypes.func,
   setVariable:PropTypes.func,
   id: PropTypes.string
+
 };

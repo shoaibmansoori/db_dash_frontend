@@ -5,16 +5,17 @@ import PropTypes from "prop-types"
 
 
 
-export default function SingleDatabase() {
+export default function SingleDatabase(props) {
+    
   return (
-
+ 
     <Card sx={{ minWidth: 250, minHeight: 200, boxShadow: 2 }}>
       <CardContent>
         <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
           <Box >
-            <Typography>Database-1</Typography>
+            <Typography>{props.db.name}</Typography>
           </Box>
-          <Box>
+                <Box>
             <Dropdown first={"Rename Database"} second={"Delete Database"} />
           </Box>
           </Box>
@@ -27,5 +28,6 @@ export default function SingleDatabase() {
 }
 
 SingleDatabase.propTypes = {
-  name  : PropTypes.string
+  db : PropTypes.object,
+  name : PropTypes.string
 }
