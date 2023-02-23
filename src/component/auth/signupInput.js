@@ -96,7 +96,7 @@ export default function SignupInput(props) {
       }
     }
   return (
-    <div>
+    <Box>
         <Box onSubmit={onSubmitSignup} component="form" sx={{display: 'flex',flexDirection: 'column',justifyContent: 'center',alignItems: 'center',backgroundColor:"white"}}>
 
         {/* First name and last name */}
@@ -147,7 +147,7 @@ export default function SignupInput(props) {
 
         <Button type='submit' onClick={validate} sx={{bgcolor: 'text.primary', width:"50%", my:1}} variant="contained">Signup</Button>
         </Box>
-    </div>
+    </Box>
   )
 }
 SignupInput.propTypes = {
