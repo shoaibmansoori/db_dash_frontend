@@ -26,7 +26,7 @@ export const OrgList = (props) => {
                 name    : db,
             }
           
-         const response = await createDb(orgId,data)
+          await createDb(orgId,data)
          
         setOpen(false);
       };
