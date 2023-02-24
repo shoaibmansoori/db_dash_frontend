@@ -13,7 +13,6 @@ export default function SingleDatabase(props) {
           <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
             <Box>
               <Typography>{props.db.name}</Typography>
-              <Typography>{props.db._id}</Typography>
             </Box>
             <Box>
               <Dropdown first={"Rename Database"} second={"Delete Database"} />
