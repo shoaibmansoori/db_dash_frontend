@@ -5,6 +5,7 @@ import Authpage from './pages/authPage';
 import LandingPage from './pages/landingPage';
 import { AuthContextProvider } from './context/authContext';
 import "./pages/css.css"
+import DbDetail from './pages/dbDetail';
 function App() {
 
   return (
@@ -13,6 +14,7 @@ function App() {
     <Routes>
       <Route exact path ="/" element ={<Authpage/>} />
       <Route exact path ="/dashboard" element ={<LandingPage/>} />
+      <Route exact path ="/db/:dbId" element ={<DbDetail/>}/>
     </Routes>
     </AuthContextProvider>
 
