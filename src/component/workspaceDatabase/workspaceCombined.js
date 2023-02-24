@@ -34,14 +34,11 @@ export default function WorkspaceCombined() {
     {
       const data = await findUserByEmail(user?.email);  
       localStorage.setItem("userid",data?.data?.data?._id)
-      // const data = await findUserByEmail("goutammehta52@gmail.com");
       filterDbsBasedOnOrg(data?.data?.data?.dbs)
-      // setAllDbs(data?.data?.data?.dbs);
     }
   const saveOrgToDB = async (e) => {
       e.preventDefault();
       const userid = localStorage.getItem("userid");
-      //console.log("userid",userid);
       await createOrg({name: org,user_id:userid})
       setOpen(false);
     };

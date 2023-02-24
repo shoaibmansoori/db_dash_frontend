@@ -19,15 +19,15 @@ export const OrgList = (props) => {
 
     const saveDb = async (e) => {
         e.preventDefault();
-        const userId = localStorage.getItem("userid");
-
-        const data = {
-            user_id: userId,
-            name: db,
-        }
-
-        await createDb(orgId, data);
-
+         const userId = localStorage.getItem("userid");
+         
+         const data ={
+                user_id : userId,
+                name    : db,
+            }
+          
+        await createDb(orgId,data)
+         
         setOpen(false);
     };
     return (
