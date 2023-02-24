@@ -30,6 +30,7 @@ export const OrgList = (props) => {
          
         setOpen(false);
     };
+    
     return (
         <>
             {Object.entries(props.alldbs).map(([orgId, dbs]) => (
@@ -38,7 +39,7 @@ export const OrgList = (props) => {
                     <Box sx={{ my: 7, display: "flex" }}>
                         {name ?
                             (<>
-                                <TextField sx={{ width: 120, fontWeight: 'bold' }} defaultValue={"WorkSpace1"} size="small" />
+                                <TextField sx={{ width: 120, fontWeight: 'bold' }} defaultValue={orgId} size="small" />
                                 <Typography sx={{ fontWeight: 'bold', cursor: 'pointer', margin: 1 }}>Rename</Typography>
 
                             </>) :

@@ -45,6 +45,12 @@ export default function PopupModal(props) {
               onChange={(e) => {
                 props.setVariable(e.target.value);
               }}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter') {
+                  props.saveFunction(e);
+                  handleClose();
+                }
+              }}
             />
 
   
