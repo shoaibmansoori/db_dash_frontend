@@ -26,17 +26,9 @@ export default function WorkspaceCombined() {
     {
       var result = {};
       allDbs.map((item)=>{
-        if(result[item.org_id._id])
-        {
-          result[item.org_id._id]= [...result[item.org_id._id],item]
-        }
-        else{
-          result[item.org_id._id]= [item ]
-
-        }
-          // result[item.org_id.name]=result[item.org_id.name]?[...result[item.org_id.name],item]:[item]
+        
+          result[item.org_id._id]=result[item.org_id._id]?[...result[item.org_id._id],item]:[item]
       })
-      console.log("result",result);
       setAllDbs(result);
     }
     const getOrgAndDb = async()=>

@@ -10,7 +10,6 @@ export default function TablesList (props ) {
   const [tables, setTables] = useState([]);
 
   const saveTable = async (e) => {
-    console.log("hello");
       const dbId = props.dbData.db._id;
     e.preventDefault();
     const data = {
@@ -18,8 +17,6 @@ export default function TablesList (props ) {
     }
     await createTable(dbId, data);
   };
-//   console.log(saveTable)
-  console.log("props",props);
   const addTable = () => {
     setTableCount(tableCount + 1);
     setTables([...tables, `Table ${tableCount + 1}`]);
