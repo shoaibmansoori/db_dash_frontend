@@ -21,7 +21,6 @@ const style = {
 
 export default function PopupModal(props) {
   // const [org, setOrg] = React.useState();
-
   const handleClose = () => props.setOpen(false);
 
   return (

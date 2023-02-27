@@ -1,10 +1,13 @@
-import React from 'react'
+import React   from 'react'
 import { Card, CardContent, Typography, Box } from '@mui/material'
 import PropTypes from "prop-types"
 import { Link } from 'react-router-dom'
 import Dropdown from '../dropdown'
 
 export default function SingleDatabase(props) {
+  // useEffect(()=>{
+  //     console.log("props",props)
+  //   },[])
     
   return (
     <Card sx={{ minWidth: 250, minHeight: 200, boxShadow: 2 }}>
