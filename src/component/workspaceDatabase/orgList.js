@@ -30,6 +30,7 @@ export const OrgList = (props) => {
          
         setOpen(false);
     };
+    
     return (
         <>
             {Object.entries(props.alldbs).map(([orgId, dbs]) => (
@@ -38,12 +39,12 @@ export const OrgList = (props) => {
                     <Box sx={{ my: 7, display: "flex" }}>
                         {name ?
                             (<>
-                                <TextField sx={{ width: 120, fontWeight: 'bold' }} defaultValue={"WorkSpace1"} size="small" />
+                                <TextField sx={{ width: 120, fontWeight: 'bold' }} defaultValue={dbs[0]?.org_id?.name} size="small" />
                                 <Typography sx={{ fontWeight: 'bold', cursor: 'pointer', margin: 1 }}>Rename</Typography>
 
                             </>) :
                             (<>
-                                <Typography onClick={() => { setName(true) }} sx={{ fontWeight: 'bold' }}>{orgId} </Typography>
+                                <Typography onClick={() => { setName(true) }} sx={{ fontWeight: 'bold' }}>{dbs[0]?.org_id?.name} </Typography>
 
                                 <Box sx={{ mt: -1 }}>
                                     <Dropdown first={"Rename workspace"} second={"Delete workspace"} setName={setName} />
