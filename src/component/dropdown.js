@@ -2,6 +2,9 @@ import React from 'react'
 import PropTypes from 'prop-types';
 import { Typography, Menu, MenuItem, Tooltip, IconButton } from '@mui/material'
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
+// import {deleteOrg} from '../api/orgApi.js';
+import {deleteDb} from '../api/dbApi.js';
+
 
 export default function Dropdown(props) {
 
@@ -16,6 +19,20 @@ export default function Dropdown(props) {
     const handleCloseUserMenu = () => {
       setAnchorElUser(null);
     };
+
+    // const deleteOrganization = async() => {
+    //   // e.preventDefault();
+    //   console.log("delete",props?.orgId)
+    //     const ans = await deleteOrg(props?.orgId);
+    //     // setOpen(false);
+    //     console.log("Deelete tavle",ans)
+    // }
+
+    const deletDatabases = async(e) => {
+      e.preventDefault();
+      const response = await deleteDb(props?.db?.orgId?._id,props?.db?._id)
+      console.log(response);
+    }
 
 
   return (
@@ -52,7 +69,7 @@ export default function Dropdown(props) {
             </MenuItem>
             <MenuItem onClick={(e)=>{e.preventDefault();
               e.stopPropagation();handleCloseUserMenu(e)}}>
-              <Typography textAlign="center">{props?.second}</Typography>
+              <Typography textAlign="center" onClick={(e)=>{deletDatabases(e)}}>{props?.second}</Typography>
             </MenuItem>
           </Menu>
     </>
@@ -62,5 +79,10 @@ export default function Dropdown(props) {
 Dropdown.propTypes = {
   first: PropTypes.string,
   second: PropTypes.string,
-  setName: PropTypes.func
+  setName: PropTypes.func,
+  orgId: PropTypes.object,
+  alldbs: PropTypes.any,
+  name: PropTypes.string,
+  db:PropTypes.string,
+  // db.orgId:PropTypes.string
 };

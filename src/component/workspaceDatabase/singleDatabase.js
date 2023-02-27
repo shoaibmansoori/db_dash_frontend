@@ -15,7 +15,7 @@ export default function SingleDatabase(props) {
               <Typography>{props.db.name}</Typography>
             </Box>
             <Box>
-              <Dropdown first={"Rename Database"} second={"Delete Database"} />
+              <Dropdown first={"Rename Database"} second={"Delete Database"}  db={props?.db}/>
             </Box>
           </Box>
         </CardContent>

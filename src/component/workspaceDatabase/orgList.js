@@ -47,7 +47,7 @@ export const OrgList = (props) => {
                                 <Typography onClick={() => { setName(true) }} sx={{ fontWeight: 'bold' }}>{dbs[0]?.org_id?.name} </Typography>
 
                                 <Box sx={{ mt: -1 }}>
-                                    <Dropdown first={"Rename workspace"} second={"Delete workspace"} setName={setName} />
+                                    <Dropdown first={"Rename workspace"} second={"Delete workspace"} setName={setName} orgId={orgId}/>
 
                                 </Box>
                             </>)
