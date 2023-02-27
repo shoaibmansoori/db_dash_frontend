@@ -21,7 +21,10 @@ export default function Dropdown(props) {
   return (
     <>
         <Tooltip>
-            <IconButton onClick={handleOpenUserMenu}>
+            <IconButton onClick={(e)=>{
+              e.preventDefault();
+              e.stopPropagation();
+              handleOpenUserMenu(e)}}>
               <MoreHorizIcon />
             </IconButton>
           </Tooltip>
@@ -44,9 +47,11 @@ export default function Dropdown(props) {
           >
 
             <MenuItem onClick={handleCloseUserMenu}>
-              <Typography textAlign="center" onClick={() =>props?.setName (true)}>{props?.first}</Typography>
+              <Typography textAlign="center" onClick={(e) =>{e.preventDefault();
+              e.stopPropagation();props?.setName (true)}}>{props?.first}</Typography>
             </MenuItem>
-            <MenuItem onClick={handleCloseUserMenu}>
+            <MenuItem onClick={(e)=>{e.preventDefault();
+              e.stopPropagation();handleCloseUserMenu(e)}}>
               <Typography textAlign="center">{props?.second}</Typography>
             </MenuItem>
           </Menu>
