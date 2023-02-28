@@ -8,18 +8,18 @@ import { renameDb,deleteDb } from '../../api/dbApi'
 // import {deleteDb} from '../api/dbApi.js';
 
 export default function SingleDatabase(props) {
-  // console.log(props)
+  console.log(props)
   const [name, setName] = useState(false)
   const [dbname,setDbname ] = useState()
   // const [open, setOpen] = useState(false);
   
   const renameDatabase = async (orgId,id,name) =>{
-   
-
     const data = {
           name  : dbname||name
     }
      await renameDb(orgId,id,data)
+     await props?.getOrgAndDbs();
+
         
 };
 

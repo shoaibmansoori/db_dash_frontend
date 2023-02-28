@@ -59,6 +59,7 @@ export const OrgList = (props) => {
 
               <Button
                 onClick={() => {
+                  setName(false);
                   renameWorkspace(props?.orgId);
                 }}
                 variant="contained"
