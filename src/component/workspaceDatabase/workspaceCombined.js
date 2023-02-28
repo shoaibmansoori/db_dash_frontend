@@ -43,6 +43,7 @@ export default function WorkspaceCombined() {
       const userid = localStorage.getItem("userid");
       await createOrg({name: org,user_id:userid})
       setOpen(false);
+      await getOrgAndDb();
     };
   return (
     <>
@@ -56,7 +57,7 @@ export default function WorkspaceCombined() {
           <Box>
           {Object.entries(alldbs).map(([orgId, dbs]) => (
                 <Box key={orgId}>
-                  <OrgList orgId={orgId} dbs ={dbs}  /> 
+                  <OrgList orgId={orgId} dbs ={dbs} getOrgAndDbs={getOrgAndDb} /> 
                    </Box>
                 
             ))

@@ -8,7 +8,7 @@ import { renameDb,deleteDb } from '../../api/dbApi'
 // import {deleteDb} from '../api/dbApi.js';
 
 export default function SingleDatabase(props) {
-
+  // console.log(props)
   const [name, setName] = useState(false)
   const [dbname,setDbname ] = useState()
   // const [open, setOpen] = useState(false);
@@ -31,6 +31,7 @@ useEffect(() => {
 
 const deletDatabases = async(dbId) => {
   await deleteDb(props?.db?.org_id?._id,dbId)
+  await props.getOrgAndDbs();
 }
     
   return (
@@ -81,7 +82,8 @@ SingleDatabase.propTypes = {
   db: PropTypes.shape({
     name: PropTypes.string,
     _id: PropTypes.string,
-    org_id : PropTypes.any
-    
-  })
+    org_id : PropTypes.any,
+  }),
+  getOrgAndDbs:PropTypes.func
+
 };
