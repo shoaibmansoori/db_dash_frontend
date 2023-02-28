@@ -54,7 +54,14 @@ export const OrgList = (props) => {
                         {name ?
                             (<>
                                 <TextField sx={{ width: 120, fontWeight: 'bold' }} defaultValue={props.dbs[0]?.org_id?.name} 
-                                  value ={ orgName}  onChange={e => setOrgName(e.target.value)  } size="small"   />
+                                  value ={ orgName}  onChange={(e) => {  setOrgName(e.target.value) 
+                                  }}  
+                                  onKeyDown={(e) => {
+                                    if (e.key === 'Enter') {
+                                        renameWorkspace(props?.orgId);
+                                    }
+                                  }}
+                                    size="small"   />
                         
                                   
                                   <Button onClick={() =>  { renameWorkspace(props?.orgId);

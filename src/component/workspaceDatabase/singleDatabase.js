@@ -8,6 +8,7 @@ import { renameDb,deleteDb } from '../../api/dbApi'
 // import {deleteDb} from '../api/dbApi.js';
 
 export default function SingleDatabase(props) {
+    
 
   const [name, setName] = useState(false)
   const [dbname,setDbname ] = useState()
@@ -31,24 +32,22 @@ const deletDatabases = async(dbId) => {
 }
     
   return (
-      <Link to={{ pathname: "/db/" + props.db._id}}  state = {{db: props.db}}>
     <Card sx={{ minWidth: 250, minHeight: 200, boxShadow: 2 }}>
-        <CardContent sx={{ display:"flex" }} >
+      <Link to={{ pathname: "/db/" + props.db._id}}  state = {{db: props.db}}>
+        <CardContent>
 
          
             { name?
             (<>
-                  <TextField
-                   autoFocus sx={{ width: 120,fontWeight: 'bold' }} defaultValue={props.db.name} value ={ dbname} 
+                  <TextField autoFocus sx={{ width: 120, fontWeight: 'bold' }} defaultValue={props.db.name} value ={ dbname} 
                    onChange={(e) => {
+                   if(e.key==='enter')
                     e.preventDefault();
                     e.stopPropagation();setDbname(e.target.value)} }size="small" />
 
 
               <Button onClick={(e) =>  { e.preventDefault();
-              e.stopPropagation(); 
-              setName(false);
-              renameDatabase(props.db.org_id?._id,props.db._id,props.db.name);} } 
+              e.stopPropagation();  renameDatabase(props.db.org_id?._id,props.db._id,props.db.name);} } 
               variant="contained" sx={{ width: '8rem',  backgroundColor: '#1C2833', fontSize: '12px', mx: 3, ':hover': 
                 { bgcolor: '#273746', color: 'white', border: 0, borderColor: '#1C2833', } }}>
                     Rename
@@ -68,8 +67,8 @@ const deletDatabases = async(dbId) => {
             
               }
         </CardContent>
-    </Card>
       </Link>
+    </Card>
   )
 }
 
