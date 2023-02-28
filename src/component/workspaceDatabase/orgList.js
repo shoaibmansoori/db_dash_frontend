@@ -10,9 +10,7 @@ import { updateOrg,deleteOrg } from '../../api/orgApi';
 
 
 
-export const OrgList = (props) => {
-     
- 
+export const OrgList = (props) => { 
     const [name, setName] = useState(false)
     const [orgName,setOrgName] = useState();
     const [db, setDb] = useState(false);
@@ -30,6 +28,7 @@ export const OrgList = (props) => {
             }
             setOpen(false);
         await createDb(orgId,data)
+        await props?.getOrgAndDbs();
 
     };
 
@@ -37,13 +36,17 @@ export const OrgList = (props) => {
            const data = {
                 name  : orgName
            }
-         await updateOrg(orgId,data)      
+         await updateOrg(orgId,data)   
+        await props?.getOrgAndDbs();
+
      };
   
    
    const deleteOrganization = async(orgId) => {
-        console.log("handle org",orgId);
+        // console.log("handle org",orgId);
         await deleteOrg(orgId);
+        await props?.getOrgAndDbs();
+
     }
    
     
@@ -70,7 +73,7 @@ export const OrgList = (props) => {
                                 <Typography sx={{ fontWeight: 'bold' }}>{props.dbs[0]?.org_id?.name} </Typography>
 
                                 <Box sx={{ mt: -1 }}>
-                                    <Dropdown first={"Rename workspace"} second={"Delete workspace"} setName={setName} idToDelete={orgId} deleteFunction={deleteOrganization}/>
+                                    <Dropdown first={"Rename workspace"} second={"Delete workspace"} setName={setName} idToDelete={props?.orgId} deleteFunction={deleteOrganization}/>
 
                                 </Box>
                             </>)
@@ -81,7 +84,7 @@ export const OrgList = (props) => {
                         <Box sx={{ display: 'flex' }}>
                             {props.dbs.map((db) => (
                                 <Box key={db._id} sx={{ mx: 3, display: "flex" }}>
-                                    <SingleDatabase db={db} />
+                                    <SingleDatabase db={db} getOrgAndDbs={props?.getOrgAndDbs}/>
                                 </Box>
                             ))}
                         </Box> 
@@ -100,5 +103,6 @@ export const OrgList = (props) => {
 }
 OrgList.propTypes = {
     dbs: PropTypes.array,
-    orgId : PropTypes.string
+    orgId : PropTypes.string,
+    getOrgAndDbs:PropTypes.func
 }
