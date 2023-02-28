@@ -11,7 +11,10 @@ export default function SingleDatabase(props) {
 
   const [name, setName] = useState(false)
   const [dbname,setDbname ] = useState()
-
+  // const [open, setOpen] = useState(false);
+  const handleOpen = () => {
+       setName(false);
+  }
   const renameDatabase = async (orgId,id,name) =>{
    
 
@@ -39,6 +42,7 @@ const deletDatabases = async(dbId) => {
             { name?
             (<>
                   <TextField
+                  onBlur={handleOpen}
                    autoFocus sx={{ width: 120,fontWeight: 'bold' }} defaultValue={props.db.name} value ={ dbname} 
                    onChange={(e) => {
                     e.preventDefault();
