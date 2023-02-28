@@ -6,9 +6,11 @@ import {findUserByEmail} from "../../api/userApi"
 import { UserAuth } from "../../context/authContext.js"
 import { createOrg } from "../../api/orgApi";
 import { OrgList } from './orgList';
+import { PropTypes } from 'prop-types';
+
 
 export default function WorkspaceCombined() {
-
+              
     const {user} = UserAuth();
     const [alldbs,setAllDbs] = useState([]);
 
@@ -25,12 +27,10 @@ export default function WorkspaceCombined() {
     const filterDbsBasedOnOrg = async (allDbs)=>
     {
       var result = {};
-      allDbs.map((item)=>{
-        
+      allDbs.map((item)=>{        
           result[item.org_id._id]=result[item.org_id._id]?[...result[item.org_id._id],item]:[item]
       })
       setAllDbs(result);
-      console.log(result)
     }
     const getOrgAndDb = async()=>
     {
@@ -54,10 +54,22 @@ export default function WorkspaceCombined() {
           </Box>
 
           <Box>
-            <OrgList alldbs=  {alldbs}  />
+          {Object.entries(alldbs).map(([orgId, dbs]) => (
+                <Box key={orgId}>
+                  <OrgList orgId={orgId} dbs ={dbs}  /> 
+                   </Box>
+                
+            ))
+            }
+         
+            
           </Box>
     </Box>
           
     </>
   );
+}
+WorkspaceCombined.propTypes = {
+dbs :PropTypes.string
+
 }

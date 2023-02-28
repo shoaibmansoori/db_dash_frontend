@@ -12,7 +12,7 @@ import { updateOrg } from '../../api/orgApi';
 
 export const OrgList = (props) => {
      
-
+ 
     const [name, setName] = useState(false)
     const [orgName,setOrgName] = useState();
     const [db, setDb] = useState(false);
@@ -48,17 +48,15 @@ export const OrgList = (props) => {
     
     return (
         <>
-            {Object.entries(props.alldbs).map(([orgId, dbs]) => (
-                 
-                 <Box key={orgId} sx={{ m: 3 }}>
+                 <Box key={props?.orgId} sx={{ m: 3 }}>
                     <Box sx={{ my: 7, display: "flex" }}>
                         {name ?
                             (<>
-                                <TextField sx={{ width: 120, fontWeight: 'bold' }} defaultValue={dbs[0]?.org_id?.name} 
+                                <TextField sx={{ width: 120, fontWeight: 'bold' }} defaultValue={props.dbs[0]?.org_id?.name} 
                                   value ={ orgName}  onChange={e => setOrgName(e.target.value)  } size="small"   />
                         
                                   
-                                  <Button onClick={() =>  { renameWorkspace(orgId);
+                                  <Button onClick={() =>  { renameWorkspace(props?.orgId);
                                     } } variant="contained" sx={{ width: '8rem', 
                                     backgroundColor: '#1C2833', fontSize: '12px', mx: 3, ':hover': 
                                     { bgcolor: '#273746', color: 'white', border: 0, borderColor: '#1C2833', } }}>
@@ -68,7 +66,7 @@ export const OrgList = (props) => {
 
                             </>) :
                             (<>
-                                <Typography sx={{ fontWeight: 'bold' }}>{dbs[0]?.org_id?.name} </Typography>
+                                <Typography sx={{ fontWeight: 'bold' }}>{props.dbs[0]?.org_id?.name} </Typography>
 
                                 <Box sx={{ mt: -1 }}>
                                     <Dropdown first={"Rename workspace"} second={"Delete workspace"} setName={setName} />
@@ -80,30 +78,26 @@ export const OrgList = (props) => {
                     </Box>
                     <Box sx={{ display: 'flex' }}>
                         <Box sx={{ display: 'flex' }}>
-                            {dbs.map((db) => (
+                            {props.dbs.map((db) => (
                                 <Box key={db._id} sx={{ mx: 3, display: "flex" }}>
                                     <SingleDatabase db={db} />
                                 </Box>
                             ))}
                         </Box> 
                         <Box>
-                            <Button onClick={(e) => { handleOpen(e); setOrg(orgId) }} variant="contained">Create Db</Button>
+                            <Button onClick={(e) => { handleOpen(e); setOrg(props?.orgId) }} variant="contained">Create Db</Button>
                             <PopupModal title="create Database" open={open} setOpen={setOpen} label="Database Name"
                                 saveFunction={saveDb} setVariable={setDb} />
                         </Box>
                     </Box>
                 </Box>
-            ))
-            }
-
-
-
-
-
+                <Box>
+                
+                </Box>
         </>
     )
 }
 OrgList.propTypes = {
-    alldbs: PropTypes.any,
-    orgId : PropTypes.any
+    dbs: PropTypes.array    ,
+    orgId : PropTypes.string
 }
