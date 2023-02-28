@@ -30,11 +30,12 @@ export default function WorkspaceCombined() {
           result[item.org_id._id]=result[item.org_id._id]?[...result[item.org_id._id],item]:[item]
       })
       setAllDbs(result);
+      console.log(result)
     }
     const getOrgAndDb = async()=>
     {
       const data = await findUserByEmail(user?.email);  
-      localStorage.setItem("userid",data?.data?.data?._id)
+      localStorage.setItem("userid",data?.data?.data?._id);
       filterDbsBasedOnOrg(data?.data?.data?.dbs)
     }
   const saveOrgToDB = async (e) => {

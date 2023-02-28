@@ -21,7 +21,6 @@ const style = {
 
 export default function PopupModal(props) {
   // const [org, setOrg] = React.useState();
-
   const handleClose = () => props.setOpen(false);
 
   return (
@@ -45,6 +44,7 @@ export default function PopupModal(props) {
               onChange={(e) => {
                 props.setVariable(e.target.value);
               }}
+              autoFocus
               onKeyDown={(e) => {
                 if (e.key === 'Enter') {
                   props.saveFunction(e);
