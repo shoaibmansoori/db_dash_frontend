@@ -24,6 +24,7 @@ const getDbByOrgId = async (orgId) =>
 
 const renameDb = async (orgId,id,data) =>
 {
+    console.log("dataofapii",data);
      return await axios.patch(URL +`/dbs/${orgId}/dbs/${id}`,data)
 }
 

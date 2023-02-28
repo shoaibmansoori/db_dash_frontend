@@ -6,14 +6,18 @@ import { Box, Typography, TextField } from '@mui/material'
 import SingleDatabase from './singleDatabase';
 import { createDb } from '../../api/dbApi';
 import PropTypes from "prop-types";
+import { updateOrg } from '../../api/orgApi';
+
 
 
 export const OrgList = (props) => {
+     
 
     const [name, setName] = useState(false)
+    const [orgName,setOrgName] = useState();
     const [db, setDb] = useState(false);
     const [open, setOpen] = useState(false);
-    const [orgId, setOrg] = useState(null)
+    const [orgId, setOrg] = useState()
     const handleOpen = () => setOpen(true);
 
 
@@ -30,21 +34,41 @@ export const OrgList = (props) => {
          
         setOpen(false);
     };
+
+     const renameWorkspace = async (orgId) =>{
+
+           const data = {
+                name  : orgName
+           }
+         await updateOrg(orgId,data)      
+     };
+  
+   
+   
     
     return (
         <>
             {Object.entries(props.alldbs).map(([orgId, dbs]) => (
-
-                <Box key={orgId} sx={{ m: 3 }}>
+                 
+                 <Box key={orgId} sx={{ m: 3 }}>
                     <Box sx={{ my: 7, display: "flex" }}>
                         {name ?
                             (<>
-                                <TextField sx={{ width: 120, fontWeight: 'bold' }} defaultValue={dbs[0]?.org_id?.name} size="small" />
-                                <Typography sx={{ fontWeight: 'bold', cursor: 'pointer', margin: 1 }}>Rename</Typography>
+                                <TextField sx={{ width: 120, fontWeight: 'bold' }} defaultValue={dbs[0]?.org_id?.name} 
+                                  value ={ orgName}  onChange={e => setOrgName(e.target.value)  } size="small"   />
+                        
+                                  
+                                  <Button onClick={() =>  { renameWorkspace(orgId);
+                                    } } variant="contained" sx={{ width: '8rem', 
+                                    backgroundColor: '#1C2833', fontSize: '12px', mx: 3, ':hover': 
+                                    { bgcolor: '#273746', color: 'white', border: 0, borderColor: '#1C2833', } }}>
+                                    Rename
+                                  </Button>   
+                              
 
                             </>) :
                             (<>
-                                <Typography onClick={() => { setName(true) }} sx={{ fontWeight: 'bold' }}>{dbs[0]?.org_id?.name} </Typography>
+                                <Typography sx={{ fontWeight: 'bold' }}>{dbs[0]?.org_id?.name} </Typography>
 
                                 <Box sx={{ mt: -1 }}>
                                     <Dropdown first={"Rename workspace"} second={"Delete workspace"} setName={setName} />
@@ -61,7 +85,7 @@ export const OrgList = (props) => {
                                     <SingleDatabase db={db} />
                                 </Box>
                             ))}
-                        </Box>
+                        </Box> 
                         <Box>
                             <Button onClick={(e) => { handleOpen(e); setOrg(orgId) }} variant="contained">Create Db</Button>
                             <PopupModal title="create Database" open={open} setOpen={setOpen} label="Database Name"
@@ -80,5 +104,6 @@ export const OrgList = (props) => {
     )
 }
 OrgList.propTypes = {
-    alldbs: PropTypes.any
+    alldbs: PropTypes.any,
+    orgId : PropTypes.any
 }
