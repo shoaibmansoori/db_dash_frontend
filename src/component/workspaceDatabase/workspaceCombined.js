@@ -30,7 +30,7 @@ export default function WorkspaceCombined() {
           result[item.org_id._id]=result[item.org_id._id]?[...result[item.org_id._id],item]:[item]
       })
       setAllDbs(result);
-      console.log(result)
+      getOrgAndDb();
     }
     const getOrgAndDb = async()=>
     {
