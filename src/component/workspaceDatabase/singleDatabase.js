@@ -8,11 +8,13 @@ import { renameDb,deleteDb } from '../../api/dbApi'
 // import {deleteDb} from '../api/dbApi.js';
 
 export default function SingleDatabase(props) {
-    
-
+  // console.log(props)
   const [name, setName] = useState(false)
   const [dbname,setDbname ] = useState()
-
+  // const [open, setOpen] = useState(false);
+  const handleOpen = () => {
+       setName(false);
+  }
   const renameDatabase = async (orgId,id,name) =>{
    
 
@@ -29,17 +31,20 @@ useEffect(() => {
 
 const deletDatabases = async(dbId) => {
   await deleteDb(props?.db?.org_id?._id,dbId)
+  await props.getOrgAndDbs();
 }
     
   return (
     <Card sx={{ minWidth: 250, minHeight: 200, boxShadow: 2 }}>
-      <Link to={{ pathname: "/db/" + props.db._id}}  state = {{db: props.db}}>
-        <CardContent>
+      <Link to={{ pathname: "/db/" + props.db._id}} style={{ textDecoration: "none" }} state = {{db: props.db}}>
+        <CardContent sx={{ display:"flex"}}>
 
          
             { name?
             (<>
-                  <TextField autoFocus sx={{ width: 120, fontWeight: 'bold' }} defaultValue={props.db.name} value ={ dbname} 
+                  <TextField
+                  onBlur={handleOpen}
+                   autoFocus sx={{ width: 120,fontWeight: 'bold' }} defaultValue={props.db.name} value ={ dbname} 
                    onChange={(e) => {
                    if(e.key==='enter')
                     e.preventDefault();
@@ -76,7 +81,8 @@ SingleDatabase.propTypes = {
   db: PropTypes.shape({
     name: PropTypes.string,
     _id: PropTypes.string,
-    org_id : PropTypes.any
-    
-  })
+    org_id : PropTypes.any,
+  }),
+  getOrgAndDbs:PropTypes.func
+
 };
