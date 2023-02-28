@@ -1,7 +1,6 @@
 import React, { useState,useEffect } from 'react';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
 import PopupModal from '../popupModal';
 import { createTable } from '../../api/tableApi';
 import { getDbById } from '../../api/dbApi';
@@ -23,11 +22,12 @@ export default function TablesList (props ) {
        const data = {
         tableName: table
       }
-
+      // check if data already exists
+ 
      await createTable(dbId,data);
+     setOpen(false)
      getAllTableName(props?.dbData?.db?._id, props?.dbData?.db?.org_id?._id)
-   
-  };
+  }
 
   useEffect(() => {
    if(props?.dbData)
@@ -36,13 +36,13 @@ export default function TablesList (props ) {
 
   const getAllTableName = async (dbId,orgId)=>{
     const data =  await getDbById(dbId,orgId)
-      setTables(data.data.data.tables || []);
+      setTables(data.data.data.tables  || {});
      return data;
   };
 
   return (
     <Box sx={{ display: 'flex', flexDirection: 'row', gap: '1px', flexWrap: 'wrap' }}>
-      <Typography> </Typography>
+
       { Object.entries(tables).map((table, index) => (
         <Box
           key={index}
@@ -77,7 +77,7 @@ export default function TablesList (props ) {
         
       >
      
-      <Button onClick={handleOpen} >Add Table</Button>
+      <Button onClick={handleOpen}  variant="contained" >Add Table</Button>
       <PopupModal title="create table" label="Table Name"   open={open} setOpen ={setOpen} saveFunction = {saveTable}  setVariable={setTable}/>
       </Box>
     </Box>
