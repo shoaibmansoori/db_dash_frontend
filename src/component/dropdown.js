@@ -80,9 +80,9 @@ Dropdown.propTypes = {
   first: PropTypes.string,
   second: PropTypes.string,
   setName: PropTypes.func,
-  orgId: PropTypes.object,
+  orgId: PropTypes.string,
   alldbs: PropTypes.any,
   name: PropTypes.string,
-  db:PropTypes.string,
+  db:PropTypes.object,
   // db.orgId:PropTypes.string
 };
