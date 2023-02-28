@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import Dropdown from '../dropdown';
 import Button from '@mui/material/Button';
+import Grid from '@mui/material/Grid';
 import PopupModal from '../popupModal';
 import { Box, Typography, TextField } from '@mui/material'
 import SingleDatabase from './singleDatabase';
@@ -80,19 +81,24 @@ export const OrgList = (props) => {
                         }
 
                     </Box>
+                 
                     <Box sx={{ display: 'flex' }}>
+                            <Grid container spacing={3}>
                         <Box sx={{ display: 'flex' }}>
+
                             {props.dbs.map((db) => (
                                 <Box key={db._id} sx={{ mx: 3, display: "flex" }}>
                                     <SingleDatabase db={db} getOrgAndDbs={props?.getOrgAndDbs}/>
                                 </Box>
                             ))}
                         </Box> 
-                        <Box>
+                        <Box sx={{ display: 'flex' }} >
                             <Button onClick={(e) => { handleOpen(e); setOrg(props?.orgId) }} variant="contained">Create Db</Button>
                             <PopupModal title="create Database" open={open} setOpen={setOpen} label="Database Name"
                                 saveFunction={saveDb} setVariable={setDb} />
                         </Box>
+                        
+                          </Grid>  
                     </Box>
                 </Box>
                 <Box>
