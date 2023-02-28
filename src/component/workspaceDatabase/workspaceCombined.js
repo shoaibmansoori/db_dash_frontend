@@ -30,8 +30,7 @@ export default function WorkspaceCombined() {
       allDbs.map((item)=>{        
           result[item.org_id._id]=result[item.org_id._id]?[...result[item.org_id._id],item]:[item]
       })
-      setAllDbs(result);
-      getOrgAndDb();
+      setAllDbs(result);  
     }
     const getOrgAndDb = async()=>
     {
