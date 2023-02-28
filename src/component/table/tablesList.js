@@ -1,30 +1,49 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
-import AddIcon from '@mui/icons-material/Add';
+import Typography from '@mui/material/Typography';
+import PopupModal from '../popupModal';
 import { createTable } from '../../api/tableApi';
+import { getDbById } from '../../api/dbApi';
 import PropTypes from "prop-types";
 
 export default function TablesList (props ) {
-  const [tableCount, setTableCount] = useState(0);
-  const [tables, setTables] = useState([]);
+  const [tables, setTables] = useState({});
+
+
+ //state to display modal
+ const [table, setTable] = useState();
+ const [open, setOpen] = useState(false);
+ const handleOpen = () => setOpen(true);
+
 
   const saveTable = async (e) => {
-      const dbId = props.dbData.db._id;
     e.preventDefault();
-    const data = {
-        tableName: "default_table"
-    }
-    await createTable(dbId, data);
+      const dbId = props?.dbData?.db._id;
+       const data = {
+        tableName: table
+      }
+
+     await createTable(dbId,data);
+     getAllTableName(props?.dbData?.db?._id, props?.dbData?.db?.org_id?._id)
+   
   };
-  const addTable = () => {
-    setTableCount(tableCount + 1);
-    setTables([...tables, `Table ${tableCount + 1}`]);
+
+  useEffect(() => {
+   if(props?.dbData)
+   getAllTableName(props?.dbData?.db?._id, props?.dbData?.db?.org_id?._id)
+  },[props]);
+
+  const getAllTableName = async (dbId,orgId)=>{
+    const data =  await getDbById(dbId,orgId)
+      setTables(data.data.data.tables || []);
+     return data;
   };
 
   return (
     <Box sx={{ display: 'flex', flexDirection: 'row', gap: '1px', flexWrap: 'wrap' }}>
-      {tables.map((table, index) => (
+      <Typography> </Typography>
+      { Object.entries(tables).map((table, index) => (
         <Box
           key={index}
           sx={{
@@ -42,11 +61,11 @@ export default function TablesList (props ) {
             whiteSpace: 'nowrap',
           }}
         >
-          {table}
-        </Box>
-      ))}
-      <Button
-        startIcon={<AddIcon />}
+           {table[0]}
+         </Box>
+      ))} 
+      <Box
+        // startIcon={<AddIcon />}
         sx={{
           borderRadius: '8px',
           backgroundColor: '#4caf50',
@@ -55,16 +74,19 @@ export default function TablesList (props ) {
             backgroundColor: '#388e3c',
           },
         }}
-        onClick={(e)=>{addTable();saveTable(e)}}
+        
       >
-        Add Table
-      </Button>
-      
+     
+      <Button onClick={handleOpen} >Add Table</Button>
+      <PopupModal title="create table" label="Table Name"   open={open} setOpen ={setOpen} saveFunction = {saveTable}  setVariable={setTable}/>
+      </Box>
     </Box>
   );
 }
 TablesList.propTypes = {
-    dbData: PropTypes.any
+    dbData: PropTypes.any,
+    dbId: PropTypes.string,
+    orgId: PropTypes.string,
 };
 
 

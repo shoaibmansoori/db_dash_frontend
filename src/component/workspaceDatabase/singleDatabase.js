@@ -7,6 +7,9 @@ import Dropdown from '../dropdown'
 import { renameDb } from '../../api/dbApi'
 
 export default function SingleDatabase(props) {
+  // useEffect(()=>{
+  //     console.log("props",props)
+  //   },[])
     
 
   const [name, setName] = useState(false)
@@ -24,22 +27,24 @@ export default function SingleDatabase(props) {
 
     
   return (
-    <Card sx={{ minWidth: 250, minHeight: 200, boxShadow: 2 }}>
       <Link to={{ pathname: "/db/" + props.db._id}}  state = {{db: props.db}}>
-        <CardContent>
+    <Card sx={{ minWidth: 250, minHeight: 200, boxShadow: 2 }}>
+        <CardContent sx={{ display:"flex" }} >
 
          
             { name?
             (<>
-                  <TextField autoFocus sx={{ width: 120, fontWeight: 'bold' }} defaultValue={props.db.name} value ={ dbname} 
+                  <TextField
+                   autoFocus sx={{ width: 120,fontWeight: 'bold' }} defaultValue={props.db.name} value ={ dbname} 
                    onChange={(e) => {
-                    console.log(e);
                     e.preventDefault();
                     e.stopPropagation();setDbname(e.target.value)} }size="small" />
 
 
               <Button onClick={(e) =>  { e.preventDefault();
-              e.stopPropagation();  renameDatabase(props.db.org_id?._id,props.db._id,props.db.name);} } 
+              e.stopPropagation(); 
+              setName(false);
+              renameDatabase(props.db.org_id?._id,props.db._id,props.db.name);} } 
               variant="contained" sx={{ width: '8rem',  backgroundColor: '#1C2833', fontSize: '12px', mx: 3, ':hover': 
                 { bgcolor: '#273746', color: 'white', border: 0, borderColor: '#1C2833', } }}>
                     Rename
@@ -59,8 +64,8 @@ export default function SingleDatabase(props) {
             
               }
         </CardContent>
-      </Link>
     </Card>
+      </Link>
   )
 }
 

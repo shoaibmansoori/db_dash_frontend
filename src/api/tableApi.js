@@ -1,8 +1,9 @@
 import axios from "../interceptor/interceptor.js";
 const URL = process.env.REACT_APP_API_BASE_URL;
 
-const createTable = async (db_id , data) =>
+const createTable = async (db_id,data) =>
 {
+    // console.log(db_id,data)
     return await axios.post(URL +`/dbs/${db_id}/table`,data)
 }
 
