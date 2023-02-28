@@ -6,7 +6,7 @@ import { Box, Typography, TextField } from '@mui/material'
 import SingleDatabase from './singleDatabase';
 import { createDb } from '../../api/dbApi';
 import PropTypes from "prop-types";
-import { updateOrg } from '../../api/orgApi';
+import { updateOrg,deleteOrg } from '../../api/orgApi';
 
 
 
@@ -24,19 +24,16 @@ export const OrgList = (props) => {
     const saveDb = async (e) => {
         e.preventDefault();
          const userId = localStorage.getItem("userid");
-         
          const data ={
                 user_id : userId,
                 name    : db,
             }
-          
+            setOpen(false);
         await createDb(orgId,data)
-         
-        setOpen(false);
+
     };
 
      const renameWorkspace = async (orgId) =>{
-
            const data = {
                 name  : orgName
            }
@@ -44,6 +41,10 @@ export const OrgList = (props) => {
      };
   
    
+   const deleteOrganization = async(orgId) => {
+        console.log("handle org",orgId);
+        await deleteOrg(orgId);
+    }
    
     
     return (
@@ -69,7 +70,7 @@ export const OrgList = (props) => {
                                 <Typography sx={{ fontWeight: 'bold' }}>{props.dbs[0]?.org_id?.name} </Typography>
 
                                 <Box sx={{ mt: -1 }}>
-                                    <Dropdown first={"Rename workspace"} second={"Delete workspace"} setName={setName} />
+                                    <Dropdown first={"Rename workspace"} second={"Delete workspace"} setName={setName} idToDelete={orgId} deleteFunction={deleteOrganization}/>
 
                                 </Box>
                             </>)
@@ -98,6 +99,6 @@ export const OrgList = (props) => {
     )
 }
 OrgList.propTypes = {
-    dbs: PropTypes.array    ,
+    dbs: PropTypes.array,
     orgId : PropTypes.string
 }

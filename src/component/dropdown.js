@@ -2,13 +2,12 @@ import React from 'react'
 import PropTypes from 'prop-types';
 import { Typography, Menu, MenuItem, Tooltip, IconButton } from '@mui/material'
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
+// import {deleteOrg} from '../api/orgApi.js';
+
 
 export default function Dropdown(props) {
 
     const [anchorElUser, setAnchorElUser] = React.useState(null);
-    
-  
-
     const handleOpenUserMenu = (event) => {
       setAnchorElUser(event.currentTarget);
     };
@@ -16,6 +15,18 @@ export default function Dropdown(props) {
     const handleCloseUserMenu = () => {
       setAnchorElUser(null);
     };
+
+    // const deleteOrganization = async() => {
+    //   if(func)
+    //   {
+    //     // e.preventDefault();
+    //     console.log("delete",props?.orgId)
+    //     await deleteOrg(props?.orgId);
+    //       // setOpen(false);
+    //   }
+    // }
+
+    
 
 
   return (
@@ -52,7 +63,7 @@ export default function Dropdown(props) {
             </MenuItem>
             <MenuItem onClick={(e)=>{e.preventDefault();
               e.stopPropagation();handleCloseUserMenu(e)}}>
-              <Typography textAlign="center">{props?.second}</Typography>
+              <Typography textAlign="center" onClick={()=>{[props.deleteFunction(props?.idToDelete)]}}>{props?.second}</Typography>
             </MenuItem>
           </Menu>
     </>
@@ -62,5 +73,9 @@ export default function Dropdown(props) {
 Dropdown.propTypes = {
   first: PropTypes.string,
   second: PropTypes.string,
-  setName: PropTypes.func
+  setName: PropTypes.func,
+  name: PropTypes.string,
+  deleteFunction:PropTypes.func,
+  idToDelete :PropTypes.any
+  // db.orgId:PropTypes.string
 };

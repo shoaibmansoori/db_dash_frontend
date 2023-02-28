@@ -1,16 +1,13 @@
-import React,{useState} from 'react'
+import React,{useState,useEffect} from 'react'
 import { Card, CardContent, Typography, Box,TextField} from '@mui/material'
 import Button from '@mui/material/Button';
 import PropTypes from "prop-types"
 import { Link } from 'react-router-dom'
 import Dropdown from '../dropdown'
-import { renameDb } from '../../api/dbApi'
+import { renameDb,deleteDb } from '../../api/dbApi'
+// import {deleteDb} from '../api/dbApi.js';
 
 export default function SingleDatabase(props) {
-  // useEffect(()=>{
-  //     console.log("props",props)
-  //   },[])
-    
 
   const [name, setName] = useState(false)
   const [dbname,setDbname ] = useState()
@@ -25,6 +22,13 @@ export default function SingleDatabase(props) {
         
 };
 
+useEffect(() => {
+  // console.log(props?.db?.org_id?._id)
+});
+
+const deletDatabases = async(dbId) => {
+  await deleteDb(props?.db?.org_id?._id,dbId)
+}
     
   return (
       <Link to={{ pathname: "/db/" + props.db._id}}  state = {{db: props.db}}>
@@ -57,7 +61,7 @@ export default function SingleDatabase(props) {
                 <Typography sx={{ fontWeight: 'bold' }}>{props.db.name} </Typography>
 
           < Box sx={{ mt: -1 }}>
-              <Dropdown first={"Rename Database"} second={"Delete Database"} setName={setName} />
+              <Dropdown first={"Rename Database"} second={"Delete Database"} setName={setName}  idToDelete={props?.db?._id} deleteFunction={deletDatabases}/>
               </Box>
             
             </>)
