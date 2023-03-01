@@ -20,6 +20,7 @@ export default function SingleDatabase(props) {
           name  : dbname||name
     }
      await renameDb(orgId,id,data)
+     await props.getOrgAndDbs();
         
 };
 const handleOpen = () => {
@@ -36,7 +37,7 @@ const deletDatabases = async(dbId) => {
 }
     
   return (
-      <Link to={{ pathname: "/db/" + props.db._id}}  state = {{db: props.db}}>
+      <Link to={{ pathname: "/db/" + props.db._id}} style={{ textDecoration: "none" }}  state = {{db: props.db}}>
     <Card sx={{ minWidth: 250, minHeight: 200, boxShadow: 2 }}>
         <CardContent sx={{ display:"flex" }} >
 
@@ -46,8 +47,13 @@ const deletDatabases = async(dbId) => {
                   <TextField
                   onBlur={handleOpen}
                    autoFocus sx={{ width: 120,fontWeight: 'bold' }} defaultValue={props.db.name} value ={ dbname} 
+                   onKeyDown={(e) => {
+                    if (e.key === 'Enter') {
+                      renameDatabase(props.db.org_id?._id,props.db._id,props.db.name);
+                      setName(false);
+                    }
+                  }}
                    onChange={(e) => {
-                    if (e.key === 'enter')
                       e.preventDefault();
                     e.stopPropagation();setDbname(e.target.value)} }size="small" />
 
