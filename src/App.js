@@ -15,6 +15,7 @@ function App() {
       <Route exact path ="/" element ={<Authpage/>} />
       <Route exact path ="/dashboard" element ={<LandingPage/>} />
       <Route exact path ="/db/:dbId" element ={<DbDetail/>}/>
+      <Route exact path ="/apiDoc/db/:dbId/table/:tableName" element ={<apidocPage/>}/>
     </Routes>
     </AuthContextProvider>
 

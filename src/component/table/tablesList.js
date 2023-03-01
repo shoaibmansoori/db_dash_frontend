@@ -62,7 +62,12 @@ export default function TablesList (props ) {
           }}
         >
            {table[0]}
+           <Box sx={{display: 'flex', justifyContent: 'flex-end'}}>
+    <Button variant="contained">APIs</Button>
+  </Box>
+           
          </Box>
+         
       ))} 
       <Box
         // startIcon={<AddIcon />}
