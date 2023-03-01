@@ -11,11 +11,13 @@ import {GoogleAuthProvider,
 } from "firebase/auth";
 import {signUpUser} from "../api/userApi"
 import { useNavigate } from "react-router-dom";
+
 const AuthContext = createContext();
 
 export const AuthContextProvider = ({ children }) => {
     const [user, setUser] = useState({});
-    const navigate = useNavigate();
+
+const navigate=useNavigate();
     const googleSignIn = async () => {
       try {
         const provider = new GoogleAuthProvider();
@@ -32,7 +34,6 @@ export const AuthContextProvider = ({ children }) => {
 
           // return;
         }
-
         navigate("/dashboard")
 
       } catch (error) {
@@ -86,7 +87,8 @@ export const AuthContextProvider = ({ children }) => {
 };
 
 export const UserAuth = () => {
-  return useContext(AuthContext);
+  const res= useContext(AuthContext);
+  return res;
 };
 
 AuthContextProvider.propTypes = {
