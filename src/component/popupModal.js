@@ -58,7 +58,7 @@ export default function PopupModal(props) {
           <Box sx={{ display: "flex", justifyContent: "space-between" }}>
             <Box>
               <Button variant="contained" onClick={(e)=>{props?.saveFunction (e)}}>
-                Save
+                Create
               </Button>
             </Box>
             <Box>
