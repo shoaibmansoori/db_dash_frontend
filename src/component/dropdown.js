@@ -52,7 +52,7 @@ export default function Dropdown(props) {
             </MenuItem>
             <MenuItem onClick={(e)=>{e.preventDefault();
               e.stopPropagation();handleCloseUserMenu(e)}}>
-              <Typography textAlign="center">{props?.second}</Typography>
+              <Typography textAlign="center" onClick={()=>{[props.deleteFunction(props?.idToDelete)]}}>{props?.second}</Typography>
             </MenuItem>
           </Menu>
     </>
@@ -62,5 +62,8 @@ export default function Dropdown(props) {
 Dropdown.propTypes = {
   first: PropTypes.string,
   second: PropTypes.string,
-  setName: PropTypes.func
+  setName: PropTypes.func,
+  name: PropTypes.string,
+  deleteFunction:PropTypes.func,
+  idToDelete :PropTypes.any 
 };
