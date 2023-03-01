@@ -8,6 +8,7 @@ import PropTypes from 'prop-types';
 
 export default function SignupInput(props) {
     // Joi implementation
+
     const { state, setData, setExplicitField, validate } = useValidator({
       
         initialData: {
@@ -32,6 +33,7 @@ export default function SignupInput(props) {
         ).min(8).required(),
 confirmPassword:Joi.string().regex(/^(?=.*[a-zA-Z])(?=.*\d).+$/
         ).min(8).required()
+
         }),
         explicitCheck: {
             firstName: false,
@@ -44,6 +46,10 @@ confirmPassword:Joi.string().regex(/^(?=.*[a-zA-Z])(?=.*\d).+$/
             abortEarly: true,
         },
     })
+    
+
+
+
     const updateFirstName = (e) => {
         // react < v17
         e.persist()
@@ -62,7 +68,7 @@ confirmPassword:Joi.string().regex(/^(?=.*[a-zA-Z])(?=.*\d).+$/
     }
     const updateEmail = (e) => {
         // react < v17
-        e.persist()
+        e.persist();
         setData((old) => ({
             ...old,
             email: e.target.value,
@@ -98,6 +104,9 @@ confirmPassword:Joi.string().regex(/^(?=.*[a-zA-Z])(?=.*\d).+$/
       if(userdata.password === userdata.confirmPassword)
       {
         props?.signupHandleSubmit(userdata);
+      }
+      else{
+        alert("error-password not matched");
       }
     }
   return (
