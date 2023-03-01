@@ -12,9 +12,7 @@ export default function SingleDatabase(props) {
   const [name, setName] = useState(false)
   const [dbname,setDbname ] = useState()
   // const [open, setOpen] = useState(false);
-  const handleOpen = () => {
-       setName(false);
-  }
+  
   const renameDatabase = async (orgId,id,name) =>{
    
 
@@ -22,8 +20,12 @@ export default function SingleDatabase(props) {
           name  : dbname||name
     }
      await renameDb(orgId,id,data)
+     await props.getOrgAndDbs();
         
 };
+const handleOpen = () => {
+  setName(false);
+}
 
 useEffect(() => {
   // console.log(props?.db?.org_id?._id)
@@ -35,9 +37,10 @@ const deletDatabases = async(dbId) => {
 }
     
   return (
-      <Link to={{ pathname: "/db/" + props.db._id}}  state = {{db: props.db}}>
+      <Link to={{ pathname: "/db/" + props.db._id}} style={{ textDecoration: "none" }}  state = {{db: props.db}}>
     <Card sx={{ minWidth: 250, minHeight: 200, boxShadow: 2 }}>
-        <CardContent sx={{ display:"flex" }} >
+    
+        <CardContent sx={{ display:"flex"}}>
 
          
             { name?
@@ -45,15 +48,19 @@ const deletDatabases = async(dbId) => {
                   <TextField
                   onBlur={handleOpen}
                    autoFocus sx={{ width: 120,fontWeight: 'bold' }} defaultValue={props.db.name} value ={ dbname} 
+                   onKeyDown={(e) => {
+                    if (e.key === 'Enter') {
+                      renameDatabase(props.db.org_id?._id,props.db._id,props.db.name);
+                      setName(false);
+                    }
+                  }}
                    onChange={(e) => {
-                    e.preventDefault();
+                      e.preventDefault();
                     e.stopPropagation();setDbname(e.target.value)} }size="small" />
 
 
               <Button onClick={(e) =>  { e.preventDefault();
-              e.stopPropagation(); 
-              setName(false);
-              renameDatabase(props.db.org_id?._id,props.db._id,props.db.name);} } 
+              e.stopPropagation();  renameDatabase(props.db.org_id?._id,props.db._id,props.db.name);} } 
               variant="contained" sx={{ width: '8rem',  backgroundColor: '#1C2833', fontSize: '12px', mx: 3, ':hover': 
                 { bgcolor: '#273746', color: 'white', border: 0, borderColor: '#1C2833', } }}>
                     Rename

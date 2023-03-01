@@ -22,9 +22,9 @@ const addUserInOrg = async (id, data) =>
     return  await axios.patch(URL + `/orgs/${id}/adduser`,data)
 }
 
-const updateOrg = async (id ,data) =>
+const updateOrg = async (id ,data,userId) =>
 {
-    return await axios.patch(URL + `/orgs/${id}`,data)
+    return await axios.patch(URL + `/orgs/${id}/${userId}`,data)
 }
 
 const removeUserInOrg = async (id , data) =>
@@ -32,9 +32,9 @@ const removeUserInOrg = async (id , data) =>
     return await axios.patch(URL + `/orgs/${id}/removeuser`,data)
 }    
 
-const deleteOrg = async (id)=>
+const deleteOrg = async (id,userId)=>
 {
-    return await axios.delete(URL + `/orgs/${id}`)
+    return await axios.delete(URL + `/orgs/${id}/${userId}`)
 }
 
 
