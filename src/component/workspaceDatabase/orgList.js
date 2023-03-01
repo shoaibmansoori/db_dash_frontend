@@ -30,16 +30,18 @@ export const OrgList = (props) => {
   };
 
   const renameWorkspace = async (orgId) => {
+    const userid = localStorage.getItem("userid");
     const data = {
       name: orgName,
     };
-    await updateOrg(orgId, data);
+    await updateOrg(orgId, data,userid);
     await props?.getOrgAndDbs();
   };
 
   const deleteOrganization = async (orgId) => {
+    const userid = localStorage.getItem("userid");
     // console.log("handle org",orgId);
-    await deleteOrg(orgId);
+    await deleteOrg(orgId,userid);
     await props?.getOrgAndDbs();
   };
 
