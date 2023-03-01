@@ -18,15 +18,20 @@ export default function SignupInput(props) {
           confirmPassword:null
         },
         schema: Joi.object({
-          firstName: Joi.string().min(3).required(),
-          lastName: Joi.string().min(4).required(),
+     // data validate
+
+          firstName:Joi.string().regex(/^[a-zA-Z ]{3,10}$/).required(),
+          lastName:Joi.string().regex(/^[a-zA-Z ]{3,10}$/).required(),
+
             email: Joi.string()
                 .email({
                     tlds: { allow: false },
                 })
                 .required(),
-          password: Joi.string().min(8).required(),
-          confirmPassword: Joi.string().min(8).required(),
+        password:Joi.string().regex(/^(?=.*[a-zA-Z])(?=.*\d).+$/
+        ).min(8).required(),
+confirmPassword:Joi.string().regex(/^(?=.*[a-zA-Z])(?=.*\d).+$/
+        ).min(8).required()
         }),
         explicitCheck: {
             firstName: false,
