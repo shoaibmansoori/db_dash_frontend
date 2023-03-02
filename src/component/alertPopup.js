@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { PropTypes } from 'prop-types';
 import {
   Button,
   Dialog,
@@ -7,49 +8,36 @@ import {
   DialogContentText,
   DialogTitle,
 } from '@mui/material';
-
-function DeleteDatabaseModal() {
-  const [open, setOpen] = useState(false);
-
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-
+export default function AlertPopup(props) {
   const handleClose = () => {
-    setOpen(false);
-  };
-
-  const handleDelete = () => {
-    // code to delete the database goes here
-    setOpen(false);
+    props.setOpen(false);
   };
 
   return (
     <>
-      <Button variant="outlined" color="error" onClick={handleClickOpen}>
-        Delete Database
-      </Button>
       <Dialog
-        open={open}
+        open={props.open}
         onClose={handleClose}
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
-        <DialogTitle id="alert-dialog-title">{"Delete Database?"}</DialogTitle>
+        <DialogTitle id="alert-dialog-title">{props.title}</DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
-            Are you sure you want to delete the database?
+            Are you sure you want to delete the {props.title}?
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose}>Cancel</Button>
-          <Button onClick={handleDelete} autoFocus>
-            Delete
-          </Button>
+          <Button onClick={    (e)=>{e.preventDefault();e.stopPropagation(); props?.deleteFunction (e);handleClose()}  } >Delete</Button>
+          <Button onClick={handleClose} autoFocus>Cancel </Button>
         </DialogActions>
       </Dialog>
     </>
   );
 }
-
-export default DeleteDatabaseModal;
+AlertPopup.propTypes = {
+  setOpen: PropTypes.func,
+  open:PropTypes.bool,
+  title: PropTypes.string,
+  deleteFunction : PropTypes.func
+}

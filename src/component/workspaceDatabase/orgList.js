@@ -38,10 +38,11 @@ export const OrgList = (props) => {
     await props?.getOrgAndDbs();
   };
 
-  const deleteOrganization = async (orgId) => {
+  const deleteOrganization = async () => {
+      
     const userid = localStorage.getItem("userid");
-    // console.log("handle org",orgId);
-    await deleteOrg(orgId,userid);
+
+    await deleteOrg(props?.orgId,userid);
     await props?.getOrgAndDbs();
   };
 
@@ -52,13 +53,17 @@ export const OrgList = (props) => {
           {name ? (
             <>
               <TextField
-                sx={{ width: 120, fontWeight: "bold" }}  defaultValue={props.dbs[0]?.org_id?.name} value={orgName}  onKeyDown={(e) => {
-                    if (e.key === 'Enter') {
-                      renameWorkspace(props?.orgId);
-                      setName(false);
-                    }
-                  }}     onChange={(e) => setOrgName(e.target.value)}
-                 size="small"
+                sx={{ width: 120, fontWeight: "bold" }}
+                defaultValue={props.dbs[0]?.org_id?.name}
+                value={orgName}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter') {
+                    renameWorkspace(props?.orgId);
+                    setName(false);
+                  }
+                }}
+                onChange={(e) => setOrgName(e.target.value)}
+                size="small"
               />
 
               <Button onClick={() => { setName(false); renameWorkspace(props?.orgId); }}
