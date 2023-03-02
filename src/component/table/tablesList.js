@@ -22,12 +22,17 @@ export default function TablesList (props ) {
        const data = {
         tableName: table
       }
-      // check if data already exists
- 
+  //     // check if data already exists
+  // if (data === "existing data") {
+  //   toast.error("Error: Data already exists!", {
+  //     position: toast.POSITION.TOP_CENTER,
+  //   });
+  // } else {
      await createTable(dbId,data);
      setOpen(false)
      getAllTableName(props?.dbData?.db?._id, props?.dbData?.db?.org_id?._id)
-  }
+  // }
+  };
 
   useEffect(() => {
    if(props?.dbData)
@@ -62,9 +67,7 @@ export default function TablesList (props ) {
           }}
         >
            {table[0]}
-           <Box sx={{display: 'flex', justifyContent: 'flex-end'}}>
-    <Button variant="contained">APIs</Button>
-  </Box>
+           
            
          </Box>
          
@@ -85,6 +88,7 @@ export default function TablesList (props ) {
       <Button onClick={handleOpen}  variant="contained" >Add Table</Button>
       <PopupModal title="create table" label="Table Name"   open={open} setOpen ={setOpen} saveFunction = {saveTable}  setVariable={setTable}/>
       </Box>
+      
     </Box>
   );
 }

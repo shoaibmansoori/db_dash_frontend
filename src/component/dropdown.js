@@ -48,7 +48,7 @@ export default function Dropdown(props) {
 
             <MenuItem onClick={handleCloseUserMenu}>
               <Typography textAlign="center" onClick={(e) =>{e.preventDefault();
-              e.stopPropagation();props?.setName (true)}}>{props?.first}</Typography>
+              e.stopPropagation(); props?.setName (true)}}>{props?.first}</Typography>
             </MenuItem>
             <MenuItem onClick={(e)=>{e.preventDefault();
               e.stopPropagation();handleCloseUserMenu(e)}}>

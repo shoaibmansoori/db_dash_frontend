@@ -1,23 +1,27 @@
-import React, { useState, useEffect } from "react";
-import PropTypes from "prop-types";
-import {Box, Typography, Container } from "@mui/material";
-import { useLocation } from "react-router-dom";
-import navbarApi from "../component/apiDoc/navbarApi";
+import React from "react";
+// import PropTypes from "prop-types";
+import Navbar from "../component/apiDoc/navbarApi";
+import CodeTab from "../component/apiDoc/codeSection/codeTab";
 
-function apidocPage(props) {
-    const location = useLocation();
-    const [dbData, setDbData] = useState(null);
 
-    useEffect(() => {   
-        if (location?.state) {
-            setDbData(location?.state);
-        } else {
-            // handle case where no data was passed
-        }
-    }, [props?.location?.state]);
+
+
+function ApiDocPage() {
+    // const location = useLocation();
+    // const [dbData, setDbData] = useState(null);
+
+    // useEffect(() => {   
+    //     if (location?.state) {
+    //         setDbData(location?.state);
+    //     } else {
+    //         // handle case where no data was passed
+    //     }
+    // }, [props?.location?.state]);
 
     return (
         <>
+        <Navbar/>
+        <CodeTab/>
         {/* <Container maxWidth="sm">
            
                 <Typography variant="body1" align="center">
@@ -27,17 +31,13 @@ function apidocPage(props) {
         </Container> */}
         
 
-        <Box align="center">
-        <navbarApi/>
-        
-   </Box>
    </>
     );
 }
 
-export default apidocPage;
-apidocPage.propTypes = {
-    location: PropTypes.shape({
-        state: PropTypes.object
-    })
-};
+export default ApiDocPage;
+// apidocPage.propTypes = {
+//     location: PropTypes.shape({
+//         state: PropTypes.object
+//     })
+// };

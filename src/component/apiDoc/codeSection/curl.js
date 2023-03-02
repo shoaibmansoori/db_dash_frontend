@@ -1,9 +1,7 @@
-import React from 'react'
 import { Box } from '@mui/material'
-const curl = () => {
+import React from 'react'
+export default function Curl() {
   return (
     <Box>curl</Box>
   )
 }
-
-export default curl
