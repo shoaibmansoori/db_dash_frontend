@@ -8,7 +8,7 @@ import {
   onAuthStateChanged,
   signOut,
   signInWithPopup,
-  getAdditionalUserInfo
+  getAdditionalUserInfo,
 } from "firebase/auth";
 import { signUpUser, loginUser } from "../api/userApi"
 import { useNavigate } from "react-router-dom";
@@ -29,7 +29,7 @@ export const AuthContextProvider = ({ children }) => {
         const dataToSend = {
           "email": email,
           "first_name": displayName.split(" ")[0],
-          last_name: displayName.split(" ")[1] || " ",
+          "last_name": displayName.split(" ")[1] || " ",
         }
         const token = await signUpUser(dataToSend)
         console.log("TOKEN googleSignIn ",token);
@@ -80,7 +80,7 @@ export const AuthContextProvider = ({ children }) => {
     } catch (error) {
       console.log(error);
     }
-  }
+  };
 
   const logOut = () => {
     signOut(auth);
@@ -111,5 +111,4 @@ export const UserAuth = () => {
 
 AuthContextProvider.propTypes = {
   children: PropTypes.node.isRequired,
-}
-
+};
