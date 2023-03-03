@@ -1,36 +1,32 @@
-import React from 'react'
+import React,{useState} from 'react'
 import PropTypes from 'prop-types';
 import { Typography, Menu, MenuItem, Tooltip, IconButton } from '@mui/material'
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
-// import {deleteOrg} from '../api/orgApi.js';
-
+import AlertPopup from './alertPopup';
+//import { deleteDb } from '../../api/dbApi'
 
 export default function Dropdown(props) {
-
-    const [anchorElUser, setAnchorElUser] = React.useState(null);
+    
+    const [anchorElUser, setAnchorElUser] = useState(null);
+    const [open, setOpen] = useState(false);
     const handleOpenUserMenu = (event) => {
       setAnchorElUser(event.currentTarget);
     };
-  
-    const handleCloseUserMenu = () => {
+    const handleCloseUserMenu = (e) => {
+      e.stopPropagation();
       setAnchorElUser(null);
     };
+    const handleClickOpen = () => {
+    
+      setOpen(true);
+    };
 
-    // const deleteOrganization = async() => {
-    //   if(func)
-    //   {
-    //     // e.preventDefault();
-    //     console.log("delete",props?.orgId)
-    //     await deleteOrg(props?.orgId);
-    //       // setOpen(false);
-    //   }
-    // }
+     
+    
+  return (
 
     
-
-
-  return (
-    <>
+    <>  
         <Tooltip>
             <IconButton onClick={(e)=>{
               e.preventDefault();
@@ -39,7 +35,6 @@ export default function Dropdown(props) {
               <MoreHorizIcon />
             </IconButton>
           </Tooltip>
-
           <Menu
             sx={{ mt: '45px' }}
             id="menu-appbar"
@@ -56,26 +51,39 @@ export default function Dropdown(props) {
             open={Boolean(anchorElUser)}
             onClose={handleCloseUserMenu}
           >
-
             <MenuItem onClick={handleCloseUserMenu}>
               <Typography textAlign="center" onClick={(e) =>{e.preventDefault();
-              e.stopPropagation();props?.setName (true)}}>{props?.first}</Typography>
+              e.stopPropagation(); props?.setName (true)}}>{props?.first}</Typography>
             </MenuItem>
             <MenuItem onClick={(e)=>{e.preventDefault();
-              e.stopPropagation();handleCloseUserMenu(e)}}>
-              <Typography textAlign="center" onClick={()=>{[props.deleteFunction(props?.idToDelete)]}}>{props?.second}</Typography>
+              e.stopPropagation();handleCloseUserMenu(e);setOpen(true)}}>
+              <Typography  onClick={handleClickOpen} textAlign="center" >{props?.second}</Typography>
             </MenuItem>
+            <AlertPopup open={open} setOpen ={setOpen} title={props?.title } deleteFunction={props?.deleteFunction}  /> 
           </Menu>
     </>
   )
 }
-
 Dropdown.propTypes = {
   first: PropTypes.string,
   second: PropTypes.string,
   setName: PropTypes.func,
-  name: PropTypes.string,
-  deleteFunction:PropTypes.func,
-  idToDelete :PropTypes.any
-  // db.orgId:PropTypes.string
+  title: PropTypes.string,
+  deleteFunction : PropTypes.func
+  
+    
+  
 };
+
+
+
+
+
+
+
+
+
+
+
+
+

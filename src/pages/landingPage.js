@@ -6,7 +6,6 @@ import WorkspaceCombined from '../component/workspaceDatabase/workspaceCombined'
 import "./css.css"
 
 export default function LandingPage() {
-
   return (
     <Container maxWidth='true'>
 

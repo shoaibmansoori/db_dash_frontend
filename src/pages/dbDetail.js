@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
-import {Box, Typography, Container } from "@mui/material";
+import {Box,Button, Typography, Container } from "@mui/material";
 import { useLocation } from "react-router-dom";
 import TablesList from "../component/table/tablesList";
+import { Link } from 'react-router-dom'
 
 
 function DbDetails(props) {
@@ -30,6 +31,13 @@ function DbDetails(props) {
                 </Typography>
             )}
         </Container>
+        <Link to={{pathname: "/apiDoc/db/:dbId/table/:tableName"}} state={{data : dbData}}    >
+           
+
+        <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
+            <Button variant="contained" color="primary">APIs</Button>
+        </Box>
+        </Link>
         <Box align="center">
         <TablesList dbData ={dbData} />
    </Box>

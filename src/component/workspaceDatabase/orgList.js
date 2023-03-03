@@ -9,6 +9,7 @@ import { createDb } from "../../api/dbApi";
 import PropTypes from "prop-types";
 import { updateOrg, deleteOrg } from "../../api/orgApi";
 
+
 export const OrgList = (props) => {
   const [name, setName] = useState(false);
   const [orgName, setOrgName] = useState();
@@ -38,10 +39,11 @@ export const OrgList = (props) => {
     await props?.getOrgAndDbs();
   };
 
-  const deleteOrganization = async (orgId) => {
+  const deleteOrganization = async () => {
+      
     const userid = localStorage.getItem("userid");
-    // console.log("handle org",orgId);
-    await deleteOrg(orgId,userid);
+
+    await deleteOrg(props?.orgId,userid);
     await props?.getOrgAndDbs();
   };
 
@@ -65,10 +67,7 @@ export const OrgList = (props) => {
                 size="small"
               />
 
-              <Button
-                onClick={() => {
-                  renameWorkspace(props?.orgId);
-                }}
+              <Button onClick={() => { setName(false); renameWorkspace(props?.orgId); }}
                 variant="contained"
                 sx={{
                   width: "8rem",
@@ -99,6 +98,7 @@ export const OrgList = (props) => {
                   setName={setName}
                   idToDelete={props?.orgId}
                   deleteFunction={deleteOrganization}
+                  title= "Organization"
                 />
               </Box>
             </>
@@ -117,12 +117,11 @@ export const OrgList = (props) => {
               <Card sx={{m: 4, minWidth: 250, minHeight: 200, boxShadow: 2 ,display: "flex" ,alignItems:"center",justifyContent:"center" }}>
                
                   <Button 
-                    onClick={(e) => {
+                     onClick={(e) => {
                       handleOpen(e);
                       setOrg(props?.orgId);
                     }}
-                    variant="contained"
-                  >
+                    variant="contained" >
                     Create Db
                   </Button>
               </Card>
@@ -136,6 +135,7 @@ export const OrgList = (props) => {
               setVariable={setDb}
             />
           </Box>
+          
         </Box>
       </Box>
       <Box></Box>
