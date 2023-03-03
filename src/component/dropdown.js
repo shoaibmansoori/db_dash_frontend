@@ -12,7 +12,8 @@ export default function Dropdown(props) {
     const handleOpenUserMenu = (event) => {
       setAnchorElUser(event.currentTarget);
     };
-    const handleCloseUserMenu = () => {
+    const handleCloseUserMenu = (e) => {
+      e.stopPropagation();
       setAnchorElUser(null);
     };
     const handleClickOpen = () => {
