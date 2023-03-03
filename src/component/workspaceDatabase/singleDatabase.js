@@ -2,7 +2,7 @@ import React,{useState,useEffect} from 'react'
 import { Card, CardContent, Typography, Box,TextField} from '@mui/material'
 import Button from '@mui/material/Button';
 import PropTypes from "prop-types"
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom' 
 import Dropdown from '../dropdown'
 import { renameDb,deleteDb } from '../../api/dbApi'
 // import {deleteDb} from '../api/dbApi.js';
@@ -41,12 +41,15 @@ const deletDatabases = async() => {
                    onKeyDown={(e) => {
                     if (e.key === 'Enter') {
                       renameDatabase(props.db.org_id?._id,props.db._id,props.db.name);
-                      setName(false);
+                      setName(false); 
                     }
                   }}
+                  onClick={(e) => {
+                    e.preventDefault();
+                  e.stopPropagation();}}
                    onChange={(e) => {
-                      e.preventDefault();
-                    e.stopPropagation();setDbname(e.target.value)} }size="small" />
+                     setDbname(e.target.value)} }size="small" />
+
               <Button onClick={(e) =>  { e.preventDefault();
               e.stopPropagation();  renameDatabase(props.db.org_id?._id,props.db._id,props.db.name);} }
               variant="contained" sx={{ width: '8rem',  backgroundColor: '#1C2833', fontSize: '12px', mx: 3, ':hover':

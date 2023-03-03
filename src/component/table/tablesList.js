@@ -9,6 +9,7 @@ import MainTable from '../../table/mainTable';
 import { addColumns } from '../../store/table/tableThunk';
 import { useDispatch } from 'react-redux';
 
+
 export default function TablesList (props ) {
   const [tables, setTables] = useState({});
 
@@ -26,12 +27,17 @@ export default function TablesList (props ) {
        const data = {
         tableName: table
       }
-      // check if data already exists
- 
+  //     // check if data already exists
+  // if (data === "existing data") {
+  //   toast.error("Error: Data already exists!", {
+  //     position: toast.POSITION.TOP_CENTER,
+  //   });
+  // } else {
      await createTable(dbId,data);
      setOpen(false)
      getAllTableName(props?.dbData?.db?._id, props?.dbData?.db?.org_id?._id)
-  }
+  // }
+  };
 
   useEffect(() => {
    if(props?.dbData)
@@ -50,9 +56,11 @@ export default function TablesList (props ) {
     const data =  await getDbById(dbId,orgId)
       setTables(data.data.data.tables  || {});
      return data;
-  };
+  }
 
   return (
+         
+      
     <Box sx={{ display: 'flex', flexDirection: 'row', gap: '1px', flexWrap: 'wrap' }}>
 
       { Object.entries(tables).map((table, index) => (
@@ -74,7 +82,10 @@ export default function TablesList (props ) {
           }}  
         >
            {table[0]}
+           
+           
          </Box>
+         
       ))} 
       <Box
         // startIcon={<AddIcon />}
@@ -91,8 +102,13 @@ export default function TablesList (props ) {
       <Button onClick={handleOpen}  variant="contained" >Add Table</Button>
       <PopupModal title="create table" label="Table Name"   open={open} setOpen ={setOpen} saveFunction = {saveTable}  setVariable={setTable}/>
       </Box>
+<<<<<<< HEAD
       <MainTable/>
+=======
+       
+>>>>>>> 61c4002c9b31670dad4e57d9682f8e5448c05a4d
     </Box>
+    
   );
 }
 TablesList.propTypes = {

@@ -6,7 +6,6 @@ import LandingPage from './pages/landingPage';
 import { AuthContextProvider } from './context/authContext';
 import "./pages/css.css"
 import DbDetail from './pages/dbDetail';
-import MainTable from "./table/mainTable"
 function App() {
 
   return (
@@ -16,7 +15,6 @@ function App() {
       <Route exact path ="/" element ={<Authpage/>} />
       <Route exact path ="/dashboard" element ={<LandingPage/>} />
       <Route exact path ="/db/:dbId" element ={<DbDetail/>}/>
-      <Route exact path= "/tables" element={<MainTable/>}/>
     </Routes>
     </AuthContextProvider>
 

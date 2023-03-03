@@ -9,6 +9,7 @@ import { createDb } from "../../api/dbApi";
 import PropTypes from "prop-types";
 import { updateOrg, deleteOrg } from "../../api/orgApi";
 
+
 export const OrgList = (props) => {
   const [name, setName] = useState(false);
   const [orgName, setOrgName] = useState();
@@ -97,6 +98,7 @@ export const OrgList = (props) => {
                   setName={setName}
                   idToDelete={props?.orgId}
                   deleteFunction={deleteOrganization}
+                  title= "Organization"
                 />
               </Box>
             </>
@@ -133,6 +135,7 @@ export const OrgList = (props) => {
               setVariable={setDb}
             />
           </Box>
+          
         </Box>
       </Box>
       <Box></Box>

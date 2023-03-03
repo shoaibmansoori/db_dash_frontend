@@ -12,9 +12,9 @@ const getAllDb = async () =>
     return await axios.get(URL + "/dbs")
 }
 
-const getDbById = async (dbId,orgId) =>
+const getDbById = async (dbId) =>
 {
-     return await axios.get(URL +`/dbs/${orgId}/dbs/${dbId}`);
+     return await axios.get(URL +`/dbs/dbs/${dbId}`);
 }
 
 const getDbByOrgId = async (orgId) =>
