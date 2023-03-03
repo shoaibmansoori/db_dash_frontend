@@ -5,10 +5,14 @@ import PopupModal from '../popupModal';
 import { createTable } from '../../api/tableApi';
 import { getDbById } from '../../api/dbApi';
 import PropTypes from "prop-types";
+import MainTable from '../../table/mainTable';
+import { addColumns } from '../../store/table/tableThunk';
+import { useDispatch } from 'react-redux';
 
 export default function TablesList (props ) {
   const [tables, setTables] = useState({});
 
+  const dispatch=useDispatch();
 
  //state to display modal
  const [table, setTable] = useState();
@@ -33,6 +37,14 @@ export default function TablesList (props ) {
    if(props?.dbData)
    getAllTableName(props?.dbData?.db?._id, props?.dbData?.db?.org_id?._id)
   },[props]);
+
+  useEffect(()=>{
+    dispatch(addColumns({
+      // option: e.target.value,
+      // backgroundColor: randomColor(),
+      // columnId: id
+    }))
+  },[])
 
   const getAllTableName = async (dbId,orgId)=>{
     const data =  await getDbById(dbId,orgId)
@@ -59,7 +71,7 @@ export default function TablesList (props ) {
             textOverflow: 'ellipsis',
             overflow: 'hidden',
             whiteSpace: 'nowrap',
-          }}
+          }}  
         >
            {table[0]}
          </Box>
@@ -76,10 +88,10 @@ export default function TablesList (props ) {
         }}
         
       >
-     
       <Button onClick={handleOpen}  variant="contained" >Add Table</Button>
       <PopupModal title="create table" label="Table Name"   open={open} setOpen ={setOpen} saveFunction = {saveTable}  setVariable={setTable}/>
       </Box>
+      <MainTable/>
     </Box>
   );
 }

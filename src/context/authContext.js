@@ -28,7 +28,7 @@ export const AuthContextProvider = ({ children }) => {
             "first_name": displayName.split(" ")[0],
             last_name: displayName.split(" ")[1] || " ",
           }
-      await signUpUser(dataToSend)
+          await signUpUser(dataToSend)
 
           // return;
         }

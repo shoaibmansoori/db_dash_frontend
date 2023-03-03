@@ -38,6 +38,7 @@ export default function WorkspaceCombined() {
       localStorage.setItem("userid",data?.data?.data?._id);
       filterDbsBasedOnOrg(data?.data?.data?.dbs)
     }
+    
   const saveOrgToDB = async (e) => {
       e.preventDefault();
       const userid = localStorage.getItem("userid");
