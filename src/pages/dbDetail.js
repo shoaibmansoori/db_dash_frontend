@@ -31,6 +31,7 @@ function DbDetails(props) {
                 </Typography>
             )}
         </Container>
+        {console.log("Props : ",props)}
         <Link to={{pathname: "/apiDoc/db/:dbId/table/:tableName"}} >
         <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
             <Button variant="contained" color="primary">APIs</Button>
