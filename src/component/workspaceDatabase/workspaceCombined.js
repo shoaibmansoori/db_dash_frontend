@@ -59,9 +59,11 @@ export default function WorkspaceCombined() {
                 <Box key={orgId}>
                   <OrgList orgId={orgId} dbs ={dbs} getOrgAndDbs={getOrgAndDb} /> 
                    </Box>
+                   
                 
             ))
             }
+
          
             
           </Box>

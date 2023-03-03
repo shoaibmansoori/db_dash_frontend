@@ -14,8 +14,8 @@ export default function Navbar() {
             <Button variant="contained" color="primary">Auth Key</Button>
         </Box>
    </Box>
-   <Box >
-         <Select value={2} >
+   <Box>
+         <Select size='small' value={2} >
          <MenuItem value={1}>organization 1</MenuItem>
          <MenuItem value={2}>organization 2</MenuItem>
          <MenuItem value={3}>organization 3</MenuItem>
@@ -25,7 +25,7 @@ export default function Navbar() {
      </Box>
      <br></br>
      <Box >
-         <Select value={2} >
+         <Select size='small' value={2} >
          <MenuItem value={1}>Table 1</MenuItem>
          <MenuItem value={2}>Table 2</MenuItem>
          <MenuItem value={3}>Table 3</MenuItem>

@@ -93,8 +93,8 @@ export default function TablesList (props ) {
   );
 }
 TablesList.propTypes = {
-    dbData: PropTypes.any,
-    dbId: PropTypes.string,
+  dbData: PropTypes.any,
+  dbId: PropTypes.string,
     orgId: PropTypes.string,
 };
 
