@@ -5,8 +5,10 @@ import Cell from "./Cell";
 import Header from "./Header";
 import PlusIcon from "./img/Plus";
 import PropTypes from 'prop-types';
+import { useDispatch } from "react-redux";
 
 import { useCellRangeSelection } from 'react-table-plugins'
+import { addRows } from "../store/table/tableThunk";
 // import useScrollOnEdges from 'react-scroll-on-edges'
 
 const defaultColumn = {
@@ -20,6 +22,7 @@ const defaultColumn = {
 
 export default function Table({ columns, data, skipReset }) {
   // console.log(columns);
+  const dispatch=useDispatch();
 
   // console.log(dataDispatch);
   const [selectedRange, setSelectedRange] = useState({});  
@@ -134,6 +137,7 @@ export default function Table({ columns, data, skipReset }) {
         newData[index][keyName] = newValueToReplace;
       })
       // dataDispatch({ type: "update_cell" })
+      
     }
   }, [selectedCellIds])
 
@@ -256,7 +260,7 @@ export default function Table({ columns, data, skipReset }) {
             );
           })}
           <div className='tr add-row' 
-          // onClick={() => dataDispatch({ type: "add_row" })}
+          onClick={() => dispatch(addRows({ type: "add_row" }))}
           >
             <span className='svg-icon svg-gray' style={{ marginRight: 4 }}>
               <PlusIcon />
@@ -278,6 +282,6 @@ export default function Table({ columns, data, skipReset }) {
 Table.propTypes = {
   columns:PropTypes.any,
   data:PropTypes.any,
-  // dispatch:PropTypes.any,
+  dispatch:PropTypes.any,
   skipReset:PropTypes.any
 };

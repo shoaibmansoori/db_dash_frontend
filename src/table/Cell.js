@@ -5,7 +5,7 @@ import {usePopper} from "react-popper";
 import {grey} from "./colors";
 import PlusIcon from "./img/Plus";
 import {randomColor} from "./utils";
-import { addColumns } from "../store/table/tableThunk";
+import { addColumns, updateCells } from "../store/table/tableThunk";
 import { useDispatch } from "react-redux";
 
 export default function Cell({value: initialValue, row: {index}, column: {id, dataType, options}, dataDispatch}) {
@@ -30,9 +30,12 @@ export default function Cell({value: initialValue, row: {index}, column: {id, da
 
   useEffect(() => {
     if (value.update) {
-      dataDispatch({type: "update_cell", columnId: id, rowIndex: index, value: value.value});
+      // dataDispatch({type: "update_cell", columnId: id, rowIndex: index, value: value.value});
+      dispatch(updateCells({
+        columnId: id, rowIndex: index, value: value.value
+      }))
     }
-  }, [value, dataDispatch, id, index]);
+  }, [value, dispatch, id, index]);
 
   function handleOptionKeyDown(e) {
     if (e.key === "Enter") {

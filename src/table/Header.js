@@ -13,7 +13,7 @@ import PlusIcon from "./img/Plus";
 import { useDispatch } from "react-redux";
 import {shortId} from "./utils";
 import PropTypes from 'prop-types';
-import { addColumnsToRight, deleteColumns, updateColumnHeaders } from "../store/table/tableThunk";
+import { addColumnsToRight, addColumsToLeft, deleteColumns, updateColumnHeaders } from "../store/table/tableThunk";
 
 
 export default function Header({
@@ -68,7 +68,10 @@ export default function Header({
           columnId: id,
           label: header
         }))
-        dataDispatch({type: "add_column_to_left", columnId: id, focus: false});
+        // dataDispatch({type: "add_column_to_left", columnId: id, focus: false});
+        dispatch(addColumsToLeft({
+          columnId: id, focus: false
+        }))
         setExpanded(false);
       },
       icon: <ArrowLeftIcon />,
@@ -259,8 +262,8 @@ export default function Header({
                     zIndex: 4,
                     padding: "4px 0px"
                   }}>
-                  {types.map((type) => (
-                    <button key={type} className='sort-button' onClick={type.onClick}>
+                  {types.map((type,index) => (
+                    <button key={index} className='sort-button' onClick={type.onClick}>
                       <span className='svg-icon svg-text icon-margin'>{type.icon}</span>
                       {type.label}
                     </button>
@@ -274,8 +277,8 @@ export default function Header({
                 borderTop: `2px solid ${grey(200)}`,
                 padding: "4px 0px"
               }}>
-              {buttons.map((button) => (
-                <button key={button} type='button' className='sort-button' onMouseDown={button.onClick}>
+              {buttons.map((button,index) => (
+                <button key={index} type='button' className='sort-button' onMouseDown={button.onClick}>
                   <span className='svg-icon svg-text icon-margin'>{button.icon}</span>
                   {button.label}
                 </button>
@@ -291,10 +294,11 @@ export default function Header({
         className='th-content'
         style={{display: "flex", justifyContent: "center"}}
         onClick={() =>
-           dispatch(addColumnsToRight({
-          type: "addColumnToRight", 
-          columnId: 999999, focus: true
+           dispatch(addColumsToLeft({
+          columnId: 999999, focus: false
         }))}>
+        {/* onClick={() => dataDispatch({type: "add_column_to_left", columnId: 999999, focus: true})}> */}
+
         <span className='svg-icon-sm svg-gray'>
           <PlusIcon />
         </span>

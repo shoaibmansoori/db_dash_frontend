@@ -223,7 +223,6 @@ function MainTable() {
 
   const tableInfo=useSelector((state)=>getTableInfo(state));
 
-  console.log(tableInfo);
 
   // const [state, dispatch] = useReducer(reducer,tableInfo);
 
@@ -231,8 +230,7 @@ function MainTable() {
   const dispatchs=useDispatch();
 
   const getData=()=>{
-    const data =  dispatchs(bulkAddColumns(makeData(10)));
-    console.log(data)
+     dispatchs(bulkAddColumns(makeData(10)));
   }
 
   useEffect(() => {
