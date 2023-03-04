@@ -11,6 +11,7 @@ import AddRecord from './addRecord';
 import UpdateRecord from './updateRecord';
 import DeleteRecord from './deleteRecord';
 
+
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
 
@@ -45,8 +46,10 @@ function a11yProps(index) {
 }
 
 
-function ApiCrudTablist() {
+function ApiCrudTablist(props) {
   const [value, setValue] = useState(0);
+
+  console.log("ApiCrudTablist Props : ",props);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -65,26 +68,31 @@ function ApiCrudTablist() {
         </Tabs>
       </Box>
       <TabPanel value={value} index={0}>
-        <BasicStuff/>
+        <BasicStuff db={props.db} table={props.table}/>
       </TabPanel>
       <TabPanel value={value} index={1}>
-        <RetrieveRecord/>
+        <RetrieveRecord db={props.db} table={props.table} />
       </TabPanel>
       <TabPanel value={value} index={2}>
-        <ListRecord/>
+        <ListRecord db={props.db} table={props.table}/>
       </TabPanel>
       <TabPanel value={value} index={3}>
-       <AddRecord/>
+       <AddRecord db={props.db} table={props.table}/>
       </TabPanel>
       <TabPanel value={value} index={4}>
-       <UpdateRecord/>
+       <UpdateRecord db={props.db} table={props.table}/>
       </TabPanel>
       <TabPanel value={value} index={5}>
-       <DeleteRecord/>
+       <DeleteRecord db={props.db} table={props.table}/>
       </TabPanel>
     </Box>
     </>
   )
+}
+
+ApiCrudTablist.propTypes = {
+  db: PropTypes.string,
+  table:PropTypes.string
 }
 
 export default ApiCrudTablist

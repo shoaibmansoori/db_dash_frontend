@@ -15,6 +15,7 @@ export default function Navbar() {
   const [tables, setTables] = useState({});
   const [selectedOption,setSelectedOption] = useState('');
   const [selectTable,setSelectTable] = useState('');
+
   const handleChange = async (event) => {
     setSelectedOption(event.target.value);
     console.log("event",  event.target)    
@@ -103,7 +104,7 @@ export default function Navbar() {
          </Select>
      </Box>
      <Box>
-      <ApiCrudTablist/>
+      <ApiCrudTablist db={selectedOption} table={selectTable}/>
      </Box>
         </>
   )
