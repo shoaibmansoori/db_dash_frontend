@@ -86,7 +86,7 @@ export default function Header({
         }))
         dispatch(addColumnsToRight({
           type: "addColumnToRight", 
-          columnId: 999999, focus: true
+          columnId: id, focus: false
         }))
         setExpanded(false);
       },
@@ -204,9 +204,34 @@ export default function Header({
         }))
   }
 
-  return id !== 999999 ? (
+  return id == 999999 || id == 9999991 ? (
     <>
-      <div {...getHeaderProps({style: {display: "inline-block"}})} className='th noselect'>
+    
+      { id ==999999 ?<div {...getHeaderProps({style: {display: "inline-block"}})} className='th noselect'>
+      <div
+        className='th-content'
+        style={{display: "flex", justifyContent: "center"}}
+        // onClick={(e) => dataDispatch({type: "add_column_to_left", columnId: 999999, focus: true})}>
+        onClick={() =>
+          dispatch(addColumsToLeft({
+         columnId: 999999, focus: false
+        }))}>
+        <span className='svg-icon-sm svg-gray'>
+          <PlusIcon />
+        </span>
+      </div>
+    </div > :
+    <div  {...getHeaderProps({style: {display: "inline-block"}})} className='th noselect'
+        style={{display: "flex", justifyContent: "center"}}>
+          <div
+        className='th-content' style={{paddingLeft: "25px"}}>
+          checkbox
+        </div>
+    </div> }
+    </>
+  ) : (
+    <>
+    <div {...getHeaderProps({style: {display: "inline-block"}})} className='th noselect'>
         <div className='th-content' onClick={() => setExpanded(true)} ref={setReferenceElement}>
           <span className='svg-icon svg-gray icon-margin'>{propertyIcon}</span>
           {label}
@@ -263,7 +288,7 @@ export default function Header({
                     padding: "4px 0px"
                   }}>
                   {types.map((type,index) => (
-                    <button key={index} className='sort-button' onClick={type.onClick}>
+                    <button key = {index} className='sort-button' onClick={type.onClick}>
                       <span className='svg-icon svg-text icon-margin'>{type.icon}</span>
                       {type.label}
                     </button>
@@ -278,7 +303,7 @@ export default function Header({
                 padding: "4px 0px"
               }}>
               {buttons.map((button,index) => (
-                <button key={index} type='button' className='sort-button' onMouseDown={button.onClick}>
+                <button type='button' key ={index} className='sort-button' onMouseDown={button.onClick}>
                   <span className='svg-icon svg-text icon-margin'>{button.icon}</span>
                   {button.label}
                 </button>
@@ -288,23 +313,11 @@ export default function Header({
         </div>
       )}
     </>
-  ) : (
-    <div {...getHeaderProps({style: {display: "inline-block"}})} className='th noselect'>
-      <div
-        className='th-content'
-        style={{display: "flex", justifyContent: "center"}}
-        onClick={() =>
-           dispatch(addColumsToLeft({
-          columnId: 999999, focus: false
-        }))}>
-        {/* onClick={() => dataDispatch({type: "add_column_to_left", columnId: 999999, focus: true})}> */}
-
-        <span className='svg-icon-sm svg-gray'>
-          <PlusIcon />
-        </span>
-      </div>
-    </div>
+   
   );
+
+
+
 }
 
 Header.propTypes = {

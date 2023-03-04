@@ -6,9 +6,7 @@ import { getCurrentUser } from "../../api/userApi";
 
 export const saveUser = createAsyncThunk (
     "user/saveUser", async (payload , {dispatch}) =>{
-        console.log("o=in thulkk")
         const data = await getCurrentUser();
-        console.log("get current user",data)
         dispatch(add(data.data.data));
         return 5;
     }

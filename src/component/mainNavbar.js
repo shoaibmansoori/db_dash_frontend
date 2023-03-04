@@ -2,24 +2,17 @@ import React from 'react';
 import {Box, Toolbar, IconButton, Typography, Menu, Container, Avatar, Tooltip, MenuItem,  Divider} from '@mui/material';
 import { UserAuth } from "../context/authContext.js"
 import { Link, useNavigate } from 'react-router-dom';
-// import { useDispatch } from 'react-redux';
-// import { saveUser } from '../store/user/userThunk.js';
-// import PropTypes from 'prop-types';
-// import { useLocation } from 'react-router-dom';
-
+import { useSelector } from 'react-redux';
+import { selectActiveUser } from '../store/user/userSelector.js';
 
 function MainNavbar() {
-  // const dispatch=useDispatch()
 
   const user = UserAuth();
-  // dispatch(saveUser(user));  
 
-  // console.log(user);
   const logOut = user?.logOut;
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const navigate = useNavigate();
-
-  // const location = useLocation();
+  const userDetails = useSelector((state) => selectActiveUser(state));
 
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
@@ -70,7 +63,7 @@ function MainNavbar() {
 
           <Tooltip title="Open settings">
             <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-              <Avatar alt={user?.user?.displayName} src={user?.user?.photoURL}/>
+              <Avatar alt={userDetails?.fullName} src={userDetails?.fullName || user?.user?.photoURL}/>
             </IconButton>
           </Tooltip>
 
@@ -92,10 +85,10 @@ function MainNavbar() {
           >
 
             <MenuItem onClick={handleCloseUserMenu}>
-              <Typography textAlign="center">{user?.user?.displayName}</Typography>
+              <Typography textAlign="center">{userDetails?.fullName}</Typography>
             </MenuItem>
             <MenuItem onClick={handleCloseUserMenu}>
-              <Typography textAlign="center">{user?.user?.email}</Typography>
+              <Typography textAlign="center">{userDetails?.email}</Typography>
             </MenuItem>
             <Divider />
             <MenuItem onClick={() => { handleLogOut() }}>

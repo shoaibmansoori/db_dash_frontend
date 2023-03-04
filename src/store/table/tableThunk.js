@@ -2,7 +2,7 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 
 
 // reducer imports
-import { addColumnToLeft, addOptionToColumn,addRow,deleteColumn,updateCell,updateColumnHeader} from "./tableSlice";
+import { addColumnToLeft, addColumnToRight, addOptionToColumn,addRow,deleteColumn,updateCell,updateColumnHeader} from "./tableSlice";
 
 export const addColumns = createAsyncThunk(
     "table/addColumns",
@@ -16,6 +16,7 @@ export const addColumns = createAsyncThunk(
 export const bulkAddColumns = createAsyncThunk(
     "table/bulkAddColumns",
     async (payload) =>{
+        console.log("thunk",payload)
         // dispatch(bulkAdd(payload));  
         return payload;
     }
@@ -24,8 +25,10 @@ export const bulkAddColumns = createAsyncThunk(
 export const deleteColumns = createAsyncThunk(
     "table/deleteColumns",
     async(payload,{dispatch})=>{
+        console.log("in dlete colujns")
+        //delte api call 
         dispatch(deleteColumn(payload));
-        return 2;
+        // return response of api;
     }
 )
 export const updateColumnHeaders = createAsyncThunk(
@@ -38,8 +41,8 @@ export const updateColumnHeaders = createAsyncThunk(
 
 export const addColumnsToRight = createAsyncThunk(
     "table/addColumnsToRight",
-    async(payload)=>{
-        // dispatch(addColumnsToRight(payload));
+    async(payload,{dispatch})=>{
+        dispatch(addColumnToRight(payload));
         return payload;
     }
 )
@@ -63,6 +66,7 @@ export const updateCells = createAsyncThunk(
 export const addRows = createAsyncThunk(
     "table/addRows",
     async(payload,{dispatch})=>{
+        
         dispatch(addRow(payload));
         return payload;
     }

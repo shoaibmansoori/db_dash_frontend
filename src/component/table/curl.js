@@ -6,8 +6,8 @@ import PropTypes from "prop-types";
 
 
 
-export default function Curl(props) {
-  console.log(" curl props",props)
+export default function Curl() {
+  // console.log(" curl props",props)
 
 
 // const addRow = async(e) => 

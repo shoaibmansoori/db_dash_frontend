@@ -21,16 +21,14 @@ export default function makeData(count) {
   }
 
   let columns = [
-    { 
-      id: "checkBox",
-      label: "First Name",
-      width : 100,
-      dataType: "null",
-      Header: "11111", 
-      accessor: "checkbox",
-      disableResizing : true
-    //  Cell: ({ row }) => <input type="checkbox" {...row.getToggleRowSelectedProps()} />
-     },
+     {
+      id: 9999991,
+      width: 100,
+      label: "checkbox",
+      disableResizing: true,
+      dataType: "checkbox",
+      accessor : "checkbox",
+    },
     {
       id: "firstName",
       label: "First Name",

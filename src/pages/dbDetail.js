@@ -5,14 +5,30 @@ import { useLocation } from "react-router-dom";
 import TablesList from "../component/table/tablesList";
 import { Link } from 'react-router-dom'
 import Curl from "../component/table/curl";
+import { bulkAddColumns } from "../store/table/tableThunk";
+import { useDispatch } from "react-redux";
+import makeData from "../table/makeData";
 
 
 function DbDetails(props) {
-console.log("dblist",props)
+// console.log("dblist",props)
 
     const location = useLocation();
     const [dbData, setDbData] = useState(null);
-    console.log("db",dbData)
+    // console.log("db",dbData)
+    const dispatchs=useDispatch();
+    const getData=()=>{
+      console.log("dvnjf,vjb ")
+       dispatchs(bulkAddColumns(makeData(10)));
+    }
+   
+    useEffect(() => {
+      // console.log(dispatch)
+      // dispatch({ type: "enable_reset" });
+      // const data = dispatchs(bulkAddColumns(makeData(10)));
+      console.log("dabv bta")
+      getData();
+    },[]);
 
     useEffect(() => {   
         if (location?.state) {
@@ -35,8 +51,8 @@ console.log("dblist",props)
                 </Typography>
             )}
         </Container>
-
-        <Link to={{pathname: "/apiDoc/db/:dbId/table/:tableName"}} style={{ textDecoration: "none" }}>
+        <Link to={{pathname: "/apiDoc/db/:dbId/table/:tableName"}} state={{data : dbData}}    >
+           
         <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
             <Button variant="contained" color="primary">APIs</Button>
         </Box>

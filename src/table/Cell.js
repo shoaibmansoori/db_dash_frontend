@@ -8,7 +8,7 @@ import {randomColor} from "./utils";
 import { addColumns, updateCells } from "../store/table/tableThunk";
 import { useDispatch } from "react-redux";
 
-export default function Cell({value: initialValue, row: {index}, column: {id, dataType, options}, dataDispatch}) {
+export default function Cell({value: initialValue, row, column: {id, dataType, options}, dataDispatch}) {
 
 
   const dispatch=useDispatch();
@@ -32,10 +32,10 @@ export default function Cell({value: initialValue, row: {index}, column: {id, da
     if (value.update) {
       // dataDispatch({type: "update_cell", columnId: id, rowIndex: index, value: value.value});
       dispatch(updateCells({
-        columnId: id, rowIndex: index, value: value.value
+        columnId: id, rowIndex: row.index, value: value.value
       }))
     }
-  }, [value, dispatch, id, index]);
+  }, [value, dispatch, id, row.index]);
 
   function handleOptionKeyDown(e) {
     if (e.key === "Enter") {
@@ -193,9 +193,13 @@ export default function Cell({value: initialValue, row: {index}, column: {id, da
         </>
       );
       break;
-      // case :
-      // typeckecxbox
-      // state will be there boolean state
+      case "checkbox":
+      element =(<><div   {...row.getRowProps()} className= "tr">
+          <input type="checkbox" {...row.getToggleRowSelectedProps()} />
+          </div>
+      </>)
+          
+        break;
 
     default:
       element = null;

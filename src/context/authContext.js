@@ -60,9 +60,9 @@ const dispatch = useDispatch();
           last_name: displayName.split(" ")[1] || " ",
         }
         const token = await signUpUser(dataToSend)
-        console.log("TOKEN googleSignIn ",token);
+        // console.log("TOKEN googleSignIn ",token);
         localStorage.setItem('accessToken', token.data.data)
-        console.log(localStorage.getItem('accessToken')); 
+        // console.log(localStorage.getItem('accessToken')); 
         await dispatch(saveUser());
         navigate("/dashboard")
         return;
@@ -70,7 +70,7 @@ const dispatch = useDispatch();
       const token = await loginUser({ email: userInfo?.user?.email });
       if (token.data.data) {
         localStorage.setItem("accessToken", token.data.data);
-        console.log(localStorage.getItem('accessToken')); 
+        // console.log(localStorage.getItem('accessToken')); 
         await dispatch(saveUser());
         navigate("/dashboard")
       }
@@ -89,7 +89,7 @@ const dispatch = useDispatch();
           "last_name": lastName
         }
         const token = await signUpUser(dataToSend)
-        console.log("TOKEN signUp ",token);
+        // console.log("TOKEN signUp ",token);
 
         localStorage.setItem('accessToken', token.data.data)
         await dispatch(saveUser());

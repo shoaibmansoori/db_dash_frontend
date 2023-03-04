@@ -5,10 +5,11 @@ import Cell from "./Cell";
 import Header from "./Header";
 import PlusIcon from "./img/Plus";
 import PropTypes from 'prop-types';
-import { useDispatch } from "react-redux";
-
+// import { useDispatch } from "react-redux";
+import { cloneDeep } from "lodash";
 import { useCellRangeSelection } from 'react-table-plugins'
 import { addRows } from "../store/table/tableThunk";
+import { updateTableData } from "../store/table/tableSlice";
 // import useScrollOnEdges from 'react-scroll-on-edges'
 
 const defaultColumn = {
@@ -20,9 +21,10 @@ const defaultColumn = {
   sortType: "alphanumericFalsyLast"
 };
 
-export default function Table({ columns, data, skipReset }) {
-  // console.log(columns);
-  const dispatch=useDispatch();
+export default function Table({ columns, data,dispatch:dataDispatch, skipReset }) {
+  console.log("clumns ",columns);
+  console.log("data ",data);
+  // const dispatch=useDispatch();
 
   // console.log(dataDispatch);
   const [selectedRange, setSelectedRange] = useState({});  
@@ -35,42 +37,24 @@ export default function Table({ columns, data, skipReset }) {
     event.preventDefault();
     document.execCommand('copy');
   };
-  // function handlePaste(e, row, col) {
-  //   e.preventDefault();
-  //   const text = e.clipboardData.getData('text/plain');
-  //   const newData = [...data];
-  //   newData[row][col] = text.trim();
-  // }
-  // const handlePaste = (event, cell) => {
-  //   event.preventDefault();
-  //   const clipboardData = event.clipboardData.getData('text/plain');
-  //   if (clipboardData !== copiedValue) {
-  //     cell.setCellProps({ style: { backgroundColor: 'red' } });
-  //     // handle paste logic here
-  //   }
-  // };
-  // const handleCellSelection = (cell, event) => {
-  //   const cellIndex = selectedCells.findIndex(selectedCell => selectedCell.id === cell.id);
-  //   if (cellIndex >= 0) {
-  //     setSelectedCells(prevSelectedCells =>
-  //       prevSelectedCells.filter(selectedCell => selectedCell.id !== cell.id)
-  //     );
-  //   } else {
-  //     setSelectedCells(prevSelectedCells => [...prevSelectedCells, cell]);
-  //   }
-  // };
+  const handlePaste = (event,row,cell) => {
+    event.preventDefault();
+    // const clipboardData = event.clipboardData.getData('text/plain');
+    // const copiedValue =  event.clipboardData.setData('text/plain', value);
+    // if (clipboardData !== copiedValue) {
+      // handle paste logic here
+      const text = event.clipboardData.getData('text/plain');
+      // console.log("text",text);
+       const newData = cloneDeep(data);
+      //  console.log("newdata",newData);
+      //  console.log("column id",newData[row][cell.column.id]);
+       newData[row][cell.column.id] = text.trim();
+      //  console.log("new data",newData);
+// }
 
-  // const getCellProps = cell => {
-  //   return {
-  //     onClick: event => handleCellSelection(cell, event),
-  //     style: {
-  //       background: selectedCells.some(selectedCell => selectedCell.id === cell.id)
-  //         ? '#dbdbdb'
-  //         : 'transparent',
-  //     },
-  //   };
-  // };
-
+    dataDispatch(updateTableData(newData))
+    // dataDispatch({type:"update_cell"})
+  };
 
   const sortTypes = useMemo(
     () => ({
@@ -106,7 +90,7 @@ export default function Table({ columns, data, skipReset }) {
       columns,
       data,
       defaultColumn,
-      // dataDispatch,
+      dataDispatch,
       autoResetSortBy: !skipReset,
       autoResetFilters: !skipReset,
       autoResetRowState: !skipReset,
@@ -125,7 +109,7 @@ export default function Table({ columns, data, skipReset }) {
 
   useEffect(() => {
     if(Object.keys(selectedCellIds).length > 0) {
-      const newData = [...data]
+      const newData = cloneDeep(data)
       const firstValue =Object.keys(selectedCellIds)[0].split('_');
       const newValueToReplace = newData[firstValue[1]][firstValue[0]];
       Object.keys(selectedCellIds).forEach((key, i) => {
@@ -136,7 +120,9 @@ export default function Table({ columns, data, skipReset }) {
   
         newData[index][keyName] = newValueToReplace;
       })
-      // dataDispatch({ type: "update_cell" })
+      console.log(newData);
+      dataDispatch(updateTableData(newData))
+      // datadataDispatch({ type: "update_cell" })
       
     }
   }, [selectedCellIds])
@@ -165,6 +151,7 @@ export default function Table({ columns, data, skipReset }) {
       endColumn: columnIndex
     });
   };
+  
 
   const handleCellMouseOver = (rowIndex, columnIndex) => {
     setSelectedRange(prevRange => {
@@ -228,7 +215,13 @@ export default function Table({ columns, data, skipReset }) {
           {rows.map((row, rowIndex ) => {
             prepareRow(row);
             return (
-              <div  key={rowIndex} {...row.getRowProps()} className= {'tr'+rowIndex}>
+              <div  key={rowIndex} {...row.getRowProps()} className= {'tr'+rowIndex}
+              style=
+              {
+                row.isSelected ? { ...row.getRowProps().style, backgroundColor: 'blue' } : {
+                  ...row.getRowProps().style
+                }
+              }>
                 {row.cells.map((cell,columnIndex) => {
                   // console.log("cell.getCellProps().key",cell.getCellProps())
                   return (
@@ -240,7 +233,7 @@ export default function Table({ columns, data, skipReset }) {
                     {...cell.getCellProps(
                       {
                         onCopy: event => handleCopy(event, cell.value),
-                    // onPaste : event => handlePaste(event, rowIndex, colIndex)  
+                    onPaste : event => handlePaste(event, rowIndex, cell)  
                   }
                   )} 
                   
@@ -250,7 +243,7 @@ export default function Table({ columns, data, skipReset }) {
                   {
                     cellsSelected[cell.id]
                       ? { ...cell.getCellProps().style, backgroundColor: '#6beba8', userSelect: 'none' }
-                      : {...cell.getCellProps().style ,  backgroundColor: 'white', userSelect: 'none' }
+                      : {...cell.getCellProps().style, userSelect: 'none' }
                   }
                   className='td'> 
                     {cell.render("Cell")}
@@ -260,7 +253,7 @@ export default function Table({ columns, data, skipReset }) {
             );
           })}
           <div className='tr add-row' 
-          onClick={() => dispatch(addRows({ type: "add_row" }))}
+          onClick={() => dataDispatch(addRows({ type: "add_row" }))}
           >
             <span className='svg-icon svg-gray' style={{ marginRight: 4 }}>
               <PlusIcon />

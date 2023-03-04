@@ -126,6 +126,12 @@ export const reducers = {
           ]
         };
   },
+  updateTableData(state,payload){
+
+    return  {
+      ...state ,data : payload.payload
+    }
+  },
   updateCell(state,payload)
   {
     const action = payload.payload
@@ -149,7 +155,8 @@ export const reducers = {
       skipReset: true,
       data: [...state.data, {}]
     };
-  }
+  },
+
         
 }
 
@@ -168,7 +175,10 @@ export function extraReducers(builder) {
 
     })
     .addCase(addColumns.rejected, (state) => {
+      
       state.status = "failed";
+      // initial data ka call 
+        // bulk add call 
       // MDBToast.error("Unable to fetch jamaats.");
     })
 
@@ -178,8 +188,8 @@ export function extraReducers(builder) {
     .addCase(bulkAddColumns.fulfilled, (state, action) => {
       console.log("action", action.payload.columns)
       if (action.payload) {
-        state.columns = [...action.payload.columns];
-        state.data = [...action.payload.data];
+        state.columns = action.payload.columns;
+        state.data = action.payload.data;
       }
       state.status = "succeeded";
 
@@ -219,31 +229,9 @@ export function extraReducers(builder) {
     .addCase(addColumnsToRight.pending, (state) => {
       state.status = "loading"
     })
-    .addCase(addColumnsToRight.fulfilled, (state,action) => {
-      const actionn = state.payload;
-      if (actionn) {
-        var rightIndex = state.columns.findIndex(
-          (column) => column.id === action.columnId
-        );
-      }
-      var rightId = shortId();
-    return {
-      ...state,
-      skipReset: true,
-      columns: [
-        ...state.columns.slice(0, rightIndex + 1),
-        {
-          id: rightId,
-          label: "Column",
-          accessor: rightId,
-          dataType: "text",
-          created: action.focus && true,
-          options: []
-        },
-        ...state.columns.slice(rightIndex + 1, state.columns.length)
-      ]
-    };
-      // state.status = "succeeded";
+    .addCase(addColumnsToRight.fulfilled, (state) => {
+
+      state.status = "succeeded";
 
     })
     .addCase(addColumnsToRight.rejected, (state) => {

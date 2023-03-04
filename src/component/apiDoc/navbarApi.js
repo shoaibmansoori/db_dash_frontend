@@ -17,11 +17,11 @@ export default function Navbar() {
   const [selectTable,setSelectTable] = useState('');
   const handleChange = async (event) => {
     setSelectedOption(event.target.value);
-    console.log("event",  event.target)    
+    // console.log("event",  event.target)    
     await getAllTableName(event.target.value)
   };
   const handleChangeTable =  async (event) => {
-    console.log(event.target.value)
+    // console.log(event.target.value)
     setSelectTable(event.target.value);
   };
   const {user} = UserAuth();
@@ -31,7 +31,7 @@ export default function Navbar() {
     },[user])
     const filterDbsBasedOnOrg = async (allDbs)=>
     {
-      console.log(allDbs);
+      // console.log(allDbs);
       var result = {};
       allDbs.map((item)=>{
           result[item.org_id._id]=result[item.org_id._id]?[...result[item.org_id._id],item]:[item]
@@ -56,7 +56,7 @@ export default function Navbar() {
      const getAllTableName = async (dbId)=>{
        const data =  await getDbById(dbId)
         setTables(data.data.data.tables  || {});
-        console.log("data",data,tables);
+        // console.log("data",data,tables);
      }
     
   return (
