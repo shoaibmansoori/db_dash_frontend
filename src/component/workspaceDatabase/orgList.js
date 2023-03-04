@@ -8,9 +8,12 @@ import SingleDatabase from "./singleDatabase";
 import { createDb } from "../../api/dbApi";
 import PropTypes from "prop-types";
 import { updateOrg, deleteOrg } from "../../api/orgApi";
+// import Curl from '../apiDoc/codeSection/curl';
+
 
 
 export const OrgList = (props) => {
+
   const [name, setName] = useState(false);
   const [orgName, setOrgName] = useState();
   const [db, setDb] = useState(false);
@@ -113,6 +116,9 @@ export const OrgList = (props) => {
                   <SingleDatabase db={db} getOrgAndDbs={props?.getOrgAndDbs} />
                 </Box>
               ))}
+
+            {/* <Curl dbs={props?.dbs}/> */}
+             
 
               <Card sx={{m: 4, minWidth: 250, minHeight: 200, boxShadow: 2 ,display: "flex" ,alignItems:"center",justifyContent:"center" }}>
                

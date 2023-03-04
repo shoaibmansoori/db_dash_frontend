@@ -7,7 +7,6 @@ import { UserAuth } from "../../context/authContext.js"
 import { createOrg } from "../../api/orgApi";
 import { OrgList } from './orgList';
 import { PropTypes } from 'prop-types';
-import DbDetails from '../../pages/dbDetail'
 
 
 export default function WorkspaceCombined() {
@@ -59,11 +58,13 @@ export default function WorkspaceCombined() {
           {Object.entries(alldbs).map(([orgId, dbs]) => (
                 <Box key={orgId}>
                   <OrgList orgId={orgId} dbs ={dbs} getOrgAndDbs={getOrgAndDb} /> 
-                  <DbDetails orgId={orgId} dbs={dbs}/>
+                 
                    </Box>
+                   
                 
             ))
             }
+
          
             
           </Box>
