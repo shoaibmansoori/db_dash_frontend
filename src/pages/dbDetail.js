@@ -35,19 +35,15 @@ console.log("dblist",props)
                 </Typography>
             )}
         </Container>
-<<<<<<< HEAD
-        <Link to={{pathname: "/apiDoc/db/:dbId/table/:tableName"}} state={{data : dbData}}    >
-           
 
-=======
         <Link to={{pathname: "/apiDoc/db/:dbId/table/:tableName"}} style={{ textDecoration: "none" }}>
->>>>>>> f58b85dfde28022c23e2583560a95c739f574969
         <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
             <Button variant="contained" color="primary">APIs</Button>
         </Box>
         </Link>
         <Box align="center">
         <TablesList dbData ={dbData} />
+        {/* <Navbar data={props}/> */}
    </Box>
    <Curl dbData={dbData}/>
    </>

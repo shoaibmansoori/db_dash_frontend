@@ -9,7 +9,6 @@ import ListSubheader from '@mui/material/ListSubheader';
 import InputLabel from '@mui/material/InputLabel';
 import PropTypes from "prop-types";
 import { getDbById } from '../../api/dbApi';
-
 export default function Navbar() {
   
   const [alldbs,setAllDbs] = useState([]);
@@ -40,7 +39,6 @@ export default function Navbar() {
       setAllDbs(result);
     }
     useEffect(()=>{
-
     },[selectTable])
     
     const getOrgAndDb = async()=>
@@ -91,7 +89,6 @@ export default function Navbar() {
         )}
   </Select>
 </FormControl>
-
      </Box>
      <br></br>
      <Box >
