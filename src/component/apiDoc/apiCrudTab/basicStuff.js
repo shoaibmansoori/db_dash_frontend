@@ -25,4 +25,5 @@ BasicStuff.propTypes = {
   db: PropTypes.string,
   table:PropTypes.string
 }
+
 export default BasicStuff

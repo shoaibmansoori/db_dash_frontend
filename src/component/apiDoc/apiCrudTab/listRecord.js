@@ -1,10 +1,28 @@
 import React from 'react'
 import { PropTypes } from 'prop-types';
+import { Box } from '@mui/system';
+// import { getTable } from '../../../api/tableApi'
 
 function ListRecord(props) {
+
+    // const tableData = async ()=>{
+    //   const temp = await getTable(props.db,props.table)
+    //   console.log("temp",temp);
+    // }
+  
+    // useEffect(()=>{
+    //   tableData();
+    // })
+
   console.log("ListRecord Props : ",props);
   return (
+    <>
     <div>List Record</div>
+    <Box>
+    {
+      `curl "https://localhost:5000/${props.db}/${props.table}"`}
+    </Box>
+    </>
   )
 }
 ListRecord.propTypes = {
