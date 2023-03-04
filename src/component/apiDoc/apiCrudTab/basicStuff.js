@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { PropTypes } from 'prop-types';
 import { getTable } from '../../../api/tableApi';
-
+import CodeSnippet from '../codeSnippet';
  function BasicStuff(props) {
   console.log("BasicStuff Props : ",props);
   const tableData = async ()=>{
@@ -14,7 +14,10 @@ import { getTable } from '../../../api/tableApi';
   })
 
   return (
+   <>
     <div>Basic Stuff</div>
+    <CodeSnippet codeString="const myVar = 'Hello, world!';" />
+   </>
   )
 }
 
