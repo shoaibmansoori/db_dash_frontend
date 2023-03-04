@@ -12,6 +12,7 @@ import PropTypes from "prop-types";
 
 
 export const OrgList = (props) => {
+
   const [name, setName] = useState(false);
   const [orgName, setOrgName] = useState();
   const [db, setDb] = useState(false);
@@ -115,7 +116,10 @@ export const OrgList = (props) => {
                 </Box>
               ))}
 
-              <Card sx={{m: 4, minWidth: 250, minHeight: 200, boxShadow: 2 ,display: "flex" ,alignItems:"center",justifyContent:"center", ':hover': {boxShadow: '7' , cursor:'pointer'} }}>
+            {/* <Curl dbs={props?.dbs}/> */}
+             
+
+              <Card sx={{m: 4, minWidth: 250, minHeight: 200, boxShadow: 2 ,display: "flex" ,alignItems:"center",justifyContent:"center" }}>
                
                   {/* <Button 
                     onClick={(e) => {

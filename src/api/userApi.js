@@ -34,6 +34,7 @@ const deleteUser = async (id) =>
 
 const findUserByEmail = async (email) =>
 {
+    console.log(URL + `/users/email/${email}`);
     return await axios.get(URL + `/users/email/${email}`);
 }
 
