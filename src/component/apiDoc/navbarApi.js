@@ -47,11 +47,7 @@ export default function Navbar() {
       localStorage.setItem("userid",data?.data?.data?._id);
       filterDbsBasedOnOrg(data?.data?.data?.dbs)
     }
-    // useEffect(() => {
-    //   if(props?.dbData)
-    //   getAllTableName(dbData?.db?._id)
-      
-    //  },[props]);
+    
       
      const getAllTableName = async (dbId)=>{
        const data =  await getDbById(dbId)
@@ -93,6 +89,8 @@ export default function Navbar() {
      <br></br>
      <Box >
      { console.log(tables)}
+     <FormControl sx={{ m: 1, minWidth: 120 }}>
+     <InputLabel htmlFor="grouped-select">Tables</InputLabel>
          <Select  value={selectTable}
     onChange={handleChangeTable} >
          { Object.entries(tables)?.map((table) => (
@@ -101,6 +99,7 @@ export default function Navbar() {
           </MenuItem>   
          ))}
          </Select>
+         </FormControl>
      </Box>
      <Box>
       <ApiCrudTablist/>
