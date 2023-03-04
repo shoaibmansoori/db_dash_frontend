@@ -1,10 +1,12 @@
-import * as React from "react";
+import React from "react";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import PropTypes from "prop-types";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
+
+
 // import { createOrg } from "../api/orgApi";
 
 const style = {
@@ -25,7 +27,7 @@ export default function PopupModal(props) {
 
   return (
     <Box>
-      <Modal
+      <Modal 
         open={props.open}
         onClose={handleClose}
         aria-labelledby="modal-modal-title"
@@ -36,7 +38,9 @@ export default function PopupModal(props) {
             {props.title}
           </Typography>
           <Box sx={{ my: 2 }}>
+
             <TextField 
+             autoFocus
               id={props?.id}
               name={props?.id}
               label={props.label} 
@@ -44,7 +48,6 @@ export default function PopupModal(props) {
               onChange={(e) => {
                 props.setVariable(e.target.value);
               }}
-              autoFocus
               onKeyDown={(e) => {
                 if (e.key === 'Enter') {
                   props.saveFunction(e);
@@ -53,7 +56,6 @@ export default function PopupModal(props) {
               }}
             />
 
-  
           </Box>
           <Box sx={{ display: "flex", justifyContent: "space-between" }}>
             <Box>
@@ -82,5 +84,4 @@ PopupModal.propTypes = {
   saveFunction:PropTypes.func,
   setVariable:PropTypes.func,
   id: PropTypes.string
-
 };
