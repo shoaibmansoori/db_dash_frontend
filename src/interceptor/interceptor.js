@@ -2,10 +2,10 @@ import axios from "axios";
 //request interceptor
 axios.interceptors.request.use(
   async (config) => {
-    // const token = localStorage.getItem("accessToken");
-    // if (token) {
-    //   config.headers["Authorization"] = token;
-    // }
+    const token = localStorage.getItem("accessToken");
+    if (token) {
+      config.headers["Authorization"] = token;
+    }
     return config;
   },
   (error) => {

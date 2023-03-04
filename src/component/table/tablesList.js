@@ -102,18 +102,14 @@ export default function TablesList (props ) {
       <Button onClick={handleOpen}  variant="contained" >Add Table</Button>
       <PopupModal title="create table" label="Table Name"   open={open} setOpen ={setOpen} saveFunction = {saveTable}  setVariable={setTable}/>
       </Box>
-<<<<<<< HEAD
       <MainTable/>
-=======
-       
->>>>>>> 61c4002c9b31670dad4e57d9682f8e5448c05a4d
     </Box>
     
   );
 }
 TablesList.propTypes = {
-    dbData: PropTypes.any,
-    dbId: PropTypes.string,
+  dbData: PropTypes.any,
+  dbId: PropTypes.string,
     orgId: PropTypes.string,
 };
 

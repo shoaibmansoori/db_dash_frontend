@@ -4,11 +4,15 @@ import {Box,Button, Typography, Container } from "@mui/material";
 import { useLocation } from "react-router-dom";
 import TablesList from "../component/table/tablesList";
 import { Link } from 'react-router-dom'
+import Curl from "../component/table/curl";
 
 
 function DbDetails(props) {
+console.log("dblist",props)
+
     const location = useLocation();
     const [dbData, setDbData] = useState(null);
+    console.log("db",dbData)
 
     useEffect(() => {   
         if (location?.state) {
@@ -31,16 +35,17 @@ function DbDetails(props) {
                 </Typography>
             )}
         </Container>
-        <Link to={{pathname: "/apiDoc/db/:dbId/table/:tableName"}} state={{data : dbData}}    >
-           
 
+        <Link to={{pathname: "/apiDoc/db/:dbId/table/:tableName"}} style={{ textDecoration: "none" }}>
         <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
             <Button variant="contained" color="primary">APIs</Button>
         </Box>
         </Link>
         <Box align="center">
         <TablesList dbData ={dbData} />
+        {/* <Navbar data={props}/> */}
    </Box>
+   <Curl dbData={dbData}/>
    </>
     );
 }

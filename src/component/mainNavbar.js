@@ -2,12 +2,19 @@ import React from 'react';
 import {Box, Toolbar, IconButton, Typography, Menu, Container, Avatar, Tooltip, MenuItem,  Divider} from '@mui/material';
 import { UserAuth } from "../context/authContext.js"
 import { Link, useNavigate } from 'react-router-dom';
+// import { useDispatch } from 'react-redux';
+// import { saveUser } from '../store/user/userThunk.js';
 // import PropTypes from 'prop-types';
 // import { useLocation } from 'react-router-dom';
 
 
 function MainNavbar() {
+  // const dispatch=useDispatch()
+
   const user = UserAuth();
+  // dispatch(saveUser(user));  
+
+  // console.log(user);
   const logOut = user?.logOut;
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const navigate = useNavigate();
@@ -33,6 +40,8 @@ function MainNavbar() {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
+
+
 
   return (
     <Container sx={{bgcolor: "#212529", height: '55px'}} maxWidth="false" >
