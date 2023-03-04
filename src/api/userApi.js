@@ -7,6 +7,15 @@ const signUpUser = async (data)=>
     return await axios.post(URL +"/users" ,data );
 }
 
+
+const loginUser = async (email) => {
+    return await axios.post(URL + "/users/login", email);
+  }
+  const getCurrentUser = async () => {
+    return await axios.get(URL + "/users/profile/me");
+  }
+  
+
 const createUser = async (data)=>
 {
     return await axios.post(URL + "/users",data);
@@ -47,5 +56,7 @@ export {
     getUserById,
     updateUser,
     deleteUser,
-    findUserByEmail
+    findUserByEmail,
+    loginUser,
+    getCurrentUser
 }

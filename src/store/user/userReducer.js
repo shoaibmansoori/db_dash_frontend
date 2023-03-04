@@ -8,7 +8,8 @@ export const initialState = {
     userFirstName:"",
     userLastName:"",
     userEmail:"",
-    userProfilePic:""
+    userProfilePic:"",
+    userId:""
 };
 
 export const reducers = {
@@ -16,24 +17,25 @@ export const reducers = {
       console.log(payload);
 
         if(payload.payload){
-            const {displayName,email,}=payload.payload;
-            state.userFirstName=displayName;
-            // state.userLastName=last_name;
-            state.userEmail=email;
-            state.userProfilePic=displayName;
-            state.userLogIn=true;
-            state.userLogOut=false;
+          const {first_name,last_name,id,email,profile_pic}=payload.payload;
+          state.userFirstName=first_name;
+          state.userLastName=last_name;
+          state.userId=id;
+          state.userEmail=email;
+          state.userProfilePic=profile_pic;
+          state.userLogIn=true;
+          state.userLogOut=false;
         }
         // console.log(current(state));
     },
     remove(state){
-
-            state.userFirstName='';
-            state.userLastName='';
-            state.userEmail='';
-            // state.userProfilePic='';
-            state.userLogIn=false;
-            state.userLogOut=true;
+      state.userFirstName='';
+      state.userLastName='';
+      state.userId='';
+      state.userEmail='';
+      state.userProfilePic='';
+      state.userLogIn=false;
+      state.userLogOut=true;
 
     }
   
