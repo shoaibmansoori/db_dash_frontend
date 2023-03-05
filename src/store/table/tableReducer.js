@@ -1,6 +1,6 @@
 import { current } from '@reduxjs/toolkit';
-import { addColumns, addColumnsToRight, bulkAddColumns,updateCells,addRows, deleteColumns, updateColumnHeaders,addColumsToLeft } from './tableThunk.js';
-import { shortId } from "../../table/utils";
+import { addColumns, addColumnsToRight, bulkAddColumns, updateColumnsType,updateCells, addRows, deleteColumns, updateColumnHeaders, addColumsToLeft } from './tableThunk.js';
+import { randomColor, shortId } from "../../table/utils";
 
 
 export const initialState = {
@@ -100,40 +100,38 @@ export const reducers = {
       ]
     };
   },
-  addColumnToLeft(state,payload){
+  addColumnToLeft(state, payload) {
     const action = payload.payload;
-    if(action)
-    {
+    if (action) {
       var leftIndex = state.columns.findIndex(
-           (column) => column.id === action.columnId
-         );
+        (column) => column.id === action.columnId
+      );
     }
-        var leftId = shortId();
-        return {
-          ...state,
-          skipReset: true,
-          columns: [
-            ...state.columns.slice(0, leftIndex),
-            {
-              id: leftId,
-              label: "Column",
-              accessor: leftId,
-              dataType: "text",
-              created: action.focus && true,
-              options: []
-            },
-            ...state.columns.slice(leftIndex, state.columns.length)
-          ]
-        };
+    var leftId = shortId();
+    return {
+      ...state,
+      skipReset: true,
+      columns: [
+        ...state.columns.slice(0, leftIndex),
+        {
+          id: leftId,
+          label: "Column",
+          accessor: leftId,
+          dataType: "text",
+          created: action.focus && true,
+          options: []
+        },
+        ...state.columns.slice(leftIndex, state.columns.length)
+      ]
+    };
   },
-  updateTableData(state,payload){
+  updateTableData(state, payload) {
 
-    return  {
-      ...state ,data : payload.payload
+    return {
+      ...state, data: payload.payload
     }
   },
-  updateCell(state,payload)
-  {
+  updateCell(state, payload) {
     const action = payload.payload
     return {
       ...state,
@@ -149,15 +147,109 @@ export const reducers = {
       })
     };
   },
-  addRow(state){
+  addRow(state) {
     return {
       ...state,
       skipReset: true,
       data: [...state.data, {}]
     };
   },
+  updateColumnType(state, payload) {
+    const action = payload.payload
+    if (action) {
+      var typeIndex = state.columns.findIndex(
+        (column) => column.id === action.columnId
+      );
+    }
 
-        
+    switch (action.dataType) {
+      case "number":
+        if (state.columns[typeIndex].dataType === "number") {
+          return state;
+        } else {
+          return {
+            ...state,
+            columns: [
+              ...state.columns.slice(0, typeIndex),
+              { ...state.columns[typeIndex], dataType: action.dataType },
+              ...state.columns.slice(typeIndex + 1, state.columns.length)
+            ],
+            data: state.data.map((row) => ({
+              ...row,
+              [action.columnId]: isNaN(row[action.columnId])
+                ? ""
+                : Number.parseInt(row[action.columnId])
+            }))
+          };
+        }
+      case "select":
+        if (state.columns[typeIndex].dataType === "select") {
+          return {
+            ...state,
+            columns: [
+              ...state.columns.slice(0, typeIndex),
+              { ...state.columns[typeIndex], dataType: action.dataType },
+              ...state.columns.slice(typeIndex + 1, state.columns.length)
+            ],
+            skipReset: true
+          };
+        } else {
+          let options = [];
+          state.data.forEach((row) => {
+            if (row[action.columnId]) {
+              options.push({
+                label: row[action.columnId],
+                backgroundColor: randomColor()
+              });
+            }
+          });
+          return {
+            ...state,
+            columns: [
+              ...state.columns.slice(0, typeIndex),
+              {
+                ...state.columns[typeIndex],
+                dataType: action.dataType,
+                options: [...state.columns[typeIndex].options, ...options]
+              },
+              ...state.columns.slice(typeIndex + 1, state.columns.length)
+            ],
+            skipReset: true
+          };
+        }
+      case "text":
+        if (state.columns[typeIndex].dataType === "text") {
+          return state;
+        } else if (state.columns[typeIndex].dataType === "select") {
+          return {
+            ...state,
+            skipReset: true,
+            columns: [
+              ...state.columns.slice(0, typeIndex),
+              { ...state.columns[typeIndex], dataType: action.dataType },
+              ...state.columns.slice(typeIndex + 1, state.columns.length)
+            ]
+          };
+        } else {
+          return {
+            ...state,
+            skipReset: true,
+            columns: [
+              ...state.columns.slice(0, typeIndex),
+              { ...state.columns[typeIndex], dataType: action.dataType },
+              ...state.columns.slice(typeIndex + 1, state.columns.length)
+            ],
+            data: state.data.map((row) => ({
+              ...row,
+              [action.columnId]: row[action.columnId] + ""
+            }))
+          };
+        }
+      default:
+        return state;
+    }
+  }
+
 }
 
 
@@ -175,10 +267,10 @@ export function extraReducers(builder) {
 
     })
     .addCase(addColumns.rejected, (state) => {
-      
+
       state.status = "failed";
       // initial data ka call 
-        // bulk add call 
+      // bulk add call 
       // MDBToast.error("Unable to fetch jamaats.");
     })
 
@@ -272,6 +364,18 @@ export function extraReducers(builder) {
 
     })
     .addCase(addRows.rejected, (state) => {
+      state.status = "failed";
+      // MDBToast.error("Unable to fetch jamaats.");
+    })
+
+    .addCase(updateColumnsType.pending, (state) => {
+      state.status = "loading"
+    })
+    .addCase(updateColumnsType.fulfilled, (state) => {
+      state.status = "succeeded";
+
+    })
+    .addCase(updateColumnsType.rejected, (state) => {
       state.status = "failed";
       // MDBToast.error("Unable to fetch jamaats.");
     })

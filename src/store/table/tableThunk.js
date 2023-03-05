@@ -2,7 +2,7 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 
 
 // reducer imports
-import { addColumnToLeft, addColumnToRight, addOptionToColumn,addRow,deleteColumn,updateCell,updateColumnHeader} from "./tableSlice";
+import { addColumnToLeft, addColumnToRight, addOptionToColumn,addRow,deleteColumn,updateCell,updateColumnHeader, updateColumnType} from "./tableSlice";
 
 export const addColumns = createAsyncThunk(
     "table/addColumns",
@@ -68,6 +68,15 @@ export const addRows = createAsyncThunk(
     async(payload,{dispatch})=>{
         
         dispatch(addRow(payload));
+        return payload;
+    }
+)
+
+export const updateColumnsType = createAsyncThunk(
+    "table/updateColumnsType",
+    async(payload,{dispatch})=>{
+        
+        dispatch(updateColumnType(payload));
         return payload;
     }
 )

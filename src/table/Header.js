@@ -13,13 +13,13 @@ import PlusIcon from "./img/Plus";
 import { useDispatch } from "react-redux";
 import {shortId} from "./utils";
 import PropTypes from 'prop-types';
-import { addColumnsToRight, addColumsToLeft, deleteColumns, updateColumnHeaders } from "../store/table/tableThunk";
+import { addColumnsToRight, addColumsToLeft, deleteColumns, updateColumnHeaders, updateColumnsType } from "../store/table/tableThunk";
 
 
 export default function Header({
   column: {id, created, label, dataType, getResizerProps, getHeaderProps},
   setSortBy,
-  dataDispatch
+  // dispatch:dataDispatch
 }) {
   const dispatch=useDispatch();
   const [expanded, setExpanded] = useState(created || false);
@@ -116,7 +116,11 @@ export default function Header({
   const types = [
     {
       onClick: () => {
-        dataDispatch({type: "update_column_type", columnId: id, dataType: "select"});
+        // dataDispatch({type: "update_column_type", columnId: id, dataType: "select"});
+        dispatch(updateColumnsType({
+          columnId: id, 
+          dataType: "select"
+        }))
         setShowType(false);
         setExpanded(false);
       },
@@ -125,7 +129,11 @@ export default function Header({
     },
     {
       onClick: () => {
-        dataDispatch({type: "update_column_type", columnId: id, dataType: "text"});
+        // dataDispatch({type: "update_column_type", columnId: id, dataType: "text"});
+        dispatch(updateColumnsType({
+          columnId: id, 
+          dataType: "text"
+        }))
         setShowType(false);
         setExpanded(false);
       },
@@ -134,7 +142,11 @@ export default function Header({
     },
     {
       onClick: () => {
-        dataDispatch({type: "update_column_type", columnId: id, dataType: "number"});
+        // dataDispatch({type: "update_column_type", columnId: id, dataType: "number"});
+        dispatch(updateColumnsType({
+          columnId: id, 
+          dataType: "number"
+        }))
         setShowType(false);
         setExpanded(false);
       },
