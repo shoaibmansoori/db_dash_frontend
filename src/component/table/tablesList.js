@@ -6,9 +6,9 @@ import { createTable } from '../../api/tableApi';
 import { getDbById } from '../../api/dbApi';
 import PropTypes from "prop-types";
 import MainTable from '../../table/mainTable';
-import { addColumns } from '../../store/table/tableThunk';
-import { useDispatch } from 'react-redux';
-
+import { addColumns, bulkAddColumns } from '../../store/table/tableThunk';
+import { useDispatch } from "react-redux";
+// import makeData from "";
 
 export default function TablesList (props ) {
   const [tables, setTables] = useState({});
@@ -64,7 +64,14 @@ export default function TablesList (props ) {
     <Box sx={{ display: 'flex', flexDirection: 'row', gap: '1px', flexWrap: 'wrap' }}>
 
       { Object.entries(tables).map((table, index) => (
+        
         <Box
+        onClick={() => { 
+          dispatch(bulkAddColumns({
+            "dbId":props.dbData.db._id,
+            "tableName":table[0]
+          }));
+         }}
           key={index}
           sx={{
             p: '6px',

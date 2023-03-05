@@ -30,9 +30,9 @@ export default function makeData(count) {
       accessor : "checkbox",
     },
     {
-      id: "firstName",
-      label: "First Name",
-      accessor: "firstName",
+      id: "name",
+      label: "name",
+      accessor: "name",
       minWidth: 100,
       dataType: "text",
       options: []

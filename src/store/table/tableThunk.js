@@ -1,5 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-
+import { getTable } from "../../api/tableApi";
+import makeData from "../../table/makeData"
 
 // reducer imports
 import { addColumnToLeft, addColumnToRight, addOptionToColumn,addRow,deleteColumn,updateCell,updateColumnHeader, updateColumnType} from "./tableSlice";
@@ -15,10 +16,18 @@ export const addColumns = createAsyncThunk(
 
 export const bulkAddColumns = createAsyncThunk(
     "table/bulkAddColumns",
-    async (payload) =>{
+    async (payload) =>{      
         console.log("thunk",payload)
+        const makeDataa = makeData(5)
+        console.log(makeDataa)
+        const data = await getTable(payload.dbId,payload.tableName)
+        console.log(data.data.data.tableData)
+        const dataa = {
+            "colums":makeDataa,
+            "row":data.data.data.tableData
+        }
         // dispatch(bulkAdd(payload));  
-        return payload;
+        return dataa;
     }
 ) ;
 

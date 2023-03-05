@@ -50,12 +50,12 @@ function MainTable() {
             marginRight: "auto"
           }}
         >
-          <Table
+          {tableInfo?.data?.length>1 && <Table
             columns={tableInfo.columns}
             data={tableInfo.data}
             dispatch={dispatchs}
             skipReset={tableInfo.skipReset}
-          />
+          />}
         </div>
       </div>
       <div

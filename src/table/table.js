@@ -5,12 +5,10 @@ import Cell from "./Cell";
 import Header from "./Header";
 import PlusIcon from "./img/Plus";
 import PropTypes from 'prop-types';
-// import { useDispatch } from "react-redux";
 import { cloneDeep } from "lodash";
 import { useCellRangeSelection } from 'react-table-plugins'
 import { addRows } from "../store/table/tableThunk";
 import { updateTableData } from "../store/table/tableSlice";
-// import useScrollOnEdges from 'react-scroll-on-edges'
 
 const defaultColumn = {
   minWidth: 50,
@@ -24,14 +22,10 @@ const defaultColumn = {
 export default function Table({ columns, data,dispatch:dataDispatch, skipReset }) {
   console.log("clumns ",columns);
   console.log("data ",data);
-  // const dispatch=useDispatch();
 
-  // console.log(dataDispatch);
   const [selectedRange, setSelectedRange] = useState({});  
   console.log(selectedRange);
 
-  // const [selectedCells, setSelectedCells] = useState([]);
-  // const [copiedValue, setCopiedValue] = useState('');
   const handleCopy = (event, value) => {
     event.clipboardData.setData('text/plain', value);
     event.preventDefault();
@@ -39,21 +33,11 @@ export default function Table({ columns, data,dispatch:dataDispatch, skipReset }
   };
   const handlePaste = (event,row,cell) => {
     event.preventDefault();
-    // const clipboardData = event.clipboardData.getData('text/plain');
-    // const copiedValue =  event.clipboardData.setData('text/plain', value);
-    // if (clipboardData !== copiedValue) {
-      // handle paste logic here
       const text = event.clipboardData.getData('text/plain');
-      // console.log("text",text);
        const newData = cloneDeep(data);
-      //  console.log("newdata",newData);
-      //  console.log("column id",newData[row][cell.column.id]);
        newData[row][cell.column.id] = text.trim();
-      //  console.log("new data",newData);
-// }
 
     dataDispatch(updateTableData(newData))
-    // dataDispatch({type:"update_cell"})
   };
 
   const sortTypes = useMemo(
@@ -82,9 +66,6 @@ export default function Table({ columns, data,dispatch:dataDispatch, skipReset }
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow, selectedFlatRows,
     state: { selectedCellIds, currentSelectedCellIds  },
      
-    // getCellsBetweenId,
-    // setSelectedCellIds,
-    // cellsById
   } = useTable(
     {
       columns,
@@ -122,26 +103,12 @@ export default function Table({ columns, data,dispatch:dataDispatch, skipReset }
       })
       console.log(newData);
       dataDispatch(updateTableData(newData))
-      // datadataDispatch({ type: "update_cell" })
       
     }
   }, [selectedCellIds])
 
   let cellsSelected = { ...currentSelectedCellIds, ...selectedCellIds }
 
-  // returns two random cell ids, this is just for the demo.
-    // const getRandomCellIds = React.useCallback(() => {
-    //   let cloneCellIds = Object.keys(cellsById)
-    //   let randomCellId = () =>
-    //     cloneCellIds[(cloneCellIds.length * Math.random()) << 0]
-    //   return [randomCellId(), randomCellId()]
-    // }, [cellsById])
-
-  // getCellsBetweenId returns all cell Ids between two cell Id, and then setState for selectedCellIds
-  // const selectRandomCells = React.useCallback(() => {
-  //   const cellsBetween = getCellsBetweenId(...getRandomCellIds())
-  //   setSelectedCellIds(cellsBetween)
-  // }, [getCellsBetweenId, setSelectedCellIds, getRandomCellIds])
 
   const handleCellMouseDown = (rowIndex, columnIndex) => {
     setSelectedRange({
@@ -163,13 +130,6 @@ export default function Table({ columns, data,dispatch:dataDispatch, skipReset }
     });
   };
 
-  // const selectedRowIds = useMemo(() => selectedFlatRows.map((row) =>{
-    
-  //   return (
-  //     row
-  //   )
-  // }
-  // ), [selectedFlatRows]);
   function isTableResizing() {
     for (let headerGroup of headerGroups) {
       for (let column of headerGroup.headers) {
@@ -181,11 +141,8 @@ export default function Table({ columns, data,dispatch:dataDispatch, skipReset }
 
     return false;
   }
-  // const getEdgeScrollingProps = useScrollOnEdges({
-  //   canAnimate: isSelectingCells // Scroll when user `isSelectingCells` is True
-  //   // scrollSpeed: 15, -> Optional, default is 12,
-  //   // edgeSize: 30     -> Optional, default is 25
-  // })
+  
+  
 
   return (
     <>
@@ -223,7 +180,6 @@ export default function Table({ columns, data,dispatch:dataDispatch, skipReset }
                 }
               }>
                 {row.cells.map((cell,columnIndex) => {
-                  // console.log("cell.getCellProps().key",cell.getCellProps())
                   return (
                     
                     <div key={columnIndex}

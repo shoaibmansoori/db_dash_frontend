@@ -5,9 +5,7 @@ import { useLocation } from "react-router-dom";
 import TablesList from "../component/table/tablesList";
 import { Link } from 'react-router-dom'
 import Curl from "../component/table/curl";
-import { bulkAddColumns } from "../store/table/tableThunk";
-import { useDispatch } from "react-redux";
-import makeData from "../table/makeData";
+
 
 
 function DbDetails(props) {
@@ -16,16 +14,13 @@ function DbDetails(props) {
     const location = useLocation();
     const [dbData, setDbData] = useState(null);
     // console.log("db",dbData)
-    const dispatchs=useDispatch();
+    // const dispatchs=useDispatch();
     const getData=()=>{
       console.log("dvnjf,vjb ")
-       dispatchs(bulkAddColumns(makeData(10)));
+    //    dispatchs(bulkAddColumns(makeData(10)));
     }
    
     useEffect(() => {
-      // console.log(dispatch)
-      // dispatch({ type: "enable_reset" });
-      // const data = dispatchs(bulkAddColumns(makeData(10)));
       console.log("dabv bta")
       getData();
     },[]);

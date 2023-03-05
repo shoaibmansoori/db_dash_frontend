@@ -7,12 +7,17 @@ import { UserAuth } from "../../context/authContext.js"
 import { createOrg } from "../../api/orgApi";
 import { OrgList } from './orgList';
 import { PropTypes } from 'prop-types';
+// import makeData from "../../table/makeData"
+// import { bulkAddColumns } from '../../store/table/tableThunk';
+// import { Dispatch } from 'react';
+// import { useDispatch } from "react-redux";
 
 
 export default function WorkspaceCombined() {
               
     const {user} = UserAuth();
     const [alldbs,setAllDbs] = useState([]);
+    // const dispatchs=useDispatch();
 
     //state to display modal
     const [org, setOrg] = useState();
@@ -20,6 +25,7 @@ export default function WorkspaceCombined() {
     const handleOpen = () => setOpen(true);
 
     useEffect(()=>{
+      // dispatchs(bulkAddColumns(makeData(10)));
     if(user?.email)
       getOrgAndDb();
     },[user])
