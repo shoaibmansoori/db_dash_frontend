@@ -1,12 +1,12 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { getAllfields } from "../../api/fieldApi";
+import { createField, getAllfields } from "../../api/fieldApi";
 import { getTable } from "../../api/tableApi";
-import makeData from "../../table/makeData"
 
 // reducer imports
 import { addColumnToLeft, addColumnToRight, addOptionToColumn,addRow,deleteColumn,updateCell,updateColumnHeader, updateColumnType} from "./tableSlice";
 const getHeaders = async(dbId,tableName) =>{
     const fields = await getAllfields(dbId,tableName);
+    console.log("getHeaders",fields)
     let columns = [
         {
             id: 9999991,
@@ -19,18 +19,20 @@ const getHeaders = async(dbId,tableName) =>{
     ]
    
    Object.entries(fields.data.data.fields).forEach( (field) =>{
-    var json = {
-        id: "",
+    console.log("field",field)
+       var json = {
+           id: "",
         label: "",
         accessor: "",
         minWidth: 100,
         dataType: "",
         options: []
     }
-        json.id = field[0];
-        json.label = json.accessor = field[1].name;
-        json.dataType = field[1].fieldType
-        columns.push (json);
+    json.id = field[0];
+    json.label = json.accessor = field[1].name?.toLowerCase() || field[0]?.toLowerCase();
+    json.dataType = field[1].fieldType
+    columns.push (json);
+    console.log("json",json)
     }
     )
     columns.push({
@@ -42,10 +44,12 @@ const getHeaders = async(dbId,tableName) =>{
     })
     return columns;
 }
+
+
 export const addColumns = createAsyncThunk(
     "table/addColumns",
     async (payload,{dispatch}) =>{
-        // console.log("thunk",payload)
+        console.log("addColumns")
         dispatch(addOptionToColumn(payload));
         return 5;
     }
@@ -54,17 +58,16 @@ export const addColumns = createAsyncThunk(
 export const bulkAddColumns = createAsyncThunk(
     "table/bulkAddColumns",
     async (payload) =>{      
-        console.log("thunk",payload)
-        const makeDataa = makeData(5)
-        console.log(makeDataa)
+        console.log("thunkkkkk")
         const columns =  await getHeaders(payload.dbId,payload.tableName)
+        console.log("grfvd",columns)
         const data = await getTable(payload.dbId,payload.tableName)
-        console.log(data.data.data.tableData)
         const dataa = {
             "columns":columns,
-            "row":data.data.data.tableData
+            "row":data.data.data.tableData,
+            "tableId":payload.tableName,
+            "dbId":payload.dbId
         }
-        // dispatch(bulkAdd(payload));  
         return dataa;
     }
 ) ;
@@ -72,7 +75,8 @@ export const bulkAddColumns = createAsyncThunk(
 export const deleteColumns = createAsyncThunk(
     "table/deleteColumns",
     async(payload,{dispatch})=>{
-        console.log("in dlete colujns")
+        console.log("deleteColumns")
+
         //delte api call 
         dispatch(deleteColumn(payload));
         // return response of api;
@@ -81,6 +85,8 @@ export const deleteColumns = createAsyncThunk(
 export const updateColumnHeaders = createAsyncThunk(
     "table/updateColumnHeaders",
     async(payload,{dispatch})=>{
+        console.log("updateColumnHeaders")
+
         dispatch(updateColumnHeader(payload));
         return 2;
     }
@@ -89,6 +95,8 @@ export const updateColumnHeaders = createAsyncThunk(
 export const addColumnsToRight = createAsyncThunk(
     "table/addColumnsToRight",
     async(payload,{dispatch})=>{
+        console.log("addColumnsToRight")
+
         dispatch(addColumnToRight(payload));
         return payload;
     }
@@ -97,6 +105,13 @@ export const addColumnsToRight = createAsyncThunk(
 export const addColumsToLeft = createAsyncThunk(
     "table/addColumsToLeft",
     async(payload,{dispatch})=>{
+        console.log("addColumsToLeft",payload)
+        const data={
+            fieldName:payload?.fieldName,
+            fieldType:payload?.fieldType
+        }
+        const addField = await createField(payload?.dbId,payload?.tableId,data);
+        console.log("addField",addField)
         dispatch(addColumnToLeft(payload));
         return payload;
     }

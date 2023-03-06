@@ -6,6 +6,8 @@ import { randomColor, shortId } from "../../table/utils";
 export const initialState = {
   columns: [],
   data: [],
+  tableId:[],
+  dbId:[],
   skipReset: false,
   status: "idle",
 };
@@ -115,7 +117,7 @@ export const reducers = {
         ...state.columns.slice(0, leftIndex),
         {
           id: leftId,
-          label: "Column",
+          label: action?.fieldName,
           accessor: leftId,
           dataType: "text",
           created: action.focus && true,
@@ -281,6 +283,8 @@ export function extraReducers(builder) {
       if (action.payload) {
         state.columns = action.payload.columns;
         state.data = action.payload.row;
+        state.tableId = action.payload.tableId;
+        state.dbId = action.payload.dbId
       }
       state.status = "succeeded";
 

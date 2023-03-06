@@ -17,11 +17,9 @@ export default function Navbar() {
   const [selectTable,setSelectTable] = useState('');
   const handleChange = async (event) => {
     setSelectedOption(event.target.value);
-    // console.log("event",  event.target)    
     await getAllTableName(event.target.value)
   };
   const handleChangeTable =  async (event) => {
-    // console.log(event.target.value)
     setSelectTable(event.target.value);
   };
   const {user} = UserAuth();
@@ -31,7 +29,6 @@ export default function Navbar() {
     },[user])
     const filterDbsBasedOnOrg = async (allDbs)=>
     {
-      // console.log(allDbs);
       var result = {};
       allDbs.map((item)=>{
           result[item.org_id._id]=result[item.org_id._id]?[...result[item.org_id._id],item]:[item]
@@ -47,22 +44,15 @@ export default function Navbar() {
       localStorage.setItem("userid",data?.data?.data?._id);
       filterDbsBasedOnOrg(data?.data?.data?.dbs)
     }
-    // useEffect(() => {
-    //   if(props?.dbData)
-    //   getAllTableName(dbData?.db?._id)
-      
-    //  },[props]);
       
      const getAllTableName = async (dbId)=>{
        const data =  await getDbById(dbId)
         setTables(data.data.data.tables  || {});
-        // console.log("data",data,tables);
      }
     
   return (
     <>
     <Box align="center">
-        {/* <navbarApi/> */}
         <Box sx={{ display: 'flex', justifyContent: 'center' ,alignItems:'center'}}>
             <Button variant="contained" color="primary">APIs Documentation</Button>
             <Button variant="contained" color="primary">Auth Key</Button>
@@ -92,7 +82,6 @@ export default function Navbar() {
      </Box>
      <br></br>
      <Box >
-     { console.log(tables)}
          <Select  value={selectTable}
     onChange={handleChangeTable} >
          { Object.entries(tables)?.map((table) => (

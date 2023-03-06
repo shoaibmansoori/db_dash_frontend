@@ -20,8 +20,6 @@ const defaultColumn = {
 };
 
 export default function Table({ columns, data,dispatch:dataDispatch, skipReset }) {
-  console.log("clumns ",columns);
-  console.log("data ",data);
 
   const [selectedRange, setSelectedRange] = useState({});  
   console.log(selectedRange);
@@ -63,7 +61,7 @@ export default function Table({ columns, data,dispatch:dataDispatch, skipReset }
     []
   );
 
-  const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow,
+  const { getTableProps, getTableBodyProps, headerGroups,rows, prepareRow,
     //  selectedFlatRows,
     state: { selectedCellIds, currentSelectedCellIds  },
      
@@ -148,6 +146,7 @@ export default function Table({ columns, data,dispatch:dataDispatch, skipReset }
   return (
     <>
       <pre>
+        {/* <Header/> */}
         <code>
           {/* {JSON.stringify(
             {

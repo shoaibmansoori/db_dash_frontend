@@ -12,7 +12,7 @@ function MainTable() {
     console.log("hello");
 },[]);
   const tableInfo=useSelector((state)=>getTableInfo(state));
-
+  console.log("tableInfo",tableInfo.columns)
   // const [state, dispatch] = useReducer(reducer,tableInfo);
   const dispatchs = useDispatch();
   

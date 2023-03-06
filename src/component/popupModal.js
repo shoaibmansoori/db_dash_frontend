@@ -21,6 +21,7 @@ const style = {
 
 export default function PopupModal(props) {
   // const [org, setOrg] = React.useState();
+
   const handleClose = () => props.setOpen(false);
 
   return (
@@ -57,7 +58,10 @@ export default function PopupModal(props) {
           </Box>
           <Box sx={{ display: "flex", justifyContent: "space-between" }}>
             <Box>
-              <Button variant="contained" onClick={(e)=>{props?.saveFunction (e)}}>
+              <Button variant="contained" onClick={()=>{
+                  // props?.saveFunction ();
+                  props?.submitData();
+              }}>
                 Create
               </Button>
             </Box>
@@ -81,6 +85,7 @@ PopupModal.propTypes = {
   label: PropTypes.string,
   saveFunction:PropTypes.func,
   setVariable:PropTypes.func,
-  id: PropTypes.string
-
+  id: PropTypes.string,
+  submitData: PropTypes.func,
+  variable:PropTypes.string
 };

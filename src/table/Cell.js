@@ -47,7 +47,6 @@ export default function Cell({value: initialValue, row, column: {id, dataType, o
         //   backgroundColor: randomColor(),
         //   columnId: id
         // });
-        // console.log(1)
         dispatch(addColumns({
           option: e.target.value,
           backgroundColor: randomColor(),
