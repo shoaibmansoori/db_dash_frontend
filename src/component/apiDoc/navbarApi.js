@@ -9,6 +9,7 @@ import ListSubheader from '@mui/material/ListSubheader';
 import InputLabel from '@mui/material/InputLabel';
 import PropTypes from "prop-types";
 import { getDbById } from '../../api/dbApi';
+import { Link } from 'react-router-dom' 
 
 export default function Navbar() {
 
@@ -69,8 +70,10 @@ export default function Navbar() {
       <Box align="center">
         {/* <navbarApi/> */}
         <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-          <Button variant="contained" color="primary">APIs Documentation</Button>
+          <Button variant="contained" color="primary" sx={{m:1}} disabled>APIs Documentation</Button>
+          <Link to='/authkeypage' style={{textDecoration:'none'}}>
           <Button variant="contained" color="primary">Auth Key</Button>
+          </Link>
         </Box>
       </Box>
       <Box >
