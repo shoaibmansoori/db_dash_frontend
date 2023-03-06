@@ -4,7 +4,6 @@ import {Box,Button, Typography, Container } from "@mui/material";
 import { useLocation } from "react-router-dom";
 import TablesList from "../component/table/tablesList";
 import { Link } from 'react-router-dom'
-import Curl from "../component/table/curl";
 
 
 function DbDetails(props) {
@@ -45,7 +44,6 @@ console.log("dblist",props)
         <TablesList dbData ={dbData} />
         {/* <Navbar data={props}/> */}
    </Box>
-   <Curl dbData={dbData}/>
    </>
     );
 }
