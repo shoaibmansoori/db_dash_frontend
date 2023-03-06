@@ -278,10 +278,8 @@ export function extraReducers(builder) {
       state.status = "loading"
     })
     .addCase(bulkAddColumns.fulfilled, (state, action) => {
-      console.log("action", action.payload.colums.columns)
-      console.log("action", action.payload.row)
       if (action.payload) {
-        state.columns = action.payload.colums.columns;
+        state.columns = action.payload.columns;
         state.data = action.payload.row;
       }
       state.status = "succeeded";
