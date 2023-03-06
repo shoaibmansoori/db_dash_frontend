@@ -1,6 +1,7 @@
 import React from 'react'
 import { PropTypes } from 'prop-types';
 import { Box } from '@mui/system';
+import CodeSnippet from '../codeSnippet';
 
 function AddRecord(props) {
   console.log("AddRecord Props : ",props);
@@ -8,8 +9,7 @@ function AddRecord(props) {
     <>
     <div>Add Record</div>
     <Box>
-    {
-      `curl "https://localhost:5000/${props.db}/${props.table}"`}
+      <CodeSnippet  codeString={`"https://localhost:5000/${props.db}/${props.table}"`}/>
     </Box>
     </>
   )
