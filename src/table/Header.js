@@ -13,7 +13,7 @@ import PlusIcon from "./img/Plus";
 import { useDispatch,useSelector } from "react-redux";
 import { shortId } from "./utils";
 import PropTypes from 'prop-types';
-import { addColumnsToRight, addColumsToLeft, updateColumnHeaders, updateColumnsType } from "../store/table/tableThunk";
+import { addColumnsToRight, addColumsToLeft, bulkAddColumns, deleteColumns, updateColumnHeaders, updateColumnsType } from "../store/table/tableThunk";
 import PopupModal from "../component/popupModal";
 import { getTableInfo } from "../store/table/tableSelector";
 
@@ -26,7 +26,7 @@ export default function Header({
 }) {
   const dispatch = useDispatch();
   const tableInfo=useSelector((state)=>getTableInfo(state));
-  console.log("tableInfo",tableInfo)
+  // console.log("tableInfo",tableInfo)
 
   // console.log("column",id)
   const [open, setOpen] = useState(false);
@@ -44,7 +44,7 @@ export default function Header({
     }));
   }
 
-  console.log(open);
+  // console.log(open);
   const [expanded, setExpanded] = useState(created || false);
   const [referenceElement, setReferenceElement] = useState(null);
   const [popperElement, setPopperElement] = useState(null);
@@ -119,18 +119,24 @@ export default function Header({
     },
     {
       onClick: () => {
+        console.log("id",header)
         // dataDispatch({type: "update_column_header", columnId: id, label: header});
-        // dispatch(updateColumnHeaders({
-        //   type: "updateColumnHeader",
-        //   columnId: id,
-        //   label: header
-        // }))
-        // console
+        dispatch(updateColumnHeaders({
+          columnId: id,
+          label: header
+        }))
+        console.log(id,tableInfo?.tableId,tableInfo?.dbId)
         // // dataDispatch({type: "delete_column", columnId: id});
-        // dispatch(deleteColumns({
-        //   type: "delete_column",
-        //   columnId: id
-        // }))
+        dispatch(deleteColumns({
+          columnId: id,
+          fieldName:id,
+          tableId:tableInfo?.tableId,
+          dbId:tableInfo?.dbId
+        }))
+        dispatch(bulkAddColumns({
+          "dbId":tableInfo?.dbId,
+          "tableName":tableInfo?.tableId,
+        }));
         setExpanded(false);
       },
       icon: <TrashIcon />,
@@ -254,7 +260,7 @@ export default function Header({
             <PlusIcon />
           </span>
         </div>
-    <PopupModal title="create organisation" label="Organization Name" setVariable={setVariable} variable={variable} open={open} setOpen ={setOpen}  submitData={createLeftColumn} />
+      <PopupModal title="create column" label="Column Name" setVariable={setVariable} variable={variable} open={open} setOpen ={setOpen}  submitData={createLeftColumn} />
 
       </div > :
         <div  {...getHeaderProps({ style: { display: "inline-block" } })} className='th noselect'

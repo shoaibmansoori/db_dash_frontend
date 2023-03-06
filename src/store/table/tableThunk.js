@@ -1,5 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { createField, getAllfields } from "../../api/fieldApi";
+import { createField, deleteField, getAllfields } from "../../api/fieldApi";
 import { getTable } from "../../api/tableApi";
 
 // reducer imports
@@ -29,8 +29,8 @@ const getHeaders = async(dbId,tableName) =>{
         options: []
     }
     json.id = field[0];
-    json.label = json.accessor = field[1].name?.toLowerCase() || field[0]?.toLowerCase();
-    json.dataType = field[1].fieldType
+    json.label = json.accessor = field[1]?.name?.toLowerCase() || field[0]?.toLowerCase();
+    json.dataType = field[1]?.fieldType
     columns.push (json);
     console.log("json",json)
     }
@@ -75,10 +75,12 @@ export const bulkAddColumns = createAsyncThunk(
 export const deleteColumns = createAsyncThunk(
     "table/deleteColumns",
     async(payload,{dispatch})=>{
-        console.log("deleteColumns")
-
+        console.log("deleteColumns",payload) 
+        const dataa = await deleteField(payload?.dbId,payload?.tableId,payload?.fieldName)
+        console.log(dataa);
         //delte api call 
-        dispatch(deleteColumn(payload));
+            dispatch(deleteColumn(payload));
+        return 2;
         // return response of api;
     }
 )

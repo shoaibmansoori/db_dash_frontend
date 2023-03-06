@@ -14,9 +14,10 @@ const updateField = async (db_id,tableName,data) =>
     return await axios.patch(URL +`/dbs/${db_id}/${tableName}/updatefield`,data)
 }
 
-const deleteField = async (db_id,tableName,data) =>
+const deleteField = async (db_id,tableName,fieldName) =>
 {
-    return await axios.delete(URL +`/dbs/${db_id}/${tableName}/deletefield`,data)
+    // console.log(db_id,tableName,fieldName)
+    return await axios.delete(URL +`/dbs/${db_id}/${tableName}/${fieldName}/deletefield`)
 }
 
 
