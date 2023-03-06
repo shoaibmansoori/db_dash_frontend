@@ -63,7 +63,8 @@ export default function Table({ columns, data,dispatch:dataDispatch, skipReset }
     []
   );
 
-  const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow, selectedFlatRows,
+  const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow,
+    //  selectedFlatRows,
     state: { selectedCellIds, currentSelectedCellIds  },
      
   } = useTable(
@@ -148,13 +149,13 @@ export default function Table({ columns, data,dispatch:dataDispatch, skipReset }
     <>
       <pre>
         <code>
-          {JSON.stringify(
+          {/* {JSON.stringify(
             {
               selectedFlatRows: selectedFlatRows.map(row => row.original)
             },
             null,
             2
-          )}
+          )} */}
         </code>
       </pre>
       <div {...getTableProps()} className={clsx("table", isTableResizing() && "noselect")}>
@@ -218,11 +219,11 @@ export default function Table({ columns, data,dispatch:dataDispatch, skipReset }
           </div>
         </div>
       </div>
-      <pre>
+      {/* <pre>
         <code>
         {JSON.stringify({ selectedCellIds, currentSelectedCellIds }, null, 2)}
         </code>
-      </pre>
+      </pre> */}
     </>
   );
 }
