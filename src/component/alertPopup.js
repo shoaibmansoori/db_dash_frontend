@@ -1,14 +1,8 @@
 import React from 'react';
+import {Button,Dialog,DialogActions,DialogContent,DialogContentText,DialogTitle} from '@mui/material';
 import { PropTypes } from 'prop-types';
-import {
-  Button,
-  Dialog,
-  DialogActions,
-  DialogContent,
-  DialogContentText,
-  DialogTitle,
-} from '@mui/material';
 export default function AlertPopup(props) {
+
   const handleClose = () => {
     props.setOpen(false);
   };
@@ -28,13 +22,15 @@ export default function AlertPopup(props) {
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={    (e)=>{e.preventDefault();e.stopPropagation(); props?.deleteFunction (e);handleClose()}  } >Delete</Button>
+          <Button onClick={(e)=>{e.preventDefault();e.stopPropagation(); props?.deleteFunction (e);handleClose()}}>Delete</Button>
           <Button onClick={handleClose} autoFocus>Cancel </Button>
         </DialogActions>
       </Dialog>
     </>
   );
 }
+
+
 AlertPopup.propTypes = {
   setOpen: PropTypes.func,
   open:PropTypes.bool,
