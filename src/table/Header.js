@@ -16,6 +16,7 @@ import PropTypes from 'prop-types';
 import { addColumnsToRight, addColumsToLeft, deleteColumns, updateColumnHeaders, updateColumnsType } from "../store/table/tableThunk";
 import PopupModal from "../component/popupModal";
 import { getTableInfo } from "../store/table/tableSelector";
+import zIndex from "@mui/material/styles/zIndex";
 
 
 
@@ -35,14 +36,16 @@ export default function Header({
   const handleOpen = () => {
     setOpen(true);
   }
-  
+  // console.log(open);
   const createLeftColumn=()=>{
     console.log("columnName",variable)
-    console.log(1);
+    setOpen(false);
     dispatch(addColumsToLeft({
       columnId: 999999, focus: false,fieldName:variable,dbId:tableInfo?.dbId,tableId:tableInfo?.tableId,fieldType:"text"
     }));
   }
+
+
 
   // console.log(open);
   const [expanded, setExpanded] = useState(created || false);
@@ -126,7 +129,7 @@ export default function Header({
           columnId: id,
           label: header
         }))
-        console.log(id,tableInfo?.tableId,tableInfo?.dbId)
+        // console.log(id,tableInfo?.tableId,tableInfo?.dbId)
         // // dataDispatch({type: "delete_column", columnId: id});
         dispatch(deleteColumns({
           columnId: id,
@@ -134,8 +137,8 @@ export default function Header({
           tableId:tableInfo?.tableId,
           dbId:tableInfo?.dbId
         }))
+        setExpanded(false);zIndex
         
-        setExpanded(false);
       },
       icon: <TrashIcon />,
       label: "Delete"
