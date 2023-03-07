@@ -29,8 +29,8 @@ const getHeaders = async(dbId,tableName) =>{
         options: []
     }
     json.id = field[0];
-    json.label = json.accessor = field[1]?.name?.toLowerCase() || field[0]?.toLowerCase();
-    json.dataType = field[1]?.fieldType
+    json.label = json.accessor = field[1].name?.toLowerCase() || field[0]?.toLowerCase();
+    json.dataType = field[1].fieldType?.toLowerCase();
     columns.push (json);
     console.log("json",json)
     }
@@ -58,7 +58,6 @@ export const addColumns = createAsyncThunk(
 export const bulkAddColumns = createAsyncThunk(
     "table/bulkAddColumns",
     async (payload) =>{      
-        console.log("thunkkkkk")
         const columns =  await getHeaders(payload.dbId,payload.tableName)
         console.log("grfvd",columns)
         const data = await getTable(payload.dbId,payload.tableName)

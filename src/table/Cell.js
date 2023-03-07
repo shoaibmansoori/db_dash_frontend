@@ -110,7 +110,17 @@ export default function Cell({value: initialValue, row, column: {id, dataType, o
         />
       );
       break;
-    case "number":
+      case "varchar":
+      element = (
+        <ContentEditable
+          html={(value.value && value.value.toString()) || ""}
+          onChange={onChange}
+          onBlur={() => setValue((old) => ({value: old.value, update: true}))}
+          className='data-input'
+        />
+      );
+      break;
+    case "integer":
       element = (
         <ContentEditable
           html={(value.value && value.value.toString()) || ""}

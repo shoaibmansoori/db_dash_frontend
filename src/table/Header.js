@@ -27,7 +27,6 @@ export default function Header({
 }) {
   const dispatch = useDispatch();
   const tableInfo=useSelector((state)=>getTableInfo(state));
-  // console.log("tableInfo",tableInfo)
 
   // console.log("column",id)
   const [open, setOpen] = useState(false);
@@ -44,10 +43,6 @@ export default function Header({
       columnId: 999999, focus: false,fieldName:variable,dbId:tableInfo?.dbId,tableId:tableInfo?.tableId,fieldType:"text"
     }));
   }
-
-
-
-  // console.log(open);
   const [expanded, setExpanded] = useState(created || false);
   const [referenceElement, setReferenceElement] = useState(null);
   const [popperElement, setPopperElement] = useState(null);
@@ -177,19 +172,35 @@ export default function Header({
         // dataDispatch({type: "update_column_type", columnId: id, dataType: "number"});
         dispatch(updateColumnsType({
           columnId: id,
-          dataType: "number"
+          dataType: "integer"
         }))
         setShowType(false);
         setExpanded(false);
       },
       icon: <HashIcon />,
-      label: "Number"
+      label: "Integer"
+    },
+    {
+      onClick: () => {
+        // dataDispatch({type: "update_column_type", columnId: id, dataType: "select"});
+        dispatch(updateColumnsType({
+          columnId: id, 
+          dataType: "varchar"
+        }))
+        setShowType(false);
+        setExpanded(false);
+      },
+      icon: <TextIcon/>,
+      label: "Varchar"
     }
   ];
 
   let propertyIcon;
   switch (dataType) {
-    case "number":
+    case "varchar":
+      propertyIcon = <TextIcon />;
+      break;
+    case "integer":
       propertyIcon = <HashIcon />;
       break;
     case "text":

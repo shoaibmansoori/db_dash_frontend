@@ -23,7 +23,7 @@ export default function Table({ columns, data,dispatch:dataDispatch, skipReset }
 
   const [selectedRange, setSelectedRange] = useState({});  
   console.log(selectedRange);
-
+  console.log("data",data);
   const handleCopy = (event, value) => {
     event.clipboardData.setData('text/plain', value);
     event.preventDefault();
@@ -62,7 +62,7 @@ export default function Table({ columns, data,dispatch:dataDispatch, skipReset }
   );
 
   const { getTableProps, getTableBodyProps, headerGroups,rows, prepareRow,
-    //  selectedFlatRows,
+     selectedFlatRows,  
     state: { selectedCellIds, currentSelectedCellIds  },
      
   } = useTable(
@@ -146,15 +146,14 @@ export default function Table({ columns, data,dispatch:dataDispatch, skipReset }
   return (
     <>
       <pre>
-        {/* <Header/> */}
         <code>
-          {/* {JSON.stringify(
+          {JSON.stringify(
             {
               selectedFlatRows: selectedFlatRows.map(row => row.original)
             },
             null,
             2
-          )} */}
+          )}
         </code>
       </pre>
       <div {...getTableProps()} className={clsx("table", isTableResizing() && "noselect")}>
