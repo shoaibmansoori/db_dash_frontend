@@ -1,5 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { createField, deleteField, getAllfields } from "../../api/fieldApi";
+import { createField, deleteField, getAllfields, updateField } from "../../api/fieldApi";
 import { getTable } from "../../api/tableApi";
 
 // reducer imports
@@ -87,9 +87,14 @@ export const deleteColumns = createAsyncThunk(
 export const updateColumnHeaders = createAsyncThunk(
     "table/updateColumnHeaders",
     async(payload,{dispatch})=>{
-        console.log("updateColumnHeaders")
-
+        const data={
+            newFieldName:payload?.label,
+            newFieldType:payload?.fieldType
+        }
+        console.log("updateColumnHeaders",payload?.dbId,payload?.tableName,payload?.fieldName,data)
+        const dataa = await updateField(payload?.dbId,payload?.tableName,payload?.fieldName,data)
         dispatch(updateColumnHeader(payload));
+        console.log(dataa)
         return 2;
     }
 )

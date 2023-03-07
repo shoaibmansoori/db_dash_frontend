@@ -9,9 +9,9 @@ const getAllfields = async (db_id, tableName) =>{
     return  await axios.get(URL+`/dbs/${db_id}/${tableName}/field`)
 }
 
-const updateField = async (db_id,tableName,data) =>
+const updateField = async (db_id,tableName,fieldName,data) =>
 {
-    return await axios.patch(URL +`/dbs/${db_id}/${tableName}/updatefield`,data)
+    return await axios.patch(URL +`/dbs/${db_id}/${tableName}/${fieldName}/updatefield`,data)
 }
 
 const deleteField = async (db_id,tableName,fieldName) =>

@@ -226,9 +226,13 @@ export default function Header({
 
   function handleKeyDown(e) {
     if (e.key === "Enter") {
+      // console.log("id",id)
       dispatch(updateColumnHeaders({
-        type: "updateColumnHeader",
         columnId: id,
+        dbId:tableInfo?.dbId,
+        tableName:tableInfo?.tableId,
+        fieldName:id,
+        fieldType:"text",
         label: header
       }))
       setExpanded(false);
