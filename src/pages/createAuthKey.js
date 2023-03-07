@@ -12,7 +12,7 @@ import {
 } from "@mui/material";
 import AuthKeyDropdown from "../component/authKeyComponents/authKeyDropdown";
 
-export default function Hello() {
+export default function CreateAuthKey() {
   const [open, setOpen] = useState(false);
 
   const handleCreateClick = () => {
@@ -32,6 +32,7 @@ export default function Hello() {
 
   return (
     <>
+    
       <Box>
         <AuthKeyHeader />
       </Box>
@@ -42,7 +43,7 @@ export default function Hello() {
           ml: 1,
           mr: 1,
           border: 2,
-          minHeight: 560,
+          minHeight: 500,
         }}
       >
         <Box
