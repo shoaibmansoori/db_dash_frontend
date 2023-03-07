@@ -1,8 +1,6 @@
 import React from 'react'
 import { Link } from "react-router-dom";
 import { Box, Button } from "@mui/material";
-
-
 export default function AuthKeyHeader() {
   return (
     <>
@@ -13,6 +11,12 @@ export default function AuthKeyHeader() {
         <Button variant="contained" color="primary" disabled>Auth Key</Button>
       </Box>
     </>
-  
   )
 }
+
+
+
+
+
+
+

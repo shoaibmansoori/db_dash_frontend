@@ -1,5 +1,4 @@
 import React from "react";
-import Dropdown from "../dropdown";
 import {
   Table,
   TableBody,
@@ -10,14 +9,10 @@ import {
   TableContainer,
   TableCell,
 } from "@mui/material";
-
-
-
+import TableMenuDropdown from "./tableMenuDropdown";
 function createData(name, access, scope, datacreated, createdby, dropdown) {
   return { name, access, scope, datacreated, createdby, dropdown };
 }
-
-
 const rows = [
   createData(
     "Frozen yoghurt",
@@ -25,10 +20,9 @@ const rows = [
     6.0,
     24,
     4.0,
-    <Dropdown first={"Edit"} second={"Generated Key"} third={"Delet"} />
+    <TableMenuDropdown first={"Edit"} second={"Delete"} third={"Show AuthKey"} />
   ),
 ];
-
 export default function AuthKey() {
   return (
     <>

@@ -1,4 +1,5 @@
 import { Box } from '@mui/material'
+import { Link } from "react-router-dom";
 import React, { useEffect, useState } from 'react'
 import { UserAuth } from "../../context/authContext.js"
 import { findUserByEmail } from "../../api/userApi"
@@ -61,13 +62,15 @@ export default function Navbar() {
 
   return (
     <>
-      <Box align="center">
+   <Box align="center">
         {/* <navbarApi/> */}
         <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-          <Button variant="contained" color="primary">APIs Documentation</Button>
+          <Button variant="contained" color="primary" sx={{m:1}} disabled>APIs Documentation</Button>
+          <Link to='/authkeypage' style={{textDecoration:'none'}}>
           <Button variant="contained" color="primary">Auth Key</Button>
+          </Link>
         </Box>
-      </Box>
+   </Box>
       <Box >
 
         {alldbs && <FormControl sx={{ m: 1, minWidth: 120 }}>

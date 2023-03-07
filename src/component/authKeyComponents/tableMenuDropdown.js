@@ -2,35 +2,26 @@ import React,{useState} from 'react'
 import PropTypes from 'prop-types';
 import { Typography, Menu, MenuItem, Tooltip, IconButton } from '@mui/material'
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
-import AlertPopup from './alertPopup';
-//import { deleteDb } from '../../api/dbApi'
+import AuthKeyPopup from './authKeyPopup';
 
-export default function Dropdown(props) {
+export default function TableMenuDropdown(props) {
+
+    const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
     
     const [anchorElUser, setAnchorElUser] = useState(null);
-    const [open, setOpen] = useState(false);
     const handleOpenUserMenu = (event) => {
       setAnchorElUser(event.currentTarget);
     };
-    const handleCloseUserMenu = (e) => {
-      e.stopPropagation();
+    const handleCloseUserMenu = () => {
       setAnchorElUser(null);
     };
-    const handleClickOpen = () => {
-    
-      setOpen(true);
-    };
-
-     
-    
+   
   return (
-
-    
     <>  
         <Tooltip>
             <IconButton onClick={(e)=>{
               e.preventDefault();
-              e.stopPropagation();
               handleOpenUserMenu(e)}}>
               <MoreHorizIcon />
             </IconButton>
@@ -53,23 +44,27 @@ export default function Dropdown(props) {
           >
             <MenuItem onClick={handleCloseUserMenu}>
               <Typography textAlign="center" onClick={(e) =>{e.preventDefault();
-              e.stopPropagation(); props?.setName (true)}}>{props?.first}</Typography>
+              e.stopPropagation();}}>{props?.first}</Typography>
             </MenuItem>
 
             <MenuItem onClick={(e)=>{e.preventDefault();
-              e.stopPropagation();handleCloseUserMenu(e);setOpen(true)}}>
-              <Typography  onClick={handleClickOpen} textAlign="center" >{props?.second}</Typography>
+              e.stopPropagation();handleCloseUserMenu(e)}}>
+              <Typography textAlign="center" >{props?.second}</Typography>
             </MenuItem>
 
-            <AlertPopup open={open} setOpen ={setOpen} title={props?.title } deleteFunction={props?.deleteFunction}  /> 
+            <MenuItem>
+              <Typography textAlign="center"  onClick={handleOpen} >{props?.third}</Typography>
+              <AuthKeyPopup open={open}
+              setOpen={setOpen}/>
+            </MenuItem>
           </Menu>
     </>
   )
 }
-Dropdown.propTypes = {
+TableMenuDropdown.propTypes = {
   first: PropTypes.string,
   second: PropTypes.string,
-  setName: PropTypes.func,
+  third: PropTypes.string,
   title: PropTypes.string,
   deleteFunction : PropTypes.func
   

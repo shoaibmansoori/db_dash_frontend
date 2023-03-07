@@ -18,12 +18,10 @@ axios.interceptors.response.use(
     return response;
   },
   async function  (error) {
-    // console.log(error);
-    // if (error?.response?.status ===401) {
-    //   toast.error('Session Expired');
-    //   localStorage.removeItem("accessToken");
-    //   window.location.href = "/";
-    // }
+    if (error?.response?.status ===401) {
+      localStorage.removeItem("accessToken");
+      window.location.href = "/";
+    }
     return Promise.reject(error);
   }
 );
