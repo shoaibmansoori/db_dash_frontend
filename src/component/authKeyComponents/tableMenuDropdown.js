@@ -42,10 +42,10 @@ export default function TableMenuDropdown(props) {
           >
             <MenuItem onClick={handleCloseUserMenu}>
               <Typography textAlign="center" onClick={(e) =>{e.preventDefault();
-              e.stopPropagation();}}>{props?.first}</Typography>
+             }}>{props?.first}</Typography>
             </MenuItem>
             <MenuItem onClick={(e)=>{e.preventDefault();
-              e.stopPropagation();handleCloseUserMenu(e)}}>
+             handleCloseUserMenu(e)}}>
               <Typography textAlign="center" >{props?.second}</Typography>
             </MenuItem>
             <MenuItem>

@@ -23,7 +23,7 @@ const rows = [
     <TableMenuDropdown first={"Edit"} second={"Delete"} third={"Show AuthKey"} />
   ),
 ];
-export default function AuthKey() {
+export default function AuthKeyTable() {
   return (
     <>
       <Box sx={{ border: 1, m: 1, boxShadow: 10 }}>
