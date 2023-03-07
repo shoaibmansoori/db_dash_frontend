@@ -15,12 +15,10 @@ function DbDetails(props) {
     // console.log("db",dbData)
     // const dispatchs=useDispatch();
     const getData=()=>{
-      console.log("dvnjf,vjb ")
     //    dispatchs(bulkAddColumns(makeData(10)));
     }
    
     useEffect(() => {
-      console.log("dabv bta")
       getData();
     },[]);
 

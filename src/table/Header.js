@@ -16,7 +16,6 @@ import PropTypes from 'prop-types';
 import { addColumnsToRight, addColumsToLeft, deleteColumns, updateColumnHeaders, updateColumnsType } from "../store/table/tableThunk";
 import PopupModal from "../component/popupModal";
 import { getTableInfo } from "../store/table/tableSelector";
-import zIndex from "@mui/material/styles/zIndex";
 
 
 
@@ -120,19 +119,20 @@ export default function Header({
       onClick: () => {
         console.log("id",header)
         // dataDispatch({type: "update_column_header", columnId: id, label: header});
-        dispatch(updateColumnHeaders({
-          columnId: id,
-          label: header
-        }))
+        // dispatch(updateColumnHeaders({
+        //   columnId: id,
+        //   label: header
+        // }))
         // console.log(id,tableInfo?.tableId,tableInfo?.dbId)
         // // dataDispatch({type: "delete_column", columnId: id});
         dispatch(deleteColumns({
+          label: header,
           columnId: id,
           fieldName:id,
           tableId:tableInfo?.tableId,
           dbId:tableInfo?.dbId
         }))
-        setExpanded(false);zIndex
+        setExpanded(false);
         
       },
       icon: <TrashIcon />,
@@ -256,9 +256,16 @@ export default function Header({
 
   function handleBlur(e) {
     e.preventDefault();
+    // dispatch(updateColumnHeaders({
+    //   type: "updateColumnHeader",
+    //   columnId: id,
+    //   label: header
+    // }))
     dispatch(updateColumnHeaders({
-      type: "updateColumnHeader",
       columnId: id,
+      dbId:tableInfo?.dbId,
+      tableName:tableInfo?.tableId,
+      fieldName:id,
       label: header
     }))
   }

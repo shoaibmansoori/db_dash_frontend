@@ -67,6 +67,9 @@ export const reducers = {
         (column) => column.id === action.columnId
       );
     }
+
+    console.log("in update column header reducer ");
+   
     return {
       ...state,
       skipReset: true,
@@ -309,6 +312,7 @@ export function extraReducers(builder) {
     })
 
     .addCase(bulkAddColumns.pending, (state) => {
+      console.log("blk add pending")
       state.status = "loading"
     })
     .addCase(bulkAddColumns.fulfilled, (state, action) => {

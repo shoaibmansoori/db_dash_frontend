@@ -29,7 +29,7 @@ const getHeaders = async(dbId,tableName) =>{
         options: []
     }
     json.id = field[0];
-    json.label = json.accessor = field[1].name?.toLowerCase() || field[0]?.toLowerCase();
+    json.label = json.accessor = field[1].fieldName?.toLowerCase() || field[0]?.toLowerCase();
     json.dataType = field[1].fieldType?.toLowerCase();
     columns.push (json);
     console.log("json",json)
@@ -49,7 +49,6 @@ const getHeaders = async(dbId,tableName) =>{
 export const addColumns = createAsyncThunk(
     "table/addColumns",
     async (payload,{dispatch}) =>{
-        console.log("addColumns")
         dispatch(addOptionToColumn(payload));
         return 5;
     }
@@ -59,7 +58,7 @@ export const bulkAddColumns = createAsyncThunk(
     "table/bulkAddColumns",
     async (payload) =>{      
         const columns =  await getHeaders(payload.dbId,payload.tableName)
-        console.log("grfvd",columns)
+        console.log("in bulk addd",columns)
         const data = await getTable(payload.dbId,payload.tableName)
         const dataa = {
             "columns":columns,
@@ -85,15 +84,18 @@ export const deleteColumns = createAsyncThunk(
 )
 export const updateColumnHeaders = createAsyncThunk(
     "table/updateColumnHeaders",
-    async(payload,{dispatch})=>{
+    async(payload,{dispatch,getState})=>{
         const data={
             newFieldName:payload?.label,
             newFieldType:payload?.fieldType
         }
         console.log("updateColumnHeaders",payload?.dbId,payload?.tableName,payload?.fieldName,data)
-        const dataa = await updateField(payload?.dbId,payload?.tableName,payload?.fieldName,data)
+        await updateField(payload?.dbId,payload?.tableName,payload?.fieldName,data)
         dispatch(updateColumnHeader(payload));
-        console.log(dataa)
+        const {tableId, dbId} = getState().table
+        // console.log(getState().table.tableId, "dlkds",getState());
+        dispatch(bulkAddColumns({tableName:tableId,dbId :dbId}));
+        // console.log("state",getState().table.tableId,);
         return 2;
     }
 )
