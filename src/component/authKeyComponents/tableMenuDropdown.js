@@ -4,11 +4,10 @@ import { Typography, Menu, MenuItem, Tooltip, IconButton } from '@mui/material'
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import AuthKeyPopup from './authKeyPopup';
 
-export default function TableMenuDropdown(props) {
 
+export default function TableMenuDropdown(props) {
     const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
-    
     const [anchorElUser, setAnchorElUser] = useState(null);
     const handleOpenUserMenu = (event) => {
       setAnchorElUser(event.currentTarget);
@@ -16,9 +15,8 @@ export default function TableMenuDropdown(props) {
     const handleCloseUserMenu = () => {
       setAnchorElUser(null);
     };
-   
   return (
-    <>  
+    <>
         <Tooltip>
             <IconButton onClick={(e)=>{
               e.preventDefault();
@@ -46,12 +44,10 @@ export default function TableMenuDropdown(props) {
               <Typography textAlign="center" onClick={(e) =>{e.preventDefault();
               e.stopPropagation();}}>{props?.first}</Typography>
             </MenuItem>
-
             <MenuItem onClick={(e)=>{e.preventDefault();
               e.stopPropagation();handleCloseUserMenu(e)}}>
               <Typography textAlign="center" >{props?.second}</Typography>
             </MenuItem>
-
             <MenuItem>
               <Typography textAlign="center"  onClick={handleOpen} >{props?.third}</Typography>
               <AuthKeyPopup open={open}
@@ -67,20 +63,4 @@ TableMenuDropdown.propTypes = {
   third: PropTypes.string,
   title: PropTypes.string,
   deleteFunction : PropTypes.func
-  
-    
-  
 };
-
-
-
-
-
-
-
-
-
-
-
-
-

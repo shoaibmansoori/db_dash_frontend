@@ -21,13 +21,13 @@ const AuthKeyPopup = (props) => {
     navigator.clipboard.writeText(copyText);
     setCopySuccess(true);
   };
+
+  
   return (
     <Dialog open={props.open} onClose={handleClose}>
       <DialogTitle>Create Auth Key</DialogTitle>
       <DialogContent>
-
       <TextField id="outlined-basic" label="Outlined" variant="outlined"  value={copyText} onChange={handleCopyText}/>
-
         <IconButton onClick={handleCopyClick}>
           <FileCopy />
         </IconButton>
@@ -41,7 +41,6 @@ const AuthKeyPopup = (props) => {
     </Dialog>
   );
 };
-
 export default AuthKeyPopup;
 AuthKeyPopup.propTypes={
     open:PropTypes.any,

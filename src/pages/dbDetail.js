@@ -41,7 +41,7 @@ console.log("dblist",props)
         </Box>
         </Link>
         <Box align="center">
-        <TablesList dbData ={dbData} />
+        <TablesList dbData = {dbData}/>
         {/* <Navbar data={props}/> */}
    </Box>
    </>
