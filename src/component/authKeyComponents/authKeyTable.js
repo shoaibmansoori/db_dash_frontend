@@ -37,7 +37,7 @@ export default function AuthKey() {
                 <TableCell>Name</TableCell>
                 <TableCell>Access</TableCell>
                 <TableCell>Scopes</TableCell>
-                <TableCell>Data Created</TableCell>
+                <TableCell>Created On</TableCell>
                 <TableCell>Created By</TableCell>
                 <TableCell> </TableCell>
               </TableRow>

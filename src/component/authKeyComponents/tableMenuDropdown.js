@@ -2,7 +2,7 @@ import React,{useState} from 'react'
 import PropTypes from 'prop-types';
 import { Typography, Menu, MenuItem, Tooltip, IconButton } from '@mui/material'
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
-import AuthKeyPopup from './AuthKeyPopup';
+import AuthKeyPopup from './authKeyPopup';
 
 
 export default function TableMenuDropdown(props) {
