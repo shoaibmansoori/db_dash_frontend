@@ -25,7 +25,7 @@ const rows = [
     6.0,
     24,
     4.0,
-    <Dropdown first={"Edit"} second={"Generated Key"} third={"Delet"} />
+    <Dropdown first={"Edit"} second={"Delete"} third={"Show AuthKey"} />
   ),
 ];
 

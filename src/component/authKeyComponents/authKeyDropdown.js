@@ -1,71 +1,49 @@
-import React,{useState} from 'react'
-import { Typography, Menu, MenuItem, Tooltip, IconButton } from '@mui/material'
-import AddIcon from '@mui/icons-material/Add';
-// import PropTypes from 'prop-types';
-//import { deleteDb } from '../../api/dbApi'
+import React from 'react'
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
+import { Box } from '@mui/system';
+
+
 
 export default function AuthKeyDropdown() {
-    
-    const [anchorElUser, setAnchorElUser] = useState(null);
-    // const [open, setOpen] = useState(false);
-    const handleOpenUserMenu = (event) => {
-      setAnchorElUser(event.currentTarget);
-    };
-    const handleCloseUserMenu = (e) => {
-      e.stopPropagation();
-      setAnchorElUser(null);
-    };
-    // const handleClickOpen = () => {
-    
-    //   setOpen(true);
-    // };
+  const [age, setAge] = React.useState('');
 
-     
+  const handleChange = (event) => {
+    setAge(event.target.value);
+
+  }
     
   return (
 
     
     <>  
-        <Tooltip>
-            <IconButton onClick={(e)=>{
+       <Box>
+      <FormControl sx={{ m: 1, minWidth: 120 }}>
+        <InputLabel id="demo-simple-select-helper-label">Add Space</InputLabel>
+        <Select
+          labelId="demo-simple-select-helper-label"
+          id="demo-simple-select-helper"
+          value={age}
+          label="Add Space"
+          onChange={handleChange}
+        >
+          <MenuItem value="">
+            <em>None</em>
+          </MenuItem>
+          <MenuItem value={1}>Table 1</MenuItem>
+          <MenuItem value={2}>Table 2</MenuItem>
+          <MenuItem value={3}>Table 3</MenuItem>
+        </Select>
+      </FormControl>
 
-              handleOpenUserMenu(e)}}>
-              <AddIcon />
-            </IconButton>
-          </Tooltip>
-          <Menu
-            sx={{ mt: '45px' }}
-            id="menu-appbar"
-            anchorEl={anchorElUser}
-            anchorOrigin={{
-              vertical: 'top',
-              horizontal: 'left',
-            }}
-            keepMounted
-            transformOrigin={{
-              vertical: 'top',
-              horizontal: 'left',
-            }}
-            open={Boolean(anchorElUser)}
-            onClose={handleCloseUserMenu}
-          >
-            <MenuItem onClick={handleCloseUserMenu}>
-              <Typography textAlign="center" onClick={(e) =>{e.preventDefault();
-              e.stopPropagation();}}>ansh</Typography>
-            </MenuItem>
-
-            <MenuItem onClick={(e)=>{
-             handleCloseUserMenu(e);}}>
-              <Typography  textAlign="center" >Dube</Typography>
-            </MenuItem>
-          </Menu>
+    </Box>
     </>
-  )
+  );
 }
 
-AuthKeyDropdown.propTypes = {
-  
-};
+AuthKeyDropdown.propTypes = {};
 
 
 
