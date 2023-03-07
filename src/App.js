@@ -30,6 +30,11 @@ function App() {
       <Route exact path ="/authKeyCreate" element ={<CreateAuthKey/>}/>
       <Route exact path ="/apiDoc/db/:dbId/table/:tableName" element ={<ApiDocPage />}/>
     </Routes>
+
+
+
+
+    
     </AuthContextProvider>
 
 
