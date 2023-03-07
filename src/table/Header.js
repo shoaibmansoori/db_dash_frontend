@@ -13,7 +13,7 @@ import PlusIcon from "./img/Plus";
 import { useDispatch,useSelector } from "react-redux";
 import { shortId } from "./utils";
 import PropTypes from 'prop-types';
-import { addColumnsToRight, addColumsToLeft, bulkAddColumns, deleteColumns, updateColumnHeaders, updateColumnsType } from "../store/table/tableThunk";
+import { addColumnsToRight, addColumsToLeft, deleteColumns, updateColumnHeaders, updateColumnsType } from "../store/table/tableThunk";
 import PopupModal from "../component/popupModal";
 import { getTableInfo } from "../store/table/tableSelector";
 
@@ -57,6 +57,7 @@ export default function Header({
   const [typeReferenceElement, setTypeReferenceElement] = useState(null);
   const [typePopperElement, setTypePopperElement] = useState(null);
   const [showType, setShowType] = useState(false);
+
   const buttons = [
     {
       onClick: () => {
@@ -133,10 +134,7 @@ export default function Header({
           tableId:tableInfo?.tableId,
           dbId:tableInfo?.dbId
         }))
-        dispatch(bulkAddColumns({
-          "dbId":tableInfo?.dbId,
-          "tableName":tableInfo?.tableId,
-        }));
+        
         setExpanded(false);
       },
       icon: <TrashIcon />,

@@ -104,28 +104,29 @@ export const reducers = {
   },
   addColumnToLeft(state, payload) {
     const action = payload.payload;
+    console.log(action)
     if (action) {
       var leftIndex = state.columns.findIndex(
         (column) => column.id === action.columnId
       );
-    }
-    var leftId = shortId();
-    return {
-      ...state,
-      skipReset: true,
-      columns: [
+
+
+      state.skipReset=true;
+      state.columns=[
         ...state.columns.slice(0, leftIndex),
         {
-          id: leftId,
+          id: action?.fieldName,
           label: action?.fieldName,
-          accessor: leftId,
+          accessor: action?.fieldName,
           dataType: "text",
           created: action.focus && true,
           options: []
         },
         ...state.columns.slice(leftIndex, state.columns.length)
       ]
-    };
+
+    }
+    console.log('add column',current(state));
   },
   updateTableData(state, payload) {
 
