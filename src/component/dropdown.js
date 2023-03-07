@@ -55,9 +55,14 @@ export default function Dropdown(props) {
               <Typography textAlign="center" onClick={(e) =>{e.preventDefault();
               e.stopPropagation(); props?.setName (true)}}>{props?.first}</Typography>
             </MenuItem>
+
             <MenuItem onClick={(e)=>{e.preventDefault();
               e.stopPropagation();handleCloseUserMenu(e);setOpen(true)}}>
               <Typography  onClick={handleClickOpen} textAlign="center" >{props?.second}</Typography>
+            </MenuItem>
+
+            <MenuItem>
+              <Typography  onClick={handleClickOpen} textAlign="center" >{props?.third}</Typography>
             </MenuItem>
             <AlertPopup open={open} setOpen ={setOpen} title={props?.title } deleteFunction={props?.deleteFunction}  /> 
           </Menu>
@@ -67,6 +72,7 @@ export default function Dropdown(props) {
 Dropdown.propTypes = {
   first: PropTypes.string,
   second: PropTypes.string,
+  third: PropTypes.string,
   setName: PropTypes.func,
   title: PropTypes.string,
   deleteFunction : PropTypes.func

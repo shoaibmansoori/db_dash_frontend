@@ -89,6 +89,7 @@ export default function TablesList (props ) {
       >
      
       <Button onClick={handleOpen}  variant="contained" >Add Table</Button>
+      
       <PopupModal title="create table" label="Table Name"   open={open} setOpen ={setOpen} saveFunction = {saveTable}  setVariable={setTable}/>
       </Box>
        

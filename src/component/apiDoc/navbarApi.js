@@ -2,13 +2,11 @@ import { Box } from '@mui/material'
 import React, { useEffect, useState } from 'react'
 import { UserAuth } from "../../context/authContext.js"
 import { findUserByEmail } from "../../api/userApi"
-import { Button, Select, MenuItem } from "@mui/material";
-import FormControl from '@mui/material/FormControl';
+import { Button, Select, MenuItem, FormControl, InputLabel, ListSubheader } from "@mui/material";
 import ApiCrudTablist from './apiCrudTab/apiCrudTablist';
-import ListSubheader from '@mui/material/ListSubheader';
-import InputLabel from '@mui/material/InputLabel';
-import PropTypes from "prop-types";
 import { getDbById } from '../../api/dbApi';
+import { Link } from 'react-router-dom' 
+import PropTypes from "prop-types";
 
 export default function Navbar() {
 
@@ -38,17 +36,14 @@ export default function Navbar() {
     allDbs.map((item) => {
       result[item.org_id._id] = result[item.org_id._id] ? [...result[item.org_id._id], item] : [item]
     })
+    
+    setSelectedOption(result?.[Object.keys(result)?.[0]]?.[0].name);
     setAllDbs(result);
   }
   console.log(alldbs?.[Object.keys(alldbs)?.[0]]?.[0].name)
   // console.log(alldbs)
 
-  useEffect(() => {
-
-    setSelectedOption(alldbs?.[Object.keys(alldbs)?.[0]]?.[0].name);
-
-  }, [alldbs])
-
+  
 
   const getOrgAndDb = async () => {
     const data = await findUserByEmail(user?.email);
@@ -64,13 +59,17 @@ export default function Navbar() {
     setTables(data.data.data.tables || {});
   }
 
+  console.log("Console",selectedOption);
+
   return (
     <>
       <Box align="center">
         {/* <navbarApi/> */}
         <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-          <Button variant="contained" color="primary">APIs Documentation</Button>
+          <Button variant="contained" color="primary" sx={{m:1}} disabled>APIs Documentation</Button>
+          <Link to='/authkeypage' style={{textDecoration:'none'}}>
           <Button variant="contained" color="primary">Auth Key</Button>
+          </Link>
         </Box>
    </Box>
    <Box >

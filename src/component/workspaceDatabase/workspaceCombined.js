@@ -29,6 +29,7 @@ export default function WorkspaceCombined() {
       var result = {};
       allDbs.map((item)=>{        
           result[item.org_id._id]=result[item.org_id._id]?[...result[item.org_id._id],item]:[item]
+          console.log("result",result)
       })
       setAllDbs(result);  
     }
