@@ -4,12 +4,17 @@ import { Box, Button } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import AuthKeyHeader from "../component/authKeyComponents/authKeyHeader";
 import { Link } from "react-router-dom";
+import MainNavbar from "../component/mainNavbar";
 
 
 
 export default function AuthKeyPage() {
   return (
     <>
+    <Box>
+      <MainNavbar/>
+    </Box>
+    
      <Box>
      <AuthKeyHeader/>
      </Box>

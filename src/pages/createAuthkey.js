@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React,{useState} from "react";
 import AuthKeyHeader from "../component/authKeyComponents/authKeyHeader";
 import Box from "@mui/material/Box";
 import { Link } from "react-router-dom";
@@ -6,36 +6,27 @@ import {
   TextField,
   Typography,
   Button,
-  Dialog,
-  DialogTitle,
-  DialogActions,
 } from "@mui/material";
 import AuthKeyDropdown from "../component/authKeyComponents/authKeyDropdown";
+import AuthKeyPopup from "../component/authKeyComponents/authKeyPopup";
 
-export default function Hello() {
+
+export default function CreateAuthKey() {
   const [open, setOpen] = useState(false);
-
-  const handleCreateClick = () => {
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-  };
-
+  const handleOpen = () => setOpen(true);
+  
   const handleKeyDown = (event) => {
     if (event.key === "Enter") {
       event.preventDefault();
-      handleClose();
     }
   };
+
 
   return (
     <>
       <Box>
         <AuthKeyHeader />
       </Box>
-
       <Box
         sx={{
           mt: 4,
@@ -61,14 +52,12 @@ export default function Hello() {
               onKeyDown={handleKeyDown}
             />
           </Box>
-
           <Box sx={{ display: "flex", justifyContent: "center" }}>
             <Typography sx={{ mr: "70px", mt: "55px" }}>Access</Typography>
             <Typography sx={{ mt: "35px",ml:'45px' }}>
               <AuthKeyDropdown />
             </Typography>
           </Box>
-
           <Box sx={{ display: "flex", justifyContent: "center", mt: 4 }}>
             <Typography sx={{ mr: "70px", mt: "30px" }}>Scope</Typography>
             <Typography sx={{ mt: "10px" ,ml:'48px'}}>
@@ -76,7 +65,6 @@ export default function Hello() {
             </Typography>
           </Box>
         </Box>
-
         <Box
           sx={{
             position: "absolute",
@@ -87,26 +75,20 @@ export default function Hello() {
         >
           <Box sx={{ display: "flex" }}>
             <Box sx={{ mr: 3 }}>
-              <Button variant="contained" onClick={handleCreateClick}>
+              <Button variant="contained" onClick={handleOpen}>
                 Create
               </Button>
+              <AuthKeyPopup open={open}
+              setOpen={setOpen}/>
             </Box>
-
             <Box>
-              <Link to='/authkeypage' style={{textDecoration:'none'}}>
+              <Link to='/authkeypage' >
               <Button variant="outlined">Cancel</Button>
               </Link>
             </Box>
           </Box>
         </Box>
       </Box>
-
-      <Dialog open={open} onClose={handleClose}>
-        <DialogTitle>AuthKey create</DialogTitle>
-        <DialogActions>
-          <Button onClick={handleClose}>Close</Button>
-        </DialogActions>
-      </Dialog>
     </>
   );
 }
