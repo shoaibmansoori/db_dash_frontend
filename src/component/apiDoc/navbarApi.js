@@ -39,8 +39,6 @@ export default function Navbar() {
     setSelectedOption(result?.[Object.keys(result)?.[0]]?.[0].name);
     setAllDbs(result);
   }
-  console.log(alldbs?.[Object.keys(alldbs)?.[0]]?.[0].name)
-  // console.log(alldbs)
 
   
 
@@ -52,13 +50,14 @@ export default function Navbar() {
     filterDbsBasedOnOrg(data?.data?.data?.dbs)
   }
 
+  console.log("tables",tables)
 
   const getAllTableName = async (dbId) => {
     const data = await getDbById(dbId)
     setTables(data.data.data.tables || {});
   }
 
-  console.log("Console",selectedOption);
+  
 
   return (
     <>

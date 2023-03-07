@@ -28,6 +28,7 @@ export default function PopupModal(props) {
   return (
     <Box>
       <Modal 
+      disableRestoreFocus
         open={props.open}
         onClose={handleClose}
         aria-labelledby="modal-modal-title"
