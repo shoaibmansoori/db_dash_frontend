@@ -1,6 +1,6 @@
 import React from 'react'
 import AuthKeyHeader from '../component/authKeyComponents/authKeyHeader'
-import Box from '@mui/material/Box';
+import {Box} from '@mui/material';
 
 
 export default function Hello() {
@@ -9,6 +9,11 @@ export default function Hello() {
     <Box>
         <AuthKeyHeader/>
     </Box>
+
+    <Box>
+     
+    </Box>
+
     <Box>
 
     </Box>
