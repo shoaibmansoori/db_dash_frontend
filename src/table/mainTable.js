@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import "./style.css";
 import Table from "./table";
-// import { randomColor, shortId } from "./utils";
 import { grey } from "./colors";
 import {  useDispatch ,useSelector } from "react-redux";
 import { getTableInfo } from "../store/table/tableSelector";
@@ -11,11 +10,9 @@ function MainTable() {
   useEffect(() => {
 },[]);
   const tableInfo=useSelector((state)=>getTableInfo(state));
-  // console.log("tableInfo",tableInfo.columns)
   // const [state, dispatch] = useReducer(reducer,tableInfo);
   const dispatchs = useDispatch();
   
-  // dispatchs(deleteColumns(makeData(10)));
  
 
   return (

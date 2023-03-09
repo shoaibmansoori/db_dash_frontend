@@ -1,13 +1,13 @@
 import { current } from '@reduxjs/toolkit';
-import { addColumns, addColumnsToRight, bulkAddColumns, updateColumnsType,updateCells, addRows, deleteColumns, updateColumnHeaders, addColumsToLeft } from './tableThunk.js';
+import { addColumns, addColumnsToRight, bulkAddColumns, updateColumnsType, updateCells, addRows, deleteColumns, updateColumnHeaders, addColumsToLeft } from './tableThunk.js';
 import { randomColor, shortId } from "../../table/utils";
 
 
 export const initialState = {
   columns: [],
   data: [],
-  tableId:[],
-  dbId:[],
+  tableId: [],
+  dbId: [],
   skipReset: false,
   status: "idle",
 };
@@ -37,13 +37,6 @@ export const reducers = {
     console.log(current(state));
   },
 
-  //   bulkAdd(state,payload){
-  //     if(payload.payload){
-  //         state.columns=[...payload.payload.columns];
-  //         state.data=[...payload.payload.data];
-  //     }
-  //     console.log(current(state));
-  //   }
   deleteColumn(state, payload) {
     const action = payload.payload;
     if (action) {
@@ -69,7 +62,7 @@ export const reducers = {
     }
 
     console.log("in update column header reducer ");
-   
+
     return {
       ...state,
       skipReset: true,
@@ -114,8 +107,8 @@ export const reducers = {
       );
 
 
-      state.skipReset=true;
-      state.columns=[
+      state.skipReset = true;
+      state.columns = [
         ...state.columns.slice(0, leftIndex),
         {
           id: action?.fieldName,
@@ -129,7 +122,7 @@ export const reducers = {
       ]
 
     }
-    console.log('add column',current(state));
+    console.log('add column', current(state));
   },
   updateTableData(state, payload) {
 
@@ -253,35 +246,35 @@ export const reducers = {
           };
         }
       case "varchar":
-      if (state.columns[typeIndex].dataType === "varchar") {
-        console.log("varchar in reducer ");
-        console.log(current(state));
-        return state;
-      } else if (state.columns[typeIndex].dataType === "select") {
-        return {
-          ...state,
-          skipReset: true,
-          columns: [
-            ...state.columns.slice(0, typeIndex),
-            { ...state.columns[typeIndex], dataType: action.dataType },
-            ...state.columns.slice(typeIndex + 1, state.columns.length)
-          ]
-        };
-      } else {
-        return {
-          ...state,
-          skipReset: true,
-          columns: [
-            ...state.columns.slice(0, typeIndex),
-            { ...state.columns[typeIndex], dataType: action.dataType },
-            ...state.columns.slice(typeIndex + 1, state.columns.length)
-          ],
-          data: state.data.map((row) => ({
-            ...row,
-            [action.columnId]: row[action.columnId] + ""
-          })) 
-        };
-      }
+        if (state.columns[typeIndex].dataType === "varchar") {
+          console.log("varchar in reducer ");
+          console.log(current(state));
+          return state;
+        } else if (state.columns[typeIndex].dataType === "select") {
+          return {
+            ...state,
+            skipReset: true,
+            columns: [
+              ...state.columns.slice(0, typeIndex),
+              { ...state.columns[typeIndex], dataType: action.dataType },
+              ...state.columns.slice(typeIndex + 1, state.columns.length)
+            ]
+          };
+        } else {
+          return {
+            ...state,
+            skipReset: true,
+            columns: [
+              ...state.columns.slice(0, typeIndex),
+              { ...state.columns[typeIndex], dataType: action.dataType },
+              ...state.columns.slice(typeIndex + 1, state.columns.length)
+            ],
+            data: state.data.map((row) => ({
+              ...row,
+              [action.columnId]: row[action.columnId] + ""
+            }))
+          };
+        }
       default:
         return state;
     }
@@ -306,9 +299,6 @@ export function extraReducers(builder) {
     .addCase(addColumns.rejected, (state) => {
 
       state.status = "failed";
-      // initial data ka call 
-      // bulk add call 
-      // MDBToast.error("Unable to fetch jamaats.");
     })
 
     .addCase(bulkAddColumns.pending, (state) => {
@@ -327,7 +317,6 @@ export function extraReducers(builder) {
     })
     .addCase(bulkAddColumns.rejected, (state) => {
       state.status = "failed";
-      // MDBToast.error("Unable to fetch jamaats.");
     })
 
     .addCase(deleteColumns.pending, (state) => {
@@ -352,7 +341,6 @@ export function extraReducers(builder) {
     })
     .addCase(updateColumnHeaders.rejected, (state) => {
       state.status = "failed";
-      // MDBToast.error("Unable to fetch jamaats.");
     })
 
 
@@ -367,7 +355,6 @@ export function extraReducers(builder) {
     })
     .addCase(addColumnsToRight.rejected, (state) => {
       state.status = "failed";
-      // MDBToast.error("Unable to fetch jamaats.");
     })
 
 
@@ -380,7 +367,6 @@ export function extraReducers(builder) {
     })
     .addCase(addColumsToLeft.rejected, (state) => {
       state.status = "failed";
-      // MDBToast.error("Unable to fetch jamaats.");
     })
 
     .addCase(updateCells.pending, (state) => {
@@ -392,7 +378,6 @@ export function extraReducers(builder) {
     })
     .addCase(updateCells.rejected, (state) => {
       state.status = "failed";
-      // MDBToast.error("Unable to fetch jamaats.");
     })
 
     .addCase(addRows.pending, (state) => {
@@ -404,7 +389,6 @@ export function extraReducers(builder) {
     })
     .addCase(addRows.rejected, (state) => {
       state.status = "failed";
-      // MDBToast.error("Unable to fetch jamaats.");
     })
 
     .addCase(updateColumnsType.pending, (state) => {
@@ -416,6 +400,5 @@ export function extraReducers(builder) {
     })
     .addCase(updateColumnsType.rejected, (state) => {
       state.status = "failed";
-      // MDBToast.error("Unable to fetch jamaats.");
     })
 }

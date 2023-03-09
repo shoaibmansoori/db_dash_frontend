@@ -8,7 +8,6 @@ import PropTypes from "prop-types";
 import MainTable from '../../table/mainTable';
 import { addColumns, bulkAddColumns } from '../../store/table/tableThunk';
 import { useDispatch } from "react-redux";
-// import makeData from "";
 
 export default function TablesList (props ) {
   const [tables, setTables] = useState({});
@@ -96,7 +95,6 @@ export default function TablesList (props ) {
          
       ))} 
       <Box
-        // startIcon={<AddIcon />}
         sx={{
           borderRadius: '8px',
           backgroundColor: '#4caf50',

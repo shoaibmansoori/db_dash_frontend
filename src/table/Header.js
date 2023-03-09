@@ -10,7 +10,7 @@ import TextIcon from "./Text";
 import MultiIcon from "./img/Multi";
 import HashIcon from "./img/Hash";
 import PlusIcon from "./img/Plus";
-import { useDispatch,useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { shortId } from "./utils";
 import PropTypes from 'prop-types';
 import { addColumsToLeft, deleteColumns, updateColumnHeaders, updateColumnsType } from "../store/table/tableThunk";
@@ -25,12 +25,12 @@ export default function Header({
   // dispatch:dataDispatch
 }) {
   const dispatch = useDispatch();
-  const tableInfo=useSelector((state)=>getTableInfo(state));
+  const tableInfo = useSelector((state) => getTableInfo(state));
   // console.log(tableInfo)
   // console.log("column",id)
   const [open, setOpen] = useState(false);
   // const [modalOpen,setModalOpen] = useState(false);
-  const [variable,setVariable] = useState("");
+  const [variable, setVariable] = useState("");
 
   const handleOpen = () => {
     setOpen(true);
@@ -39,11 +39,11 @@ export default function Header({
     console.log(1);
   }
   // console.log(open);
-  const createLeftColumn=()=>{
-    console.log("columnName",tableInfo)
+  const createLeftColumn = () => {
+    console.log("columnName", tableInfo)
     setOpen(false);
     dispatch(addColumsToLeft({
-      columnId: 999999, focus: false,fieldName:variable,dbId:tableInfo?.dbId,tableId:tableInfo?.tableId,fieldType:"text"
+      columnId: 999999, focus: false, fieldName: variable, dbId: tableInfo?.dbId, tableId: tableInfo?.tableId, fieldType: "text"
     }));
   }
   const [expanded, setExpanded] = useState(created || false);
@@ -124,23 +124,23 @@ export default function Header({
     // },
     {
       onClick: () => {
-        console.log("id",header)
+        console.log("id", header)
         // dataDispatch({type: "update_column_header", columnId: id, label: header});
         // dispatch(updateColumnHeaders({
         //   columnId: id,
         //   label: header
         // }))
-        console.log("yufdhjncx",header,id,tableInfo?.tableId,tableInfo?.dbId)
+        console.log("yufdhjncx", header, id, tableInfo?.tableId, tableInfo?.dbId)
         // // dataDispatch({type: "delete_column", columnId: id});
         dispatch(deleteColumns({
           label: header,
           columnId: id,
-          fieldName:id,
-          tableId:tableInfo?.tableId,
-          dbId:tableInfo?.dbId
+          fieldName: id,
+          tableId: tableInfo?.tableId,
+          dbId: tableInfo?.dbId
         }))
         setExpanded(false);
-        
+
       },
       icon: <TrashIcon />,
       label: "Delete"
@@ -150,7 +150,6 @@ export default function Header({
   const types = [
     {
       onClick: () => {
-        // dataDispatch({type: "update_column_type", columnId: id, dataType: "select"});
         dispatch(updateColumnsType({
           columnId: id,
           dataType: "select"
@@ -163,7 +162,6 @@ export default function Header({
     },
     {
       onClick: () => {
-        // dataDispatch({type: "update_column_type", columnId: id, dataType: "text"});
         dispatch(updateColumnsType({
           columnId: id,
           dataType: "text"
@@ -176,7 +174,6 @@ export default function Header({
     },
     {
       onClick: () => {
-        // dataDispatch({type: "update_column_type", columnId: id, dataType: "number"});
         dispatch(updateColumnsType({
           columnId: id,
           dataType: "integer"
@@ -189,15 +186,14 @@ export default function Header({
     },
     {
       onClick: () => {
-        // dataDispatch({type: "update_column_type", columnId: id, dataType: "select"});
         dispatch(updateColumnsType({
-          columnId: id, 
+          columnId: id,
           dataType: "varchar"
         }))
         setShowType(false);
         setExpanded(false);
       },
-      icon: <TextIcon/>,
+      icon: <TextIcon />,
       label: "Varchar"
     }
   ];
@@ -244,13 +240,12 @@ export default function Header({
 
   function handleKeyDown(e) {
     if (e.key === "Enter") {
-      // console.log("id",id)
       dispatch(updateColumnHeaders({
         columnId: id,
-        dbId:tableInfo?.dbId,
-        tableName:tableInfo?.tableId,
-        fieldName:id,
-        fieldType:"text",
+        dbId: tableInfo?.dbId,
+        tableName: tableInfo?.tableId,
+        fieldName: id,
+        fieldType: "text",
         label: header
       }))
       setExpanded(false);
@@ -270,9 +265,9 @@ export default function Header({
     }))
     dispatch(updateColumnHeaders({
       columnId: id,
-      dbId:tableInfo?.dbId,
-      tableName:tableInfo?.tableId,
-      fieldName:id,
+      dbId: tableInfo?.dbId,
+      tableName: tableInfo?.tableId,
+      fieldName: id,
       label: header
     }))
   }
@@ -284,13 +279,12 @@ export default function Header({
         <div
           className='th-content'
           style={{ display: "flex", justifyContent: "center" }}
-          // onClick={(e) => dataDispatch({type: "add_column_to_left", columnId: 999999, focus: true})}>
           onClick={handleOpen}>
           <span className='svg-icon-sm svg-gray'>
             <PlusIcon />
           </span>
         </div>
-      <PopupModal title="create column" label="Column Name" setVariable={setVariable} variable={variable} open={open} setOpen ={setOpen}  submitData={createLeftColumn} />
+        <PopupModal title="create column" label="Column Name" setVariable={setVariable} variable={variable} open={open} setOpen={setOpen} submitData={createLeftColumn} />
 
       </div > :
         <div  {...getHeaderProps({ style: { display: "inline-block" } })} className='th noselect'
@@ -375,8 +369,8 @@ export default function Header({
                 padding: "4px 0px"
               }}>
               {buttons.map((button, index) => (
-                <button type='button' key={index} className='sort-button' 
-                onClick={button.onClick}
+                <button type='button' key={index} className='sort-button'
+                  onClick={button.onClick}
                 >
                   <span className='svg-icon svg-text icon-margin'>{button.icon}</span>
                   {button.label}

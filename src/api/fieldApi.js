@@ -16,7 +16,6 @@ const updateField = async (db_id,tableName,fieldName,data) =>
 
 const deleteField = async (db_id,tableName,fieldName) =>
 {
-    // console.log(db_id,tableName,fieldName)
     return await axios.delete(URL +`/dbs/${db_id}/${tableName}/${fieldName}/deletefield`)
 }
 
