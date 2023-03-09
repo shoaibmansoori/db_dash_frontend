@@ -11,8 +11,10 @@ export default function Navbar() {
   const [alldbs, setAllDbs] = useState(false);
   const [tables, setTables] = useState({});
   const [selectedOption, setSelectedOption] = useState();
+  // const [selectedDb,setSelectedDb] = useState(null);
   const [selectTable, setSelectTable] = useState('');
   const handleChange = async (event) => {
+    // console.log("event",event.target.value)
     setSelectedOption(event.target.value);
     await getAllTableName(event.target.value)
   };
@@ -31,6 +33,9 @@ export default function Navbar() {
       result[item.org_id._id] = result[item.org_id._id] ? [...result[item.org_id._id], item] : [item]
     })
     setSelectedOption(result?.[Object.keys(result)?.[0]]?.[0].name);
+    console.log(selectedOption)
+    // setSelectedDb(result?.[Object.keys(result)?.[0]]?.[0]._id)
+    // console.log(result?.[Object.keys(result)?.[0]]?.[0]._id)
     setAllDbs(result);
   }
   const getOrgAndDb = async () => {
@@ -39,10 +44,14 @@ export default function Navbar() {
     filterDbsBasedOnOrg(data?.data?.data?.dbs)
   }
   console.log("tables",tables)
+  // console.log("GGG : ",dbId)
   const getAllTableName = async (dbId) => {
+    console.log("dbId",dbId)
     const data = await getDbById(dbId)
+    console.log("data",data)
     setTables(data.data.data.tables || {});
   }
+  
   return (
     <>
    <Box align="center">
@@ -57,14 +66,16 @@ export default function Navbar() {
       <Box >
         {alldbs && <FormControl sx={{ m: 1, minWidth: 120 }}>
           <InputLabel htmlFor="grouped-select">Organization-db</InputLabel>
-          <Select id="grouped-select" label="Organization and dbs"  value={selectedOption} onChange={handleChange} defaultValue={selectedOption}>
+          <Select id="grouped-select" label="Organization and dbs"  value={selectedOption._id}  onChange={handleChange}>
             {Object.entries(alldbs).map(([orgId, dbs]) => [
               <ListSubheader key={`${orgId}-header`} name={orgId}>{dbs[0].org_id.name}</ListSubheader>,
               dbs?.map((db,index) => (
-                <MenuItem key={index} value={db?.name}>{db?.name} </MenuItem>
+                <MenuItem key={index} value={db?._id}>{db?.name} </MenuItem>
               ))
             ]
             )}
+            {/* defaultValue={selectedOption} */}
+            {/* {console.log("HHH :",selectedDb)} */}
           </Select>
         </FormControl>}
       </Box>
@@ -83,7 +94,7 @@ export default function Navbar() {
         </FormControl>
       </Box>
       <Box>
-        <ApiCrudTablist />
+        <ApiCrudTablist db={selectedOption} table={selectTable}/>
       </Box>
     </>
   )

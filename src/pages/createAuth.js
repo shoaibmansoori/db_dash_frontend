@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import AuthKeyHeader from "../component/authKeyComponents/authKeyHeader";
 import Box from "@mui/material/Box";
-import { Link } from "react-router-dom";
+import { Link ,useLocation} from "react-router-dom";
 // import { useLocation } from "react-router-dom";
 import {
   TextField,
@@ -15,10 +15,10 @@ import AuthKeyDropdown from "../component/authKeyComponents/authKeyDropdown";
 
 export default function CreateAuth() {
   console.log('inside create auth key page')
-//   const location = useLocation();
-// //the data here will be an object since an object was
-// const dbId = location.state;
-// console.log("dbid",dbId)
+  const location = useLocation();
+//the data here will be an object since an object was
+const dbId = location.state;
+console.log("dbid",dbId)
 
   const [open, setOpen] = useState(false);
 
