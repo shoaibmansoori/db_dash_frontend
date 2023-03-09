@@ -64,7 +64,7 @@ const MenuProps = {
 
 
 
-export default function AuthAccessDropDown(props) {
+export default function AuthAccessDropDown({selected,setSelected,dbId}) {
   const [options, setOptions] = useState([]);
  
   const getAllTableName = async (dbId) => {
@@ -75,7 +75,7 @@ export default function AuthAccessDropDown(props) {
   }
   // console.log("Authkeydrop",props)
   const classes = useStyles();
-  const [selected, setSelected] = useState([]);
+  // const [selected, setSelected] = useState([]);
   const isAllSelected =
     options.length > 0 && selected.length === options.length;
   const handleChange = (event) => {
@@ -105,7 +105,7 @@ export default function AuthAccessDropDown(props) {
   console.log('setSelected',selected)
 
   const callFunc = async()=>{
-    const data = await getAllTableName(props?.dbId);
+    const data = await getAllTableName(dbId);
     console.log(data)
   }
   return (
@@ -116,7 +116,7 @@ export default function AuthAccessDropDown(props) {
         multiple
         value={selected}
         onChange={handleChange}
-        renderValue={(selected) => selected?.join(", ")}
+        renderValue={(selected) => selected.join(", ")}
         MenuProps={MenuProps}
       >
         {console.log(selected)}
@@ -131,9 +131,9 @@ export default function AuthAccessDropDown(props) {
                classes={{ indeterminate: classes.indeterminateColor }}
               //  checked={isAllSelected}
                indeterminate={
-                 selected.length > 0 && selected.length < options.length
+                 selected?.length > 0 && selected?.length < options.length
               }
-              defaultChecked={selected.length === Object.entries(options)?.length}
+              defaultChecked={selected?.length === Object.entries(options)?.length}
               />
           </ListItemIcon>
           <ListItemText
@@ -149,13 +149,13 @@ export default function AuthAccessDropDown(props) {
            {/* <Checkbox checked={option[0]} /> */}
            {/* <input type="checkbox" value={option[0]}/> */}
            <Checkbox value={option[0]} onChange={(e)=>{
-            if(!selected.includes(e.target.value)){
+            if(!selected?.includes(e.target.value)){
               
               setSelected([...selected,e.target.value])
             }
             console.log(e.target.value);
            }}
-           defaultChecked={selected.includes(option[0])}
+           defaultChecked={selected?.includes(option[0])}
            />
          </ListItemIcon>
          <ListItemText primary={option[0]} />
@@ -166,5 +166,7 @@ export default function AuthAccessDropDown(props) {
   );
 }
 AuthAccessDropDown.propTypes = {
-  dbId: PropTypes.string
+  dbId: PropTypes.string,
+  selected: PropTypes.any,
+  setSelected: PropTypes.func
 };
