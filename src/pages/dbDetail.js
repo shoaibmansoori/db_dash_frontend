@@ -8,11 +8,9 @@ import { Link } from 'react-router-dom'
 
 
 function DbDetails(props) {
-// console.log("dblist",props)
 
     const location = useLocation();
     const [dbData, setDbData] = useState(null);
-    // console.log("db",dbData)
     // const dispatchs=useDispatch();
     const getData=()=>{
     //    dispatchs(bulkAddColumns(makeData(10)));

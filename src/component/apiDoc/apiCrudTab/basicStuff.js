@@ -3,10 +3,8 @@ import { PropTypes } from 'prop-types';
 import { getTable } from '../../../api/tableApi';
 import CodeSnippet from '../codeSnippet';
  function BasicStuff(props) {
-  console.log("BasicStuff Props : ",props);
   const tableData = async ()=>{
-    const temp = await getTable(props.db,props.table)
-    console.log("temp",temp);
+    await getTable(props.db,props.table)
   }
 
   useEffect(()=>{

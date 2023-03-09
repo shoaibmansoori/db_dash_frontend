@@ -5,7 +5,6 @@ import CodeSnippet from '../codeSnippet';
 
 
 function UpdateRecord(props) {
-  console.log("UpdateRecord Props : ",props);
   return (
     <>
     <div>Update Record</div>

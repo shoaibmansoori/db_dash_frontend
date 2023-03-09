@@ -26,21 +26,14 @@ export default function Header({
 }) {
   const dispatch = useDispatch();
   const tableInfo = useSelector((state) => getTableInfo(state));
-  // console.log(tableInfo)
-  // console.log("column",id)
   const [open, setOpen] = useState(false);
-  // const [modalOpen,setModalOpen] = useState(false);
   const [variable, setVariable] = useState("");
 
   const handleOpen = () => {
     setOpen(true);
     setExpanded(false);
-
-    console.log(1);
   }
-  // console.log(open);
   const createLeftColumn = () => {
-    console.log("columnName", tableInfo)
     setOpen(false);
     dispatch(addColumsToLeft({
       columnId: 999999, focus: false, fieldName: variable, dbId: tableInfo?.dbId, tableId: tableInfo?.tableId, fieldType: "text"
@@ -124,13 +117,11 @@ export default function Header({
     // },
     {
       onClick: () => {
-        console.log("id", header)
         // dataDispatch({type: "update_column_header", columnId: id, label: header});
         // dispatch(updateColumnHeaders({
         //   columnId: id,
         //   label: header
         // }))
-        console.log("yufdhjncx", header, id, tableInfo?.tableId, tableInfo?.dbId)
         // // dataDispatch({type: "delete_column", columnId: id});
         dispatch(deleteColumns({
           label: header,

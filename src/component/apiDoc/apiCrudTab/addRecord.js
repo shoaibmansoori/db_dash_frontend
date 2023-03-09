@@ -4,7 +4,6 @@ import { Box } from '@mui/system';
 import CodeSnippet from '../codeSnippet';
 
 function AddRecord(props) {
-  console.log("AddRecord Props : ",props);
   return (
     <>
     <div>Add Record</div>

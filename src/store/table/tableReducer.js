@@ -1,4 +1,4 @@
-import { current } from '@reduxjs/toolkit';
+// import { current } from '@reduxjs/toolkit';
 import { addColumns, addColumnsToRight, bulkAddColumns, updateColumnsType, updateCells, addRows, deleteColumns, updateColumnHeaders, addColumsToLeft } from './tableThunk.js';
 import { randomColor, shortId } from "../../table/utils";
 
@@ -34,7 +34,6 @@ export const reducers = {
 
       state.skipReset = true;
     }
-    console.log(current(state));
   },
 
   deleteColumn(state, payload) {
@@ -61,7 +60,6 @@ export const reducers = {
       );
     }
 
-    console.log("in update column header reducer ");
 
     return {
       ...state,
@@ -122,7 +120,6 @@ export const reducers = {
       ]
 
     }
-    console.log('add column', current(state));
   },
   updateTableData(state, payload) {
 
@@ -247,8 +244,6 @@ export const reducers = {
         }
       case "varchar":
         if (state.columns[typeIndex].dataType === "varchar") {
-          console.log("varchar in reducer ");
-          console.log(current(state));
           return state;
         } else if (state.columns[typeIndex].dataType === "select") {
           return {
@@ -302,7 +297,6 @@ export function extraReducers(builder) {
     })
 
     .addCase(bulkAddColumns.pending, (state) => {
-      console.log("blk add pending")
       state.status = "loading"
     })
     .addCase(bulkAddColumns.fulfilled, (state, action) => {

@@ -7,18 +7,6 @@ import PropTypes from "prop-types";
 
 
 export default function Curl() {
-  // console.log(" curl props",props)
-
-
-// const addRow = async(e) => 
-// {
-//   e.preventDefault();
-//   const dbId = await props?.dbData?.db?._id;
-//   const tableName = await props?.dbData?.db?.name;
-//   const data = {}
-//   //await insertRow(dbId,tableName,data)
-// }
-// console.log("dbId",dbId);
 
 
   return (

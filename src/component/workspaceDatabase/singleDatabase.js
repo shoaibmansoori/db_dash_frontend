@@ -23,7 +23,6 @@ const handleOpen = () => {
   setName(false);
 }
 useEffect(() => {
-  // console.log(props?.db?.org_id?._id)
 });
 const deletDatabases = async() => {
   await deleteDb(props?.db?.org_id?._id,props?.db._id)

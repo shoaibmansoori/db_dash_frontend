@@ -99,7 +99,6 @@ export default function Table({ columns, data,dispatch:dataDispatch, skipReset }
   
         newData[index][keyName] = newValueToReplace;
       })
-      console.log(newData);
       dataDispatch(updateTableData(newData))
       
     }

@@ -14,7 +14,6 @@ export const initialState = {
 
 export const reducers = {
     add(state,payload){
-      console.log(payload);
 
         if(payload.payload){
           const {first_name,last_name,_id,email,profile_pic}=payload.payload;
@@ -26,7 +25,6 @@ export const reducers = {
           state.userLogIn=true;
           state.userLogOut=false;
         }
-        // console.log(current(state));
     },
     remove(state){
       state.userFirstName='';

@@ -66,7 +66,6 @@ export default function TablesList (props ) {
         
         <Box
         onClick={() => { 
-          console.log("onclick")
           dispatch(bulkAddColumns({
             "dbId":props.dbData.db._id,
             "tableName":table[0]
