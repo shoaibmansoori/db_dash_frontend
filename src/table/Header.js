@@ -31,12 +31,16 @@ export default function Header({
 
   // console.log("column",id)
   const [open, setOpen] = useState(false);
+  const [modalOpen,setModalOpen] = useState(false);
   const [variable,setVariable] = useState("");
 
   const handleOpen = () => {
     setOpen(true);
+    setExpanded(false);
+
+    console.log(1);
   }
-  // console.log(open);
+  console.log(open);
   const createLeftColumn=()=>{
     console.log("columnName",variable)
     setOpen(false);
@@ -91,16 +95,19 @@ export default function Header({
     {
       onClick: () => {
         console.log("plus")
-        dispatch(updateColumnHeaders({
-          type: "updateColumnHeader",
-          columnId: id,
-          label: header
-        }))
+        handleOpen()
+        // dispatch(updateColumnHeaders({
+        //   columnId: id,
+        //   label: header
+        // }))
         // dataDispatch({type: "add_column_to_left", columnId: id, focus: false});
-        dispatch(addColumsToLeft({
-          columnId: id, focus: false,
-        }))
-        setExpanded(false);
+        // dispatch(addColumsToLeft({
+        //   columnId: id, focus: false,
+        // }))
+        // dispatch(addColumsToLeft({
+        //   columnId: 999999, focus: false,fieldName:variable,dbId:tableInfo?.dbId,tableId:tableInfo?.tableId,fieldType:"text"
+        // }));
+        // setExpanded(false);
       },
       icon: <ArrowLeftIcon />,
       label: "Insert left"
@@ -351,7 +358,7 @@ export default function Header({
               }}>
               {buttons.map((button, index) => (
                 <button type='button' key={index} className='sort-button' 
-                onMouseDown={button.onClick}
+                onClick={handleOpen}
                 >
                   <span className='svg-icon svg-text icon-margin'>{button.icon}</span>
                   {button.label}

@@ -183,8 +183,8 @@ export default function Table({ columns, data,dispatch:dataDispatch, skipReset }
                   return (
                     
                     <div key={columnIndex}
-                    onMouseDown={() => handleCellMouseDown(rowIndex, columnIndex)}
-                    onMouseOver={() => handleCellMouseOver(rowIndex, columnIndex)}
+                    // onMouseDown={() => handleCellMouseDown(rowIndex, columnIndex)}
+                    // onMouseOver={() => handleCellMouseOver(rowIndex, columnIndex)}
                     {...cell.getCellRangeSelectionProps()}
                     {...cell.getCellProps(
                       {
