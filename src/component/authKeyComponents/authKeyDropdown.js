@@ -29,12 +29,8 @@ export default function AuthKeyDropdown() {
           label="Add Space"
           onChange={handleChange}
         >
-          <MenuItem value="">
-            <em>None</em>
-          </MenuItem>
-          <MenuItem value={1}>Table 1</MenuItem>
-          <MenuItem value={2}>Table 2</MenuItem>
-          <MenuItem value={3}>Table 3</MenuItem>
+          <MenuItem value={1}>Read</MenuItem>
+          <MenuItem value={2}>Write</MenuItem>
         </Select>
       </FormControl>
 

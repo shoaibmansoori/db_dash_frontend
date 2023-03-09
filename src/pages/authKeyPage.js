@@ -20,7 +20,7 @@ const dbId = location.state;
      </Box>
 
       <Box sx={{ display: "flex", justifyContent: "end", m: 1 }}>
-        <Link to ='/authKeyCreate' style={{textDecoration:'none'}} >
+        <Link to ='/authKeyCreate' state={dbId} style={{textDecoration:'none'}} >
         <Button variant="contained" startIcon={<AddIcon/>}>
           Create Authkey
         </Button>

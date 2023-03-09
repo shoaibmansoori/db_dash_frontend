@@ -1,5 +1,4 @@
 import React, { useEffect, useState} from "react";
-import Dropdown from "../dropdown";
 import {
   Table,
   TableBody,
@@ -13,6 +12,7 @@ import {
 
 import { PropTypes } from 'prop-types';
 import { getAuthkey,deleteAuthkey} from "../../api/authkeyApi";
+import TableMenuDropdown from "./tableMenuDropdown";
 export default function AuthKey(props) {
 
   const adminId = localStorage.getItem("userid");
@@ -75,7 +75,7 @@ export default function AuthKey(props) {
                   <TableCell>{authKeys[keys].createBy}</TableCell>
                   <TableCell>{authKeys[keys].createDate}</TableCell>
                   <TableCell>     
-                     <Dropdown first={"Edit"} second={"Delete"} third={"Show AuthKey"} title={keys} deleteFunction={deleteAuthkeyFun}/>
+                  <TableMenuDropdown first={"Edit"} second={"Delete"} third={"Show AuthKey"} title={keys} deleteFunction={deleteAuthkeyFun}/>
                   </TableCell>
             
                 </TableRow>

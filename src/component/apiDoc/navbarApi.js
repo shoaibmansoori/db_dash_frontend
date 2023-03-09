@@ -98,7 +98,7 @@ export default function Navbar() {
      <Box >
      { console.log(tables)}
          <Select  value={selectTable}
-    onChange={handleChangeTable} >
+        onChange={handleChangeTable} >
          { Object.entries(tables)?.map((table) => (
           <MenuItem key = {table[0]}value={table[0]} >
             {table[0]}
