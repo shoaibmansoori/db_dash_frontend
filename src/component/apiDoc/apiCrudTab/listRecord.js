@@ -7,16 +7,6 @@ import { Typography } from '@mui/material';
 
 function ListRecord(props) {
 
-    // const tableData = async ()=>{
-    //   const temp = await getTable(props.db,props.table)
-    //   console.log("temp",temp);
-    // }
-  
-    // useEffect(()=>{
-    //   tableData();
-    // })
-
-  console.log("ListRecord Props : ",props);
   return (
     <>
     <div>List Record</div>

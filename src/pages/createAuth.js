@@ -8,6 +8,7 @@ import AuthKeyPopup from "../component/authKeyComponents/authKeyPopup";
 import AuthKeyDropdown from "../component/authKeyComponents/authKeyDropdown";
 import { PropTypes } from "prop-types";
 import { createAuthkey } from "../api/authkeyApi";
+import MainNavbar from "../component/mainNavbar";
 
 
 
@@ -15,15 +16,10 @@ export default function CreateAuthKey() {
 
  const location = useLocation()
  const dbId = location.state;
- console.log("Creating auth key", dbId);
- console.log("Creating auth key", dbId);
  const [selected,setSelected] = useState([])
  const [scope, setScope] = useState('');
  const [name,setName] = useState('');
 
-console.log("scope",scope)
-  const adminId = localStorage.getItem("userid");
-    console.log("adminId", adminId);
 
   const [open, setOpen] = useState(false);
   // const handleOpen = () => setOpen(true);
@@ -52,6 +48,9 @@ console.log("scope",scope)
 
   return (
     <>
+    <Box>
+      <MainNavbar/>
+    </Box>
       <Box>
         <AuthKeyHeader />
       </Box>

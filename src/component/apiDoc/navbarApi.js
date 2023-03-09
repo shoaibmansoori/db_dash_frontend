@@ -14,12 +14,10 @@ export default function Navbar() {
   // const [selectedDb,setSelectedDb] = useState(null);
   const [selectTable, setSelectTable] = useState('');
   const handleChange = async (event) => {
-    // console.log("event",event.target.value)
     setSelectedOption(event.target.value);
     await getAllTableName(event.target.value)
   };
   const handleChangeTable = async (event) => {
-    //console.log(event.target.value)
     setSelectTable(event.target.value);
   };
   const { user } = UserAuth();
@@ -43,12 +41,8 @@ export default function Navbar() {
     localStorage.setItem("userid", data?.data?.data?._id);
     filterDbsBasedOnOrg(data?.data?.data?.dbs)
   }
-  console.log("tables",tables)
-  // console.log("GGG : ",dbId)
   const getAllTableName = async (dbId) => {
-    console.log("dbId",dbId)
     const data = await getDbById(dbId)
-    console.log("data",data)
     setTables(data.data.data.tables || {});
   }
   
@@ -75,7 +69,6 @@ export default function Navbar() {
             ]
             )}
             {/* defaultValue={selectedOption} */}
-            {/* {console.log("HHH :",selectedDb)} */}
           </Select>
         </FormControl>}
       </Box>

@@ -49,7 +49,6 @@ function a11yProps(index) {
 function ApiCrudTablist(props) {
   const [value, setValue] = useState(0);
 
-  console.log("ApiCrudTablist Props : ",props);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);

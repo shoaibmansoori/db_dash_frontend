@@ -5,7 +5,6 @@ import CodeSnippet from '../codeSnippet';
 
 
 function DeleteRecord(props) {
-  console.log("DeleteRecord Props : ",props);
   return (
     <>
     <div>Delete Record</div>

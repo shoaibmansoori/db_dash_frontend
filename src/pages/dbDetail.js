@@ -4,6 +4,7 @@ import {Box,Button, Typography, Container } from "@mui/material";
 import { useLocation } from "react-router-dom";
 import TablesList from "../component/table/tablesList";
 import { Link } from 'react-router-dom'
+import MainNavbar from "../component/mainNavbar";
 
 
 function DbDetails(props) {
@@ -23,6 +24,9 @@ console.log("dblist",props)
 
     return (
         <>
+        <Box>
+      <MainNavbar/>
+    </Box>
         <Container maxWidth="sm">
             {dbData ? (
                 <Typography variant="body1" align="center">
