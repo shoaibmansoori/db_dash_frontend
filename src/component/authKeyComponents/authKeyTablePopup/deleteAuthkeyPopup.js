@@ -1,7 +1,7 @@
 import React from 'react';
 import {Button,Dialog,DialogActions,DialogContent,DialogContentText,DialogTitle} from '@mui/material';
 import { PropTypes } from 'prop-types';
-export default function AlertPopup(props) {
+export default function DeleteAuthKeyPopup(props) {
 
   const handleClose = () => {
     props.setOpen(false);
@@ -32,7 +32,7 @@ export default function AlertPopup(props) {
 }
 
 
-AlertPopup.propTypes = {
+DeleteAuthKeyPopup.propTypes = {
   setOpen: PropTypes.func,
   open:PropTypes.bool,
   title: PropTypes.string,

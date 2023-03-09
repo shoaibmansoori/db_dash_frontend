@@ -4,10 +4,15 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import { Box } from '@mui/system';
-export default function AuthKeyDropdown() {
-  const [age, setAge] = React.useState('');
+import PropTypes from "prop-types";
+
+
+
+export default function AuthKeyDropdown({scope,setScope}) {
+
   const handleChange = (event) => {
-    setAge(event.target.value);
+    setScope(event.target.value);
+
   }
   return (
     <>
@@ -17,20 +22,33 @@ export default function AuthKeyDropdown() {
         <Select
           labelId="demo-simple-select-helper-label"
           id="demo-simple-select-helper"
-          value={age}
+          value={scope}
           label="Add Space"
           onChange={handleChange}
         >
-          <MenuItem value="">
-            <em>None</em>
-          </MenuItem>
-          <MenuItem value={1}>Table 1</MenuItem>
-          <MenuItem value={2}>Table 2</MenuItem>
-          <MenuItem value={3}>Table 3</MenuItem>
+          <MenuItem value={"Read"}>Read</MenuItem>
+          <MenuItem value={"Write"}>Write</MenuItem>
         </Select>
       </FormControl>
     </Box>
     </>
   );
 }
-AuthKeyDropdown.propTypes = {};
+
+AuthKeyDropdown.propTypes = {
+  scope: PropTypes.any,
+  setScope:PropTypes.func
+};
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -3,8 +3,6 @@ import PropTypes from 'prop-types';
 import { Typography, Menu, MenuItem, Tooltip, IconButton } from '@mui/material'
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import AuthKeyPopup from './authKeyPopup';
-
-
 export default function TableMenuDropdown(props) {
     const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
@@ -42,10 +40,10 @@ export default function TableMenuDropdown(props) {
           >
             <MenuItem onClick={handleCloseUserMenu}>
               <Typography textAlign="center" onClick={(e) =>{e.preventDefault();
-              e.stopPropagation();}}>{props?.first}</Typography>
+             }}>{props?.first}</Typography>
             </MenuItem>
             <MenuItem onClick={(e)=>{e.preventDefault();
-              e.stopPropagation();handleCloseUserMenu(e)}}>
+             handleCloseUserMenu(e)}}>
               <Typography textAlign="center" >{props?.second}</Typography>
             </MenuItem>
             <MenuItem>

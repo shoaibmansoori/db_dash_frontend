@@ -1,5 +1,4 @@
 import React, { useEffect, useState} from "react";
-import Dropdown from "../dropdown";
 import {
   Table,
   TableBody,
@@ -12,7 +11,8 @@ import {
 } from "@mui/material";
 
 import { PropTypes } from 'prop-types';
-import { getAuthkey } from "../../api/authkeyApi";
+import { getAuthkey,deleteAuthkey} from "../../api/authkeyApi";
+import TableMenuDropdown from "./tableMenuDropdown";
 export default function AuthKey(props) {
 
   const adminId = localStorage.getItem("userid");
@@ -26,9 +26,15 @@ export default function AuthKey(props) {
   },[])
 
   async function getAuthkeyFun(){
+    // console.log("props",props)
   const data = await getAuthkey(props.dbId,adminId) 
   setAuthKeys(data?.data?.data)
-  console.log("idris",Object.keys(authKeys))
+  }
+
+  async function deleteAuthkeyFun(authKey){
+    const data = await deleteAuthkey(props.dbId,adminId,authKey)
+    console.log("Delete Auth Key Data : ",data);
+    return data;
   }
   
   console.log("AuthKeys : ",authKeys);
@@ -69,8 +75,9 @@ export default function AuthKey(props) {
                   <TableCell>{authKeys[keys].scope}</TableCell>
                   <TableCell>{authKeys[keys].createBy}</TableCell>
                   <TableCell>{authKeys[keys].createDate}</TableCell>
-                  <TableCell>      <Dropdown first={"Edit"} second={"Delete"} third={"Show AuthKey"} />
-</TableCell>
+                  <TableCell>     
+                  <TableMenuDropdown first={"Edit"} second={"Delete"} third={"Show AuthKey"} title={keys} deleteFunction={deleteAuthkeyFun}/>
+                  </TableCell>
             
                 </TableRow>
               ))}
