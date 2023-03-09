@@ -5,11 +5,12 @@ import PropTypes from 'prop-types';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import BasicStuff from './basicStuff';
-import RetrieveRecord from './retrieveRecord';
+// import RetrieveRecord from './retrieveRecord';
 import ListRecord from './listRecord';
 import AddRecord from './addRecord';
 import UpdateRecord from './updateRecord';
 import DeleteRecord from './deleteRecord';
+
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -45,8 +46,10 @@ function a11yProps(index) {
 }
 
 
-function ApiCrudTablist() {
+function ApiCrudTablist(props) {
   const [value, setValue] = useState(0);
+
+  console.log("ApiCrudTablist Props : ",props);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -57,34 +60,39 @@ function ApiCrudTablist() {
       <Box sx={{ borderBottom: 1, borderColor: 'divider'}}>
         <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
           <Tab label="Basic stuff" {...a11yProps(0)} />
-          <Tab label="Retrieve a record" {...a11yProps(1)} />
-          <Tab label="List/Search records" {...a11yProps(2)} />
-          <Tab label="Add records" {...a11yProps(3)} />
-          <Tab label="Update records" {...a11yProps(4)} />
-          <Tab label="Delete records" {...a11yProps(5)} />
+          {/* <Tab label="Retrieve a record" {...a11yProps(1)} /> */}
+          <Tab label="List/Search records" {...a11yProps(1)} />
+          <Tab label="Add records" {...a11yProps(2)} />
+          <Tab label="Update records" {...a11yProps(3)} />
+          <Tab label="Delete records" {...a11yProps(4)} />
         </Tabs>
       </Box>
       <TabPanel value={value} index={0}>
-        <BasicStuff/>
+        <BasicStuff db={props.db} table={props.table}/>
       </TabPanel>
+      {/* <TabPanel value={value} index={1}>
+        <RetrieveRecord db={props.db} table={props.table} />
+      </TabPanel> */}
       <TabPanel value={value} index={1}>
-        <RetrieveRecord/>
+        <ListRecord db={props.db} table={props.table}/>
       </TabPanel>
       <TabPanel value={value} index={2}>
-        <ListRecord/>
+       <AddRecord db={props.db} table={props.table}/>
       </TabPanel>
       <TabPanel value={value} index={3}>
-       <AddRecord/>
+       <UpdateRecord db={props.db} table={props.table}/>
       </TabPanel>
       <TabPanel value={value} index={4}>
-       <UpdateRecord/>
-      </TabPanel>
-      <TabPanel value={value} index={5}>
-       <DeleteRecord/>
+       <DeleteRecord db={props.db} table={props.table}/>
       </TabPanel>
     </Box>
     </>
   )
+}
+
+ApiCrudTablist.propTypes = {
+  db: PropTypes.string,
+  table:PropTypes.string
 }
 
 export default ApiCrudTablist

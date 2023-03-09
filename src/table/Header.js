@@ -3,8 +3,8 @@ import { usePopper } from "react-popper";
 import { grey } from "./colors";
 import ArrowUpIcon from "./img/ArrowUp";
 import ArrowDownIcon from "./img/ArrowDown";
-import ArrowLeftIcon from "./img/ArrowLeft";
-import ArrowRightIcon from "./img/ArrowRight";
+// import ArrowLeftIcon from "./img/ArrowLeft";
+// import ArrowRightIcon from "./img/ArrowRight";
 import TrashIcon from "./img/Trash";
 import TextIcon from "./Text";
 import MultiIcon from "./img/Multi";
@@ -13,10 +13,9 @@ import PlusIcon from "./img/Plus";
 import { useDispatch,useSelector } from "react-redux";
 import { shortId } from "./utils";
 import PropTypes from 'prop-types';
-import { addColumnsToRight, addColumsToLeft, deleteColumns, updateColumnHeaders, updateColumnsType } from "../store/table/tableThunk";
+import { addColumsToLeft, deleteColumns, updateColumnHeaders, updateColumnsType } from "../store/table/tableThunk";
 import PopupModal from "../component/popupModal";
 import { getTableInfo } from "../store/table/tableSelector";
-import zIndex from "@mui/material/styles/zIndex";
 
 
 
@@ -27,11 +26,10 @@ export default function Header({
 }) {
   const dispatch = useDispatch();
   const tableInfo=useSelector((state)=>getTableInfo(state));
-  // console.log("tableInfo",tableInfo)
-
+  // console.log(tableInfo)
   // console.log("column",id)
   const [open, setOpen] = useState(false);
-  const [modalOpen,setModalOpen] = useState(false);
+  // const [modalOpen,setModalOpen] = useState(false);
   const [variable,setVariable] = useState("");
 
   const handleOpen = () => {
@@ -40,18 +38,14 @@ export default function Header({
 
     console.log(1);
   }
-  console.log(open);
+  // console.log(open);
   const createLeftColumn=()=>{
-    console.log("columnName",variable)
+    console.log("columnName",tableInfo)
     setOpen(false);
     dispatch(addColumsToLeft({
       columnId: 999999, focus: false,fieldName:variable,dbId:tableInfo?.dbId,tableId:tableInfo?.tableId,fieldType:"text"
     }));
   }
-
-
-
-  // console.log(open);
   const [expanded, setExpanded] = useState(created || false);
   const [referenceElement, setReferenceElement] = useState(null);
   const [popperElement, setPopperElement] = useState(null);
@@ -92,59 +86,60 @@ export default function Header({
       icon: <ArrowDownIcon />,
       label: "Sort descending"
     },
-    {
-      onClick: () => {
-        console.log("plus")
-        handleOpen()
-        // dispatch(updateColumnHeaders({
-        //   columnId: id,
-        //   label: header
-        // }))
-        // dataDispatch({type: "add_column_to_left", columnId: id, focus: false});
-        // dispatch(addColumsToLeft({
-        //   columnId: id, focus: false,
-        // }))
-        // dispatch(addColumsToLeft({
-        //   columnId: 999999, focus: false,fieldName:variable,dbId:tableInfo?.dbId,tableId:tableInfo?.tableId,fieldType:"text"
-        // }));
-        // setExpanded(false);
-      },
-      icon: <ArrowLeftIcon />,
-      label: "Insert left"
-    },
-    {
-      onClick: () => {
-        dispatch(updateColumnHeaders({
-          type: "updateColumnHeader",
-          columnId: id,
-          label: header
-        }))
-        dispatch(addColumnsToRight({
-          type: "addColumnToRight",
-          columnId: id, focus: false
-        }))
-        setExpanded(false);
-      },
-      icon: <ArrowRightIcon />,
-      label: "Insert right"
-    },
+    // {
+    //   onClick: () => {
+    //     console.log("plus")
+    //     handleOpen()
+    //     // dispatch(updateColumnHeaders({
+    //     //   columnId: id,
+    //     //   label: header
+    //     // }))
+    //     // dataDispatch({type: "add_column_to_left", columnId: id, focus: false});
+    //     // dispatch(addColumsToLeft({
+    //     //   columnId: id, focus: false,
+    //     // }))
+    //     // dispatch(addColumsToLeft({
+    //     //   columnId: 999999, focus: false,fieldName:variable,dbId:tableInfo?.dbId,tableId:tableInfo?.tableId,fieldType:"text"
+    //     // }));
+    //     // setExpanded(false);
+    //   },
+    //   icon: <ArrowLeftIcon />,
+    //   label: "Insert left"
+    // },
+    // {
+    //   onClick: () => {
+    //     dispatch(updateColumnHeaders({
+    //       type: "updateColumnHeader",
+    //       columnId: id,
+    //       label: header
+    //     }))
+    //     dispatch(addColumnsToRight({
+    //       type: "addColumnToRight",
+    //       columnId: id, focus: false
+    //     }))
+    //     setExpanded(false);
+    //   },
+    //   icon: <ArrowRightIcon />,
+    //   label: "Insert right"
+    // },
     {
       onClick: () => {
         console.log("id",header)
         // dataDispatch({type: "update_column_header", columnId: id, label: header});
-        dispatch(updateColumnHeaders({
-          columnId: id,
-          label: header
-        }))
-        // console.log(id,tableInfo?.tableId,tableInfo?.dbId)
+        // dispatch(updateColumnHeaders({
+        //   columnId: id,
+        //   label: header
+        // }))
+        console.log("yufdhjncx",header,id,tableInfo?.tableId,tableInfo?.dbId)
         // // dataDispatch({type: "delete_column", columnId: id});
         dispatch(deleteColumns({
+          label: header,
           columnId: id,
           fieldName:id,
           tableId:tableInfo?.tableId,
           dbId:tableInfo?.dbId
         }))
-        setExpanded(false);zIndex
+        setExpanded(false);
         
       },
       icon: <TrashIcon />,
@@ -184,19 +179,35 @@ export default function Header({
         // dataDispatch({type: "update_column_type", columnId: id, dataType: "number"});
         dispatch(updateColumnsType({
           columnId: id,
-          dataType: "number"
+          dataType: "integer"
         }))
         setShowType(false);
         setExpanded(false);
       },
       icon: <HashIcon />,
-      label: "Number"
+      label: "Integer"
+    },
+    {
+      onClick: () => {
+        // dataDispatch({type: "update_column_type", columnId: id, dataType: "select"});
+        dispatch(updateColumnsType({
+          columnId: id, 
+          dataType: "varchar"
+        }))
+        setShowType(false);
+        setExpanded(false);
+      },
+      icon: <TextIcon/>,
+      label: "Varchar"
     }
   ];
 
   let propertyIcon;
   switch (dataType) {
-    case "number":
+    case "varchar":
+      propertyIcon = <TextIcon />;
+      break;
+    case "integer":
       propertyIcon = <HashIcon />;
       break;
     case "text":
@@ -255,6 +266,13 @@ export default function Header({
     dispatch(updateColumnHeaders({
       type: "updateColumnHeader",
       columnId: id,
+      label: header
+    }))
+    dispatch(updateColumnHeaders({
+      columnId: id,
+      dbId:tableInfo?.dbId,
+      tableName:tableInfo?.tableId,
+      fieldName:id,
       label: header
     }))
   }
@@ -358,7 +376,7 @@ export default function Header({
               }}>
               {buttons.map((button, index) => (
                 <button type='button' key={index} className='sort-button' 
-                onClick={handleOpen}
+                onClick={button.onClick}
                 >
                   <span className='svg-icon svg-text icon-margin'>{button.icon}</span>
                   {button.label}

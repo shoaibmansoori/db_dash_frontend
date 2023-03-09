@@ -67,6 +67,9 @@ export const reducers = {
         (column) => column.id === action.columnId
       );
     }
+
+    console.log("in update column header reducer ");
+   
     return {
       ...state,
       skipReset: true,
@@ -160,14 +163,15 @@ export const reducers = {
   updateColumnType(state, payload) {
     const action = payload.payload
     if (action) {
+
       var typeIndex = state.columns.findIndex(
         (column) => column.id === action.columnId
       );
     }
 
     switch (action.dataType) {
-      case "number":
-        if (state.columns[typeIndex].dataType === "number") {
+      case "integer":
+        if (state.columns[typeIndex].dataType === "integer") {
           return state;
         } else {
           return {
@@ -248,6 +252,36 @@ export const reducers = {
             }))
           };
         }
+      case "varchar":
+      if (state.columns[typeIndex].dataType === "varchar") {
+        console.log("varchar in reducer ");
+        console.log(current(state));
+        return state;
+      } else if (state.columns[typeIndex].dataType === "select") {
+        return {
+          ...state,
+          skipReset: true,
+          columns: [
+            ...state.columns.slice(0, typeIndex),
+            { ...state.columns[typeIndex], dataType: action.dataType },
+            ...state.columns.slice(typeIndex + 1, state.columns.length)
+          ]
+        };
+      } else {
+        return {
+          ...state,
+          skipReset: true,
+          columns: [
+            ...state.columns.slice(0, typeIndex),
+            { ...state.columns[typeIndex], dataType: action.dataType },
+            ...state.columns.slice(typeIndex + 1, state.columns.length)
+          ],
+          data: state.data.map((row) => ({
+            ...row,
+            [action.columnId]: row[action.columnId] + ""
+          })) 
+        };
+      }
       default:
         return state;
     }
@@ -278,6 +312,7 @@ export function extraReducers(builder) {
     })
 
     .addCase(bulkAddColumns.pending, (state) => {
+      console.log("blk add pending")
       state.status = "loading"
     })
     .addCase(bulkAddColumns.fulfilled, (state, action) => {

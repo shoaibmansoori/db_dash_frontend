@@ -9,7 +9,6 @@ import { getTableInfo } from "../store/table/tableSelector";
 function MainTable() {
 
   useEffect(() => {
-    console.log("hello");
 },[]);
   const tableInfo=useSelector((state)=>getTableInfo(state));
   // console.log("tableInfo",tableInfo.columns)

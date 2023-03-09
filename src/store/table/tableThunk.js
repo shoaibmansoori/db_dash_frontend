@@ -6,7 +6,7 @@ import { getTable } from "../../api/tableApi";
 import { addColumnToLeft, addColumnToRight, addOptionToColumn,addRow,deleteColumn,updateCell,updateColumnHeader, updateColumnType} from "./tableSlice";
 const getHeaders = async(dbId,tableName) =>{
     const fields = await getAllfields(dbId,tableName);
-    console.log("getHeaders",fields)
+    // console.log("getHeaders",fields)
     let columns = [
         {
             id: 9999991,
@@ -19,7 +19,7 @@ const getHeaders = async(dbId,tableName) =>{
     ]
    
    Object.entries(fields.data.data.fields).forEach( (field) =>{
-    console.log("field",field)
+    // console.log("field",field)
        var json = {
            id: "",
         label: "",
@@ -29,10 +29,10 @@ const getHeaders = async(dbId,tableName) =>{
         options: []
     }
     json.id = field[0];
-    json.label = json.accessor = field[1]?.name?.toLowerCase() || field[0]?.toLowerCase();
-    json.dataType = field[1]?.fieldType
+    json.label = json.accessor = field[1].fieldName?.toLowerCase() || field[0]?.toLowerCase();
+    json.dataType = field[1].fieldType?.toLowerCase();
     columns.push (json);
-    console.log("json",json)
+    // console.log("json",json)
     }
     )
     columns.push({
@@ -49,7 +49,6 @@ const getHeaders = async(dbId,tableName) =>{
 export const addColumns = createAsyncThunk(
     "table/addColumns",
     async (payload,{dispatch}) =>{
-        console.log("addColumns")
         dispatch(addOptionToColumn(payload));
         return 5;
     }
@@ -58,9 +57,8 @@ export const addColumns = createAsyncThunk(
 export const bulkAddColumns = createAsyncThunk(
     "table/bulkAddColumns",
     async (payload) =>{      
-        console.log("thunkkkkk")
         const columns =  await getHeaders(payload.dbId,payload.tableName)
-        console.log("grfvd",columns)
+        // console.log("in bulk addd",columns)
         const data = await getTable(payload.dbId,payload.tableName)
         const dataa = {
             "columns":columns,
@@ -86,15 +84,18 @@ export const deleteColumns = createAsyncThunk(
 )
 export const updateColumnHeaders = createAsyncThunk(
     "table/updateColumnHeaders",
-    async(payload,{dispatch})=>{
-        console.log("payload",payload)
+    async(payload,{dispatch,getState})=>{
         const data={
             newFieldName:payload?.label,
             newFieldType:payload?.fieldType
         }
-        const dataa = await updateField(payload?.dbId,payload?.tableName,payload?.fieldName,data)
+        console.log("updateColumnHeaders",payload?.dbId,payload?.tableName,payload?.fieldName,data)
+        await updateField(payload?.dbId,payload?.tableName,payload?.fieldName,data)
         dispatch(updateColumnHeader(payload));
-        console.log(dataa)
+        const {tableId, dbId} = getState().table
+        // console.log(getState().table.tableId, "dlkds",getState());
+        dispatch(bulkAddColumns({tableName:tableId,dbId :dbId}));
+        // console.log("state",getState().table.tableId,);
         return 2;
     }
 )
