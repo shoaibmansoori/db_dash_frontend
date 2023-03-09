@@ -10,9 +10,12 @@ import {
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import DeleteAuthKeyPopup from './authKeyComponents/authKeyTablePopup/deleteAuthkeyPopup';
 
+import DisplayAuthKeyPopup from './authKeyComponents/authKeyTablePopup/displayAuthkeyPopup';
+
 export default function Dropdown(props) {
   const [anchorElUser, setAnchorElUser] = useState(null);
   const [open, setOpen] = useState(false);
+  const[display,setDisplay]=useState(false);
 
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
@@ -54,6 +57,7 @@ export default function Dropdown(props) {
           horizontal: 'left',
         }}
         open={Boolean(anchorElUser)}
+        display ={Boolean(anchorElUser)}
         onClose={handleCloseUserMenu}
       >
         <MenuItem onClick={handleCloseUserMenu}>
@@ -71,7 +75,7 @@ export default function Dropdown(props) {
           <Typography textAlign="center">{props?.second}</Typography>
         </MenuItem>
 
-        <MenuItem onClick={(event)=>{handleCloseUserMenu(event);setOpen(true)}}>
+        <MenuItem onClick={(event)=>{handleCloseUserMenu(event);setDisplay(true)}}>
           <Typography textAlign="center">{props?.third}</Typography>
         </MenuItem>
         <DeleteAuthKeyPopup
@@ -80,6 +84,8 @@ export default function Dropdown(props) {
           title={props?.title}
           deleteFunction={props?.deleteFunction}
         />
+        <DisplayAuthKeyPopup display={display} setDisplay={setDisplay} title={props?.title}/>
+
       </Menu>
     </>
   );
