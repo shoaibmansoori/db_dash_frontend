@@ -12,8 +12,8 @@ export default function Navbar() {
 
   const [alldbs, setAllDbs] = useState(false);
   const [tables, setTables] = useState({});
-  const [selectedOption, setSelectedOption] = useState();
-  const [selectTable, setSelectTable] = useState('');
+  const [selectedOption,setSelectedOption] = useState('');
+  const [selectTable,setSelectTable] = useState('');
 
   const handleChange = async (event) => {
     setSelectedOption(event.target.value);
@@ -65,54 +65,50 @@ export default function Navbar() {
    <Box align="center">
         {/* <navbarApi/> */}
         <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-          <Button variant="contained" color="primary" sx={{m:1,borderRadius:5}} >APIs Documentation</Button>
-          <Link to='/authkeypage' style={{textDecoration:'none'}}>
-          <Button  sx={{borderRadius:5}} variant="contained" color="primary">Auth Key</Button>
+          <Button variant="contained" color="primary" sx={{m:1}} disabled>APIs Documentation</Button>
+          <Link to='/authkeypage' state={selectedOption} style={{textDecoration:'none'}}>
+          <Button variant="contained" color="primary">Auth Key</Button>
           </Link>
         </Box>
    </Box>
-      <Box >
-
-        {alldbs && <FormControl sx={{ m: 1, minWidth: 120 }}>
-          <InputLabel htmlFor="grouped-select">Organization-db</InputLabel>
-
-          <Select id="grouped-select" label="Organization and dbs"  value={selectedOption} onChange={handleChange} defaultValue={selectedOption}>
-
-            {Object.entries(alldbs).map(([orgId, dbs]) => [
-              <ListSubheader key={`${orgId}-header`} name={orgId}>{dbs[0].org_id.name}</ListSubheader>,
-
-              dbs?.map((db,index) => (
-
-                <MenuItem key={index} value={db?.name}>{db?.name} </MenuItem>
-
-              ))
-            ]
-
-            )}
-          </Select>
-        </FormControl>}
-      </Box>
-
-      <br></br>
-
-      <Box >
-
-        <FormControl sx={{ m: 1, minWidth: 120 }}>
-          <InputLabel htmlFor="grouped-select">Tables-Name</InputLabel>
-          <Select value={selectTable}
-            onChange={handleChangeTable} >
-            {Object.entries(tables)?.map((table) => (
-              <MenuItem key={table[0]} value={table[0]} >
-                {table[0]}
-              </MenuItem>
-            ))}
-          </Select>
-        </FormControl>
-      </Box>
-      <Box>
-        <ApiCrudTablist />
-      </Box>
-    </>
+   <Box >
+   <FormControl sx={{ m: 1, minWidth: 120 }}>
+  <InputLabel htmlFor="grouped-select">Organization-dbs</InputLabel>
+  <Select
+    id="grouped-select"
+    label="Organization and dbs"
+    value={selectedOption}
+    onChange={handleChange}
+   
+  >
+    {Object.entries(alldbs).map(([orgId, dbs]) => [
+        <ListSubheader key={`${orgId}-header`}  name={orgId}>{orgId}</ListSubheader>,
+        dbs?.map((db) => (
+          <MenuItem key={db?._id} value={db?._id}>
+            {db?.name}
+          </MenuItem>
+        ))
+    ]
+        )}
+  </Select>
+</FormControl>
+     </Box>
+     <br></br>
+     <Box >
+     { console.log(tables)}
+         <Select  value={selectTable}
+        onChange={handleChangeTable} >
+         { Object.entries(tables)?.map((table) => (
+          <MenuItem key = {table[0]}value={table[0]} >
+            {table[0]}
+          </MenuItem>   
+         ))}
+         </Select>
+     </Box>
+     <Box>
+      <ApiCrudTablist db={selectedOption} table={selectTable}/>
+     </Box>
+        </>
   )
 }
 Navbar.propTypes = {

@@ -3,8 +3,6 @@ import PropTypes from 'prop-types';
 import { Typography, Menu, MenuItem, Tooltip, IconButton } from '@mui/material'
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import AuthKeyPopup from './authKeyPopup';
-
-
 export default function TableMenuDropdown(props) {
     const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState} from "react";
 import {
   Table,
   TableBody,
@@ -9,22 +9,38 @@ import {
   TableContainer,
   TableCell,
 } from "@mui/material";
-import TableMenuDropdown from "./tableMenuDropdown";
 
-function createData(name, access, scope, datacreated, createdby, dropdown) {
-  return { name, access, scope, datacreated, createdby, dropdown };
-}
-const rows = [
-  createData(
-    "Frozen yoghurt",
-    159,
-    6.0,
-    24,
-    4.0,
-    <TableMenuDropdown first={"Edit"} second={"Delete"} third={"Show AuthKey"} />
-  ),
-];
-export default function AuthKeyTable() {
+import { PropTypes } from 'prop-types';
+import { getAuthkey,deleteAuthkey} from "../../api/authkeyApi";
+import TableMenuDropdown from "./tableMenuDropdown";
+export default function AuthKey(props) {
+
+  const adminId = localStorage.getItem("userid");
+  console.log("Hariom Props : ", props.dbId);
+  console.log("Admin Id : ",adminId);
+  const[authKeys,setAuthKeys] = useState(null)
+  
+
+  useEffect(  ()=>{
+    getAuthkeyFun()
+  },[])
+
+  async function getAuthkeyFun(){
+  const data = await getAuthkey(props.dbId,adminId) 
+  setAuthKeys(data?.data?.data)
+  }
+
+  async function deleteAuthkeyFun(authKey){
+    const data = await deleteAuthkey(props.dbId,adminId,authKey)
+    console.log("Delete Auth Key Data : ",data);
+    return data;
+  }
+  
+  console.log("AuthKeys : ",authKeys);
+ 
+
+  console.log("AuthKeys : ",authKeys);
+ 
   return (
     <>
       <Box sx={{ border: 1, m: 1, boxShadow: 10 }}>
@@ -38,25 +54,30 @@ export default function AuthKeyTable() {
                 <TableCell>Name</TableCell>
                 <TableCell>Access</TableCell>
                 <TableCell>Scopes</TableCell>
-                <TableCell>Created On</TableCell>
                 <TableCell>Created By</TableCell>
+                <TableCell>Created Date By</TableCell>
+                <TableCell>Action</TableCell>
                 <TableCell> </TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
-              {rows.map((row) => (
+              {authKeys && Object.keys(authKeys).map((keys) => (
                 <TableRow
-                  key={row.name}
+                  key={keys}
                   sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                 >
                   <TableCell component="th" scope="row">
-                    {row.name}
+                    {/* {keys} */}
+                    {authKeys[keys].user}
                   </TableCell>
-                  <TableCell>{row.access}</TableCell>
-                  <TableCell>{row.scope}</TableCell>
-                  <TableCell>{row.datacreated}</TableCell>
-                  <TableCell>{row.createdby}</TableCell>
-                  <TableCell>{row.dropdown}</TableCell>
+                  <TableCell>{authKeys[keys].access}</TableCell>
+                  <TableCell>{authKeys[keys].scope}</TableCell>
+                  <TableCell>{authKeys[keys].createBy}</TableCell>
+                  <TableCell>{authKeys[keys].createDate}</TableCell>
+                  <TableCell>     
+                  <TableMenuDropdown first={"Edit"} second={"Delete"} third={"Show AuthKey"} title={keys} deleteFunction={deleteAuthkeyFun}/>
+                  </TableCell>
+            
                 </TableRow>
               ))}
             </TableBody>
@@ -65,4 +86,8 @@ export default function AuthKeyTable() {
       </Box>
     </>
   );
+}
+
+AuthKey.propTypes = {
+  dbId: PropTypes.string
 }

@@ -8,8 +8,6 @@ import Button from "@mui/material/Button";
 // import { Snackbar } from '@material-ui/core';
 // import { Alert } from '@material-ui/lab';
 // import { FileCopy } from '@mui/icons-material';
-
-
 const style = {
   position: "absolute",
   top: "50%",
@@ -22,14 +20,10 @@ const style = {
   boxShadow: 24,
   p: 4,
 };
-
 export default function PopupModal(props) {
-
   // const [copySuccess, setCopySuccess] = useState(false);
   const [copyText, setCopyText] = useState('');
-
   const handleClose = () => props.setOpen(false);
-
   const handleCopyText = (e) => {
     setCopyText(e.target.value);
  }
@@ -37,22 +31,17 @@ export default function PopupModal(props) {
     navigator.clipboard.writeText(copyText);
     // setCopySuccess(true);
   };
-
-
   return (
     <Box>
-      <Modal 
+      <Modal
       disableRestoreFocus
         open={props.open}
         onClose={handleClose}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-
         <Box sx={style}>
-
           <Box sx={{ my: 2 , display:'flex'}}>
-
             <Box sx={{mr:4}}>
             <TextField autoFocus id="ansh" name="ansh" label="Auth Key"  variant="standard" value={copyText} onChange={handleCopyText} />
             </Box>
@@ -68,17 +57,14 @@ export default function PopupModal(props) {
           </Alert>
         </Snackbar> */}
           </Box>
-
           <Box sx={{mt:3}}>
           <Button variant="contained" onClick={handleClose}>Cancel</Button>
           </Box>
-
         </Box>
       </Modal>
     </Box>
   );
 }
-
 PopupModal.propTypes = {
   title: PropTypes.string,
   open: PropTypes.bool,

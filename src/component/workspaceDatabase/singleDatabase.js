@@ -17,8 +17,7 @@ export default function SingleDatabase(props) {
   //      setName(false);
   // }
   const renameDatabase = async (orgId, id, name) => {
-
-    const data = {
+      const data = {
       name: dbname || name
     }
      await renameDb(orgId,id,data)
