@@ -73,8 +73,9 @@ export default function AuthKey(props) {
                   <TableCell>{authKeys[keys].createBy}</TableCell>
                   <TableCell>{authKeys[keys].createDate}</TableCell>
                   <TableCell>     
-                  <TableMenuDropdown first={"Edit"} second={"Delete"} third={"Show AuthKey"} title={keys} deleteFunction={deleteAuthkeyFun}/>
+                  <TableMenuDropdown  second={"Delete"} third={"Show AuthKey"} title={keys} deleteFunction={deleteAuthkeyFun}/>
                   </TableCell>
+                  {/* first={"Edit"} */}
             
                 </TableRow>
               ))}

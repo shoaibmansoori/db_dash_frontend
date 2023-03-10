@@ -27,6 +27,7 @@ function App() {
       <Route exact path="*" element={<Navigate to="/notFound" />} />
       <Route exact path="/notFound" element={<Notfoundpage/>} />
       <Route exact path ="/db/:dbId" element ={<DbDetail/>}/>
+      <Route exact path ="/db/:dbId/table/:tableName" element ={<DbDetail/>}/>
       <Route exact path ="/authkeypage" element ={<AuthKeyPage/>}/>
       <Route exact path ="/authKeyCreate" element ={<CreateAuth/>}/>
       <Route exact path ="/apiDoc/db/:dbId/table/:tableName" element ={<ApiDocPage />}/>

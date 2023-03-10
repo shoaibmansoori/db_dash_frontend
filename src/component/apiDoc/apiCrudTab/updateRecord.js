@@ -2,9 +2,8 @@ import React from 'react'
 import { PropTypes } from 'prop-types';
 import { Box } from '@mui/system';
 import CodeSnippet from '../codeSnippet';
-
-
 function UpdateRecord(props) {
+  console.log("UpdateRecord Props : ",props);
   return (
     <>
     <div>Update Record</div>

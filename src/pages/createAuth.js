@@ -55,7 +55,7 @@ export default function CreateAuthKey() {
         <AuthKeyHeader />
       </Box>
       <Box
-        sx={{mt: 4, ml: 1, mr: 1, border: 2, minHeight: 560}}>
+        sx={{mt: 4, ml: 1, mr: 1, border: 2, minHeight: 50}}>
         <Box sx={{display: "grid",justifyContent: "center"}}>
           <Box sx={{ display: "flex", justifyContent: "center", mt: "120px" }}>
             <Typography sx={{ mr: "100px", mt: "6px" }}>Name</Typography>
