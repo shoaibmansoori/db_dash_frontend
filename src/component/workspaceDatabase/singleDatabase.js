@@ -102,7 +102,6 @@ import PropTypes from "prop-types"
 import { Link } from 'react-router-dom' 
 import Dropdown from '../dropdown'
 import { renameDb,deleteDb } from '../../api/dbApi'
-// import {deleteDb} from '../api/dbApi.js';
 export default function SingleDatabase(props) {
   const [name, setName] = useState(false)
   const [dbname,setDbname ] = useState()
