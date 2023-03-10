@@ -1,7 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { createField, deleteField, getAllfields, updateField } from "../../api/fieldApi";
 import { getTable } from "../../api/tableApi";
-
+import {insertRow} from "../../api/rowApi";
 // reducer imports
 import { addColumnToLeft, addColumnToRight, addOptionToColumn,addRow,deleteColumn,updateCell,updateColumnHeader, updateColumnType} from "./tableSlice";
 const getHeaders = async(dbId,tableName) =>{
@@ -123,9 +123,13 @@ export const updateCells = createAsyncThunk(
 
 export const addRows = createAsyncThunk(
     "table/addRows",
-    async(payload,{dispatch})=>{
-        
+    async(payload,{dispatch,getState})=>{
+        const {tableId, dbId} = getState().table
+        console.log("tabledId",tableId,dbId);
+        await insertRow(dbId,tableId);
+        console.log("insert row ");
         dispatch(addRow(payload));
+        dispatch(bulkAddColumns({tableName:tableId,dbId :dbId}));
         return payload;
     }
 )
