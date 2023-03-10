@@ -3,7 +3,6 @@ import React from 'react';
 import {Button,Dialog,DialogActions,DialogTitle} from '@mui/material';
 import { PropTypes } from 'prop-types';
 export default function DisplayAuthKeyPopup(props) {
-
   const handleClose = () => {
     props.setDisplay(false);
   };

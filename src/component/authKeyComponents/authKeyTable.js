@@ -16,8 +16,8 @@ import TableMenuDropdown from "./tableMenuDropdown";
 export default function AuthKey(props) {
 
   const adminId = localStorage.getItem("userid");
-  console.log("Hariom Props : ", props.dbId);
-  console.log("Admin Id : ",adminId);
+  // console.log("Hariom Props : ", props.dbId);
+  // console.log("Admin Id : ",adminId);
   const[authKeys,setAuthKeys] = useState(null)
   
 
@@ -26,6 +26,7 @@ export default function AuthKey(props) {
   },[])
 
   async function getAuthkeyFun(){
+    // console.log("props",props)
   const data = await getAuthkey(props.dbId,adminId) 
   setAuthKeys(data?.data?.data)
   }
@@ -35,11 +36,8 @@ export default function AuthKey(props) {
     console.log("Delete Auth Key Data : ",data);
     return data;
   }
-  
-  console.log("AuthKeys : ",authKeys);
- 
 
-  console.log("AuthKeys : ",authKeys);
+  // console.log("AuthKeys : ",authKeys);
  
   return (
     <>
@@ -52,10 +50,15 @@ export default function AuthKey(props) {
             <TableHead>
               <TableRow>
                 <TableCell>Name</TableCell>
+<<<<<<< HEAD
                 <TableCell>Access</TableCell>
                 <TableCell>Scopes</TableCell>
+=======
+                {/* <TableCell>Access</TableCell> */}
+                <TableCell>Scope</TableCell>
+>>>>>>> 49f47022638b40ba8786dc7dad394bfd380903de
                 <TableCell>Created By</TableCell>
-                <TableCell>Created Date By</TableCell>
+                <TableCell>Created On</TableCell>
                 <TableCell>Action</TableCell>
                 <TableCell> </TableCell>
               </TableRow>
@@ -68,15 +71,16 @@ export default function AuthKey(props) {
                 >
                   <TableCell component="th" scope="row">
                     {/* {keys} */}
-                    {authKeys[keys].user}
+                    {authKeys[keys].name}
                   </TableCell>
-                  <TableCell>{authKeys[keys].access}</TableCell>
+                  {/* <TableCell>{authKeys[keys].access}</TableCell> */}
                   <TableCell>{authKeys[keys].scope}</TableCell>
                   <TableCell>{authKeys[keys].createBy}</TableCell>
                   <TableCell>{authKeys[keys].createDate}</TableCell>
                   <TableCell>     
-                  <TableMenuDropdown first={"Edit"} second={"Delete"} third={"Show AuthKey"} title={keys} deleteFunction={deleteAuthkeyFun}/>
+                  <TableMenuDropdown  second={"Delete"} third={"Show AuthKey"} title={keys} deleteFunction={deleteAuthkeyFun}/>
                   </TableCell>
+                  {/* first={"Edit"} */}
             
                 </TableRow>
               ))}

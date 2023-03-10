@@ -12,7 +12,7 @@ import PropTypes from "prop-types";
 
 
 export const OrgList = (props) => {
-
+  console.log(props)
   const [name, setName] = useState(false);
   const [orgName, setOrgName] = useState();
   const [db, setDb] = useState(false);
@@ -55,7 +55,7 @@ export const OrgList = (props) => {
         <Box sx={{ my: 7, display: "flex" }}>
           {name ? (
             <>
-              <TextField autoFocus
+              <TextField 
                 sx={{ width: 120, fontWeight: "bold" }}
                 defaultValue={props.dbs[0]?.org_id?.name}
                 value={orgName}
@@ -162,3 +162,4 @@ OrgList.propTypes = {
   orgId: PropTypes.string,
   getOrgAndDbs: PropTypes.func,
 };
+

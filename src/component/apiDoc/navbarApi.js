@@ -7,59 +7,63 @@ import { Button, Select, MenuItem, FormControl, InputLabel, ListSubheader } from
 import ApiCrudTablist from './apiCrudTab/apiCrudTablist';
 import { getDbById } from '../../api/dbApi';
 import PropTypes from "prop-types";
-
 export default function Navbar() {
-
   const [alldbs, setAllDbs] = useState(false);
   const [tables, setTables] = useState({});
-  const [selectedOption,setSelectedOption] = useState('');
-  const [selectTable,setSelectTable] = useState('');
-
+  const [selectedOption, setSelectedOption] = useState();
+  // const [selectedDb,setSelectedDb] = useState(null);
+  const [selectTable, setSelectTable] = useState('');
   const handleChange = async (event) => {
     setSelectedOption(event.target.value);
-
     await getAllTableName(event.target.value)
   };
   const handleChangeTable = async (event) => {
-    //console.log(event.target.value)
     setSelectTable(event.target.value);
   };
-
   const { user } = UserAuth();
   useEffect(() => {
     if (user?.email)
       getOrgAndDb();
   }, [user])
   const filterDbsBasedOnOrg = async (allDbs) => {
-
     var result = {};
     allDbs.map((item) => {
       result[item.org_id._id] = result[item.org_id._id] ? [...result[item.org_id._id], item] : [item]
     })
-    
     setSelectedOption(result?.[Object.keys(result)?.[0]]?.[0].name);
+    console.log(selectedOption)
+    // setSelectedDb(result?.[Object.keys(result)?.[0]]?.[0]._id)
+    // console.log(result?.[Object.keys(result)?.[0]]?.[0]._id)
     setAllDbs(result);
   }
+<<<<<<< HEAD
 
   
 
+=======
+>>>>>>> 49f47022638b40ba8786dc7dad394bfd380903de
   const getOrgAndDb = async () => {
     const data = await findUserByEmail(user?.email);
-
     localStorage.setItem("userid", data?.data?.data?._id);
-
     filterDbsBasedOnOrg(data?.data?.data?.dbs)
   }
+<<<<<<< HEAD
 
   console.log("tables",tables)
 
+=======
+>>>>>>> 49f47022638b40ba8786dc7dad394bfd380903de
   const getAllTableName = async (dbId) => {
     const data = await getDbById(dbId)
     setTables(data.data.data.tables || {});
   }
+<<<<<<< HEAD
 
   
 
+=======
+  
+>>>>>>> 49f47022638b40ba8786dc7dad394bfd380903de
   return (
     <>
    <Box align="center">
@@ -71,44 +75,39 @@ export default function Navbar() {
           </Link>
         </Box>
    </Box>
-   <Box >
-   <FormControl sx={{ m: 1, minWidth: 120 }}>
-  <InputLabel htmlFor="grouped-select">Organization-dbs</InputLabel>
-  <Select
-    id="grouped-select"
-    label="Organization and dbs"
-    value={selectedOption}
-    onChange={handleChange}
-   
-  >
-    {Object.entries(alldbs).map(([orgId, dbs]) => [
-        <ListSubheader key={`${orgId}-header`}  name={orgId}>{orgId}</ListSubheader>,
-        dbs?.map((db) => (
-          <MenuItem key={db?._id} value={db?._id}>
-            {db?.name}
-          </MenuItem>
-        ))
-    ]
-        )}
-  </Select>
-</FormControl>
-     </Box>
-     <br></br>
-     <Box >
-     { console.log(tables)}
-         <Select  value={selectTable}
-        onChange={handleChangeTable} >
-         { Object.entries(tables)?.map((table) => (
-          <MenuItem key = {table[0]}value={table[0]} >
-            {table[0]}
-          </MenuItem>   
-         ))}
-         </Select>
-     </Box>
-     <Box>
-      <ApiCrudTablist db={selectedOption} table={selectTable}/>
-     </Box>
-        </>
+      <Box >
+        {alldbs && <FormControl sx={{ m: 1, minWidth: 120 }}>
+          <InputLabel htmlFor="grouped-select">Organization-db</InputLabel>
+          <Select id="grouped-select" label="Organization and dbs"  value={selectedOption._id}  onChange={handleChange}>
+            {Object.entries(alldbs).map(([orgId, dbs]) => [
+              <ListSubheader key={`${orgId}-header`} name={orgId}>{dbs[0].org_id.name}</ListSubheader>,
+              dbs?.map((db,index) => (
+                <MenuItem key={index} value={db?._id}>{db?.name} </MenuItem>
+              ))
+            ]
+            )}
+            {/* defaultValue={selectedOption} */}
+          </Select>
+        </FormControl>}
+      </Box>
+      <br></br>
+      <Box >
+        <FormControl sx={{ m: 1, minWidth: 120 }}>
+          <InputLabel htmlFor="grouped-select">Tables-Name</InputLabel>
+          <Select value={selectTable}
+            onChange={handleChangeTable} >
+            {Object.entries(tables)?.map((table) => (
+              <MenuItem key={table[0]} value={table[0]} >
+                {table[0]}
+              </MenuItem>
+            ))}
+          </Select>
+        </FormControl>
+      </Box>
+      <Box>
+        <ApiCrudTablist db={selectedOption} table={selectTable}/>
+      </Box>
+    </>
   )
 }
 Navbar.propTypes = {

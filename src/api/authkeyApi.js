@@ -20,12 +20,12 @@ const getSingleAuthKey = async (db_id,adminId,authkey)=>{
 
 const updateAuthkey = async (db_id,adminId,authkey,data) =>
 {
-    return await axios.patch(URL +`/dbs/${db_id}/admin/${adminId}/${authkey}/updateAuthkey`,data)
+    return await axios.patch(URL +`/dbs/${db_id}/admin/${adminId}/${authkey}/update`,data)
 }
 
 const deleteAuthkey = async (db_id,adminId,authkey) =>
 {
-    return await axios.delete(URL +`/dbs/${db_id}/admin/${adminId}/${authkey}/deleteAuthkey`)
+    return await axios.delete(URL +`/dbs/${db_id}/admin/${adminId}/${authkey}/delete`)
 }
 
 

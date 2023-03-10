@@ -2,8 +2,6 @@ import React from 'react'
 import { PropTypes } from 'prop-types';
 import { Box } from '@mui/system';
 import CodeSnippet from '../codeSnippet';
-
-
 function DeleteRecord(props) {
   console.log("DeleteRecord Props : ",props);
   return (
@@ -15,7 +13,6 @@ function DeleteRecord(props) {
     </>
   )
 }
-
 DeleteRecord.propTypes = {
   db: PropTypes.string,
   table:PropTypes.string

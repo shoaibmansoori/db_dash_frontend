@@ -11,7 +11,7 @@ import Protected from './component/protected';
 import WithAuth from './component/withAuth';
 import Notfoundpage from './component/notFoundPage';
 import AuthKeyPage from './pages/authKeyPage';
-import CreateAuthKey from './pages/createAuthKey';
+import CreateAuth from './pages/createAuth';
 
 
 
@@ -27,10 +27,16 @@ function App() {
       <Route exact path="*" element={<Navigate to="/notFound" />} />
       <Route exact path="/notFound" element={<Notfoundpage/>} />
       <Route exact path ="/db/:dbId" element ={<DbDetail/>}/>
+      <Route exact path ="/db/:dbId/table/:tableName" element ={<DbDetail/>}/>
       <Route exact path ="/authkeypage" element ={<AuthKeyPage/>}/>
-      <Route exact path ="/authKeyCreate" element ={<CreateAuthKey/>}/>
+      <Route exact path ="/authKeyCreate" element ={<CreateAuth/>}/>
       <Route exact path ="/apiDoc/db/:dbId/table/:tableName" element ={<ApiDocPage />}/>
     </Routes>
+
+
+
+
+    
     </AuthContextProvider>
 
 

@@ -3,6 +3,7 @@ import { Box, Button } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import AuthKeyHeader from "../component/authKeyComponents/authKeyHeader";
 import { Link } from "react-router-dom";
+import MainNavbar from "../component/mainNavbar";
 import { useLocation } from "react-router-dom";
 import AuthKey from "../component/authKeyComponents/authKeyTable";
 
@@ -15,7 +16,14 @@ const dbId = location.state;
 
   return (
     <>
+<<<<<<< HEAD
 
+=======
+    <Box>
+      <MainNavbar/>
+    </Box>
+    
+>>>>>>> 49f47022638b40ba8786dc7dad394bfd380903de
      <Box>
      <AuthKeyHeader/>
      </Box>
