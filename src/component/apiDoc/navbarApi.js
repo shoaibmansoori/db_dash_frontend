@@ -65,9 +65,9 @@ export default function Navbar() {
    <Box align="center">
         {/* <navbarApi/> */}
         <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-          <Button variant="contained" color="primary" sx={{m:1}} disabled>APIs Documentation</Button>
+          <Button variant="contained" color="primary" sx={{m:1,borderRadius:5}} >APIs Documentation</Button>
           <Link to='/authkeypage' style={{textDecoration:'none'}}>
-          <Button variant="contained" color="primary">Auth Key</Button>
+          <Button  sx={{borderRadius:5}} variant="contained" color="primary">Auth Key</Button>
           </Link>
         </Box>
    </Box>

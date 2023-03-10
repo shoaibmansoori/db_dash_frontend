@@ -18,7 +18,6 @@ export default function SingleDatabase(props) {
   // }
   const renameDatabase = async (orgId, id, name) => {
 
-
     const data = {
       name: dbname || name
     }
@@ -29,7 +28,7 @@ const handleOpen = () => {
   setName(false);
 }
 
-
+console.log("props",props)
 const deletDatabases = async() => {
   await deleteDb(props?.db?.org_id?._id,props?.db._id)
   await props.getOrgAndDbs();
