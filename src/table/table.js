@@ -1,4 +1,4 @@
-import React, { useMemo,useState, useEffect } from "react";
+import React, { useMemo, useEffect } from "react";
 import clsx from "clsx";
 import { useTable, useFlexLayout, useResizeColumns, useRowSelect, useSortBy } from "react-table";
 import Cell from "./Cell";
@@ -21,8 +21,8 @@ const defaultColumn = {
 
 export default function Table({ columns, data,dispatch:dataDispatch, skipReset }) {
 
-  const [selectedRange, setSelectedRange] = useState({});  
-  console.log(selectedRange);
+  // const [selectedRange, setSelectedRange] = useState({});  
+  // console.log(selectedRange);
   const handleCopy = (event, value) => {
     event.clipboardData.setData('text/plain', value);
     event.preventDefault();
@@ -107,25 +107,25 @@ export default function Table({ columns, data,dispatch:dataDispatch, skipReset }
   let cellsSelected = { ...currentSelectedCellIds, ...selectedCellIds }
 
 
-  const handleCellMouseDown = (rowIndex, columnIndex) => {
-    setSelectedRange({
-      startRow: rowIndex,
-      endRow: rowIndex,
-      startColumn: columnIndex,
-      endColumn: columnIndex
-    });
-  };
+  // const handleCellMouseDown = (rowIndex, columnIndex) => {
+  //   setSelectedRange({
+  //     startRow: rowIndex,
+  //     endRow: rowIndex,
+  //     startColumn: columnIndex,
+  //     endColumn: columnIndex
+  //   });
+  // };
   
 
-  const handleCellMouseOver = (rowIndex, columnIndex) => {
-    setSelectedRange(prevRange => {
-      return {
-        ...prevRange,
-        endRow: rowIndex,
-        endColumn: columnIndex
-      };
-    });
-  };
+  // const handleCellMouseOver = (rowIndex, columnIndex) => {
+  //   setSelectedRange(prevRange => {
+  //     return {
+  //       ...prevRange,
+  //       endRow: rowIndex,
+  //       endColumn: columnIndex
+  //     };
+  //   });
+  // };
 
   function isTableResizing() {
     for (let headerGroup of headerGroups) {
@@ -180,8 +180,8 @@ export default function Table({ columns, data,dispatch:dataDispatch, skipReset }
                   return (
                     
                     <div key={columnIndex}
-                    onMouseDown={() => handleCellMouseDown(rowIndex, columnIndex)}
-                    onMouseOver={() => handleCellMouseOver(rowIndex, columnIndex)}
+                    // onMouseDown={() => handleCellMouseDown(rowIndex, columnIndex)}
+                    // onMouseOver={() => handleCellMouseOver(rowIndex, columnIndex)}
                     {...cell.getCellRangeSelectionProps()}
                     {...cell.getCellProps(
                       {
@@ -190,8 +190,8 @@ export default function Table({ columns, data,dispatch:dataDispatch, skipReset }
                   }
                   )} 
                   
-                  suppressContentEditableWarning={true}
-                  contentEditable = {!(cell.getCellProps().key?.includes("999999") ||cell.getCellProps().key?.includes("checkBox")  ) }
+                  // suppressContentEditableWarning={true}
+                  // contentEditable
                   style=
                   {
                     cellsSelected[cell.id]

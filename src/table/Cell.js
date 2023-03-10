@@ -18,6 +18,7 @@ export default function Cell({value: initialValue, row, column: {id, dataType, o
   const [selectPop, setSelectPop] = useState(null);
   const [showSelect, setShowSelect] = useState(false);
   const onChange = (e) => {
+    console.log("onchange")
     setValue({value: e.target.value, update: false});
   };
   const [showAdd, setShowAdd] = useState(false);
@@ -29,7 +30,8 @@ export default function Cell({value: initialValue, row, column: {id, dataType, o
   }, [initialValue]);
 
   useEffect(() => {
-    if (value.update) {
+    if (value?.update) {
+      console.log("called")
       // dataDispatch({type: "update_cell", columnId: id, rowIndex: index, value: value.value});
       dispatch(updateCells({
         columnId: id, rowIndex: row.index, value: value.value
@@ -103,9 +105,12 @@ export default function Cell({value: initialValue, row, column: {id, dataType, o
     case "text":
       element = (
         <ContentEditable
-          html={(value.value && value.value.toString()) || ""}
+          html={(value?.value && value?.value?.toString()) || ""}
           onChange={onChange}
           onBlur={() => setValue((old) => ({value: old.value, update: true}))}
+        // onMouseDown={()=>{
+
+        // }}
           className='data-input'
         />
       );
@@ -113,7 +118,7 @@ export default function Cell({value: initialValue, row, column: {id, dataType, o
       case "varchar":
       element = (
         <ContentEditable
-          html={(value.value && value.value.toString()) || ""}
+          html={(value?.value && value?.value?.toString()) || ""}
           onChange={onChange}
           onBlur={() => setValue((old) => ({value: old.value, update: true}))}
           className='data-input'
@@ -123,7 +128,7 @@ export default function Cell({value: initialValue, row, column: {id, dataType, o
     case "integer":
       element = (
         <ContentEditable
-          html={(value.value && value.value.toString()) || ""}
+          html={(value?.value && value.value.toString()) || ""}
           onChange={onChange}
           onBlur={() => setValue((old) => ({value: old.value, update: true}))}
           className='data-input text-align-right'

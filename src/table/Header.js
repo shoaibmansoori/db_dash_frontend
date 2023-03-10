@@ -249,11 +249,11 @@ export default function Header({
 
   function handleBlur(e) {
     e.preventDefault();
-    dispatch(updateColumnHeaders({
-      type: "updateColumnHeader",
-      columnId: id,
-      label: header
-    }))
+    // dispatch(updateColumnHeaders({
+    //   type: "updateColumnHeader",
+    //   columnId: id,
+    //   label: header
+    // }))
     dispatch(updateColumnHeaders({
       columnId: id,
       dbId: tableInfo?.dbId,
