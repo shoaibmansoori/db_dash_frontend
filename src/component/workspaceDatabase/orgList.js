@@ -20,8 +20,8 @@ export const OrgList = (props) => {
   const [orgId, setOrg] = useState();
   const handleOpen = () => setOpen(true);
 
-  const saveDb = async (e) => {
-    e.preventDefault();
+  const saveDb = async () => {
+    // e.preventDefault();
     const userId = localStorage.getItem("userid");
     const data = {
       user_id: userId,

@@ -145,7 +145,7 @@ export default function Table({ columns, data,dispatch:dataDispatch, skipReset }
 
   return (
     <>
-      <pre>
+      {/* <pre>
         <code>
           {JSON.stringify(
             {
@@ -155,7 +155,7 @@ export default function Table({ columns, data,dispatch:dataDispatch, skipReset }
             2
           )}
         </code>
-      </pre>
+      </pre> */}
       {selectedFlatRows?.length > 0 && <Button sx = {{m:2}} onClick={()=>{
         dataDispatch(deleteRows(selectedFlatRows))
       }}>delete selected rows</Button>}

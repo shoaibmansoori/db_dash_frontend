@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import "./style.css";
 import Table from "./table";
-import { grey } from "./colors";
+// import { grey } from "./colors";
 import {  useDispatch ,useSelector } from "react-redux";
 import { getTableInfo } from "../store/table/tableSelector";
 
@@ -35,7 +35,6 @@ MainTable() {
 
         }}
       >
-        <h1 style={{ color: grey(800) }}>Editable React Table</h1>
       </div>
       <div style={{ overflow: "auto", display: "flex" }}>
         <div

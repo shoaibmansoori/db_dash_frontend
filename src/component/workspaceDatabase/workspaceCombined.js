@@ -48,8 +48,8 @@ export default function WorkspaceCombined() {
       filterDbsBasedOnOrg(data?.data?.data?.dbs)
     }
     
-  const saveOrgToDB = async (e) => {
-      e.preventDefault();
+  const saveOrgToDB = async () => {
+      // e.preventDefault();
       const userid = localStorage.getItem("userid");
       await createOrg({name: org,user_id:userid})
       setOpen(false);

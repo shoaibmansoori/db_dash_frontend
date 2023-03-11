@@ -250,7 +250,6 @@ export default function Header({
     e.preventDefault();
     if(id != header )
     {
-      console.log("id ",id ,"header",header)
       dispatch(updateColumnHeaders({
       columnId: id,
       dbId: tableInfo?.dbId,

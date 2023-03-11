@@ -27,8 +27,8 @@ export default function TablesList(props) {
     setClickedTable(value);
     setTableButton(true);
   }
-  const saveTable = async (e) => {
-    e.preventDefault();
+  const saveTable = async () => {
+    // e.preventDefault();
     const dbId = props?.dbData?.db._id;
     const data = {
       tableName: table

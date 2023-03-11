@@ -69,17 +69,16 @@ export default function AuthAccessDropDown({selected,setSelected,dbId}) {
  
   const getAllTableName = async (dbId) => {
     const data = await getDbById(dbId)
-    // console.log("data",data)
+    
     setOptions(data.data.data.tables || {});
-    // console.log("option",options)
+  
   }
-  // console.log("Authkeydrop",props)
+  
   const classes = useStyles();
   // const [selected, setSelected] = useState([]);
   const isAllSelected =
     options.length > 0 && selected.length === options.length;
   const handleChange = (event) => {
-    console.log(event.target.value,12345);
     const value = event.target.value;
     if (value[value.length - 1] === "all") {
       if(selected.length === Object.entries(options)?.length){
@@ -119,7 +118,6 @@ export default function AuthAccessDropDown({selected,setSelected,dbId}) {
         renderValue={(selected) => selected.join(", ")}
         MenuProps={MenuProps}
       >
-        {console.log(selected)}
         <MenuItem
           value="all"
           classes={{
