@@ -5,7 +5,8 @@ import { grey } from "./colors";
 import {  useDispatch ,useSelector } from "react-redux";
 import { getTableInfo } from "../store/table/tableSelector";
 
-function MainTable() {
+function 
+MainTable() {
 
   useEffect(() => {
 },[]);

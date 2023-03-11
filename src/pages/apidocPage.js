@@ -2,10 +2,7 @@ import { Box } from "@mui/material";
 import React from "react";
 // import PropTypes from "prop-types";
 import Navbar from "../component/apiDoc/navbarApi";
-<<<<<<< HEAD
-=======
 import MainNavbar from "../component/mainNavbar";
->>>>>>> 3026241893df574afa63f4177af6bf92cda3fe7e
 
 
 

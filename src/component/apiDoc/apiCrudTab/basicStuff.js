@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { PropTypes } from 'prop-types';
 // import CodeSnippet from '../codeSnippet';
-import { getField } from '../../../api/fieldApi';
+import { getAllfields } from '../../../api/fieldApi';
 import { Box } from "@mui/system";
 function BasicStuff(props) {
   const [fieldData, setFieldData] = useState(null)
   const tableData = async () => {
-    const data = await getField(props.db, props.table)
+    const data = await getAllfields(props.db, props.table)
     setFieldData(data?.data?.data?.fields)
   }
   console.log("Fields : ", fieldData)

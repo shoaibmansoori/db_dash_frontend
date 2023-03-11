@@ -4,32 +4,12 @@ import { Box, Button, Typography, Container } from "@mui/material";
 import { useLocation } from "react-router-dom";
 import TablesList from "../component/table/tablesList";
 import { Link } from 'react-router-dom'
-<<<<<<< HEAD
-
-
-
-function DbDetails(props) {
-
-    const location = useLocation();
-    const [dbData, setDbData] = useState(null);
-    // const dispatchs=useDispatch();
-    const getData=()=>{
-    //    dispatchs(bulkAddColumns(makeData(10)));
-    }
-   
-    useEffect(() => {
-      getData();
-    },[]);
-
-    useEffect(() => {   
-=======
 import { Divider } from "@mui/material";
 import MainNavbar from "../component/mainNavbar";
 function DbDetails(props) {
     const location = useLocation();
     const [dbData, setDbData] = useState(null);
     useEffect(() => {
->>>>>>> 3026241893df574afa63f4177af6bf92cda3fe7e
         if (location?.state) {
             setDbData(location?.state);
         } else {
@@ -38,30 +18,6 @@ function DbDetails(props) {
     }, [props?.location?.state]);
     return (
         <>
-<<<<<<< HEAD
-        <Container maxWidth="sm">
-            {dbData ? (
-                <Typography variant="body1" align="center">
-                    {dbData.db.name}
-                </Typography>
-            ) : (
-                <Typography variant="body1" align="center">
-                    No data to display.
-                </Typography>
-            )}
-        </Container>
-        <Link to={{pathname: "/apiDoc/db/:dbId/table/:tableName"}} state={{data : dbData}}    >
-           
-        <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
-            <Button variant="contained" color="primary">APIs</Button>
-        </Box>
-        </Link>
-        <Box align="center">
-        <TablesList dbData ={dbData} />
-        {/* <Navbar data={props}/> */}
-   </Box>
-   </>
-=======
         <Box>
       <MainNavbar/>
     </Box>
@@ -88,7 +44,6 @@ function DbDetails(props) {
                 <TablesList dbData={dbData} />
             </Box>
         </>
->>>>>>> 3026241893df574afa63f4177af6bf92cda3fe7e
     );
 }
 export default DbDetails;

@@ -61,8 +61,8 @@ export default function PopupModal(props) {
           <Box sx={{ display: "flex", justifyContent: "space-between" }}>
             <Box>
               <Button variant="contained" onClick={()=>{
-                  // props?.saveFunction ();
-                  props?.submitData();
+                  props?.saveFunction ();
+                  // props?.submitData();
               }}>
                 Create
               </Button>
@@ -87,11 +87,5 @@ PopupModal.propTypes = {
   label: PropTypes.string,
   saveFunction:PropTypes.func,
   setVariable:PropTypes.func,
-<<<<<<< HEAD
-  id: PropTypes.string,
-  submitData: PropTypes.func,
-  variable:PropTypes.string
-=======
   id: PropTypes.string
->>>>>>> 3026241893df574afa63f4177af6bf92cda3fe7e
 };
