@@ -300,6 +300,7 @@ export default function Header({
             className='bg-white shadow-5 border-radius-md'
             style={{
               width: 240
+
             }}>
             <div style={{ paddingTop: "0.75rem", paddingLeft: "0.75rem", paddingRight: "0.75rem" }}>
               <div className='is-fullwidth' style={{ marginBottom: 12 }}>

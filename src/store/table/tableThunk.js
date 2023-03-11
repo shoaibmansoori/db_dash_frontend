@@ -27,6 +27,7 @@ const getHeaders = async(dbId,tableName) =>{
         dataType: "",
         options: []
     }
+    console.log(field);
     json.id = field[0];
     json.label = field[1].fieldName?.toLowerCase() || field[0]?.toLowerCase();
     json.accessor = field[0]?.toLowerCase() ;
@@ -70,10 +71,13 @@ export const bulkAddColumns = createAsyncThunk(
 
 export const deleteColumns = createAsyncThunk(
     "table/deleteColumns",
-    async(payload,{dispatch})=>{
+    async(payload,{dispatch,getState})=>{
+        console.log(payload);
         await deleteField(payload?.dbId,payload?.tableId,payload?.fieldName)
         //delte api call 
             dispatch(deleteColumn(payload));
+            const {tableId, dbId} = getState().table
+        dispatch(bulkAddColumns({tableName:tableId,dbId :dbId}));
         return 2;
         // return response of api;
     }
@@ -95,22 +99,26 @@ export const updateColumnHeaders = createAsyncThunk(
 
 export const addColumnsToRight = createAsyncThunk(
     "table/addColumnsToRight",
-    async(payload,{dispatch})=>{
+    async(payload,{dispatch,getState})=>{
 
         dispatch(addColumnToRight(payload));
+        const {tableId, dbId} = getState().table
+        dispatch(bulkAddColumns({tableName:tableId,dbId :dbId}));
         return payload;
     }
 )
 
 export const addColumsToLeft = createAsyncThunk(
     "table/addColumsToLeft",
-    async(payload,{dispatch})=>{
+    async(payload,{dispatch,getState})=>{
         const data={
             fieldName:payload?.fieldName,
             fieldType:payload?.fieldType
         }
         await createField(payload?.dbId,payload?.tableId,data);
         dispatch(addColumnToLeft(payload));
+        const {tableId, dbId} = getState().table
+        dispatch(bulkAddColumns({tableName:tableId,dbId :dbId}));
         return payload;
     }
 )
