@@ -28,8 +28,8 @@ function App() {
       <Route exact path="/notFound" element={<Notfoundpage/>} />
       <Route exact path ="/db/:dbId" element ={<DbDetail/>}/>
       <Route exact path ="/db/:dbId/table/:tableName" element ={<DbDetail/>}/>
-      <Route exact path ="/authkeypage" element ={<AuthKeyPage/>}/>
-      <Route exact path ="/authKeyCreate" element ={<CreateAuth/>}/>
+      <Route exact path ="/authkeypage/:id" element ={<AuthKeyPage/>}/>
+      <Route exact path ="/authKeyCreate/:id" element ={<CreateAuth/>}/>
       <Route exact path ="/apiDoc/db/:dbId/table/:tableName" element ={<ApiDocPage />}/>
     </Routes>
 

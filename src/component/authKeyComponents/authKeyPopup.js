@@ -1,4 +1,4 @@
-import React,{useState} from "react";
+import React from "react";
 import Box from "@mui/material/Box";
 // import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
@@ -22,15 +22,18 @@ const style = {
 };
 export default function PopupModal(props) {
   // const [copySuccess, setCopySuccess] = useState(false);
-  const [copyText, setCopyText] = useState('');
+  // const [copyText, setCopyText] = useState('');
   const handleClose = () => props.setOpen(false);
-  const handleCopyText = (e) => {
-    setCopyText(e.target.value);
- }
+  // const handleCopyText = (e) => {
+  //   console.log(e.target.value)
+  //   setCopyText(e.target.value);
+ 
   const handleCopyClick = () => {
-    navigator.clipboard.writeText(copyText);
+    navigator.clipboard.writeText(props?.authKey);
+    navigator.clipboard.writeText(props.title);
     // setCopySuccess(true);
   };
+
   return (
     <Box>
       <Modal
@@ -43,7 +46,7 @@ export default function PopupModal(props) {
         <Box sx={style}>
           <Box sx={{ my: 2 , display:'flex'}}>
             <Box sx={{mr:4}}>
-            <TextField autoFocus id="ansh" name="ansh" label="Auth Key"  variant="standard" value={copyText} onChange={handleCopyText} />
+            <TextField autoFocus id="ansh" name="ansh" label="Auth Key"  variant="standard" value={props?.authKey} />
             </Box>
         {/* <IconButton onClick={handleCopyClick}>
                   <FileCopy />
@@ -65,6 +68,7 @@ export default function PopupModal(props) {
     </Box>
   );
 }
+
 PopupModal.propTypes = {
   title: PropTypes.string,
   open: PropTypes.bool,
@@ -72,5 +76,6 @@ PopupModal.propTypes = {
   label: PropTypes.string,
   saveFunction:PropTypes.func,
   setVariable:PropTypes.func,
-  id: PropTypes.string
+  id: PropTypes.string,
+  authKey:PropTypes.any
 };

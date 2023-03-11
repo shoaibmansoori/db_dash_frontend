@@ -16,8 +16,6 @@ import TableMenuDropdown from "./tableMenuDropdown";
 export default function AuthKey(props) {
 
   const adminId = localStorage.getItem("userid");
-  // console.log("Hariom Props : ", props.dbId);
-  // console.log("Admin Id : ",adminId);
   const[authKeys,setAuthKeys] = useState(null)
   
 
@@ -26,18 +24,17 @@ export default function AuthKey(props) {
   },[])
 
   async function getAuthkeyFun(){
-    // console.log("props",props)
   const data = await getAuthkey(props.dbId,adminId) 
   setAuthKeys(data?.data?.data)
   }
 
   async function deleteAuthkeyFun(authKey){
     const data = await deleteAuthkey(props.dbId,adminId,authKey)
-    console.log("Delete Auth Key Data : ",data);
+    const dataa = await getAuthkey(props.dbId,adminId)
+    setAuthKeys(dataa?.data?.data)
     return data;
   }
 
-  // console.log("AuthKeys : ",authKeys);
  
   return (
     <>

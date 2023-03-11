@@ -1,22 +1,36 @@
-import React from 'react'
+import React, { useEffect, useState } from "react";
 import { PropTypes } from 'prop-types';
-// import { getTable } from '../../../api/tableApi';
-import CodeSnippet from '../codeSnippet';
- function BasicStuff(props) {
-  console.log("BasicStuff Props : ",props);
-
-
+// import CodeSnippet from '../codeSnippet';
+import { getField } from '../../../api/fieldApi';
+import { Box } from "@mui/system";
+function BasicStuff(props) {
+  const [fieldData, setFieldData] = useState(null)
+  const tableData = async () => {
+    const data = await getField(props.db, props.table)
+    setFieldData(data?.data?.data?.fields)
+  }
+  console.log("Fields : ", fieldData)
+  useEffect(() => {
+    tableData();
+  }, [props.db, props.table]);
   return (
-   <>
-    <div>Basic Stuff</div>
-    <CodeSnippet codeString="const myVar = 'Hello, world!';" />
-   </>
+    <>
+      <Box >
+        {fieldData && Object.entries(fieldData).map((fields, index) => (
+          <Box
+            key={index}
+          >
+            {fields[0]}-
+            {fields[1].fieldType}
+          </Box>
+        ))}
+      </Box>
+      {/* <CodeSnippet codeString="const myVar = 'Hello, world!';" /> */}
+    </>
   )
 }
-
 BasicStuff.propTypes = {
   db: PropTypes.string,
-  table:PropTypes.string
+  table: PropTypes.string
 }
-
 export default BasicStuff

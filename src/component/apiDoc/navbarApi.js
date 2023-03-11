@@ -10,11 +10,14 @@ import PropTypes from "prop-types";
 export default function Navbar() {
   const [alldbs, setAllDbs] = useState(false);
   const [tables, setTables] = useState({});
+  const [dbId,setDbId] = useState("")
   const [selectedOption, setSelectedOption] = useState();
-  // const [selectedDb,setSelectedDb] = useState(null);
+  const [selectedDb,setSelectedDb] = useState(null);
   const [selectTable, setSelectTable] = useState('');
   const handleChange = async (event) => {
+    setSelectedDb(event.target.value);
     setSelectedOption(event.target.value);
+    setDbId(event.target.value)
     await getAllTableName(event.target.value)
   };
   const handleChangeTable = async (event) => {
@@ -32,7 +35,7 @@ export default function Navbar() {
     })
     setSelectedOption(result?.[Object.keys(result)?.[0]]?.[0].name);
     console.log(selectedOption)
-    // setSelectedDb(result?.[Object.keys(result)?.[0]]?.[0]._id)
+    setSelectedDb(result?.[Object.keys(result)?.[0]]?.[0]._id)
     // console.log(result?.[Object.keys(result)?.[0]]?.[0]._id)
     setAllDbs(result);
   }
@@ -44,6 +47,7 @@ export default function Navbar() {
   const getAllTableName = async (dbId) => {
     const data = await getDbById(dbId)
     setTables(data.data.data.tables || {});
+    setSelectTable(Object.keys(data.data.data.tables)[0])
   }
   
   return (
@@ -52,7 +56,7 @@ export default function Navbar() {
         {/* <navbarApi/> */}
         <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
           <Button variant="contained" color="primary" sx={{m:1}} disabled>APIs Documentation</Button>
-          <Link to='/authkeypage' state={selectedOption} style={{textDecoration:'none'}}>
+          <Link to= {`/authkeypage/${dbId}`} state={selectedOption} style={{textDecoration:'none'}}>
           <Button variant="contained" color="primary">Auth Key</Button>
           </Link>
         </Box>
@@ -60,7 +64,7 @@ export default function Navbar() {
       <Box >
         {alldbs && <FormControl sx={{ m: 1, minWidth: 120 }}>
           <InputLabel htmlFor="grouped-select">Organization-db</InputLabel>
-          <Select id="grouped-select" label="Organization and dbs"  value={selectedOption._id}  onChange={handleChange}>
+          <Select id="grouped-select" label="Organization and dbs"  value={selectedDb}  onChange={handleChange}>
             {Object.entries(alldbs).map(([orgId, dbs]) => [
               <ListSubheader key={`${orgId}-header`} name={orgId}>{dbs[0].org_id.name}</ListSubheader>,
               dbs?.map((db,index) => (

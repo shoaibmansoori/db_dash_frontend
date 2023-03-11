@@ -98,7 +98,7 @@ export default function TablesList(props) {
           {'>'}
         </Button>
       <Button onClick={handleOpen} variant="contained" >
-        Add Table
+        AddTable
       </Button> </div>
       <PopupModal title="create table" label="Table Name" open={open} setOpen={setOpen} saveFunction={saveTable} setVariable={setTable} />
       {/* {/ Buttons for sliding tables */}
