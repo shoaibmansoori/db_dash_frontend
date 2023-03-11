@@ -7,7 +7,6 @@ import Dropdown from '../dropdown'
 import { renameDb,deleteDb } from '../../api/dbApi'
 // import {deleteDb} from '../api/dbApi.js';
 export default function SingleDatabase(props) {
-
   const [name, setName] = useState(false)
   const [dbname,setDbname ] = useState()
   // const [open, setOpen] = useState(false);
@@ -48,7 +47,6 @@ const deletDatabases = async() => {
                   e.stopPropagation();}}
                    onChange={(e) => {
                      setDbname(e.target.value)} }size="small" />
-
               <Button onClick={(e) =>  { e.preventDefault();
               e.stopPropagation();  renameDatabase(props.db.org_id?._id,props.db._id,props.db.name);} }
               variant="contained" sx={{ width: '8rem',  backgroundColor: '#1C2833', fontSize: '12px', mx: 3, ':hover':
@@ -77,9 +75,3 @@ SingleDatabase.propTypes = {
   }),
   getOrgAndDbs:PropTypes.func
 };
-
-
-
-
-
-

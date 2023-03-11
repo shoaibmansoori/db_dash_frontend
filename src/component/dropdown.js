@@ -4,9 +4,7 @@ import { Typography, Menu, MenuItem, Tooltip, IconButton } from '@mui/material'
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import AlertPopup from './alertPopup';
 //import { deleteDb } from '../../api/dbApi'
-
 export default function Dropdown(props) {
-    
     const [anchorElUser, setAnchorElUser] = useState(null);
     const [open, setOpen] = useState(false);
     const handleOpenUserMenu = (event) => {
@@ -17,16 +15,10 @@ export default function Dropdown(props) {
       setAnchorElUser(null);
     };
     const handleClickOpen = () => {
-    
       setOpen(true);
     };
-
-     
-    
   return (
-
-    
-    <>  
+    <>
         <Tooltip>
             <IconButton onClick={(e)=>{
               e.preventDefault();
@@ -59,7 +51,7 @@ export default function Dropdown(props) {
               e.stopPropagation();handleCloseUserMenu(e);setOpen(true)}}>
               <Typography  onClick={handleClickOpen} textAlign="center" >{props?.second}</Typography>
             </MenuItem>
-            <AlertPopup open={open} setOpen ={setOpen} title={props?.title } deleteFunction={props?.deleteFunction}  /> 
+            <AlertPopup open={open} setOpen ={setOpen} title={props?.title } deleteFunction={props?.deleteFunction}  />
           </Menu>
     </>
   )
@@ -70,20 +62,4 @@ Dropdown.propTypes = {
   setName: PropTypes.func,
   title: PropTypes.string,
   deleteFunction : PropTypes.func
-  
-    
-  
 };
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -1,19 +1,18 @@
 import React, { useState } from "react";
 import Dropdown from "../dropdown";
-import Button from "@mui/material/Button";
-import Grid from "@mui/material/Grid";
 import PopupModal from "../popupModal";
-import { Box,Card, Typography, TextField } from "@mui/material";
 import SingleDatabase from "./singleDatabase";
+import Grid from "@mui/material/Grid";
+import { Box,Card, Typography, TextField, Button, IconButton} from "@mui/material";
+import ControlPointSharpIcon  from '@mui/icons-material/AddSharp';
 import { createDb } from "../../api/dbApi";
-import PropTypes from "prop-types";
 import { updateOrg, deleteOrg } from "../../api/orgApi";
-// import Curl from '../apiDoc/codeSection/curl';
+import PropTypes from "prop-types";
 
 
 
 export const OrgList = (props) => {
-
+  console.log(props)
   const [name, setName] = useState(false);
   const [orgName, setOrgName] = useState();
   const [db, setDb] = useState(false);
@@ -56,7 +55,7 @@ export const OrgList = (props) => {
         <Box sx={{ my: 7, display: "flex" }}>
           {name ? (
             <>
-              <TextField
+              <TextField 
                 sx={{ width: 120, fontWeight: "bold" }}
                 defaultValue={props.dbs[0]?.org_id?.name}
                 value={orgName}
@@ -122,20 +121,30 @@ export const OrgList = (props) => {
 
               <Card sx={{m: 4, minWidth: 250, minHeight: 200, boxShadow: 2 ,display: "flex" ,alignItems:"center",justifyContent:"center" }}>
                
-                  <Button 
-                     onClick={(e) => {
+                  {/* <Button 
+                    onClick={(e) => {
                       handleOpen(e);
                       setOrg(props?.orgId);
                     }}
                     variant="contained" >
                     Create Db
-                  </Button>
+                  </Button> */}
+
+                <IconButton sx={{color: "black"}}
+                onClick={(e) => {
+                    handleOpen(e);
+                    setOrg(props?.orgId);
+                  }} 
+                >
+                    < ControlPointSharpIcon  cursor="pointer" sx={{ fontSize: "50px" }} />
+                </IconButton>
+                
               </Card>
             </Grid>
             <PopupModal
-              title="create Database"
               open={open}
               setOpen={setOpen}
+              title="create Database"
               label="Database Name"
               saveFunction={saveDb}
               setVariable={setDb}
@@ -144,7 +153,7 @@ export const OrgList = (props) => {
           
         </Box>
       </Box>
-      <Box></Box>
+    
     </>
   );
 };
@@ -153,3 +162,4 @@ OrgList.propTypes = {
   orgId: PropTypes.string,
   getOrgAndDbs: PropTypes.func,
 };
+
