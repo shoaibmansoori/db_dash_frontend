@@ -2,7 +2,7 @@ import React,{useState,useEffect} from 'react'
 import { Card, CardContent, Typography, Box,TextField} from '@mui/material'
 import Button from '@mui/material/Button';
 import PropTypes from "prop-types"
-import { Link } from 'react-router-dom' 
+import { Link } from 'react-router-dom'
 import Dropdown from '../dropdown'
 import { renameDb,deleteDb } from '../../api/dbApi'
 // import {deleteDb} from '../api/dbApi.js';
@@ -11,7 +11,6 @@ export default function SingleDatabase(props) {
   const [dbname,setDbname ] = useState()
   // const [open, setOpen] = useState(false);
   const renameDatabase = async (orgId,id,name) =>{
-  
     const data = {
           name  : dbname||name
     }
@@ -28,7 +27,7 @@ const deletDatabases = async() => {
   await props.getOrgAndDbs();
 }
   return (
-      <Link to={{ pathname: "/db/" + props.db._id}} style={{ textDecoration: "none" }}  state = {{db: props.db}}>
+      <Link to={{ pathname: "/db/" + props.db._id  }} style={{ textDecoration: "none" }}  state = {{db: props.db}}>
     <Card sx={{ minWidth: 250, minHeight: 200, boxShadow: 2 }}>
         <CardContent sx={{ display:"flex"}}>
             { name?
@@ -39,7 +38,7 @@ const deletDatabases = async() => {
                    onKeyDown={(e) => {
                     if (e.key === 'Enter') {
                       renameDatabase(props.db.org_id?._id,props.db._id,props.db.name);
-                      setName(false); 
+                      setName(false);
                     }
                   }}
                   onClick={(e) => {

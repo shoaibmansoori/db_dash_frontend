@@ -1,130 +1,139 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import PopupModal from '../popupModal';
 import { createTable } from '../../api/tableApi';
 import { getDbById } from '../../api/dbApi';
 import PropTypes from "prop-types";
-import { addColumns, bulkAddColumns } from '../../store/table/tableThunk';
-import { useDispatch } from "react-redux";
 import SingleTable from './singleTable';
-import { useNavigate,useParams } from "react-router-dom";
-export default function TablesList(props) {
-  const [tables, setTables] = useState({});
+import {useNavigate} from "react-router-dom";
+import Tabs from '@mui/material/Tabs';
+import Tab from '@mui/material/Tab';
+import { useDispatch } from "react-redux";
+import Dropdown from '../dropdown';
+import { bulkAddColumns } from '../../store/table/tableThunk';
+export default function TablesList({dbData,tables,setTables}) {
+  // const [tables, setTables] = useState(0);
+  const [value, setValue] = React.useState(0);
+  // const location = useLocation();
+  // const [table, setTable] = useState();
+  // console.log(props?.dbData?.db?._id)
+  //const [table, setTable] = useState();
+  //const [name,setName] = useState(false);
   const navigate = useNavigate();
-  const {tableName}=useParams()
-  const sliderRef = useRef();
-  const url = window.location.pathname;
-  const dispatch = useDispatch();
+  const dispatch=useDispatch()
+  const handleChange = (event: React.SyntheticEvent, newValue: number) => {
+    setValue(newValue);
+  };
   // state to display modal
+  const TabWithDropdown = ({ label, dropdown }) => (
+    <Box sx={{ display: 'flex', alignItems: 'center' }}>
+      <Tab label={label} />
+      {dropdown}
+    </Box>
+  );
   const [table, setTable] = useState();
-  const [tableButton, setTableButton] = useState(false);
+  const [, setTableButton] = useState(false);
   const [clickedTable, setClickedTable] = useState('');
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
+  // Object.entries(tables)[0][0]
   function onTableClicked(value) {
-    navigate(`/db/${props?.dbData?.db?._id}/table/${value}`);
+    navigate(`/db/${dbData?.db?._id}/table/${value}`);
     setClickedTable(value);
     setTableButton(true);
   }
   const saveTable = async (e) => {
     e.preventDefault();
-    const dbId = props?.dbData?.db._id;
+    const dbId = dbData?.db._id;
     const data = {
       tableName: table
     }
     await createTable(dbId, data);
     setOpen(false);
-    getAllTableName(props?.dbData?.db?._id, props?.dbData?.db?.org_id?._id);
+    getAllTableName(dbData?.db?._id, dbData?.db?.org_id?._id);
   };
   useEffect(() => {
-   if(props?.dbData)
-   getAllTableName(props?.dbData?.db?._id, props?.dbData?.db?.org_id?._id)
-   updateSliderDimensions();
-  },[props]);
-
-  useEffect(()=>{
-    dispatch(addColumns({
-      // option: e.target.value,
-      // backgroundColor: randomColor(),
-      // columnId: id
-    }))
-  },[])
-
+    if (dbData) {
+      getAllTableName(dbData?.db?._id, dbData?.db?.org_id?._id);
+    }
+  }, [dbData]);
   useEffect(() => {
-    onTableClicked(tableName)
-  }, [url]);
-  useEffect(() => {
-    updateSliderDimensions();
-  }, [tables]);
+    if (Object.entries(tables)?.length >0){
+      onTableClicked(Object.keys(tables)[0])
+    // navigate(`/db/${dbData?.db?._id}/table/${Object.keys(tables)[0]}`);
+      // setClickedTable()
+    }
+  }, [tables])
   const getAllTableName = async (dbId, orgId) => {
     const data = await getDbById(dbId, orgId)
     setTables(data.data.data.tables || {});
     return data;
   }
-  let box = document.getElementById('slider');
-  const updateSliderDimensions = () => {
-    //let width = box.clientWidth;
-  }
-  const handleSliderLeft = () => {
-    let width = box.clientWidth;
-    box.scrollLeft = box.scrollLeft - width
-  }
-  const handleSliderRight = () => {
-    let width = box.clientWidth;
-    box.scrollLeft = box.scrollLeft + width;
-  }
+  // const renameTableName = async (db_id,data) => {
+  //   const data1 = {
+  //     newTableName: tabName,
+  //   };
+  //   await updateTable(db_id,data);
+  // };
+  // const deleteTableName = async (db_id,tableName) => {
+  //   await deleteTable(db_id,tableName);
+  // };
   return (
     <>
-    <div style={{width: "100%", display: "flex",height:"33px"}}>
-     <Button onClick={handleSliderLeft} >
-          {'<'}
-        </Button>
-      <Box id='slider' ref={sliderRef} sx={{ display: 'flex' , overflow: 'hidden',width:"92%" }}>
-        {Object.entries(tables).map((table, index) => (
-          <Box
-            key={index}
-            sx={{
-              p: '5px',
-              borderRadius: '2px',
-              border: '1px solid rgba(0, 0, 0, 0.2)',
-              backgroundColor: '#fff',
-              boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.1)',
-              minWidth: '75px',
-              maxWidth: '100px',
-              textAlign: 'center',
-              textOverflow: 'ellipsis',
-              overflow: 'hidden',
-              whiteSpace: 'nowrap',
-              transition: 'transform 0.2s ease-in-out',
-              //transform: translateX(-${sliderOffset}px),
-            }}
-            onClick={() => {
-              onTableClicked(table[0])
-              dispatch(bulkAddColumns({
-                "dbId":props.dbData.db._id,
-                "tableName":table[0]
-              }));
-             }}
-          >
-            {table[1]?.tableName || table[0]}
-          </Box>
-        ))}
-      </Box>
-      <Button onClick={handleSliderRight} >
-          {'>'}
-        </Button>
-      <Button onClick={handleOpen} variant="contained" >
-        AddTable
-      </Button> </div>
+      <Box sx={{ width: "100%", display: "flex", height: "33px" }}>
+        <Box  sx={{ display: 'flex', overflow: 'hidden', width: "100%", height: "47px"}}>
+        <Tabs
+        value={value}
+        onChange={handleChange}
+        variant="scrollable"
+        scrollButtons="auto"
+        aria-label="scrollable auto tabs example"
+      >
+          {Object.entries(tables).map((table, index) => (
+            <Box
+              key={index}
+              sx={{
+                p: '5px',
+                borderRadius: '8px',
+                border: '1px solid rgba(0, 0, 0, 0.2)',
+                backgroundColor: '#fff',
+                boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.1)',
+                minWidth: '175px',
+                maxWidth: '200px',
+                textAlign: 'center',
+                textOverflow: 'ellipsis',
+                overflow: 'hidden',
+                whiteSpace: 'nowrap',
+                transition: 'transform 0.2s ease-in-out',
+              }}
+              onClick={() => {
+                onTableClicked(table[0])
+                dispatch(bulkAddColumns({
+                  "dbId":dbData.db._id,
+                  "tableName":table[0]
+                }));
+               }}
+            >
+              {table[1]?.tableName || table[0]}
+
+              <TabWithDropdown
+          // label={table[0]}
+        dropdown={<Dropdown />}
+    />
+            </Box>
+          ))}
+          </Tabs>
+        </Box>
+        <Button onClick={handleOpen} variant="contained" >
+          AddTable
+        </Button> </Box>
       <PopupModal title="create table" label="Table Name" open={open} setOpen={setOpen} saveFunction={saveTable} setVariable={setTable} />
-      {/* {/ Buttons for sliding tables */}
       <Box>
-        {tableButton ? (
           <SingleTable table={clickedTable} />
-        ) : (
+        {/* ) : (
           <h1></h1>
-        )}
+        )} */}
       </Box>
     </>
   );
@@ -134,4 +143,8 @@ TablesList.propTypes = {
   table: PropTypes.string,
   dbId: PropTypes.string,
   orgId: PropTypes.string,
+  tables:PropTypes.any,
+  dropdown:PropTypes.any,
+  label : PropTypes.any,
+  setTables:PropTypes.any
 };

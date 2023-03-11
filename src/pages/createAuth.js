@@ -41,6 +41,7 @@ export default function CreateAuthKey() {
        access : selected
     }
     const create = await createAuthkey(dbId, adminId, data )
+    console.log("create",create)
     setDisplay(true)
     setAuthKey(create?.data?.data)
     await getAuthkey(dbId,adminId);

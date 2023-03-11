@@ -5,9 +5,8 @@ import Navbar from "../component/apiDoc/navbarApi";
 import MainNavbar from "../component/mainNavbar";
 
 
-
 function ApiDocPage() {
-    // const location = useLocation();
+
     // const [dbData, setDbData] = useState(null);
 
     // useEffect(() => {   
