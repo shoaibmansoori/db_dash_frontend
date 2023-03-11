@@ -146,7 +146,7 @@ export const OrgList = (props) => {
               setOpen={setOpen}
               title="create Database"
               label="Database Name"
-              saveFunction={saveDb}
+              submitData={saveDb}
               setVariable={setDb}
             />
           </Box>

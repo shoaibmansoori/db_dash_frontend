@@ -56,11 +56,11 @@ export default function SingleDatabase(props) {
                   width: '8rem', backgroundColor: '#1C2833', fontSize: '12px', mx: 3, ':hover':
                     { bgcolor: '#273746', color: 'white', border: 0, borderColor: '#1C2833', }
                 }}
-                onClick={(e) => {
-                  e.preventDefault();
-                  e.stopPropagation(); 
-                  renameDatabase(props?.db?.org_id?._id, props?.db._id, props?.db.name);
-                }}
+                 onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation(); 
+                renameDatabase(props?.db?.org_id?._id, props?.db._id, props?.db.name);
+              }}
                 
                 >
                 Rename

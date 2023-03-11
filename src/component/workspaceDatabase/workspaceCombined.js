@@ -61,7 +61,7 @@ export default function WorkspaceCombined() {
          <Box sx={{display:'flex',m:3}}>
             <Button onClick={handleOpen} variant="contained">Create Organisation</Button>
             <PopupModal title="create organisation" label="Organization Name" open={open} setOpen ={setOpen}
-            saveFunction = {saveOrgToDB}  setVariable={setOrg}/>
+            submitData = {saveOrgToDB}  setVariable={setOrg}/>
           </Box>
 
           <Box>
