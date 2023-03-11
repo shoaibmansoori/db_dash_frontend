@@ -34,7 +34,7 @@ export default function Cell({value: initialValue, row, column: {id, dataType, o
       console.log("called")
       // dataDispatch({type: "update_cell", columnId: id, rowIndex: index, value: value.value});
       dispatch(updateCells({
-        columnId: id, rowIndex: row.index, value: value.value
+        columnId: id, rowIndex: row.original.id, value: value.value
       }))
     }
   }, [value, dispatch, id, row.index]);

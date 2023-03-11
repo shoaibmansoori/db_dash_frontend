@@ -46,7 +46,7 @@ function MainTable() {
             marginRight: "auto"
           }}
         >
-          {tableInfo?.data?.length>1 && <Table
+          {tableInfo?.columns?.length>0 && <Table
             columns={tableInfo.columns}
             data={tableInfo.data}
             dispatch={dispatchs}

@@ -7,8 +7,9 @@ import PlusIcon from "./img/Plus";
 import PropTypes from 'prop-types';
 import { cloneDeep } from "lodash";
 import { useCellRangeSelection } from 'react-table-plugins'
-import { addRows } from "../store/table/tableThunk";
+import { addRows ,deleteRows} from "../store/table/tableThunk";
 import { updateTableData } from "../store/table/tableSlice";
+import { Button } from "@mui/material";
 
 const defaultColumn = {
   minWidth: 50,
@@ -30,6 +31,7 @@ export default function Table({ columns, data,dispatch:dataDispatch, skipReset }
   };
   const handlePaste = (event,row,cell) => {
     event.preventDefault();
+    console.log("handle paste");
       const text = event.clipboardData.getData('text/plain');
        const newData = cloneDeep(data);
        newData[row][cell.column.id] = text.trim();
@@ -154,6 +156,9 @@ export default function Table({ columns, data,dispatch:dataDispatch, skipReset }
           )}
         </code>
       </pre>
+      {selectedFlatRows?.length > 0 && <Button sx = {{m:2}} onClick={()=>{
+        dataDispatch(deleteRows(selectedFlatRows))
+      }}>delete selected rows</Button>}
       <div {...getTableProps()} className={clsx("table", isTableResizing() && "noselect")}>
         <div>
           <div {...headerGroups[0].getHeaderGroupProps()} className='tr'>

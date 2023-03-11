@@ -2,7 +2,7 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import { createField, deleteField, getAllfields, updateField } from "../../api/fieldApi";
 import { getTable } from "../../api/tableApi";
 import {insertRow} from "../../api/rowApi";
-import { updateRow } from "../../api/rowApi";
+import { updateRow ,deleteRow} from "../../api/rowApi";
 // reducer imports
 import { addColumnToLeft, addColumnToRight, addOptionToColumn,addRow,deleteColumn,updateCell,updateColumnHeader, updateColumnType} from "./tableSlice";
 const getHeaders = async(dbId,tableName) =>{
@@ -28,7 +28,8 @@ const getHeaders = async(dbId,tableName) =>{
         options: []
     }
     json.id = field[0];
-    json.label = json.accessor = field[1].fieldName?.toLowerCase() || field[0]?.toLowerCase();
+    json.label = field[1].fieldName?.toLowerCase() || field[0]?.toLowerCase();
+    json.accessor = field[0]?.toLowerCase() ;
     json.dataType = field[1].fieldType?.toLowerCase();
     columns.push (json);
     }
@@ -117,6 +118,7 @@ export const addColumsToLeft = createAsyncThunk(
 export const updateCells = createAsyncThunk(
     "table/updateCells",
     async(payload,{dispatch,getState})=>{
+        console.log(payload)
        const {tableId, dbId} = getState().table
        const value = payload.value
        const  columnId= payload.columnId
@@ -134,6 +136,21 @@ export const addRows = createAsyncThunk(
         await insertRow(dbId,tableId);
         console.log("insert row ");
         dispatch(addRow(payload));
+        dispatch(bulkAddColumns({tableName:tableId,dbId :dbId}));
+        return payload;
+    }
+)
+export const deleteRows = createAsyncThunk(
+    "table/deleteRows",
+    async(payload,{dispatch,getState})=>{
+        // console.log((payload))
+        var arr = [];
+        for (var index in payload) {
+            // console.log("index",payload[index].original.id);
+            arr.push(payload[index].original.id )
+        }
+        const {tableId, dbId} = getState().table
+       await deleteRow(dbId,tableId,{row_id:arr}) ;
         dispatch(bulkAddColumns({tableName:tableId,dbId :dbId}));
         return payload;
     }

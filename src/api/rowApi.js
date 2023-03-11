@@ -13,8 +13,9 @@ const updateRow = async (db_id,tableName,row_id,data) =>
 
 const deleteRow = async (db_id,tableName,row_id) =>
 {
-    return await axios.delete(URL +`/dbs/${db_id}/${tableName}/${row_id}/deleterow`)
+    return await axios.patch(URL +`/dbs/${db_id}/${tableName}/deleterow`,row_id)
 }
+
 
 export{
     insertRow,

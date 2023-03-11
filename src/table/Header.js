@@ -236,7 +236,6 @@ export default function Header({
         dbId: tableInfo?.dbId,
         tableName: tableInfo?.tableId,
         fieldName: id,
-        fieldType: "text",
         label: header
       }))
       setExpanded(false);
@@ -249,18 +248,17 @@ export default function Header({
 
   function handleBlur(e) {
     e.preventDefault();
-    // dispatch(updateColumnHeaders({
-    //   type: "updateColumnHeader",
-    //   columnId: id,
-    //   label: header
-    // }))
-    dispatch(updateColumnHeaders({
+    if(id != header )
+    {
+      console.log("id ",id ,"header",header)
+      dispatch(updateColumnHeaders({
       columnId: id,
       dbId: tableInfo?.dbId,
       tableName: tableInfo?.tableId,
       fieldName: id,
       label: header
     }))
+  }
   }
 
   return id == 999999 || id == 9999991 ? (
@@ -346,7 +344,7 @@ export default function Header({
                   }}>
                   {types.map((type, index) => (
                     <button key={index} className='sort-button' onClick={type.onClick}>
-                      <span className='svg-icon svg-text icon-margin'>{type.icon}</span>
+                      <span  key = {index}  className='svg-icon svg-text icon-margin'>{type.icon}</span>
                       {type.label}
                     </button>
                   ))}
@@ -363,7 +361,7 @@ export default function Header({
                 <button type='button' key={index} className='sort-button'
                   onClick={button.onClick}
                 >
-                  <span className='svg-icon svg-text icon-margin'>{button.icon}</span>
+                  <span   key = {index} className='svg-icon svg-text icon-margin'>{button.icon}</span>
                   {button.label}
                 </button>
               ))}
