@@ -96,9 +96,9 @@ export default function Navbar() {
           </Select>
         </FormControl>
       </Box>}
-      {<Box>
+      {Object.keys(tables).length >=1 ? <Box>
         <ApiCrudTablist db={selectedOption} table={selectTable}/>
-      </Box>}
+      </Box>:"Please make the table first"}
     </>
   )
 }
