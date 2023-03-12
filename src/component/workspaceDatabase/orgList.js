@@ -12,7 +12,6 @@ import PropTypes from "prop-types";
 
 
 export const OrgList = (props) => {
-  console.log(props)
   const [name, setName] = useState(false);
   const [orgName, setOrgName] = useState();
   const [db, setDb] = useState(false);

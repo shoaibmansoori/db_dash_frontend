@@ -11,6 +11,7 @@ export default function Navbar() {
   const [alldbs, setAllDbs] = useState(false);
   const [tables, setTables] = useState({});
   const [dbId,setDbId] = useState("")
+  // const [open,setOpen] = useState(true)
   const [selectedOption, setSelectedOption] = useState();
   const [selectedDb,setSelectedDb] = useState(null);
   const [selectTable, setSelectTable] = useState('');
@@ -20,6 +21,7 @@ export default function Navbar() {
     setDbId(event.target.value)
     console.log("in get table");
     await getAllTableName(event.target.value)
+    // console.log(table)
   };
   const handleChangeTable = async (event) => {
     setSelectTable(event.target.value);
@@ -48,7 +50,7 @@ export default function Navbar() {
   const getAllTableName = async (dbId) => {
     
     const data = await getDbById(dbId)
-    console.log("data",data)
+    console.log("data",data.data.data.tables)
     setTables(data.data.data.tables || {});
     setSelectTable(Object.keys(data.data.data.tables)[0])
   }
@@ -80,8 +82,9 @@ export default function Navbar() {
         </FormControl>}
       </Box>
       <br></br>
-      <Box >
-        <FormControl sx={{ m: 1, minWidth: 120 }}>
+      {console.log(tables)}
+      {Object.keys(tables).length >=1 && <Box >
+         <FormControl sx={{ m: 1, minWidth: 120 }}>
           <InputLabel htmlFor="grouped-select">Tables-Name</InputLabel>
           <Select value={selectTable}
             onChange={handleChangeTable} >
@@ -92,10 +95,10 @@ export default function Navbar() {
             ))}
           </Select>
         </FormControl>
-      </Box>
-      <Box>
+      </Box>}
+      {<Box>
         <ApiCrudTablist db={selectedOption} table={selectTable}/>
-      </Box>
+      </Box>}
     </>
   )
 }
