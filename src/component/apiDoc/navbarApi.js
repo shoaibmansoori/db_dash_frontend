@@ -59,12 +59,12 @@ export default function Navbar() {
     <>
    <Box align="center">
         {/* <navbarApi/> */}
-        <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+        {Object.keys(tables).length >=1 && <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
           <Button variant="contained" color="primary" sx={{m:1}} disabled>APIs Documentation</Button>
           <Link to= {`/authkeypage/${dbId}`} state={selectedOption} style={{textDecoration:'none'}}>
           <Button variant="contained" color="primary">Auth Key</Button>
           </Link>
-        </Box>
+        </Box>}
    </Box>
       <Box >
         {alldbs && <FormControl sx={{ m: 1, minWidth: 120 }}>

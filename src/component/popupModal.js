@@ -14,7 +14,7 @@ const style = {
   top: "50%",
   left: "50%",
   transform: "translate(-50%, -50%)",
-  width: 200,
+  width: 300,
   bgcolor: "background.paper",
   border: "2px solid #000",
   boxShadow: 24,
@@ -29,6 +29,7 @@ export default function PopupModal(props) {
   return (
     <Box>
       <Modal 
+       disableRestoreFocus
         open={props.open}
         onClose={handleClose}
         aria-labelledby="modal-modal-title"
@@ -51,7 +52,7 @@ export default function PopupModal(props) {
               }}
               onKeyDown={(e) => {
                 if (e.key === 'Enter') {
-                  props.saveFunction(e);
+                  props.submitData(e);
                   handleClose();
                 }
               }}

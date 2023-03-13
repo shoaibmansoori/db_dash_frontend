@@ -30,11 +30,11 @@ export default function Authpage() {
 
   }
   return (
-    <Container maxWidth={'true'} sx={{display: 'flex',  justifyContent: 'center', backgroundColor: "rgb(211, 211, 211,0.3)", padding:0 }}>
+    <Container sx={{display: 'flex',  justifyContent: 'center', backgroundColor: "rgb(211, 211, 211,0.3)", padding:0 }}>
     
-      <Box sx={{backgroundColor: "white", width: '35%', display: 'flex', flexDirection: 'column', alignItems: 'center', boxShadow: 3, borderRadius: 4, mt:2, mb:2 }}>
+      <Box sx={{backgroundColor: "white", width: '35%', display: 'flex', flexDirection: 'column', alignItems: 'center', boxShadow: 3, borderRadius: 4, mt:2, mb:2,height:510 }}>
 
-        <Box>
+        <Box sx={{m:2}}>
           {/* <img style={{ width: "100px"}}
             src="https://uploads-ssl.webflow.com/63403f10e7b52a177fd0c2ac/634934b92269c62bb6cf2e0a_Logo.png"
             alt="Via Socket"
@@ -43,7 +43,7 @@ export default function Authpage() {
           <h3>DB DASH</h3>
         </Box>
 
-        <h2>
+        <h2 style={{marginBottom:'15px'}}>
           {isLogin === false ? "Create Your Account!" : "Welcome Back!"}
         </h2>
 
@@ -51,7 +51,7 @@ export default function Authpage() {
           <GoogleAuth />
         </Box>
 
-        <p>or</p>
+        <p  style={{marginTop:'15px'}}>or</p>
         <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
           {/* condition to show login page or signup page */}
           {isLogin === true ? <LoginInput loginHandleSubmit={loginHandleSubmit} /> : <SignupInput signupHandleSubmit={signupHandleSubmit} />}

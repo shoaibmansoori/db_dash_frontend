@@ -9,7 +9,8 @@ import AuthKeyDropdown from "../component/authKeyComponents/authKeyDropdown";
 import { PropTypes } from "prop-types";
 import { createAuthkey, getAuthkey } from "../api/authkeyApi";
 import MainNavbar from "../component/mainNavbar";
-import DisplayAuthKeyPopup from "../component/authKeyComponents/authKeyTablePopup/displayAuthkeyPopup";
+// import DisplayAuthKeyPopup from "../component/authKeyComponents/authKeyTablePopup/displayAuthkeyPopup";
+import AuthKeyPopup from "../component/authKeyComponents/authKeyPopup";
 
 
 
@@ -23,8 +24,8 @@ export default function CreateAuthKey() {
  const [name,setName] = useState('');
 
   const [authKey,setAuthKey] = useState()
-  const [display, setDisplay] = useState(false);
-  const handleOpen = () => setDisplay(true);
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
   const handleKeyDown = (event) => {
     if (event.key === "Enter") {
       event.preventDefault();
@@ -41,8 +42,9 @@ export default function CreateAuthKey() {
        access : selected
     }
     const create = await createAuthkey(dbId, adminId, data )
-    setDisplay(true)
+    setOpen(true)
     setAuthKey(create?.data?.data?.authKey)
+    console.log(create)
     await getAuthkey(dbId,adminId);
 
   }
@@ -83,7 +85,7 @@ export default function CreateAuthKey() {
             </Box>
           </Box>
         </Box>
-          <Box sx={{ display: "flex", position: "absolute", right:0, bottom: 10,mr:3}}>
+          <Box sx={{ display: "flex", position: "relative", justifyContent: "flex-end",bottom: 10,mr:3}}>
             <Box sx={{m:1}}>
               
               <Button variant="contained" onClick={()=>{createAuth()
@@ -93,7 +95,7 @@ export default function CreateAuthKey() {
               </Button>
               {/* <AuthKeyPopup open={open}
               setOpen={setOpen} authKey={authKey}/> */}
-              <DisplayAuthKeyPopup display={display} setDisplay={setDisplay} title={authKey}/>
+              <AuthKeyPopup open={open} setOpen={setOpen} title={authKey}/>
             </Box>
             <Box sx={{m:1}}>
                     <Link to={`/authkeypage/${id}`} style={{ textDecoration: 'none' }}>
