@@ -23,7 +23,6 @@ function DbDetails(props) {
     const getAllTableName = async (dbId) => {
         var object = {}
         const data = await getDbById(dbId)
-        console.log("data",data.data.data)
         object.db=data.data.data
         setDbData(object);
       }
@@ -33,9 +32,8 @@ function DbDetails(props) {
       <MainNavbar/>
     </Box>
             <Container sx={{height:'40px'}}>
-                {dbData || dbId ? (
+                {dbData ? (
                     <>
-                    {console.log("dbData",dbData)}
                     <Typography variant="body1" align="center">
                         {dbData?.db.name}
                     </Typography>

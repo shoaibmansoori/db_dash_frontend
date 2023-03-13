@@ -9,7 +9,6 @@ function BasicStuff(props) {
     const data = await getAllfields(props.db, props.table)
     setFieldData(data?.data?.data?.fields)
   }
-  console.log("Fields : ", fieldData)
   useEffect(() => {
     tableData();
   }, [props.db, props.table]);

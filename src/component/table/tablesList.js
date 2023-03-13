@@ -10,8 +10,11 @@ import {useNavigate} from "react-router-dom";
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Dropdown from '../dropdown';
+import { bulkAddColumns } from '../../store/table/tableThunk';
+import { useDispatch } from 'react-redux';
 export default function TablesList({dbData,tables,setTables}) {
   // const [tables, setTables] = useState(0);
+  const dispatch= useDispatch();
   const [value, setValue] = React.useState(0);
   const navigate = useNavigate();
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
@@ -53,6 +56,10 @@ export default function TablesList({dbData,tables,setTables}) {
   useEffect(() => {
     if (Object.entries(tables)?.length >0){
       onTableClicked(Object.keys(tables)[0])
+      dispatch(bulkAddColumns({
+        "dbId":dbData?.db?._id,
+        "tableName": Object.keys(tables)[0]
+      }));
     }
   }, [tables])
   const getAllTableName = async (dbId, orgId) => {
@@ -88,10 +95,16 @@ export default function TablesList({dbData,tables,setTables}) {
                 whiteSpace: 'nowrap',
                 transition: 'transform 0.2s ease-in-out',
               }}
-              onClick={() => onTableClicked(table[0])}
+              
+              onClick={() =>{ onTableClicked(table[0]  )
+                dispatch(bulkAddColumns({
+                  "dbId":dbData?.db?._id,
+                  "tableName": table[0]
+                }));
+              } }
             >
               <TabWithDropdown
-      label={table[0]}
+      label={table[1]?.tableName || table[0]}
       dropdown={<Dropdown />}
     />
             </Box>
@@ -103,10 +116,7 @@ export default function TablesList({dbData,tables,setTables}) {
         </Button> </Box>
       <PopupModal title="create table" label="Table Name" open={open} setOpen={setOpen} saveFunction={saveTable} setVariable={setTable} />
       <Box>
-          <SingleTable table={clickedTable} />
-        {/* ) : (
-          <h1></h1>
-        )} */}
+          <SingleTable  table={clickedTable} />
       </Box>
     </>
   );
