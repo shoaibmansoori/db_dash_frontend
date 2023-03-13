@@ -131,7 +131,7 @@ export default function AuthAccessDropDown({selected,setSelected,dbId}) {
             if(!selected?.includes(e.target.value)){
               setSelected([...selected,e.target.value])
             }
-            console.log(e.target.value);
+
            }}
            defaultChecked={selected?.includes(option[0])}
            />

@@ -14,8 +14,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { shortId } from "./utils";
 import PropTypes from 'prop-types';
 import { addColumsToLeft, deleteColumns, updateColumnHeaders, updateColumnsType } from "../store/table/tableThunk";
-import PopupModal from "../component/popupModal";
+// import PopupModal from "../component/popupModal";
 import { getTableInfo } from "../store/table/tableSelector";
+import FieldPopupModal from "./fieldPopupModal";
 
 
 
@@ -25,9 +26,12 @@ export default function Header({
   // dispatch:dataDispatch
 }) {
   const dispatch = useDispatch();
+  const [textValue, setTextValue] = useState('');
+  const [selectValue, setSelectValue] = useState('');
+  console.log(textValue,selectValue)
   const tableInfo = useSelector((state) => getTableInfo(state));
   const [open, setOpen] = useState(false);
-  const [variable, setVariable] = useState("");
+  // const [variable, setVariable] = useState("");
 
   const handleOpen = () => {
     setOpen(true);
@@ -36,7 +40,7 @@ export default function Header({
   const createLeftColumn = () => {
     setOpen(false);
     dispatch(addColumsToLeft({
-      columnId: 999999, focus: false, fieldName: variable, dbId: tableInfo?.dbId, tableId: tableInfo?.tableId, fieldType: "text"
+      columnId: 999999, focus: false, fieldName: textValue, dbId: tableInfo?.dbId, tableId: tableInfo?.tableId, fieldType: selectValue
     }));
   }
   const [expanded, setExpanded] = useState(created || false);
@@ -51,6 +55,10 @@ export default function Header({
   const [typeReferenceElement, setTypeReferenceElement] = useState(null);
   const [typePopperElement, setTypePopperElement] = useState(null);
   const [showType, setShowType] = useState(false);
+
+ 
+
+ 
 
   const buttons = [
     {
@@ -272,7 +280,7 @@ export default function Header({
             <PlusIcon />
           </span>
         </div>
-        <PopupModal title="create column" label="Column Name" setVariable={setVariable} variable={variable} open={open} setOpen={setOpen} submitData={createLeftColumn} />
+        <FieldPopupModal title="create column" label="Column Name" setTextValue={setTextValue} setSelectValue={setSelectValue} open={open} setOpen={setOpen} submitData={createLeftColumn} />
 
       </div > :
         <div  {...getHeaderProps({ style: { display: "inline-block" } })} className='th noselect'
@@ -379,5 +387,5 @@ export default function Header({
 Header.propTypes = {
   column: PropTypes.any,
   setSortBy: PropTypes.any,
-  dataDispatch: PropTypes.any
+  dataDispatch: PropTypes.any,
 };

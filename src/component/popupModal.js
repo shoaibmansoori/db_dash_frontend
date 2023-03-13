@@ -23,13 +23,10 @@ const style = {
 
 export default function PopupModal(props) {
   // const [org, setOrg] = React.useState();
-
   const handleClose = () => props.setOpen(false);
-
   return (
     <Box>
-      <Modal 
-       disableRestoreFocus
+      <Modal
         open={props.open}
         onClose={handleClose}
         aria-labelledby="modal-modal-title"
@@ -40,24 +37,22 @@ export default function PopupModal(props) {
             {props.title}
           </Typography>
           <Box sx={{ my: 2 }}>
-
-            <TextField 
+            <TextField
              autoFocus
               id={props?.id}
               name={props?.id}
-              label={props.label} 
+              label={props.label}
               variant="standard"
               onChange={(e) => {
                 props.setVariable(e.target.value);
               }}
               onKeyDown={(e) => {
                 if (e.key === 'Enter') {
-                  props.submitData(e);
+                  props.saveFunction(e);
                   handleClose();
                 }
               }}
             />
-
           </Box>
           <Box sx={{ display: "flex", justifyContent: "space-between" }}>
             <Box>
@@ -73,7 +68,6 @@ export default function PopupModal(props) {
                 Cancel
               </Button>
             </Box>
-            
           </Box>
         </Box>
       </Modal>

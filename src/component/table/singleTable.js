@@ -5,7 +5,7 @@ import MainTable from '../../table/mainTable';
 export default function SingleTable() {
   
   return (
-    <>
+    <> 
       <MainTable/>
     </>
   )
