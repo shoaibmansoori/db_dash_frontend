@@ -32,7 +32,7 @@ const useStyles = makeStyles((theme) => ({
 
 
 export default function FieldPopupModal(props)  {
-    console.log("popup",props)
+    // console.log("popup",props)
   const classes = useStyles();
 //   const [open, setOpen] = useState(false);
 
@@ -82,11 +82,12 @@ const handleTextChange = (event) => {
             id="select"
             value={props.selectValue}
             onChange={handleSelectChange}
+            defaultValue	 ="Text"
             displayEmpty
             className={classes.formControl}
           >
-            <MenuItem value="">Select an option</MenuItem>
-            <MenuItem value="Text">Text</MenuItem>
+            {/* <MenuItem value="">Select an option</MenuItem> */}
+            <MenuItem value="Text" >Text</MenuItem>
             <MenuItem value="String">String</MenuItem>
             <MenuItem value="Integer">Integer</MenuItem>
           </Select>

@@ -31,7 +31,6 @@ export default function Table({ columns, data,dispatch:dataDispatch, skipReset }
   };
   const handlePaste = (event,row,cell) => {
     event.preventDefault();
-    console.log("handle paste");
       const text = event.clipboardData.getData('text/plain');
        const newData = cloneDeep(data);
        newData[row][cell.column.id] = text.trim();
@@ -200,7 +199,9 @@ export default function Table({ columns, data,dispatch:dataDispatch, skipReset }
                   style=
                   {
                     cellsSelected[cell.id]
-                      ? { ...cell.getCellProps().style, backgroundColor: '#6beba8', userSelect: 'none' }
+                      ? { ...cell.getCellProps().style, 
+                        // backgroundColor: '#6beba80'
+                       userSelect: 'none' }
                       : {...cell.getCellProps().style, userSelect: 'none' }
                   }
                   className='td'> 
