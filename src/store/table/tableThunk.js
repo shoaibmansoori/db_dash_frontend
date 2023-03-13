@@ -70,10 +70,12 @@ export const bulkAddColumns = createAsyncThunk(
 
 export const deleteColumns = createAsyncThunk(
     "table/deleteColumns",
-    async(payload,{dispatch})=>{
+    async(payload,{dispatch,getState})=>{
         await deleteField(payload?.dbId,payload?.tableId,payload?.fieldName)
         //delte api call 
             dispatch(deleteColumn(payload));
+            const {tableId, dbId} = getState().table
+            dispatch(bulkAddColumns({tableName:tableId,dbId :dbId}));
         return 2;
         // return response of api;
     }
