@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { Box, Button, Typography, Container } from "@mui/material";
-import { useLocation } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import TablesList from "../component/table/tablesList";
 import { Link } from 'react-router-dom'
 import { Divider } from "@mui/material";
 import MainNavbar from "../component/mainNavbar";
 function DbDetails(props) {
     const location = useLocation();
+    const { dbId } = useParams();
+    console.log("dbId",dbId)
     const [dbData, setDbData] = useState(null);
     useEffect(() => {
         if (location?.state) {
@@ -28,7 +30,7 @@ function DbDetails(props) {
                         {dbData.db.name}
                     </Typography>
                     <div style={{width: "60px",  right: "20px",   position: "absolute",top:"60px"}}>
-                      <Link to={{ pathname: "/apiDoc/db/:dbId/table/:tableName" }} style={{ textDecoration: "none" }}>
+                      <Link to={ `/apiDoc/db/:${dbId}` }  style={{ textDecoration: "none" }}>
                           <Button variant="contained" color="primary" size="small">APIs</Button>
                   </Link>
                   </div>
