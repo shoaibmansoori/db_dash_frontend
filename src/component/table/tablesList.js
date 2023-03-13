@@ -114,8 +114,8 @@ export default function TablesList(props) {
       <Button onClick={handleSliderRight} >
           {'>'}
         </Button>
-      <Button onClick={handleOpen} variant="contained" >
-        AddTable
+      <Button onClick={handleOpen} variant="contained" sx={{width:122}} >
+        Add Table
       </Button> </div>
       <PopupModal title="create table" label="Table Name" open={open} setOpen={setOpen} submitData={saveTable} setVariable={setTable} />
       {/* {/ Buttons for sliding tables */}
