@@ -18,30 +18,6 @@ function DbDetails(props) {
     }, [props?.location?.state]);
     return (
         <>
-<<<<<<< HEAD
-        <Container maxWidth="sm">
-            {dbData ? (
-                <Typography variant="body1" align="center">
-                    {dbData.db.name}
-                </Typography>
-            ) : (
-                <Typography variant="body1" align="center">
-                    No data to display.
-                </Typography>
-            )}
-        </Container>
-
-        <Link to={{pathname: "/apiDoc/db/:dbId/table/:tableName"}} style={{ textDecoration: "none" }}>
-        <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
-            <Button variant="contained" color="primary">APIs</Button>
-        </Box>
-        </Link>
-        <Box align="center">
-        <TablesList dbData = {dbData}/>
-        {/* <Navbar data={props}/> */}
-   </Box>
-   </>
-=======
         <Box>
       <MainNavbar/>
     </Box>
@@ -68,7 +44,6 @@ function DbDetails(props) {
                 <TablesList dbData={dbData} />
             </Box>
         </>
->>>>>>> 49f47022638b40ba8786dc7dad394bfd380903de
     );
 }
 export default DbDetails;

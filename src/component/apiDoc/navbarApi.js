@@ -7,24 +7,31 @@ import { Button, Select, MenuItem, FormControl, InputLabel, ListSubheader } from
 import ApiCrudTablist from './apiCrudTab/apiCrudTablist';
 import { getDbById } from '../../api/dbApi';
 import PropTypes from "prop-types";
+
 export default function Navbar() {
   const [alldbs, setAllDbs] = useState(false);
   const [tables, setTables] = useState({});
   const [selectedOption, setSelectedOption] = useState();
-  // const [selectedDb,setSelectedDb] = useState(null);
+  const [selectedDb,setSelectedDb] = useState();
   const [selectTable, setSelectTable] = useState('');
+
   const handleChange = async (event) => {
+    console.log("value",event)
+    setSelectedDb(event.target.value);
     setSelectedOption(event.target.value);
     await getAllTableName(event.target.value)
   };
+
   const handleChangeTable = async (event) => {
     setSelectTable(event.target.value);
   };
   const { user } = UserAuth();
+
   useEffect(() => {
     if (user?.email)
       getOrgAndDb();
   }, [user])
+  
   const filterDbsBasedOnOrg = async (allDbs) => {
     var result = {};
     allDbs.map((item) => {
@@ -32,38 +39,22 @@ export default function Navbar() {
     })
     setSelectedOption(result?.[Object.keys(result)?.[0]]?.[0].name);
     console.log(selectedOption)
-    // setSelectedDb(result?.[Object.keys(result)?.[0]]?.[0]._id)
+    setSelectedDb(result?.[Object.keys(result)?.[0]]?.[0]._id)
     // console.log(result?.[Object.keys(result)?.[0]]?.[0]._id)
     setAllDbs(result);
   }
-<<<<<<< HEAD
-
-  
-
-=======
->>>>>>> 49f47022638b40ba8786dc7dad394bfd380903de
   const getOrgAndDb = async () => {
     const data = await findUserByEmail(user?.email);
     localStorage.setItem("userid", data?.data?.data?._id);
     filterDbsBasedOnOrg(data?.data?.data?.dbs)
   }
-<<<<<<< HEAD
-
-  console.log("tables",tables)
-
-=======
->>>>>>> 49f47022638b40ba8786dc7dad394bfd380903de
   const getAllTableName = async (dbId) => {
     const data = await getDbById(dbId)
     setTables(data.data.data.tables || {});
+    console.log("data",data.data.data.tables)
+    setSelectTable(Object.keys(data.data.data.tables)[0])
   }
-<<<<<<< HEAD
-
   
-
-=======
-  
->>>>>>> 49f47022638b40ba8786dc7dad394bfd380903de
   return (
     <>
    <Box align="center">
@@ -78,7 +69,7 @@ export default function Navbar() {
       <Box >
         {alldbs && <FormControl sx={{ m: 1, minWidth: 120 }}>
           <InputLabel htmlFor="grouped-select">Organization-db</InputLabel>
-          <Select id="grouped-select" label="Organization and dbs"  value={selectedOption._id}  onChange={handleChange}>
+          <Select id="grouped-select" label="Organization and dbs"  value={selectedDb}  onChange={handleChange}>
             {Object.entries(alldbs).map(([orgId, dbs]) => [
               <ListSubheader key={`${orgId}-header`} name={orgId}>{dbs[0].org_id.name}</ListSubheader>,
               dbs?.map((db,index) => (

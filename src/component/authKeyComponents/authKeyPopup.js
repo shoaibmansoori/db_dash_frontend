@@ -20,6 +20,7 @@ const style = {
   boxShadow: 24,
   p: 4,
 };
+
 export default function PopupModal(props) {
   // const [copySuccess, setCopySuccess] = useState(false);
   const [copyText, setCopyText] = useState('');
@@ -43,7 +44,7 @@ export default function PopupModal(props) {
         <Box sx={style}>
           <Box sx={{ my: 2 , display:'flex'}}>
             <Box sx={{mr:4}}>
-            <TextField autoFocus id="ansh" name="ansh" label="Auth Key"  variant="standard" value={copyText} onChange={handleCopyText} />
+            <TextField autoFocus id="ansh" name="ansh" label="Auth Key"  variant="standard" value={copyText} onChange={handleCopyText} disabled/>
             </Box>
         {/* <IconButton onClick={handleCopyClick}>
                   <FileCopy />
@@ -58,7 +59,7 @@ export default function PopupModal(props) {
         </Snackbar> */}
           </Box>
           <Box sx={{mt:3}}>
-          <Button variant="contained" onClick={handleClose}>Cancel</Button>
+          <Button variant="contained"  onClick={handleClose}>Cancel</Button>
           </Box>
         </Box>
       </Modal>

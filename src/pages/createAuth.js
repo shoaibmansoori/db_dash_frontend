@@ -22,7 +22,7 @@ export default function CreateAuthKey() {
 
 
   const [open, setOpen] = useState(false);
-  // const handleOpen = () => setOpen(true);
+  const handleOpen = () => setOpen(true);
   const handleKeyDown = (event) => {
     if (event.key === "Enter") {
       event.preventDefault();
@@ -55,8 +55,8 @@ export default function CreateAuthKey() {
         <AuthKeyHeader />
       </Box>
       <Box
-        sx={{mt: 4, ml: 1, mr: 1, border: 2, minHeight: 50}}>
-        <Box sx={{display: "grid",justifyContent: "center"}}>
+        sx={{mt: 4, ml: 1, mr: 1, border: 2, minHeight: 400}}>
+        <Box sx={{display: "flex",flexDirection:'column',justifyContent: "center"}}>
           <Box sx={{ display: "flex", justifyContent: "center", mt: "120px" }}>
             <Typography sx={{ mr: "100px", mt: "6px" }}>Name</Typography>
             <TextField id="standard-basic" label="Standard" variant="standard" value={name} onChange={(e) => {
@@ -73,16 +73,16 @@ export default function CreateAuthKey() {
           </Box>
          
          
-          <Box sx={{ display: "flex", justifyContent: "center" }}>
+          <Box sx={{ display: "flex", justifyContent: "center" , width:'100%'}}>
             <Typography sx={{ mr: "40px", mt: "55px" }}>Access</Typography>
             <Box sx={{ mt: "35px"}}>
               <AuthKeyDropdown scope={scope} setScope={setScope}/>
             </Box>
           </Box>
         </Box>
-          <Box sx={{ display: "flex", position: "absolute", right:0, bottom: 10,mr:3}}>
+          <Box sx={{ display: "flex", position: "relative",justifyContent: "flex-end", bottom: 10,mr:3}}>
             <Box sx={{m:1}}>
-              <Button variant="contained" onClick={()=>{createAuth()}}>
+              <Button variant="contained" onClick={()=>{createAuth(),handleOpen()}}>
                 Create
               </Button>
               <AuthKeyPopup open={open}

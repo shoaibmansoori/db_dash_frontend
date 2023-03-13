@@ -16,14 +16,10 @@ const dbId = location.state;
 
   return (
     <>
-<<<<<<< HEAD
-
-=======
     <Box>
       <MainNavbar/>
     </Box>
     
->>>>>>> 49f47022638b40ba8786dc7dad394bfd380903de
      <Box>
      <AuthKeyHeader/>
      </Box>

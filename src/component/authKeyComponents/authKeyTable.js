@@ -50,13 +50,8 @@ export default function AuthKey(props) {
             <TableHead>
               <TableRow>
                 <TableCell>Name</TableCell>
-<<<<<<< HEAD
-                <TableCell>Access</TableCell>
-                <TableCell>Scopes</TableCell>
-=======
                 {/* <TableCell>Access</TableCell> */}
                 <TableCell>Scope</TableCell>
->>>>>>> 49f47022638b40ba8786dc7dad394bfd380903de
                 <TableCell>Created By</TableCell>
                 <TableCell>Created On</TableCell>
                 <TableCell>Action</TableCell>

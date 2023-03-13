@@ -95,7 +95,7 @@
 
 
 
-import React,{useState,useEffect} from 'react'
+import React,{useState} from 'react'
 import { Card, CardContent, Typography, Box,TextField} from '@mui/material'
 import Button from '@mui/material/Button';
 import PropTypes from "prop-types"
@@ -118,13 +118,7 @@ export default function SingleDatabase(props) {
 const handleOpen = () => {
   setName(false);
 }
-<<<<<<< HEAD
 
-console.log("props",props)
-=======
-useEffect(() => {
-});
->>>>>>> 49f47022638b40ba8786dc7dad394bfd380903de
 const deletDatabases = async() => {
   await deleteDb(props?.db?.org_id?._id,props?.db._id)
   await props.getOrgAndDbs();
