@@ -75,7 +75,7 @@ export const deleteColumns = createAsyncThunk(
         //delte api call 
             dispatch(deleteColumn(payload));
             const {tableId, dbId} = getState().table
-        dispatch(bulkAddColumns({tableName:tableId,dbId :dbId}));
+            dispatch(bulkAddColumns({tableName:tableId,dbId :dbId}));
         return 2;
         // return response of api;
     }

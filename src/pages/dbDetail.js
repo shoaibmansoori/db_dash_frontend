@@ -28,7 +28,7 @@ function DbDetails(props) {
                         {dbData.db.name}
                     </Typography>
                     <div style={{width: "60px",  right: "20px",   position: "absolute",top:"60px"}}>
-                      <Link to={{ pathname: "/apiDoc/db/:dbId/table/:tableName" }} style={{ textDecoration: "none" }}>
+                      <Link to={{ pathname: "/apiDoc/db/:dbId" }} style={{ textDecoration: "none" }}>
                           <Button variant="contained" color="primary" size="small">APIs</Button>
                   </Link>
                   </div>

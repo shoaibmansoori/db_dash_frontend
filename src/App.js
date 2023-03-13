@@ -30,7 +30,7 @@ function App() {
       <Route exact path ="/db/:dbId/table/:tableName" element ={<DbDetail/>}/>
       <Route exact path ="/authkeypage/:id" element ={<AuthKeyPage/>}/>
       <Route exact path ="/authKeyCreate/:id" element ={<CreateAuth/>}/>
-      <Route exact path ="/apiDoc/db/:dbId/table/:tableName" element ={<ApiDocPage />}/>
+      <Route exact path ="/apiDoc/db/:dbId" element ={<ApiDocPage />}/>
     </Routes>
 
 
