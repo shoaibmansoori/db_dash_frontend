@@ -63,7 +63,6 @@ export default function AuthAccessDropDown({selected,setSelected,dbId}) {
   const isAllSelected =
     options.length > 0 && selected.length === options.length;
   const handleChange = (event) => {
-    console.log(event.target.value,12345);
     const value = event.target.value;
     if (value[value.length - 1] === "all") {
       if(selected.length === Object.entries(options)?.length){
@@ -82,10 +81,9 @@ export default function AuthAccessDropDown({selected,setSelected,dbId}) {
   useEffect(()=>{
     callFunc();
   },[])
-  console.log('setSelected',selected)
+ 
   const callFunc = async()=>{
-    const data = await getAllTableName(dbId);
-    console.log(data)
+    await getAllTableName(dbId);
   }
   return (
     <FormControl className={classes.formControl}>
@@ -98,7 +96,6 @@ export default function AuthAccessDropDown({selected,setSelected,dbId}) {
         renderValue={(selected) => selected.join(", ")}
         MenuProps={MenuProps}
       >
-        {console.log(selected)}
         <MenuItem
           value="all"
           classes={{
@@ -122,7 +119,6 @@ export default function AuthAccessDropDown({selected,setSelected,dbId}) {
         </MenuItem>
         { Object.entries(options).map((option,index) => {
          return  <MenuItem key={index} value={option[0]}>
-         {/* {console.log("options",option[0])} */}
          <ListItemIcon>
            {/* {option[0]} */}
            {/* <Checkbox checked={option[0]} /> */}

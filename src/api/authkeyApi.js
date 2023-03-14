@@ -8,9 +8,9 @@ const createAuthkey = async (db_id,adminId,data) =>
 
 const getAuthkey = async (db_id,adminId) =>
 {
-    console.log("Inside Get Auth Key Api function");
+    
     const data = await axios.get(URL +`/dbs/${db_id}/admin/${adminId}/authKeys`)
-    console.log("DATA ",data);
+
     return data
 }
 
