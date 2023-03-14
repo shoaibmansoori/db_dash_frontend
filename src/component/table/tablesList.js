@@ -39,7 +39,7 @@ export default function TablesList({dbData,tables,setTables}) {
     setTableButton(true);
   }
   const saveTable = async (e) => {
-    e.preventDefault();
+    e?.preventDefault();
     const dbId = dbData?.db._id;
     const data = {
       tableName: table
@@ -111,10 +111,10 @@ export default function TablesList({dbData,tables,setTables}) {
           ))}
           </Tabs>
         </Box>
-        <Button onClick={handleOpen} variant="contained" >
-          AddTable
+        <Button onClick={handleOpen} variant="contained" sx={{width:122}} >
+          Add Table
         </Button> </Box>
-      <PopupModal title="create table" label="Table Name" open={open} setOpen={setOpen} saveFunction={saveTable} setVariable={setTable} />
+        <PopupModal title="create table" label="Table Name" open={open} setOpen={setOpen} submitData={saveTable} setVariable={setTable} />
       <Box>
           <SingleTable  table={clickedTable} />
       </Box>

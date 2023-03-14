@@ -55,6 +55,7 @@ export const OrgList = (props) => {
           {name ? (
             <>
               <TextField 
+                autoFocus
                 sx={{ width: 120, fontWeight: "bold" }}
                 defaultValue={props.dbs[0]?.org_id?.name}
                 value={orgName}

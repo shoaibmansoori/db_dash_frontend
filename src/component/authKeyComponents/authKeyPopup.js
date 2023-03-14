@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useState} from "react";
 import Box from "@mui/material/Box";
 // import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
@@ -14,26 +14,23 @@ const style = {
   left: "50%",
   transform: "translate(-50%, -50%)",
   width: 300,
-  height:100,
+  height:175,
   bgcolor: "background.paper",
   border: "2px solid #000",
   boxShadow: 24,
   p: 4,
 };
-export default function PopupModal(props) {
+export default function AuthKeyPopup(props) {
   // const [copySuccess, setCopySuccess] = useState(false);
-  // const [copyText, setCopyText] = useState('');
+  const [copyText, setCopyText] = useState('');
   const handleClose = () => props.setOpen(false);
-  // const handleCopyText = (e) => {
-  //   console.log(e.target.value)
-  //   setCopyText(e.target.value);
- 
+  const handleCopyText = (e) => {
+    setCopyText(e.target.value);
+ }
   const handleCopyClick = () => {
-    navigator.clipboard.writeText(props?.authKey);
-    navigator.clipboard.writeText(props.title);
+    navigator.clipboard.writeText(copyText);
     // setCopySuccess(true);
   };
-
   return (
     <Box>
       <Modal
@@ -46,7 +43,7 @@ export default function PopupModal(props) {
         <Box sx={style}>
           <Box sx={{ my: 2 , display:'flex'}}>
             <Box sx={{mr:4}}>
-            <TextField autoFocus id="ansh" name="ansh" label="Auth Key"  variant="standard" value={props?.authKey} />
+            <TextField disabled id="ansh" name="ansh" label="Auth Key"  variant="standard" value={copyText} onChange={handleCopyText} />
             </Box>
         {/* <IconButton onClick={handleCopyClick}>
                   <FileCopy />
@@ -68,14 +65,12 @@ export default function PopupModal(props) {
     </Box>
   );
 }
-
-PopupModal.propTypes = {
+AuthKeyPopup.propTypes = {
   title: PropTypes.string,
   open: PropTypes.bool,
   setOpen: PropTypes.func,
   label: PropTypes.string,
   saveFunction:PropTypes.func,
   setVariable:PropTypes.func,
-  id: PropTypes.string,
-  authKey:PropTypes.any
+  id: PropTypes.string
 };

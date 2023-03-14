@@ -13,7 +13,6 @@ export default function AuthKeyPage() {
 //the data here will be an object since an object was
 // const dbId = location.state;
 const { id } = useParams();
-console.log("params",id)
   return (
     <>
     <Box>
@@ -21,7 +20,7 @@ console.log("params",id)
     </Box>
     
      <Box>
-     <AuthKeyHeader/>
+     <AuthKeyHeader id ={ id}/>
      </Box>
 
       <Box sx={{ display: "flex", justifyContent: "end", m: 1 }}>

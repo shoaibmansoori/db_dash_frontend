@@ -14,7 +14,7 @@ const style = {
   top: "50%",
   left: "50%",
   transform: "translate(-50%, -50%)",
-  width: 200,
+  width: 300,
   bgcolor: "background.paper",
   border: "2px solid #000",
   boxShadow: 24,
@@ -23,12 +23,11 @@ const style = {
 
 export default function PopupModal(props) {
   // const [org, setOrg] = React.useState();
-
   const handleClose = () => props.setOpen(false);
-
   return (
     <Box>
-      <Modal 
+      <Modal
+      disableRestoreFocus
         open={props.open}
         onClose={handleClose}
         aria-labelledby="modal-modal-title"
@@ -39,30 +38,29 @@ export default function PopupModal(props) {
             {props.title}
           </Typography>
           <Box sx={{ my: 2 }}>
-
-            <TextField 
+            <TextField
              autoFocus
               id={props?.id}
               name={props?.id}
-              label={props.label} 
+              label={props.label}
               variant="standard"
               onChange={(e) => {
                 props.setVariable(e.target.value);
               }}
               onKeyDown={(e) => {
                 if (e.key === 'Enter') {
-                  props.saveFunction(e);
+                  props.submitData(e);
                   handleClose();
                 }
               }}
             />
-
           </Box>
           <Box sx={{ display: "flex", justifyContent: "space-between" }}>
             <Box>
               <Button variant="contained" onClick={()=>{
                   // props?.saveFunction ();
                   props?.submitData();
+                  console.log("props")
               }}>
                 Create
               </Button>
@@ -72,7 +70,6 @@ export default function PopupModal(props) {
                 Cancel
               </Button>
             </Box>
-            
           </Box>
         </Box>
       </Modal>
@@ -85,8 +82,7 @@ PopupModal.propTypes = {
   open: PropTypes.bool,
   setOpen: PropTypes.func,
   label: PropTypes.string,
-  saveFunction:PropTypes.func,
+  submitData:PropTypes.func,
   setVariable:PropTypes.func,
   id: PropTypes.string,
-  submitData:PropTypes.func
 };

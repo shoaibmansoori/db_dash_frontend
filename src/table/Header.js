@@ -27,8 +27,7 @@ export default function Header({
 }) {
   const dispatch = useDispatch();
   const [textValue, setTextValue] = useState('');
-  const [selectValue, setSelectValue] = useState('');
-  console.log(textValue,selectValue)
+  const [selectValue, setSelectValue] = useState('text');
   const tableInfo = useSelector((state) => getTableInfo(state));
   const [open, setOpen] = useState(false);
   // const [variable, setVariable] = useState("");
