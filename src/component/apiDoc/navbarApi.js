@@ -49,7 +49,7 @@ export default function Navbar() {
   const getAllTableName = async (dbId) => {
     
     const data = await getDbById(dbId)
-    console.log("data",data.data.data.tables)
+
     setTables(data.data.data.tables || {});
     setSelectTable(Object.keys(data.data.data.tables)[0])
   }
@@ -81,7 +81,7 @@ export default function Navbar() {
         </FormControl>}
       </Box>
       <br></br>
-      {console.log(tables)}
+  
       {Object.keys(tables).length >=1 && <Box >
          <FormControl sx={{ m: 1, minWidth: 120 }}>
           <InputLabel htmlFor="grouped-select">Tables-Name</InputLabel>
@@ -96,7 +96,7 @@ export default function Navbar() {
         </FormControl>
       </Box>}
       {Object.keys(tables).length >=1 ? <Box>
-        {console.log("selectedOption",selectedOption ,"selectTable",selectTable)}
+  
         <ApiCrudTablist db={selectedOption} table={selectTable}/>
       </Box>:"Please make the table first"}
     </>

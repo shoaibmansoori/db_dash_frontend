@@ -18,7 +18,6 @@ export default function Cell({value: initialValue, row, column: {id, dataType, o
   const [selectPop, setSelectPop] = useState(null);
   const [showSelect, setShowSelect] = useState(false);
   const onChange = (e) => {
-    console.log("onchange")
     setValue({value: e.target.value, update: false});
   };
   const [showAdd, setShowAdd] = useState(false);
@@ -31,7 +30,6 @@ export default function Cell({value: initialValue, row, column: {id, dataType, o
 
   useEffect(() => {
     if (value?.update) {
-      console.log("called")
       // dataDispatch({type: "update_cell", columnId: id, rowIndex: index, value: value.value});
       dispatch(updateCells({
         columnId: id, rowIndex: row.original.id, value: value.value
@@ -66,7 +64,6 @@ export default function Cell({value: initialValue, row, column: {id, dataType, o
   function handleOptionBlur(e) {
     if (e.target.value !== "") {
 
-      console.log(2)
 
       dispatch(addColumns({
         option: e.target.value,

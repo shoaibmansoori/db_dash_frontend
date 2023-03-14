@@ -124,7 +124,6 @@ export const addColumsToLeft = createAsyncThunk(
 export const updateCells = createAsyncThunk(
     "table/updateCells",
     async(payload,{dispatch,getState})=>{
-        console.log(payload)
        const {tableId, dbId} = getState().table
        const value = payload.value
        const  columnId= payload.columnId
@@ -138,9 +137,7 @@ export const addRows = createAsyncThunk(
     "table/addRows",
     async(payload,{dispatch,getState})=>{
         const {tableId, dbId} = getState().table
-        console.log("tabledId",tableId,dbId);
         await insertRow(dbId,tableId);
-        console.log("insert row ");
         dispatch(addRow(payload));
         dispatch(bulkAddColumns({tableName:tableId,dbId :dbId}));
         return payload;

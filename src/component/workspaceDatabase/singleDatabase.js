@@ -13,7 +13,6 @@ export default function SingleDatabase(props) {
   const navigate = useNavigate();
   // const [open, setOpen] = useState(false);
   const renameDatabase = async (orgId, id, name) => {
-    console.log(orgId, id, name);
     const data = {
       name: dbname || name,
     };
@@ -73,7 +72,6 @@ export default function SingleDatabase(props) {
                 onClick={(e) => {
                   e.preventDefault();
                   e.stopPropagation();
-                  console.log("hello");
                   renameDatabase(
                     props.db.org_id?._id,
                     props.db._id,
