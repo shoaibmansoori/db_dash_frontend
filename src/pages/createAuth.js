@@ -23,7 +23,7 @@ export default function CreateAuthKey() {
  const [scope, setScope] = useState('');
  const [name,setName] = useState('');
 
-  const [authKey,setAuthKey] = useState()
+  const [authKey,setAuthKey] = useState("")
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleKeyDown = (event) => {
@@ -44,7 +44,7 @@ export default function CreateAuthKey() {
     const create = await createAuthkey(dbId, adminId, data )
     setOpen(true)
     setAuthKey(create?.data?.data?.authKey)
-    console.log(create)
+    console.log(create?.data?.data?.authKey)
     await getAuthkey(dbId,adminId);
 
   }
