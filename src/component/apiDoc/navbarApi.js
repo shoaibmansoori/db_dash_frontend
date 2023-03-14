@@ -19,9 +19,7 @@ export default function Navbar() {
     setSelectedDb(event.target.value);
     setSelectedOption(event.target.value);
     setDbId(event.target.value)
-    console.log("in get table");
     await getAllTableName(event.target.value)
-    // console.log(table)
   };
   const handleChangeTable = async (event) => {
     setSelectTable(event.target.value);
@@ -36,11 +34,12 @@ export default function Navbar() {
     allDbs.map((item) => {
       result[item.org_id._id] = result[item.org_id._id] ? [...result[item.org_id._id], item] : [item]
     })
-    setSelectedOption(result?.[Object.keys(result)?.[0]]?.[0].name);
-    console.log(selectedOption)
+    setSelectedOption(result?.[Object.keys(result)?.[0]]?.[0]._id);
     setSelectedDb(result?.[Object.keys(result)?.[0]]?.[0]._id)
-    // console.log(result?.[Object.keys(result)?.[0]]?.[0]._id)
+    setDbId(result?.[Object.keys(result)?.[0]]?.[0]._id)
+    await getAllTableName(result?.[Object.keys(result)?.[0]]?.[0]._id)
     setAllDbs(result);
+    
   }
   const getOrgAndDb = async () => {
     const data = await findUserByEmail(user?.email);
@@ -90,13 +89,14 @@ export default function Navbar() {
             onChange={handleChangeTable} >
             {Object.entries(tables)?.map((table) => (
               <MenuItem key={table[0]} value={table[0]} >
-                {table[0]}
+                {table[1].tableName || table[0]}
               </MenuItem>
             ))}
           </Select>
         </FormControl>
       </Box>}
       {Object.keys(tables).length >=1 ? <Box>
+        {console.log("selectedOption",selectedOption ,"selectTable",selectTable)}
         <ApiCrudTablist db={selectedOption} table={selectTable}/>
       </Box>:"Please make the table first"}
     </>
