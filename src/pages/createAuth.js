@@ -16,15 +16,13 @@ import { selectActiveUser } from '../store/user/userSelector.js';
 
 
 export default function CreateAuthKey() {
-  const userDetails = useSelector((state) => selectActiveUser(state));
-
  const location = useLocation()
  const { id } = useParams();
  const dbId = location.state;
  const [selected,setSelected] = useState([])
  const [scope, setScope] = useState('');
  const [name,setName] = useState('');
-
+ const userDetails = useSelector((state) => selectActiveUser(state));
   const [authKey,setAuthKey] = useState("")
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
@@ -33,8 +31,6 @@ export default function CreateAuthKey() {
       event.preventDefault();
     }
   };
-  
-
   const createAuth = async () => {
     // e.preventDefault();
     // const adminId = localStorage.getItem("userid");
@@ -49,11 +45,7 @@ export default function CreateAuthKey() {
     setAuthKey(create?.data?.data?.authKey)
     console.log(create?.data?.data?.authKey)
     await getAuthkey(dbId,adminId);
-
   }
-
-
-
   return (
     <>
     <Box>
@@ -71,16 +63,12 @@ export default function CreateAuthKey() {
                 setName(e.target.value);
               }} onKeyDown={handleKeyDown}/>
           </Box>
-         
-         
           <Box sx={{ display: "flex", justifyContent: "center", mt: 4 }}>
             <Typography sx={{ mr: "40px", mt: "30px" }}>Scope</Typography>
             <Box sx={{ mt: "10px" }}>
               <AuthAccessDropDown  selected={selected} setSelected={setSelected} dbId={dbId} />
             </Box>
           </Box>
-         
-         
           <Box sx={{ display: "flex", justifyContent: "center" }}>
             <Typography sx={{ mr: "40px", mt: "55px" }}>Access</Typography>
             <Box sx={{ mt: "35px"}}>
@@ -90,7 +78,6 @@ export default function CreateAuthKey() {
         </Box>
           <Box sx={{ display: "flex", position: "relative", justifyContent: "flex-end",bottom: 10,mr:3}}>
             <Box sx={{m:1}}>
-              
               <Button variant="contained" onClick={()=>{createAuth()
                handleOpen()
               }}>
@@ -110,7 +97,6 @@ export default function CreateAuthKey() {
     </>
   );
 }
-
 CreateAuthKey.propTypes={
   dbId: PropTypes.string
 }
