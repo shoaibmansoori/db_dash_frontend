@@ -31,7 +31,7 @@ function ListRecord(props) {
                             <br/>
                             <br/>
              <b>pageSize</b>&nbsp;The number of records returned in each request.Must be less than or equal to 100.<br/>
-                                 Default is 100. See the Pagination section below for more.
+                                 Default is 100
                                  <br/>
                                  http://localhost:5000/:dbId/:tableId/?page=2&limit=10
                                  <br/>
