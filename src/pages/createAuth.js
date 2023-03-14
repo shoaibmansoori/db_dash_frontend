@@ -26,7 +26,7 @@ export default function CreateAuthKey() {
  const userDetails = useSelector((state) => selectActiveUser(state));
 
 
-  const [authKey,setAuthKey] = useState()
+  const [authKey,setAuthKey] = useState("")
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleKeyDown = (event) => {
@@ -48,7 +48,7 @@ export default function CreateAuthKey() {
     const create = await createAuthkey(dbId, adminId, data )
     setOpen(true)
     setAuthKey(create?.data?.data?.authKey)
-    console.log(create)
+    console.log(create?.data?.data?.authKey)
     await getAuthkey(dbId,adminId);
 
   }
@@ -99,7 +99,7 @@ export default function CreateAuthKey() {
               </Button>
               {/* <AuthKeyPopup open={open}
               setOpen={setOpen} authKey={authKey}/> */}
-              <AuthKeyPopup open={open} setOpen={setOpen} title={authKey}/>
+              <AuthKeyPopup open={open} setOpen={setOpen} title={authKey} dbId={dbId} />
             </Box>
             <Box sx={{m:1}}>
                     <Link to={`/authkeypage/${id}`} style={{ textDecoration: 'none' }}>
