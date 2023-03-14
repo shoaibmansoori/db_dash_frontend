@@ -12,6 +12,7 @@ import Tab from '@mui/material/Tab';
 import Dropdown from '../dropdown';
 import { bulkAddColumns } from '../../store/table/tableThunk';
 import { useDispatch } from 'react-redux';
+// import { getUserById } from '../../api/userApi';
 export default function TablesList({dbData,tables,setTables}) {
   // const [tables, setTables] = useState(0);
   const dispatch= useDispatch();
@@ -38,8 +39,7 @@ export default function TablesList({dbData,tables,setTables}) {
     setClickedTable(value);
     setTableButton(true);
   }
-  const saveTable = async (e) => {
-    e?.preventDefault();
+  const saveTable = async () => {
     const dbId = dbData?.db._id;
     const data = {
       tableName: table
@@ -111,8 +111,8 @@ export default function TablesList({dbData,tables,setTables}) {
           ))}
           </Tabs>
         </Box>
-        <Button onClick={handleOpen} variant="contained" sx={{width:122}} >
-          Add Table
+        <Button onClick={handleOpen} variant="contained" >
+          AddTable
         </Button> </Box>
         <PopupModal title="create table" label="Table Name" open={open} setOpen={setOpen} submitData={saveTable} setVariable={setTable} />
       <Box>
