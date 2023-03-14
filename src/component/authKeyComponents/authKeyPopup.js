@@ -5,6 +5,7 @@ import Modal from "@mui/material/Modal";
 import PropTypes from "prop-types";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
+import { Link } from "react-router-dom";
 // import { Snackbar } from '@material-ui/core';
 // import { Alert } from '@material-ui/lab';
 // import { FileCopy } from '@mui/icons-material';
@@ -21,14 +22,16 @@ const style = {
   p: 4,
 };
 export default function AuthKeyPopup(props) {
+  // console.log(p)
   // const [copySuccess, setCopySuccess] = useState(false);
   const [copyText, setCopyText] = useState('');
+  console.log(copyText)
   const handleClose = () => props.setOpen(false);
-  const handleCopyText = (e) => {
-    setCopyText(e.target.value);
+  const handleCopyText = () => {
+    setCopyText(props?.title);
  }
   const handleCopyClick = () => {
-    navigator.clipboard.writeText(copyText);
+    navigator.clipboard.writeText(props?.title);
     // setCopySuccess(true);
   };
   return (
@@ -43,7 +46,7 @@ export default function AuthKeyPopup(props) {
         <Box sx={style}>
           <Box sx={{ my: 2 , display:'flex'}}>
             <Box sx={{mr:4}}>
-            <TextField disabled id="ansh" name="ansh" label="Auth Key"  variant="standard" value={copyText} onChange={handleCopyText} />
+            <TextField disabled id="ansh" name="ansh" label="Auth Key"  variant="standard" value={props?.title} onChange={handleCopyText} />
             </Box>
         {/* <IconButton onClick={handleCopyClick}>
                   <FileCopy />
@@ -58,7 +61,10 @@ export default function AuthKeyPopup(props) {
         </Snackbar> */}
           </Box>
           <Box sx={{mt:3}}>
-          <Button variant="contained" onClick={handleClose}>Cancel</Button>
+          {/* <Button variant="contained" onClick={handleClose}>Cancel</Button> */}
+          <Link to={`/authkeypage/${props?.dbId}`} style={{ textDecoration: 'none' }}>
+                      <Button variant="outlined" onClick={handleClose}>Cancel</Button>
+                    </Link>
           </Box>
         </Box>
       </Modal>
@@ -72,5 +78,7 @@ AuthKeyPopup.propTypes = {
   label: PropTypes.string,
   saveFunction:PropTypes.func,
   setVariable:PropTypes.func,
-  id: PropTypes.string
+  id: PropTypes.string,
+  authkey:PropTypes.any,
+  dbId:PropTypes.any
 };

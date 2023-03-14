@@ -18,7 +18,7 @@ export default function TablesList({dbData,tables,setTables}) {
   const dispatch= useDispatch();
   const [value, setValue] = React.useState(0);
   const navigate = useNavigate();
-  const handleChange = (event: React.SyntheticEvent, newValue: number) => {
+  const handleChange = (event, newValue) => {
     setValue(newValue);
   };
   // state to display modal
@@ -114,7 +114,7 @@ export default function TablesList({dbData,tables,setTables}) {
         <Button onClick={handleOpen} variant="contained" >
           AddTable
         </Button> </Box>
-      <PopupModal title="create table" label="Table Name" open={open} setOpen={setOpen} submitData={saveTable} setVariable={setTable} />
+        <PopupModal title="create table" label="Table Name" open={open} setOpen={setOpen} submitData={saveTable} setVariable={setTable} />
       <Box>
           <SingleTable  table={clickedTable} />
       </Box>

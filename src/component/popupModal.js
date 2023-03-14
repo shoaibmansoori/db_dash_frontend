@@ -27,6 +27,7 @@ export default function PopupModal(props) {
   return (
     <Box>
       <Modal
+      disableRestoreFocus
         open={props.open}
         onClose={handleClose}
         aria-labelledby="modal-modal-title"
@@ -48,7 +49,7 @@ export default function PopupModal(props) {
               }}
               onKeyDown={(e) => {
                 if (e.key === 'Enter') {
-                  props.saveFunction(e);
+                  props.submitData(e);
                   handleClose();
                 }
               }}
@@ -59,6 +60,7 @@ export default function PopupModal(props) {
               <Button variant="contained" onClick={()=>{
                   // props?.saveFunction ();
                   props?.submitData();
+                  console.log("props")
               }}>
                 Create
               </Button>
@@ -80,8 +82,7 @@ PopupModal.propTypes = {
   open: PropTypes.bool,
   setOpen: PropTypes.func,
   label: PropTypes.string,
-  saveFunction:PropTypes.func,
+  submitData:PropTypes.func,
   setVariable:PropTypes.func,
   id: PropTypes.string,
-  submitData:PropTypes.func
 };

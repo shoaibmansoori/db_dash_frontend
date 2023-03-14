@@ -11,19 +11,19 @@ import { createAuthkey, getAuthkey } from "../api/authkeyApi";
 import MainNavbar from "../component/mainNavbar";
 // import DisplayAuthKeyPopup from "../component/authKeyComponents/authKeyTablePopup/displayAuthkeyPopup";
 import AuthKeyPopup from "../component/authKeyComponents/authKeyPopup";
-
+import { useSelector } from 'react-redux';
+import { selectActiveUser } from '../store/user/userSelector.js';
 
 
 export default function CreateAuthKey() {
-
  const location = useLocation()
  const { id } = useParams();
  const dbId = location.state;
  const [selected,setSelected] = useState([])
  const [scope, setScope] = useState('');
  const [name,setName] = useState('');
-
-  const [authKey,setAuthKey] = useState()
+ const userDetails = useSelector((state) => selectActiveUser(state));
+  const [authKey,setAuthKey] = useState("")
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleKeyDown = (event) => {
@@ -31,11 +31,10 @@ export default function CreateAuthKey() {
       event.preventDefault();
     }
   };
-  
-
   const createAuth = async () => {
     // e.preventDefault();
-    const adminId = localStorage.getItem("userid");
+    // const adminId = localStorage.getItem("userid");
+    const adminId = userDetails?.fullName ;
     const data = {
        name : name,
        scope :scope,
@@ -44,13 +43,9 @@ export default function CreateAuthKey() {
     const create = await createAuthkey(dbId, adminId, data )
     setOpen(true)
     setAuthKey(create?.data?.data?.authKey)
-    console.log(create)
+    console.log(create?.data?.data?.authKey)
     await getAuthkey(dbId,adminId);
-
   }
-
-
-
   return (
     <>
     <Box>
@@ -68,16 +63,12 @@ export default function CreateAuthKey() {
                 setName(e.target.value);
               }} onKeyDown={handleKeyDown}/>
           </Box>
-         
-         
           <Box sx={{ display: "flex", justifyContent: "center", mt: 4 }}>
             <Typography sx={{ mr: "40px", mt: "30px" }}>Scope</Typography>
             <Box sx={{ mt: "10px" }}>
               <AuthAccessDropDown  selected={selected} setSelected={setSelected} dbId={dbId} />
             </Box>
           </Box>
-         
-         
           <Box sx={{ display: "flex", justifyContent: "center" }}>
             <Typography sx={{ mr: "40px", mt: "55px" }}>Access</Typography>
             <Box sx={{ mt: "35px"}}>
@@ -87,7 +78,6 @@ export default function CreateAuthKey() {
         </Box>
           <Box sx={{ display: "flex", position: "relative", justifyContent: "flex-end",bottom: 10,mr:3}}>
             <Box sx={{m:1}}>
-              
               <Button variant="contained" onClick={()=>{createAuth()
                handleOpen()
               }}>
@@ -95,7 +85,7 @@ export default function CreateAuthKey() {
               </Button>
               {/* <AuthKeyPopup open={open}
               setOpen={setOpen} authKey={authKey}/> */}
-              <AuthKeyPopup open={open} setOpen={setOpen} title={authKey}/>
+              <AuthKeyPopup open={open} setOpen={setOpen} title={authKey} dbId={dbId} />
             </Box>
             <Box sx={{m:1}}>
                     <Link to={`/authkeypage/${id}`} style={{ textDecoration: 'none' }}>
@@ -107,7 +97,6 @@ export default function CreateAuthKey() {
     </>
   );
 }
-
 CreateAuthKey.propTypes={
   dbId: PropTypes.string
 }
