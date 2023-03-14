@@ -22,30 +22,6 @@ export const AuthContextProvider = ({ children }) => {
 
 const navigate=useNavigate();
 const dispatch = useDispatch();
-    // const googleSignIn = async () => {
-    //   try {
-    //     const provider = new GoogleAuthProvider();
-    //     const userInfo = await signInWithPopup(auth, provider);
-    //     if ((getAdditionalUserInfo(userInfo))?.isNewUser) {
-    //       const displayName = userInfo?.user?.displayName;
-    //       const email = userInfo?.user?.email;
-    //       const dataToSend ={
-    //         "email":email,
-    //         "first_name": displayName.split(" ")[0],
-    //         last_name: displayName.split(" ")[1] || " ",
-    //       }
-    //   await signUpUser(dataToSend)
-
-    //       // return;
-    //     }
-    //     navigate("/dashboard")
-
-    //   } catch (error) {
-    //     console.log(error);
-    //   }
-    // };
-
-
 
   const googleSignIn = async () => {
     try {
@@ -60,9 +36,7 @@ const dispatch = useDispatch();
           last_name: displayName.split(" ")[1] || " ",
         }
         const token = await signUpUser(dataToSend)
-        console.log("TOKEN googleSignIn ",token);
         localStorage.setItem('accessToken', token.data.data)
-        console.log(localStorage.getItem('accessToken')); 
         await dispatch(saveUser());
         navigate("/dashboard")
         return;
@@ -70,7 +44,6 @@ const dispatch = useDispatch();
       const token = await loginUser({ email: userInfo?.user?.email });
       if (token.data.data) {
         localStorage.setItem("accessToken", token.data.data);
-        console.log(localStorage.getItem('accessToken')); 
         await dispatch(saveUser());
         navigate("/dashboard")
       }
@@ -89,7 +62,6 @@ const dispatch = useDispatch();
           "last_name": lastName
         }
         const token = await signUpUser(dataToSend)
-        console.log("TOKEN signUp ",token);
 
         localStorage.setItem('accessToken', token.data.data)
         await dispatch(saveUser());

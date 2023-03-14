@@ -1,10 +1,12 @@
 
 import React from 'react'
 import PropTypes from "prop-types";
-export default function SingleTable(props) {
+import MainTable from '../../table/mainTable';
+export default function SingleTable() {
+  
   return (
-    <>
-      <h1>{props?.table}</h1>
+    <> 
+      <MainTable/>
     </>
   )
 }

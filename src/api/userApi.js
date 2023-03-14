@@ -1,6 +1,5 @@
 import axios from "../interceptor/interceptor.js";
 const URL = process.env.REACT_APP_API_BASE_URL;
-// console.log(URL);
 
 const signUpUser = async (data)=>
 {   
@@ -43,7 +42,6 @@ const deleteUser = async (id) =>
 
 const findUserByEmail = async (email) =>
 {
-    console.log(URL + `/users/email/${email}`);
     return await axios.get(URL + `/users/email/${email}`);
 }
 

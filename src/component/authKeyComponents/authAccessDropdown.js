@@ -10,7 +10,6 @@ import { makeStyles } from "@material-ui/core/styles";
 import { getDbById } from '../../api/dbApi';
 import PropTypes from "prop-types";
 
-
 const useStyles = makeStyles((theme) => ({
   formControl: {
     margin: theme.spacing(1),
@@ -49,24 +48,9 @@ const MenuProps = {
   },
   variant: "menu"
 };
-// const options = [
-//   "Oliver Hansen",
-//   "Van Henry",
-//   "April Tucker",
-//   "Ralph Hubbard",
-//   "Omar Alexander",
-//   "Carlos Abbott",
-//   "Miriam Wagner",
-//   "Bradley Wilkerson",
-//   "Virginia Andrews",
-//   "Kelly Snyder"
-// ];
-
-
 
 export default function AuthAccessDropDown({selected,setSelected,dbId}) {
   const [options, setOptions] = useState([]);
- 
   const getAllTableName = async (dbId) => {
     const data = await getDbById(dbId)
     // console.log("data",data)
@@ -79,18 +63,15 @@ export default function AuthAccessDropDown({selected,setSelected,dbId}) {
   const isAllSelected =
     options.length > 0 && selected.length === options.length;
   const handleChange = (event) => {
-    console.log(event.target.value,12345);
     const value = event.target.value;
     if (value[value.length - 1] === "all") {
       if(selected.length === Object.entries(options)?.length){
         setSelected([])
         return
       }
-      
       let all = []
       Object.entries(options).map((option)=>{
         all = [...all, option[0]]
-
       })
       setSelected(all);
       return;
@@ -100,13 +81,9 @@ export default function AuthAccessDropDown({selected,setSelected,dbId}) {
   useEffect(()=>{
     callFunc();
   },[])
-
-
-  console.log('setSelected',selected)
-
+ 
   const callFunc = async()=>{
-    const data = await getAllTableName(dbId);
-    console.log(data)
+    await getAllTableName(dbId);
   }
   return (
     <FormControl className={classes.formControl}>
@@ -119,7 +96,6 @@ export default function AuthAccessDropDown({selected,setSelected,dbId}) {
         renderValue={(selected) => selected.join(", ")}
         MenuProps={MenuProps}
       >
-        {console.log(selected)}
         <MenuItem
           value="all"
           classes={{
@@ -143,17 +119,15 @@ export default function AuthAccessDropDown({selected,setSelected,dbId}) {
         </MenuItem>
         { Object.entries(options).map((option,index) => {
          return  <MenuItem key={index} value={option[0]}>
-         {/* {console.log("options",option[0])} */}
          <ListItemIcon>
            {/* {option[0]} */}
            {/* <Checkbox checked={option[0]} /> */}
            {/* <input type="checkbox" value={option[0]}/> */}
            <Checkbox value={option[0]} onChange={(e)=>{
             if(!selected?.includes(e.target.value)){
-              
               setSelected([...selected,e.target.value])
             }
-            console.log(e.target.value);
+
            }}
            defaultChecked={selected?.includes(option[0])}
            />
@@ -170,3 +144,5 @@ AuthAccessDropDown.propTypes = {
   selected: PropTypes.any,
   setSelected: PropTypes.func
 };
+
+

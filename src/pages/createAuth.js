@@ -1,28 +1,31 @@
 import React,{useState} from "react";
 import AuthKeyHeader from "../component/authKeyComponents/authKeyHeader";
 import Box from "@mui/material/Box";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation,useParams } from "react-router-dom";
 import {TextField,Typography,Button} from "@mui/material";
 import AuthAccessDropDown from "../component/authKeyComponents/authAccessDropdown";
-import AuthKeyPopup from "../component/authKeyComponents/authKeyPopup";
+// import AuthKeyPopup from "../component/authKeyComponents/authKeyPopup";
 import AuthKeyDropdown from "../component/authKeyComponents/authKeyDropdown";
 import { PropTypes } from "prop-types";
-import { createAuthkey } from "../api/authkeyApi";
+import { createAuthkey, getAuthkey } from "../api/authkeyApi";
 import MainNavbar from "../component/mainNavbar";
+// import DisplayAuthKeyPopup from "../component/authKeyComponents/authKeyTablePopup/displayAuthkeyPopup";
+import AuthKeyPopup from "../component/authKeyComponents/authKeyPopup";
 
 
 
 export default function CreateAuthKey() {
 
  const location = useLocation()
+ const { id } = useParams();
  const dbId = location.state;
  const [selected,setSelected] = useState([])
  const [scope, setScope] = useState('');
  const [name,setName] = useState('');
 
-
+  const [authKey,setAuthKey] = useState("")
   const [open, setOpen] = useState(false);
-  // const handleOpen = () => setOpen(true);
+  const handleOpen = () => setOpen(true);
   const handleKeyDown = (event) => {
     if (event.key === "Enter") {
       event.preventDefault();
@@ -39,8 +42,10 @@ export default function CreateAuthKey() {
        access : selected
     }
     const create = await createAuthkey(dbId, adminId, data )
-    console.log("adminId", create);
-
+    setOpen(true)
+    setAuthKey(create?.data?.data?.authKey)
+    console.log(create?.data?.data?.authKey)
+    await getAuthkey(dbId,adminId);
 
   }
 
@@ -80,16 +85,20 @@ export default function CreateAuthKey() {
             </Box>
           </Box>
         </Box>
-          <Box sx={{ display: "flex", position: "absolute", right:0, bottom: 10,mr:3}}>
+          <Box sx={{ display: "flex", position: "relative", justifyContent: "flex-end",bottom: 10,mr:3}}>
             <Box sx={{m:1}}>
-              <Button variant="contained" onClick={()=>{createAuth()}}>
+              
+              <Button variant="contained" onClick={()=>{createAuth()
+               handleOpen()
+              }}>
                 Create
               </Button>
-              <AuthKeyPopup open={open}
-              setOpen={setOpen}/>
+              {/* <AuthKeyPopup open={open}
+              setOpen={setOpen} authKey={authKey}/> */}
+              <AuthKeyPopup open={open} setOpen={setOpen} title={authKey} dbId={dbId} />
             </Box>
             <Box sx={{m:1}}>
-                    <Link to='/authkeypage' style={{ textDecoration: 'none' }}>
+                    <Link to={`/authkeypage/${id}`} style={{ textDecoration: 'none' }}>
                       <Button variant="outlined">Cancel</Button>
                     </Link>
             </Box>

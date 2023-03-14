@@ -8,15 +8,15 @@ import { persistReducer, persistStore } from 'redux-persist';
 import rootReducer from "./combineReducer.js";
 
 const persistConfig = {
-    key: 'root',
-    storage,
+  key: 'root',
+  storage,
 }
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)
 
 const composedEnhancer = composeWithDevTools(
-    applyMiddleware(thunkMiddleware)
-    // other store enhancers if any
+  applyMiddleware(thunkMiddleware)
+  // other store enhancers if any
 );
 
 export const store = createStore(persistedReducer, composedEnhancer);

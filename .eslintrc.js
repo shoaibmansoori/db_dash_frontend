@@ -16,6 +16,6 @@ module.exports = {
     "plugins": [
         "react"
     ],
-    "rules": {
-    }
+    // "rules": {
+    // }
 }

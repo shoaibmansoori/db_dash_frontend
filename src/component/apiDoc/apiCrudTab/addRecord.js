@@ -3,10 +3,15 @@ import { PropTypes } from 'prop-types';
 import { Box } from '@mui/system';
 import CodeSnippet from '../codeSnippet';
 function AddRecord(props) {
-  console.log("AddRecord Props : ",props);
   return (
     <>
-    <div>Add Record</div>
+    <div>
+        <h2>Add Table Records</h2>
+        <p>
+      To create new  Table records, use the create method.Note that table names and table ids can be used interchangeably.<br/>
+      Using table ids means table name changes do not require modifications to your API request.
+      </p>
+    </div>
     <Box>
       <CodeSnippet  codeString={`"https://localhost:5000/${props.db}/${props.table}"`}/>
     </Box>

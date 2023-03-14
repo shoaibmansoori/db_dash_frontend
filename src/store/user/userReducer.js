@@ -14,19 +14,17 @@ export const initialState = {
 
 export const reducers = {
     add(state,payload){
-      console.log(payload);
 
         if(payload.payload){
-          const {first_name,last_name,id,email,profile_pic}=payload.payload;
+          const {first_name,last_name,_id,email,profile_pic}=payload.payload;
           state.userFirstName=first_name;
           state.userLastName=last_name;
-          state.userId=id;
+          state.userId=_id;
           state.userEmail=email;
           state.userProfilePic=profile_pic;
           state.userLogIn=true;
           state.userLogOut=false;
         }
-        // console.log(current(state));
     },
     remove(state){
       state.userFirstName='';

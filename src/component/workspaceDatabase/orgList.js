@@ -12,7 +12,6 @@ import PropTypes from "prop-types";
 
 
 export const OrgList = (props) => {
-  console.log(props)
   const [name, setName] = useState(false);
   const [orgName, setOrgName] = useState();
   const [db, setDb] = useState(false);
@@ -20,8 +19,8 @@ export const OrgList = (props) => {
   const [orgId, setOrg] = useState();
   const handleOpen = () => setOpen(true);
 
-  const saveDb = async (e) => {
-    e.preventDefault();
+  const saveDb = async () => {
+    // e.preventDefault();
     const userId = localStorage.getItem("userid");
     const data = {
       user_id: userId,
@@ -56,6 +55,7 @@ export const OrgList = (props) => {
           {name ? (
             <>
               <TextField 
+                autoFocus
                 sx={{ width: 120, fontWeight: "bold" }}
                 defaultValue={props.dbs[0]?.org_id?.name}
                 value={orgName}
@@ -146,7 +146,7 @@ export const OrgList = (props) => {
               setOpen={setOpen}
               title="create Database"
               label="Database Name"
-              saveFunction={saveDb}
+              submitData={saveDb}
               setVariable={setDb}
             />
           </Box>

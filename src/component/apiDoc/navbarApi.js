@@ -10,11 +10,15 @@ import PropTypes from "prop-types";
 export default function Navbar() {
   const [alldbs, setAllDbs] = useState(false);
   const [tables, setTables] = useState({});
+  const [dbId,setDbId] = useState("")
+  // const [open,setOpen] = useState(true)
   const [selectedOption, setSelectedOption] = useState();
-  // const [selectedDb,setSelectedDb] = useState(null);
+  const [selectedDb,setSelectedDb] = useState(null);
   const [selectTable, setSelectTable] = useState('');
   const handleChange = async (event) => {
+    setSelectedDb(event.target.value);
     setSelectedOption(event.target.value);
+    setDbId(event.target.value)
     await getAllTableName(event.target.value)
   };
   const handleChangeTable = async (event) => {
@@ -30,11 +34,12 @@ export default function Navbar() {
     allDbs.map((item) => {
       result[item.org_id._id] = result[item.org_id._id] ? [...result[item.org_id._id], item] : [item]
     })
-    setSelectedOption(result?.[Object.keys(result)?.[0]]?.[0].name);
-    console.log(selectedOption)
-    // setSelectedDb(result?.[Object.keys(result)?.[0]]?.[0]._id)
-    // console.log(result?.[Object.keys(result)?.[0]]?.[0]._id)
+    setSelectedOption(result?.[Object.keys(result)?.[0]]?.[0]._id);
+    setSelectedDb(result?.[Object.keys(result)?.[0]]?.[0]._id)
+    setDbId(result?.[Object.keys(result)?.[0]]?.[0]._id)
+    await getAllTableName(result?.[Object.keys(result)?.[0]]?.[0]._id)
     setAllDbs(result);
+    
   }
   const getOrgAndDb = async () => {
     const data = await findUserByEmail(user?.email);
@@ -42,25 +47,28 @@ export default function Navbar() {
     filterDbsBasedOnOrg(data?.data?.data?.dbs)
   }
   const getAllTableName = async (dbId) => {
+    
     const data = await getDbById(dbId)
+
     setTables(data.data.data.tables || {});
+    setSelectTable(Object.keys(data.data.data.tables)[0])
   }
   
   return (
     <>
    <Box align="center">
         {/* <navbarApi/> */}
-        <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+        {Object.keys(tables).length >=1 && <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
           <Button variant="contained" color="primary" sx={{m:1}} disabled>APIs Documentation</Button>
-          <Link to='/authkeypage' state={selectedOption} style={{textDecoration:'none'}}>
+          <Link to= {`/authkeypage/${dbId}`} state={selectedOption} style={{textDecoration:'none'}}>
           <Button variant="contained" color="primary">Auth Key</Button>
           </Link>
-        </Box>
+        </Box>}
    </Box>
       <Box >
         {alldbs && <FormControl sx={{ m: 1, minWidth: 120 }}>
           <InputLabel htmlFor="grouped-select">Organization-db</InputLabel>
-          <Select id="grouped-select" label="Organization and dbs"  value={selectedOption._id}  onChange={handleChange}>
+          <Select id="grouped-select" label="Organization and dbs"  value={selectedDb}  onChange={handleChange}>
             {Object.entries(alldbs).map(([orgId, dbs]) => [
               <ListSubheader key={`${orgId}-header`} name={orgId}>{dbs[0].org_id.name}</ListSubheader>,
               dbs?.map((db,index) => (
@@ -73,22 +81,24 @@ export default function Navbar() {
         </FormControl>}
       </Box>
       <br></br>
-      <Box >
-        <FormControl sx={{ m: 1, minWidth: 120 }}>
+  
+      {Object.keys(tables).length >=1 && <Box >
+         <FormControl sx={{ m: 1, minWidth: 120 }}>
           <InputLabel htmlFor="grouped-select">Tables-Name</InputLabel>
           <Select value={selectTable}
             onChange={handleChangeTable} >
             {Object.entries(tables)?.map((table) => (
               <MenuItem key={table[0]} value={table[0]} >
-                {table[0]}
+                {table[1].tableName || table[0]}
               </MenuItem>
             ))}
           </Select>
         </FormControl>
-      </Box>
-      <Box>
+      </Box>}
+      {Object.keys(tables).length >=1 ? <Box>
+  
         <ApiCrudTablist db={selectedOption} table={selectTable}/>
-      </Box>
+      </Box>:"Please make the table first"}
     </>
   )
 }
