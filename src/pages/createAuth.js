@@ -10,9 +10,11 @@ import { PropTypes } from "prop-types";
 import { createAuthkey, getAuthkey } from "../api/authkeyApi";
 import MainNavbar from "../component/mainNavbar";
 // import DisplayAuthKeyPopup from "../component/authKeyComponents/authKeyTablePopup/displayAuthkeyPopup";
-import { useSelector } from "react-redux";
+import AuthKeyPopup from "../component/authKeyComponents/authKeyPopup";
+import { useSelector } from 'react-redux';
 import { selectActiveUser } from '../store/user/userSelector.js';
-import  AuthKeyPopup   from '../component/authKeyComponents/authKeyPopup'
+
+
 export default function CreateAuthKey() {
  const location = useLocation()
  const { id } = useParams();
@@ -32,8 +34,7 @@ export default function CreateAuthKey() {
   const createAuth = async () => {
     // e.preventDefault();
     // const adminId = localStorage.getItem("userid");
-    const adminId = userDetails?.fullName
-    console.log(adminId);
+    const adminId = userDetails?.fullName ;
     const data = {
        name : name,
        scope :scope,
