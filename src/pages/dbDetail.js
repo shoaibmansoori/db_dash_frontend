@@ -1,25 +1,17 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { Box, Button, Typography, Container } from "@mui/material";
-<<<<<<< HEAD
 import { useLocation, useParams } from "react-router-dom";
-=======
-import { useLocation ,useParams} from "react-router-dom";
->>>>>>> 48910411d0fb0d902dd4448c393b342e0d02d66e
 import TablesList from "../component/table/tablesList";
 import { Link } from 'react-router-dom'
 import { Divider } from "@mui/material";
 import MainNavbar from "../component/mainNavbar";
 import { getDbById } from "../api/dbApi";
 function DbDetails(props) {
-    var {dbId} = useParams();
     const location = useLocation();
-<<<<<<< HEAD
     const { dbId } = useParams();
     console.log("dbId",dbId)
-=======
     const [tables, setTables] = useState(0);
->>>>>>> 48910411d0fb0d902dd4448c393b342e0d02d66e
     const [dbData, setDbData] = useState(null);
     useEffect(() => {
         if (location?.state) {
@@ -47,11 +39,7 @@ function DbDetails(props) {
                         {dbData?.db.name}
                     </Typography>
                     <div style={{width: "60px",  right: "20px",   position: "absolute",top:"60px"}}>
-<<<<<<< HEAD
-                      <Link to={ `/apiDoc/db/:${dbId}` }  style={{ textDecoration: "none" }}>
-=======
                       <Link to={{ pathname: `/apiDoc/db/${dbId}` }} style={{ textDecoration: "none" }}>
->>>>>>> 48910411d0fb0d902dd4448c393b342e0d02d66e
                           <Button variant="contained" color="primary" size="small">APIs</Button>
                   </Link>
                   </div>

@@ -10,7 +10,8 @@ import { PropTypes } from "prop-types";
 import { createAuthkey, getAuthkey } from "../api/authkeyApi";
 import MainNavbar from "../component/mainNavbar";
 import DisplayAuthKeyPopup from "../component/authKeyComponents/authKeyTablePopup/displayAuthkeyPopup";
-
+import { useSelector } from "react-redux";
+import { selectActiveUser } from '../store/user/userSelector.js';
 
 
 export default function CreateAuthKey() {
@@ -21,6 +22,8 @@ export default function CreateAuthKey() {
  const [selected,setSelected] = useState([])
  const [scope, setScope] = useState('');
  const [name,setName] = useState('');
+ const userDetails = useSelector((state) => selectActiveUser(state));
+
 
   const [authKey,setAuthKey] = useState()
   const [display, setDisplay] = useState(false);
@@ -33,7 +36,9 @@ export default function CreateAuthKey() {
 
   const createAuth = async () => {
     // e.preventDefault();
-    const adminId = localStorage.getItem("userid");
+    // const adminId = localStorage.getItem("userid");
+    const adminId = userDetails?.fullName
+    console.log(adminId);
     const data = {
        name : name,
        scope :scope,

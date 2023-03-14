@@ -27,11 +27,13 @@ function ListRecord(props) {
                              before passing it as a value. You can use this tool to not only encode the formula but also create<br/>
                             the entire url you need.
                             <br/>
-                            http://localhost:5000/:dbId/:tableId/?fields=field1,field2,field3&filter=field1=!nullANDfield2='10'<br/>
+                            http://localhost:5000/:dbId/:tableId/?fields=field1,field2,field3&filter=field1=!nullANDfield2=&quot;10&quot;<br/>
                             <br/>
                             <br/>
              <b>pageSize</b>&nbsp;The number of records returned in each request.Must be less than or equal to 100.<br/>
                                  Default is 100. See the Pagination section below for more.
+                                 <br/>
+                                 http://localhost:5000/:dbId/:tableId/?page=2&limit=10
                                  <br/>
                                  <br/>
                      <b>sort</b>&nbsp; A list of sort objects that specifies how the records will be ordered.<br/>
