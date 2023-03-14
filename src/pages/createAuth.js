@@ -95,7 +95,7 @@ export default function CreateAuthKey() {
               </Button>
               {/* <AuthKeyPopup open={open}
               setOpen={setOpen} authKey={authKey}/> */}
-              <AuthKeyPopup open={open} setOpen={setOpen} title={authKey}/>
+              <AuthKeyPopup open={open} setOpen={setOpen} title={authKey} dbId={dbId} />
             </Box>
             <Box sx={{m:1}}>
                     <Link to={`/authkeypage/${id}`} style={{ textDecoration: 'none' }}>
