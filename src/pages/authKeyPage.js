@@ -13,7 +13,7 @@ export default function AuthKeyPage() {
   // const location = useLocation();
 //the data here will be an object since an object was
 // const dbId = location.state;
-const { id } = useParams();
+  const { id } = useParams();
   return (
     <>
     <Box>
