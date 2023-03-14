@@ -2,15 +2,15 @@
 import { initializeApp } from "firebase/app";
 import {  getAuth} from "firebase/auth";
 
-
 const firebaseConfig = {
-  apiKey: "AIzaSyBu0cy6U66wMhmr1k_G-uAH9faqKi0CBF8",
-  authDomain: "db-dash-frontend.firebaseapp.com",
-  projectId: "db-dash-frontend",
-  storageBucket: "db-dash-frontend.appspot.com",
-  messagingSenderId: "608121647939",
-  appId: "1:608121647939:web:3f9f72e9468ab60686b5f6",
-  measurementId: "G-QYPSR529CG"
+
+  apiKey:process.env.REACT_APP_API_KEY,
+  authDomain: process.env.REACT_APP_AUTH_DOMAIN,
+  projectId: process.env.REACT_APP_PROJECT_ID,
+  storageBucket: process.env.REACT_APP_STORAGE_BUCKET,
+  messagingSenderId: process.env.REACT_APP_MESSAGING_SENDER_ID,
+  appId: process.env.REACT_APP_APP_ID,
+  measurementId: process.env.REACT_APP_MEASUREMENT_ID,
 };
 
 // Initialize Firebase

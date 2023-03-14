@@ -28,6 +28,7 @@ export default function AuthKeyPopup(props) {
   console.log(copyText)
   const handleClose = () => props.setOpen(false);
   const handleCopyText = () => {
+    console.log(props?.title)
     setCopyText(props?.title);
  }
   const handleCopyClick = () => {

@@ -8,7 +8,6 @@ import MainNavbar from "../component/mainNavbar";
 import { useParams} from "react-router-dom";
 
 
-
 export default function AuthKeyPage() {
   // const location = useLocation();
 //the data here will be an object since an object was

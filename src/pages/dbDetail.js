@@ -1,15 +1,16 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { Box, Button, Typography, Container } from "@mui/material";
-import { useLocation ,useParams} from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import TablesList from "../component/table/tablesList";
 import { Link } from 'react-router-dom'
 import { Divider } from "@mui/material";
 import MainNavbar from "../component/mainNavbar";
 import { getDbById } from "../api/dbApi";
 function DbDetails(props) {
-    var {dbId} = useParams();
     const location = useLocation();
+    const { dbId } = useParams();
+    console.log("dbId",dbId)
     const [tables, setTables] = useState(0);
     const [dbData, setDbData] = useState(null);
     useEffect(() => {

@@ -13,10 +13,11 @@ import {
 import { PropTypes } from 'prop-types';
 import { getAuthkey,deleteAuthkey} from "../../api/authkeyApi";
 import TableMenuDropdown from "./tableMenuDropdown";
+// import { getUserById } from "../../api/userApi";
 export default function AuthKey(props) {
-
   const adminId = localStorage.getItem("userid");
   const[authKeys,setAuthKeys] = useState(null)
+  // const[user,setUser] = useState(null)
   
 
   useEffect(  ()=>{
@@ -27,6 +28,18 @@ export default function AuthKey(props) {
   const data = await getAuthkey(props.dbId,adminId) 
   setAuthKeys(data?.data?.data)
   }
+
+  // useEffect(  ()=>{
+  //   getUser()
+  // },[])
+
+  // async function getUser(){
+  //   const data = await getUserById(adminId)
+  //   setUser(data.data.first_name) 
+  //   console.log("data1",data.data.first_name)
+  //   // onsole.log("data1",data.data)
+  //   // setAuthKeys(data?.data?.data)
+  //   }
 
   async function deleteAuthkeyFun(authKey){
     const data = await deleteAuthkey(props.dbId,adminId,authKey)
