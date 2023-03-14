@@ -10,8 +10,6 @@ function BasicStuff(props) {
     console.log("TABLEID : ",data?.data?.data )
     setFieldData(data?.data?.data?.fields)
   }
-  
-  console.log("Fields : ", fieldData)
   useEffect(() => {
     tableData();
   }, [props.db, props.table]);

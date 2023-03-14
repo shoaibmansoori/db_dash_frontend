@@ -9,9 +9,9 @@ const getAllfields = async (db_id, tableName) =>{
 }
 
 // get field of particular table //added by hariomm22
-const updateField = async (db_id,tableName,data) =>
+const updateField = async (db_id,tableName,fieldId,data) =>
 {
-    return await axios.patch(URL +`/dbs/${db_id}/${tableName}/updatefield`,data)
+    return await axios.patch(URL +`/dbs/${db_id}/${tableName}/${fieldId}/updatefield`,data)
 }
 // const deleteField = async (db_id,tableName,data) =>
 // {
@@ -20,6 +20,7 @@ const updateField = async (db_id,tableName,data) =>
 
 const deleteField = async (db_id,tableName,fieldName) =>
 {
+    console.log(db_id,tableName,fieldName)
     return await axios.delete(URL +`/dbs/${db_id}/${tableName}/${fieldName}/deletefield`)
 }
 export{
