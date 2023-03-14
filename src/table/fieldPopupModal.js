@@ -65,7 +65,7 @@ const handleTextChange = (event) => {
         aria-labelledby="form-dialog-title"
         className={classes.modal}
       >
-        <DialogTitle id="form-dialog-title">Popup Modal</DialogTitle>
+        <DialogTitle id="form-dialog-title">Create Column</DialogTitle>
         <DialogContent className={classes.dialog}>
           <TextField
             autoFocus
@@ -82,14 +82,14 @@ const handleTextChange = (event) => {
             id="select"
             value={props.selectValue}
             onChange={handleSelectChange}
-            defaultValue	 ="Text"
+            defaultValue	 ="text"
             displayEmpty
             className={classes.formControl}
           >
             {/* <MenuItem value="">Select an option</MenuItem> */}
-            <MenuItem value="Text" >Text</MenuItem>
-            <MenuItem value="String">String</MenuItem>
-            <MenuItem value="Integer">Integer</MenuItem>
+            <MenuItem value="text" >text</MenuItem>
+            <MenuItem value="varchar">varchar</MenuItem>
+            <MenuItem value="integer">integer</MenuItem>
           </Select>
 
         </DialogContent>
