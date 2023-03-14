@@ -11,10 +11,12 @@ import { createAuthkey, getAuthkey } from "../api/authkeyApi";
 import MainNavbar from "../component/mainNavbar";
 // import DisplayAuthKeyPopup from "../component/authKeyComponents/authKeyTablePopup/displayAuthkeyPopup";
 import AuthKeyPopup from "../component/authKeyComponents/authKeyPopup";
-
+import { useSelector } from 'react-redux';
+import { selectActiveUser } from '../store/user/userSelector.js';
 
 
 export default function CreateAuthKey() {
+  const userDetails = useSelector((state) => selectActiveUser(state));
 
  const location = useLocation()
  const { id } = useParams();
@@ -35,7 +37,8 @@ export default function CreateAuthKey() {
 
   const createAuth = async () => {
     // e.preventDefault();
-    const adminId = localStorage.getItem("userid");
+    // const adminId = localStorage.getItem("userid");
+    const adminId = userDetails?.fullName ;
     const data = {
        name : name,
        scope :scope,
