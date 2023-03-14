@@ -8,14 +8,15 @@ function UpdateRecord(props) {
     <div>
        <h2>Update Table Records</h2>
         <p>
-        To update Table records issue a request to the Table endpoint.Table names and table IDs can be used interchangeably.<br/>
-        Using table IDs means table name changes would not require modifying your API request code.<br/>
-        A PATCH request will only update the fields included in the request.Fields not included in the request will be unchanged.<br/>
-        A PUT request will perform a destructive update and clear all unincluded cell values.<br/>
+        To update {props.table} records, issue a request to the {props.table} endpoint.  A PATCH request will only update the fields
+        <br/> included in the request. Fields not included in the request will be unchanged.
         </p>
     </div>
+    <br/>
     <Box>
       <CodeSnippet  codeString={`"https://localhost:5000/${props.db}/${props.table}/{:id}"`}/>
+      <p>{`-H "Authorization: Bearer YOUR_SECRET_API_TOKEN" `}</p>
+      <p>{`-H "Content-Type: application/json"` }</p>
     </Box>
     </>
   )

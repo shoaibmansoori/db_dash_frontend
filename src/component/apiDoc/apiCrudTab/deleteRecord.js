@@ -8,12 +8,13 @@ function DeleteRecord(props) {
     <div>
     <h2>Delete Table Records</h2>
         <p>
-        To delete Table  record, use the delete method. Note that table names and table ids can be used interchangeably.<br/>
-        Using table ids means table name changes do not require modifications to your API request.
+        To delete {props.table} records, issue a DELETE request to the Teams endpoint.
       </p>
     </div>
+    <br/>
     <Box>
       <CodeSnippet  codeString={`"https://localhost:5000/${props.db}/${props.table}/{:id}"`}/>
+      <p>{`-H "Authorization: Bearer YOUR_SECRET_API_TOKEN" `}</p>
     </Box>
     </>
   )
@@ -23,3 +24,10 @@ DeleteRecord.propTypes = {
   table:PropTypes.string
 }
 export default DeleteRecord
+
+
+
+
+
+
+

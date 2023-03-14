@@ -7,6 +7,7 @@ function BasicStuff(props) {
   const [fieldData, setFieldData] = useState(null)
   const tableData = async () => {
     const data = await getAllfields(props.db, props.table)
+    console.log("TABLEID : ",data?.data?.data )
     setFieldData(data?.data?.data?.fields)
   }
   useEffect(() => {
@@ -15,11 +16,16 @@ function BasicStuff(props) {
   return (
     <>
       <Box >
+        <h5>Database Id - {props.db}</h5>
+        <h5>Table Id - {props.table}</h5>
+        <br></br>
+        <h4>fieldName    fieldId   fieldType </h4>
         {fieldData && Object.entries(fieldData).map((fields, index) => (
           <Box
             key={index}
           >
-            {fields[0]}-
+            {fields[1].fieldName} -
+            {fields[0]} -
             {fields[1].fieldType}
           </Box>
         ))}
