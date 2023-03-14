@@ -72,11 +72,13 @@ export default function SingleDatabase(props) {
                 onClick={(e) => {
                   e.preventDefault();
                   e.stopPropagation();
+                  setName(false)
                   renameDatabase(
                     props.db.org_id?._id,
                     props.db._id,
                     props.db.name
                   );
+
                 }}
                 variant="contained"
                 sx={{
