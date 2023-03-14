@@ -30,7 +30,6 @@ export default function CreateAuthKey() {
       event.preventDefault();
     }
   };
-  
 
   const createAuth = async () => {
     // e.preventDefault();

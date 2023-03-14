@@ -10,14 +10,14 @@ function ListRecord(props) {
     <div>
         <h2>List records</h2>
         <p>
-        To list records in Table ,issue a GET request to the Table endpoint.Note that table names and table ids can be used<br/>
-        interchangeably.Using table ids means table name changes do not require modifications to your API request.<br/>
+        To list records in {props.table} ,issue a GET request to the {props.table} endpoint using {props.table} ids<br/>
         You can filter, sort, and format the results with the following query parameters.
         <br/>
         <br/>
       <b>Specific fields</b> &nbsp;Only data for fields whose names are in this list will be included in the result.<br/>
                     If you do not need every field, you can use this parameter to reduce the amount of<br/>
-                    data transferred.
+                    data transferred.<br/>
+                    http://localhost:5000/:dbId/:tableId/?fields=field1,field2,field3<br/>
                     <br/>
                     <br/>
       <b>filterByFormula</b> &nbsp;A formula used to filter records. The formula will be evaluated for each record,and if the result is<br/>
@@ -27,16 +27,21 @@ function ListRecord(props) {
                              before passing it as a value. You can use this tool to not only encode the formula but also create<br/>
                             the entire url you need.
                             <br/>
+                            http://localhost:5000/:dbId/:tableId/?fields=field1,field2,field3&filter=field1=!nullANDfield2='10'<br/>
+                            <br/>
                             <br/>
              <b>pageSize</b>&nbsp;The number of records returned in each request.Must be less than or equal to 100.<br/>
                                  Default is 100. See the Pagination section below for more.
                                  <br/>
                                  <br/>
-                     <b>sort</b>&nbsp; A list of sort objects that specifies how the records will be ordered.
+                     <b>sort</b>&nbsp; A list of sort objects that specifies how the records will be ordered.<br/>
+                     http://localhost:5000/:dbId/:tableId/?fields=field1,field2,field3&sort=field1,asc.
         </p>
         </div>
+        <br/>
     <Box>
-      <CodeSnippet  codeString={`"https://localhost:5000/${props.db}/${props.table}"`}/>
+      <CodeSnippet  codeString={`"https://localhost:5000/${props.db}/${props.table}"` }/>
+      <p>{`-H "Authorization: Bearer YOUR_SECRET_API_TOKEN" `}</p>
     </Box>
     <Box>
       <Typography></Typography>
