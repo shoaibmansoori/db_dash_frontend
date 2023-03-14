@@ -1,4 +1,6 @@
 import axios from "axios";
+import { toast } from 'react-toastify'
+
 //request interceptor
 axios.interceptors.request.use(
   async (config) => {
@@ -18,6 +20,12 @@ axios.interceptors.response.use(
     return response;
   },
   async function  (error) {
+    console.log(error);
+    if (error?.response?.status ===401) {
+      toast.error('Session Expired');
+      localStorage.removeItem("accessToken");
+      window.location.href = "/";
+    }
     return Promise.reject(error);
   }
 );
