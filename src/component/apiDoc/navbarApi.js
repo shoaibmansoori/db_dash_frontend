@@ -53,7 +53,10 @@ export default function Navbar() {
     const data = await getDbById(dbId)
 
     setTables(data.data.data.tables || {});
-    setSelectTable(Object.keys(data.data.data.tables)[0])
+    if(data.data.data.tables){
+      setSelectTable(Object.keys(data.data.data.tables)[0])
+    }
+    
   }
   
   return (

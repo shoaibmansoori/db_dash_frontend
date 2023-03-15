@@ -16,7 +16,7 @@ const updateTable = async(db_id , data) =>
     return await axios.patch(URL +`/dbs/${db_id}/updatetable`,data)
 }
 
-const deleteTable = async (db_id,data,tableName) =>
+const deleteTable = async (db_id,tableName,data) =>
 {
     return await axios.delete(URL +`/dbs/${db_id}/${tableName}/deletetable`,data)
 }

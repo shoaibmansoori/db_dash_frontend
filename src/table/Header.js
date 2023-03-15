@@ -123,7 +123,8 @@ export default function Header({
     //   label: "Insert right"
     // },
     {
-      onClick: () => {
+      onClick: () =>
+       {
         // dataDispatch({type: "update_column_header", columnId: id, label: header});
         // dispatch(updateColumnHeaders({
         //   columnId: id,
