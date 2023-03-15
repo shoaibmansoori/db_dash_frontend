@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import PopupModal from '../popupModal';
-import { createTable } from '../../api/tableApi';
+import { createTable, updateTable, deleteTable } from '../../api/tableApi';
 import { getDbById } from '../../api/dbApi';
 import PropTypes from "prop-types";
 import SingleTable from './singleTable';
@@ -12,8 +12,13 @@ import Tab from '@mui/material/Tab';
 import Dropdown from '../dropdown';
 import { bulkAddColumns } from '../../store/table/tableThunk';
 import { useDispatch } from 'react-redux';
+import { TextField } from '@mui/material';
+
 export default function TablesList({dbData,tables,setTables}) {
   // const [tables, setTables] = useState(0);
+  const [tabIndex, setTabIndex] = useState(-1);
+  const [tableNa, setTableNa] = useState(null);
+  const [name,setName] = useState();
   const dispatch= useDispatch();
   const [value, setValue] = React.useState(0);
   
@@ -39,8 +44,7 @@ export default function TablesList({dbData,tables,setTables}) {
     setClickedTable(value);
     setTableButton(true);
   }
-  const saveTable = async (e) => {
-    e?.preventDefault();
+  const saveTable = async () => {
     const dbId = dbData?.db._id;
     const data = {
       tableName: table
@@ -68,6 +72,19 @@ export default function TablesList({dbData,tables,setTables}) {
     setTables(data.data.data.tables || {});
     return data;
   }
+  const renameTableName = async (db_id, tableName) => {
+    const data1 = {
+      newTableName: tableNa || table[0]
+    };
+    await updateTable(db_id,tableName, data1);
+    await getAllTableName(dbData?.db?._id, dbData?.db?.org_id?._id);
+  };
+  const deleteTableName = async (tableid) => {
+    // console.log("deltetb",tableid);
+    await deleteTable(dbData?.db?._id, tableid);
+    await getAllTableName(dbData?.db?._id, dbData?.db?.org_id?._id);
+  };
+  
   return (
     <>
       <Box sx={{ width: "100%", display: "flex", height: "33px" }}>
@@ -104,7 +121,62 @@ export default function TablesList({dbData,tables,setTables}) {
                 }));
               } }
             >
-              <TabWithDropdown
+
+              {name && tabIndex == index ?
+                  (<>
+                    <TextField
+                      // onBlur={handleOpen}
+                      defaultValue ={table[1]?.tableName || table[0]}
+                      autoFocus sx={{ width: 75, fontWeight: 'bold' }} value={tableNa  }
+                      onKeyDown={(e) => {
+                        if (e.key === 'Enter') {
+                          renameTableName(dbData?.db?._id,table[0]);
+                          setTabIndex(-1);
+                          setName(false)
+                        }
+                      }}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                       
+                      }}
+                      onChange={(e) => { setTableNa(e.target.value) }} size="small" />
+                    <Button
+                      sx={{
+                        width: 2,
+                        fontSize: 8,
+                      }}
+                      type='submit' onClick={(e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        setTabIndex(-1);
+                        setName(false)
+                        renameTableName(dbData?.db?._id, table[0])
+                      }}
+                      variant="contained" >
+                      Rename
+                    </Button>
+                  </>) :
+                  (<>
+                    < Box sx={{ mt: -1 }}>
+                      <TabWithDropdown
+                       label={table[1]?.tableName || table[0]}
+                        dropdown={<Dropdown tableId={table[0]} title={table[1]?.tableName || table[0]} 
+                        tabIndex={index} setTabIndex={setTabIndex} 
+                        first="Rename" second="Delete" idToDelete={dbData?.db?._id}
+                          deleteFunction={deleteTableName} setName={setName} />}
+                      />
+                    </Box>
+                  </>)
+                }
+              </Box>
+            ))}
+          </Tabs>
+        </Box>
+        <Button onClick={() => handleOpen()} variant="contained" sx={{ width: 122 }} >
+          Add Table
+        </Button> </Box>
+              {/* <TabWithDropdown
       label={table[1]?.tableName || table[0]}
       dropdown={<Dropdown />}
     />
@@ -114,7 +186,7 @@ export default function TablesList({dbData,tables,setTables}) {
         </Box>
         <Button onClick={handleOpen} variant="contained" sx={{width:122}} >
           Add Table
-        </Button> </Box>
+        </Button> </Box> */}
         <PopupModal title="create table" label="Table Name" open={open} setOpen={setOpen} submitData={saveTable} setVariable={setTable} />
       <Box>
           <SingleTable  table={clickedTable} />

@@ -43,7 +43,6 @@ export default function CreateAuthKey() {
     const create = await createAuthkey(dbId, adminId, data )
     setOpen(true)
     setAuthKey(create?.data?.data?.authKey)
-    console.log(create?.data?.data?.authKey)
     await getAuthkey(dbId,adminId);
   }
   return (
