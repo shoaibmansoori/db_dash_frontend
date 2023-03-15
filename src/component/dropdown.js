@@ -45,10 +45,16 @@ export default function Dropdown(props) {
           >
             <MenuItem onClick={handleCloseUserMenu}>
               <Typography textAlign="center" onClick={(e) =>{e.preventDefault();
-              e.stopPropagation(); props?.setName (true)}}>{props?.first}</Typography>
+              e.stopPropagation(); props?.setName (true);
+              if (typeof props?.setTabIndex === 'function') 
+              {
+
+                props?.setTabIndex(props?.tabIndex)
+              }
+              }}>{props?.first}</Typography>
             </MenuItem>
             <MenuItem onClick={(e)=>{e.preventDefault();
-              e.stopPropagation();handleCloseUserMenu(e);setOpen(true)}}>
+              e.stopPropagation();handleCloseUserMenu(e);setOpen(true);}}>
               <Typography  onClick={handleClickOpen} textAlign="center" >{props?.second}</Typography>
             </MenuItem>
             <AlertPopup open={open} setOpen ={setOpen} tableId ={props?.tableId} title={props?.title } deleteFunction={props?.deleteFunction}  />
@@ -62,5 +68,7 @@ Dropdown.propTypes = {
   setName: PropTypes.func,
   title: PropTypes.string,
   tableId : PropTypes.string,
-  deleteFunction : PropTypes.func
+  deleteFunction : PropTypes.func, 
+  setTabIndex:PropTypes.func,
+  tabIndex:PropTypes.string
 };
