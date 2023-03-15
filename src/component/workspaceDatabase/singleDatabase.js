@@ -13,7 +13,6 @@ export default function SingleDatabase(props) {
   const navigate = useNavigate();
   // const [open, setOpen] = useState(false);
   const renameDatabase = async (orgId, id, name) => {
-    console.log(orgId, id, name)
     const data = {
       name: dbname || name,
     };

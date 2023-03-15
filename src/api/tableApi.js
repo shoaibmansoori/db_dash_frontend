@@ -11,9 +11,9 @@ const getTable = async (db_id , tableName) =>
     return await axios.get(URL +`/dbs/${db_id}/${tableName}/fetchtable`)
 }
 
-const updateTable = async(db_id , data) =>
+const updateTable = async(db_id,tableName,data) =>
 {
-    return await axios.patch(URL +`/dbs/${db_id}/updatetable`,data)
+    return await axios.patch(URL +`/dbs/${db_id}/${tableName}/updatetable`,data)
 }
 
 const deleteTable = async (db_id,tableName,data) =>

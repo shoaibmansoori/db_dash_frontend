@@ -17,8 +17,8 @@ import { TextField } from '@mui/material';
 export default function TablesList({dbData,tables,setTables}) {
   // const [tables, setTables] = useState(0);
   const [tabIndex, setTabIndex] = useState(-1);
-  const [tableNa, setTableNa] = useState();
-  const [setName] = useState();
+  const [tableNa, setTableNa] = useState(null);
+  const [name,setName] = useState();
   const dispatch= useDispatch();
   const [value, setValue] = React.useState(0);
   const navigate = useNavigate();
@@ -71,16 +71,17 @@ export default function TablesList({dbData,tables,setTables}) {
     setTables(data.data.data.tables || {});
     return data;
   }
-  const renameTableName = async (db_id) => {
+  const renameTableName = async (db_id, tableName) => {
     const data1 = {
-      newTableName: table,
+      newTableName: tableNa || table[0]
     };
-    await updateTable(db_id, data1);
+    await updateTable(db_id,tableName, data1);
+    await getAllTableName(dbData?.db?._id, dbData?.db?.org_id?._id);
   };
   const deleteTableName = async (tableid) => {
-    console.log("deltetb",tableid);
+    // console.log("deltetb",tableid);
     await deleteTable(dbData?.db?._id, tableid);
-    getAllTableName(dbData?.db?._id, dbData?.db?.org_id?._id);
+    await getAllTableName(dbData?.db?._id, dbData?.db?.org_id?._id);
   };
   
   return (
@@ -119,26 +120,38 @@ export default function TablesList({dbData,tables,setTables}) {
                 }));
               } }
             >
-              {tabIndex == index ?
+
+              {name && tabIndex == index ?
                   (<>
                     <TextField
-                      onBlur={handleOpen}
-                      autoFocus sx={{ width: 10, fontWeight: 'bold' }} value={tableNa}
+                      // onBlur={handleOpen}
+                      defaultValue ={table[1]?.tableName || table[0]}
+                      autoFocus sx={{ width: 75, fontWeight: 'bold' }} value={tableNa  }
                       onKeyDown={(e) => {
                         if (e.key === 'Enter') {
-                          renameTableName(dbData?.db?._id);
-                          setName(false);
+                          renameTableName(dbData?.db?._id,table[0]);
+                          setTabIndex(-1);
+                          setName(false)
                         }
                       }}
                       onClick={(e) => {
                         e.preventDefault();
                         e.stopPropagation();
+                       
                       }}
                       onChange={(e) => { setTableNa(e.target.value) }} size="small" />
-                    <Button onClick={(e) => {
-                      e.preventDefault();
-                      e.stopPropagation();
-                    }}
+                    <Button
+                      sx={{
+                        width: 2,
+                        fontSize: 8,
+                      }}
+                      type='submit' onClick={(e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        setTabIndex(-1);
+                        setName(false)
+                        renameTableName(dbData?.db?._id, table[0])
+                      }}
                       variant="contained" >
                       Rename
                     </Button>
@@ -147,7 +160,9 @@ export default function TablesList({dbData,tables,setTables}) {
                     < Box sx={{ mt: -1 }}>
                       <TabWithDropdown
                        label={table[1]?.tableName || table[0]}
-                        dropdown={<Dropdown tableId={table[0]} title={table[1]?.tableName || table[0]} tabIndex={index} setTabIndex={setTabIndex} first="Rename" second="Delete" idToDelete={dbData?.db?._id}
+                        dropdown={<Dropdown tableId={table[0]} title={table[1]?.tableName || table[0]} 
+                        tabIndex={index} setTabIndex={setTabIndex} 
+                        first="Rename" second="Delete" idToDelete={dbData?.db?._id}
                           deleteFunction={deleteTableName} setName={setName} />}
                       />
                     </Box>
@@ -157,7 +172,7 @@ export default function TablesList({dbData,tables,setTables}) {
             ))}
           </Tabs>
         </Box>
-        <Button onClick={handleOpen} variant="contained" sx={{ width: 122 }} >
+        <Button onClick={() => handleOpen()} variant="contained" sx={{ width: 122 }} >
           Add Table
         </Button> </Box>
               {/* <TabWithDropdown
