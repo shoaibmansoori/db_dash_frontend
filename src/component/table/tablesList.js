@@ -21,6 +21,7 @@ export default function TablesList({dbData,tables,setTables}) {
   const [name,setName] = useState();
   const dispatch= useDispatch();
   const [value, setValue] = React.useState(0);
+  
   const navigate = useNavigate();
   const handleChange = (event, newValue) => {
     setValue(newValue);

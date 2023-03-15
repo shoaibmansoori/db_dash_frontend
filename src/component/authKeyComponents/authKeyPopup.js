@@ -24,8 +24,10 @@ const style = {
 export default function AuthKeyPopup(props) {
   // console.log(p)
   // const [copySuccess, setCopySuccess] = useState(false);
+  
   const [copyText, setCopyText] = useState('');
-  console.log(copyText)
+  const [isCopied, setIsCopied] = useState(false);
+  console.log(copyText);
   const handleClose = () => props.setOpen(false);
   const handleCopyText = () => {
     setCopyText(props?.title);
@@ -33,6 +35,7 @@ export default function AuthKeyPopup(props) {
   const handleCopyClick = () => {
     navigator.clipboard.writeText(props?.title);
     // setCopySuccess(true);
+    setIsCopied(true)
   };
   return (
     <Box>
@@ -46,13 +49,13 @@ export default function AuthKeyPopup(props) {
         <Box sx={style}>
           <Box sx={{ my: 2 , display:'flex'}}>
             <Box sx={{mr:4}}>
-            <TextField disabled id="ansh" name="ansh" label="Auth Key"  variant="standard" value={props?.title} onChange={handleCopyText} />
+            <TextField disabled  label="Auth Key"  variant="standard" value={props?.title} onChange={handleCopyText} />
             </Box>
         {/* <IconButton onClick={handleCopyClick}>
                   <FileCopy />
                 </IconButton> */}
         <Box>
-        <Button variant="contained" onClick={handleCopyClick}>copy</Button>
+        <Button variant="contained" onClick={handleCopyClick} disabled={isCopied}> {isCopied ? "Copied" : "Copy"}</Button>
         </Box>
         {/* <Snackbar open={copySuccess} autoHideDuration={2000} onClose={() => setCopySuccess(false)}>
           <Alert onClose={() => setCopySuccess(false)} severity="success">
