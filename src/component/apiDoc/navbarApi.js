@@ -1,5 +1,5 @@
 import { Box } from '@mui/material'
-import { Link } from "react-router-dom";
+import { Link ,useNavigate} from "react-router-dom";
 import React, { useEffect, useState } from 'react'
 import { UserAuth } from "../../context/authContext.js"
 import { findUserByEmail } from "../../api/userApi"
@@ -11,6 +11,7 @@ export default function Navbar() {
   const [alldbs, setAllDbs] = useState(false);
   const [tables, setTables] = useState({});
   const [dbId,setDbId] = useState("")
+  const navigate = useNavigate()
   // const [open,setOpen] = useState(true)
   const [selectedOption, setSelectedOption] = useState();
   const [selectedDb,setSelectedDb] = useState(null);
@@ -20,6 +21,7 @@ export default function Navbar() {
     setSelectedOption(event.target.value);
     setDbId(event.target.value)
     await getAllTableName(event.target.value)
+    navigate(`/apiDoc/db/${selectedDb}`);
   };
   const handleChangeTable = async (event) => {
     setSelectTable(event.target.value);
